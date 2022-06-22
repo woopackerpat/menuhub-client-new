@@ -1,4 +1,10 @@
+import ContainerHome from "../components/HomePage/ContainerHome";
+
 function HomePage() {
-   return <div>HomePage</div>;
+   return (
+      <div>
+         <ContainerHome />
+      </div>
+   );
 }
 export default HomePage;
