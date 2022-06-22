@@ -3,31 +3,31 @@ import "./App.css";
 import Router from "./routes/Router";
 import { createTheme, ThemeProvider } from "@mui/material";
 
-
 function App() {
-  const theme = createTheme({
-    palette: {
-      common: {
-        dark: "#000000",
-        light: "#ffffff"
+   const theme = createTheme({
+      palette: {
+         dark: {
+            main: "#000000",
+         },
+         light: {
+            main: "#ffffff",
+         },
+         primary: {
+            main: "#121212",
+         },
+         secondary: {
+            main: "#767676",
+         },
+         error: {
+            main: "#e60023",
+         },
       },
-      primary: {
-        main: "#121212",
-      },
-      secondary: {
-        main: "#767676",
-      },
-      error: {
-        main: "#e60023"
-      }
-    },
-  
-  });
-  return (
-    <ThemeProvider theme={theme}>
-      <Router />
-    </ThemeProvider>
-  );
+   });
+   return (
+      <ThemeProvider theme={theme}>
+         <Router />
+      </ThemeProvider>
+   );
 }
 
 export default App;

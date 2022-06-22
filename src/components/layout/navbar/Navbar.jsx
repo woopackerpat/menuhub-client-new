@@ -1,4 +1,22 @@
+import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
+import logo from "../../../assets/images/logo.png";
+
 function Navbar() {
-   return <div>Navbar</div>;
+   return (
+      <Box sx={{ flexGrow: 1 }}>
+         <AppBar position="sticky" color="light">
+            <Toolbar>
+               <IconButton>
+                  <img
+                     style={{ width: 43, height: 37 }}
+                     src={logo}
+                     alt="logo"
+                  />
+               </IconButton>
+               <Button></Button>
+            </Toolbar>
+         </AppBar>
+      </Box>
+   );
 }
 export default Navbar;
