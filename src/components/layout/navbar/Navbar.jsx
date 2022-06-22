@@ -110,7 +110,9 @@ function Navbar() {
                         alignItems: "center",
                      }}
                   >
-                     <Avatar sx={{ cursor: "pointer" }} />
+                     <IconButton size="small">
+                        <Avatar sx={{ cursor: "pointer" }} />
+                     </IconButton>
                      <IconButton size="large">
                         <KeyboardArrowDownIcon />
                      </IconButton>
