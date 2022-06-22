@@ -12,6 +12,9 @@ function App() {
          light: {
             main: "#ffffff",
          },
+         cleanLight: {
+            main: "#efefef",
+         },
          primary: {
             main: "#121212",
          },
@@ -21,6 +24,9 @@ function App() {
          error: {
             main: "#e60023",
          },
+      },
+      shape: {
+         borderRadius: 16,
       },
    });
    return (
