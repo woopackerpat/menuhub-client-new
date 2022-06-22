@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Router from "./routes/Router";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { blue } from "@mui/material/colors";
 
 function App() {
    const theme = createTheme({
@@ -24,6 +25,11 @@ function App() {
          error: {
             main: "#e60023",
          },
+         blue: {
+           main: "#1976d2",
+           dark: "#1565c0",
+           contrastText: '#fff'
+         }
       },
       shape: {
          borderRadius: 16,

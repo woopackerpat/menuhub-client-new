@@ -8,7 +8,6 @@ import {
   DialogTitle,
   Grid,
   IconButton,
-  InputLabel,
   Link,
   TextField,
   Typography,
@@ -17,7 +16,7 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-function AuthPage() {
+function AuthRegister() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -31,7 +30,7 @@ function AuthPage() {
   return (
     <>
       <Button variant="contained" onClick={handleClickOpen}>
-        Modal
+        Register
       </Button>
 
       <Dialog
@@ -79,7 +78,6 @@ function AuthPage() {
             }}
           >
             <Box>
-              
               <TextField
                 autoFocus
                 margin="normal"
@@ -92,8 +90,17 @@ function AuthPage() {
                 autoFocus
                 margin="normal"
                 id="password"
-                label="Password"
+                label="Create a password"
                 type="password"
+                fullWidth
+              />
+              
+              <TextField
+                autoFocus
+                margin="normal"
+                id="age"
+                label="Age"
+                type="text"
                 fullWidth
               />
               <Link href="#">
@@ -192,4 +199,4 @@ function AuthPage() {
   );
 }
 
-export default AuthPage;
+export default AuthRegister;

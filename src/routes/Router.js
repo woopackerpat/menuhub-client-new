@@ -9,7 +9,9 @@ import AddMenuPage from "../pages/AddMenuPage";
 import MyPinPage from "../pages/MyPinPage";
 import MapPage from "../pages/MapPage";
 import Test from "../pages/Test";
+import Test2 from "../pages/Test2";
 import AuthPage from '../pages/AuthPage'
+import AuthRegister from "../pages/AuthRegister";
 
 function Router() {
   return (
@@ -24,7 +26,9 @@ function Router() {
         <Route path="myPin" element={<MyPinPage />} />
         <Route path="map" element={<MapPage />} />
         <Route path="test" element={<Test />} />
+        <Route path="test2" element={<Test2 />} />
         <Route path = "auth" element = {<AuthPage/>} />
+        <Route path = "register" element = {<AuthRegister/>} />
       </Route>
     </Routes>
   );
