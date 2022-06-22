@@ -1,4 +1,4 @@
-import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
 import logo from "../../../assets/images/logo.png";
 
 function Navbar() {
@@ -13,6 +13,7 @@ function Navbar() {
                      alt="logo"
                   />
                </IconButton>
+               <Button></Button>
             </Toolbar>
          </AppBar>
       </Box>
