@@ -1,19 +1,24 @@
 import {
-   alpha,
    AppBar,
    Avatar,
    Box,
    Button,
+   Divider,
    IconButton,
    InputBase,
+   Menu,
+   MenuItem,
    styled,
    Toolbar,
+   Link,
 } from "@mui/material";
 import logo from "../../../assets/images/logo.png";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import MapIcon from "@mui/icons-material/Map";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
    display: "flex",
@@ -57,46 +62,113 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    },
 }));
 
+const StyledToolbar = styled(Toolbar)({
+   display: "flex",
+   justifyContent: "space-between",
+});
+
 function Navbar() {
    const user = false;
+
+   const [menu, setMenu] = useState(null);
+
+   const isMenuOpen = Boolean(menu);
+
+   const handleProfileMenuOpen = (event) => {
+      setMenu(event.currentTarget);
+   };
+
+   const handleMenuClose = () => {
+      setMenu(null);
+   };
+
+   const menuId = "primary-search-account-menu";
+   const renderMenu = (
+      <Menu
+         anchorEl={menu}
+         id={menuId}
+         keepMounted
+         open={isMenuOpen}
+         onClose={handleMenuClose}
+      >
+         <Link href="/addMenu" underline="none">
+            <MenuItem onClick={handleMenuClose}>Create menu</MenuItem>
+         </Link>
+         <Link href="/myPin" underline="none">
+            <MenuItem onClick={handleMenuClose}>My album</MenuItem>
+         </Link>
+         <Divider orientation="horizontal" />
+         <Link href="/" underline="none">
+            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+         </Link>
+      </Menu>
+   );
+
    return (
-      <Box sx={{ flexGrow: 1 }}>
+      <>
          <AppBar position="sticky" color="light">
-            <Toolbar>
-               <IconButton>
-                  <img
-                     style={{ width: 43, height: 37 }}
-                     src={logo}
-                     alt="logo"
-                  />
-               </IconButton>
-               <Button variant="contained" color="dark" sx={{ color: "white" }}>
-                  Home
-               </Button>
-               <Search>
-                  <SearchIconWrapper>
-                     <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                     placeholder="Search ..."
-                     inputProps={{ "aria-label": "search" }}
-                     sx={{ display: "flex", flex: 1 }}
-                  />
-               </Search>
-               <IconButton size="large">
-                  <AddIcon />
-               </IconButton>
-               <IconButton size="large">
-                  <MapIcon />
-               </IconButton>
+            <StyledToolbar>
+               <Link href="/">
+                  <IconButton>
+                     <img
+                        style={{ width: 43, height: 37 }}
+                        src={logo}
+                        alt="logo"
+                     />
+                  </IconButton>
+               </Link>
+               <Box
+                  sx={{
+                     display: { xs: "none", sm: "flex" },
+                     flex: 1,
+                     alignItems: "center",
+                  }}
+               >
+                  <Link href="/">
+                     <Button
+                        variant="contained"
+                        color="dark"
+                        sx={{ color: "white" }}
+                     >
+                        Home
+                     </Button>
+                  </Link>
+                  <Search>
+                     <SearchIconWrapper>
+                        <SearchIcon />
+                     </SearchIconWrapper>
+                     <StyledInputBase
+                        placeholder="Search ..."
+                        inputProps={{ "aria-label": "search" }}
+                        sx={{ display: "flex", flex: 1 }}
+                     />
+                  </Search>
+
+                  <Link href="/draftMenu">
+                     <IconButton size="large">
+                        <AddIcon />
+                     </IconButton>
+                  </Link>
+                  <Link href="/map">
+                     <IconButton size="large">
+                        <MapIcon />
+                     </IconButton>
+                  </Link>
+               </Box>
                {user ? (
                   <>
-                     <Box sx={{ mr: "5px" }}>
-                        <Button variant="contained" color="error">
+                     <Box
+                        sx={{
+                           display: { xs: "none", sm: "flex" },
+                        }}
+                     >
+                        <Button
+                           variant="contained"
+                           color="error"
+                           sx={{ mr: "10px" }}
+                        >
                            Log in
                         </Button>
-                     </Box>
-                     <Box>
                         <Button variant="contained" color="cleanLight">
                            Sign up
                         </Button>
@@ -105,22 +177,32 @@ function Navbar() {
                ) : (
                   <Box
                      sx={{
-                        display: "flex",
+                        display: { xs: "none", sm: "flex" },
                         justifyItems: "center",
                         alignItems: "center",
                      }}
                   >
-                     <IconButton size="small">
-                        <Avatar sx={{ cursor: "pointer" }} />
-                     </IconButton>
-                     <IconButton size="large">
+                     <Link href="/myPin">
+                        <IconButton size="small">
+                           <Avatar sx={{ cursor: "pointer" }} />
+                        </IconButton>
+                     </Link>
+                     <IconButton
+                        size="large"
+                        aria-controls={menuId}
+                        onClick={handleProfileMenuOpen}
+                     >
                         <KeyboardArrowDownIcon />
                      </IconButton>
                   </Box>
                )}
-            </Toolbar>
+               <Box sx={{ display: { xs: "flex", sm: "none" } }}>
+                  <MenuIcon />
+               </Box>
+            </StyledToolbar>
          </AppBar>
-      </Box>
+         {renderMenu}
+      </>
    );
 }
 export default Navbar;

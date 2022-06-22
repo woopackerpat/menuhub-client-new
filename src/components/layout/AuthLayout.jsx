@@ -9,7 +9,7 @@ function AuthLayout() {
             <Navbar />
             <Outlet />
          </div>
-         <Footer />
+         {/* <Footer /> */}
       </div>
    );
 }
