@@ -52,7 +52,9 @@ function AuthPage() {
             />
           </Box>
           <DialogTitle variant = "h3">Welcome to Menuhub</DialogTitle>
-          <DialogContent>
+          <DialogContent sx = {{
+              px:20
+          }}>
             <DialogContentText>
               To subscribe to this website, please enter your email address
               here. We will send updates occasionally.
