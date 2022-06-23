@@ -108,10 +108,10 @@ const mobData = [
 function BodyHome() {
    return (
       <Box
-         sx={{
-            minHeight: 829,
-            minWidth: 500,
-         }}
+         // sx={{
+         //    minHeight: 829,
+         //    minWidth: 500,
+         // }}
       >
          <Masonry columns={{ xs: 2, sm: 3, md: 4, lg: 5 }} spacing={2}>
             {mobData.map((item) => (
