@@ -11,18 +11,16 @@ import {
    styled,
    Toolbar,
    Link,
-   Drawer,
 } from "@mui/material";
 import logo from "../../../assets/images/logo.png";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import MapIcon from "@mui/icons-material/Map";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import Login from "../../AuthPage/Login";
 import Register from "../../AuthPage/Register";
-import SideList from "./SideList";
+import SidebarMobile from "./SidebarMobile";
 
 const Search = styled("div")(({ theme }) => ({
    display: "flex",
@@ -70,6 +68,8 @@ const StyledToolbar = styled(Toolbar)({
    display: "flex",
    justifyContent: "space-between",
 });
+
+const drawerWidth = 240;
 
 function Navbar() {
    const user = true;
@@ -241,21 +241,17 @@ function Navbar() {
                      </IconButton>
                   </Box>
                )}
-               <Box sx={{ display: { xs: "flex", sm: "none" } }}>
-                  <IconButton size="large" onClick={toggleSlider}>
-                     <MenuIcon />
-                  </IconButton>
-                  <Drawer
-                     openSlide={openSlide}
-                     anchor="right"
-                     onClose={toggleSlider}
-                  >
-                     <SideList />
-                  </Drawer>
+               <Box
+                  sx={{
+                     display: { xs: "flex", sm: "none" },
+                     justifyContent: "center",
+                     alignItems: "center",
+                  }}
+               >
+                  <SidebarMobile />
                </Box>
             </StyledToolbar>
          </AppBar>
-         <SideList openSlide = {openSlide}/>
          <Login handleClose={handleClose} open={open} />
          <Register
             handleCloseRegister={handleCloseRegister}

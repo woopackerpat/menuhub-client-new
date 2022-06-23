@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Typography } from "@mui/material";
+import { Container, CssBaseline, Typography } from "@mui/material";
 import BodyHome from "./BodyHome";
 
 function ContainerHome() {
