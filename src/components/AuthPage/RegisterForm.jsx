@@ -2,57 +2,112 @@ import { Box, Link, TextField, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContextProvider";
+import RegisterButton from "./RegisterButton";
+import { validateRegister } from "../../services/validate";
+import axios from "../../config/axios";
 
 function RegisterForm() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-    const [error, setError] = useState({})
-    const [apiError, setApiError ] = useState('')
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [apiError, setApiError] = useState("");
 
-    const navigate = useNavigate()
-    
-    const {register} = useAuth()
+  const navigate = useNavigate();
+
+  const { register } = useAuth();
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+
+    const errResult = validateRegister({
+      email,
+      password,
+      confirmPassword,
+    });
+
+    setError(errResult);
+
+    if (Object.keys(errResult).length === 0) {
+      try {
+        const res = await register({ email, password, confirmPassword });
+        navigate("/login");
+      } catch (err) {
+        console.log(err);
+        setApiError(err.response.data.message);
+      }
+    }
+  };
   return (
-    <Box>
-      <TextField
-        autoFocus
-        margin="normal"
-        id="email"
-        label="Email Address"
-        type="email"
-        fullWidth
-        
-      />
-      <TextField
-        autoFocus
-        margin="normal"
-        id="password"
-        label="Create a password"
-        type="password"
-        fullWidth
-      />
+    <>
+      <Box component="form" onSubmit={handleSubmitForm} autoComplete="off">
+        <TextField
+          autoFocus
+          margin="normal"
+          id="email"
+          label="Email Address"
+          type="email"
+          fullWidth
+          onChange={handleEmail}
+          value={email}
+          required
+          error={error.email ? true : false}
+          helperText={error.email}
+        />
+        <TextField
+          autoFocus
+          margin="normal"
+          id="password"
+          label="Create a password"
+          type="password"
+          fullWidth
+          onChange={handlePassword}
+          value={password}
+          required
+          error={error.email ? true : false}
+          helperText={error.password}
+        />
 
-      <TextField
-        autoFocus
-        margin="normal"
-        id="age"
-        label="Age"
-        type="text"
-        fullWidth
-      />
-      <Link href="#">
-        <Typography
-          align="left"
-          variant="subtitle2"
-          sx={{ fontWeight: "bold" }}
-        >
-          Forgot your password?
-        </Typography>
-      </Link>
-    </Box>
+        <TextField
+          autoFocus
+          margin="normal"
+          id="confirmPassword"
+          label="Confirm Password"
+          type="text"
+          fullWidth
+          onChange={handleConfirmPassword}
+          value={confirmPassword}
+          required
+          error={error.email ? true : false}
+          helperText={error.confirmPassword}
+        />
+        <Link href="#">
+          <Typography
+            align="left"
+            variant="subtitle2"
+            sx={{ fontWeight: "bold" }}
+          >
+            Forgot your password?
+          </Typography>
+        </Link>
+      </Box>
+      <RegisterButton />
+    </>
   );
 }
 

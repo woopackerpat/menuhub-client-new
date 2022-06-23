@@ -64,7 +64,7 @@ function Register({ handleCloseRegister, openRegister }) {
             }}
           >
             <RegisterForm />
-            <RegisterButton />
+           
             <Box
               sx={{
                 my: "10px",

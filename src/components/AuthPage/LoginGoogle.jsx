@@ -1,9 +1,10 @@
 import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
+import GoogleLogo from "./GoogleLogo";
 
 function LoginGoogle() {
   return (
-    <Button variant="contained" fullWidth size="large" color="blue">
+    <Button variant="contained" fullWidth size="large" color="light">
       <Grid
         container
         spacing={0}
@@ -13,7 +14,7 @@ function LoginGoogle() {
       >
         <Grid item xs={2}>
           <Box display="flex" justifyContent="center">
-            <Avatar />
+            <GoogleLogo />
           </Box>
         </Grid>
         <Grid item xs={8}>

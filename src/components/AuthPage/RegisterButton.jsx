@@ -13,7 +13,7 @@ function RegisterButton() {
           }}
           variant="h5"
         >
-          Log in
+          Register
         </Typography>
       </Button>
     </Box>
