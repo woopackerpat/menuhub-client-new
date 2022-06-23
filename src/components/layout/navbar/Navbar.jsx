@@ -21,57 +21,15 @@ import { useState } from "react";
 import Login from "../../AuthPage/Login";
 import Register from "../../AuthPage/Register";
 import SidebarMobile from "./SidebarMobile";
-
-const Search = styled("div")(({ theme }) => ({
-   display: "flex",
-   flex: 1,
-   position: "relative",
-   borderRadius: "50px",
-   backgroundColor: "#efefef",
-   "&:hover": {
-      backgroundColor: "#e1e1e1",
-   },
-   marginRight: theme.spacing(2),
-   marginLeft: 0,
-   width: "100%",
-   [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-   },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-   position: "absolute",
-   padding: theme.spacing(0, 2),
-   height: "100%",
-   pointerEvents: "none",
-   display: "flex",
-   alignItems: "center",
-   justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-   color: "inherit",
-   "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-         width: "20ch",
-      },
-   },
-}));
+import SearchBar from "../../common/SearchBar";
 
 const StyledToolbar = styled(Toolbar)({
    display: "flex",
    justifyContent: "space-between",
 });
 
-const drawerWidth = 240;
-
 function Navbar() {
+   // API
    const user = true;
 
    // for dropdown Menu
@@ -84,14 +42,6 @@ function Navbar() {
    };
    const handleMenuClose = () => {
       setMenu(null);
-   };
-   //******************************
-
-   // for sidebar responsive
-   const [openSlide, setOpenSlide] = useState(false);
-
-   const toggleSlider = () => {
-      setOpenSlide(!openSlide);
    };
 
    //******************************
@@ -173,16 +123,8 @@ function Navbar() {
                         Home
                      </Button>
                   </Link>
-                  <Search>
-                     <SearchIconWrapper>
-                        <SearchIcon />
-                     </SearchIconWrapper>
-                     <StyledInputBase
-                        placeholder="Search ..."
-                        inputProps={{ "aria-label": "search" }}
-                        sx={{ display: "flex", flex: 1 }}
-                     />
-                  </Search>
+
+                  <SearchBar />
 
                   <Link href="/draftMenu">
                      <IconButton size="large">
@@ -195,7 +137,7 @@ function Navbar() {
                      </IconButton>
                   </Link>
                </Box>
-               {user ? (
+               {!user ? (
                   <>
                      <Box
                         sx={{

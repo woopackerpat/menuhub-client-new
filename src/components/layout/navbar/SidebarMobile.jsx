@@ -56,7 +56,7 @@ function SidebarMobile() {
    const hamBerger = [
       {
          listIcon: <MenuIcon />,
-         listText: "Right",
+         listText: "right",
       },
    ];
 

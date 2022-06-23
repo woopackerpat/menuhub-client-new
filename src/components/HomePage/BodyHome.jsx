@@ -1,5 +1,6 @@
+import { Masonry } from "@mui/lab";
 import { Box, Grid, ImageList } from "@mui/material";
-import CartItems from "../common/CartItems";
+import CartItems from "../common/cartItems/CartItems";
 
 const mobData = [
    {
@@ -106,12 +107,17 @@ const mobData = [
 
 function BodyHome() {
    return (
-      <Box sx={{ overflowY: "scroll", flex: 1 }}>
-         <ImageList variant="masonry" cols={5} gap="15px">
+      <Box
+         sx={{
+            minHeight: 829,
+            minWidth: 500,
+         }}
+      >
+         <Masonry columns={{ xs: 2, sm: 3, md: 4, lg: 5 }} spacing={2}>
             {mobData.map((item) => (
                <CartItems key={item.id} item={item} />
             ))}
-         </ImageList>
+         </Masonry>
       </Box>
    );
 }
