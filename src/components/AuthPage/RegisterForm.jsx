@@ -1,7 +1,20 @@
 import { Box, Link, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContextProvider";
 
 function RegisterForm() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    
+
+    const [error, setError] = useState({})
+    const [apiError, setApiError ] = useState('')
+
+    const navigate = useNavigate()
+    
+    const {register} = useAuth()
   return (
     <Box>
       <TextField
@@ -11,6 +24,7 @@ function RegisterForm() {
         label="Email Address"
         type="email"
         fullWidth
+        
       />
       <TextField
         autoFocus

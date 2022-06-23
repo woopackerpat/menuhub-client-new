@@ -19,7 +19,7 @@ function AuthContextProvider({ children }) {
             const token = getAccessToken();
 
             if (token) {
-               const resMe = await axios.get("/auth/me");
+               const resMe = await axios.get("/user/me");
                setUser(resMe.data.user);
             }
          } catch (err) {
@@ -42,7 +42,7 @@ function AuthContextProvider({ children }) {
       const res = await axios.post("/auth/login", { email, password });
 
       setAccessToken(res.data.token);
-      const resMe = await axios.get("/auth/me");
+      const resMe = await axios.get("/user/me");
       setUser(resMe.data.user);
    };
 
