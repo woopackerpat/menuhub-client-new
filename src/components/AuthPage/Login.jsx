@@ -13,6 +13,9 @@ import {
 import { Box } from "@mui/system";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import LoginForm from "./LoginForm";
+import LoginButton from "./LoginButton";
+import LoginGoogle from "./LoginGoogle";
 
 function Login({ handleClose, open }) {
    return (
@@ -61,52 +64,8 @@ function Login({ handleClose, open }) {
                      px: 10,
                   }}
                >
-                  <Box>
-                     <TextField
-                        autoFocus
-                        margin="normal"
-                        id="email"
-                        label="Email Address"
-                        type="email"
-                        fullWidth
-                     />
-                     <TextField
-                        autoFocus
-                        margin="normal"
-                        id="password"
-                        label="Password"
-                        type="password"
-                        fullWidth
-                     />
-                     <Link href="#">
-                        <Typography
-                           align="left"
-                           variant="subtitle2"
-                           sx={{ fontWeight: "bold" }}
-                        >
-                           Forgot your password?
-                        </Typography>
-                     </Link>
-                  </Box>
-                  <Box sx={{ my: "10px" }}>
-                     <Button
-                        variant="contained"
-                        fullWidth
-                        size="large"
-                        color="error"
-                     >
-                        <Typography
-                           sx={{
-                              py: "10px",
-                              fontWeight: "normal",
-                              textTransform: "none",
-                           }}
-                           variant="h5"
-                        >
-                           Log in
-                        </Typography>
-                     </Button>
-                  </Box>
+                  <LoginForm/>
+                  <LoginButton />
                   <Box
                      sx={{
                         my: "10px",
@@ -123,43 +82,7 @@ function Login({ handleClose, open }) {
                      </Typography>
                   </Box>
                   <Box>
-                     <Button
-                        variant="contained"
-                        fullWidth
-                        size="large"
-                        color="blue"
-                     >
-                        <Grid
-                           container
-                           spacing={0}
-                           sx={{
-                              alignItems: "center",
-                           }}
-                        >
-                           <Grid item xs={2}>
-                              <Box display="flex" justifyContent="center">
-                                 <Avatar />
-                              </Box>
-                           </Grid>
-                           <Grid item xs={8}>
-                              <Typography
-                                 sx={{
-                                    py: "10px",
-                                    fontWeight: "normal",
-                                    textTransform: "none",
-                                 }}
-                                 variant="h5"
-                              >
-                                 Continue as Patcharapol
-                              </Typography>
-                           </Grid>
-                           <Grid item xs={2}>
-                              <Box display="flex" justifyContent="center">
-                                 <Avatar />
-                              </Box>
-                           </Grid>
-                        </Grid>
-                     </Button>
+                     <LoginGoogle />
                      <Box sx={{ mt: "30px" }}>
                         By continuing, you agree to Menuhub's
                      </Box>
