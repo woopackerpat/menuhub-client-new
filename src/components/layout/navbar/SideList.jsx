@@ -42,9 +42,9 @@ const ListItem = styled("div")(({ theme }) => ({
    color: "dark",
 }));
 
-function SideList({ openSlide, toggleSlider }) {
+function SideList({ openSlide }) {
    return (
-      <Box>
+      <Box sx = {{display: `${openSlide ? 'none': 'block'}`}}>
          <MenuSideBarContainer>
             <Avatar
                sx={{ margin: "0.5rem auto", width: "50px", height: "50px" }}

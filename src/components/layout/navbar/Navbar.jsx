@@ -91,7 +91,7 @@ function Navbar() {
    const [openSlide, setOpenSlide] = useState(false);
 
    const toggleSlider = () => {
-      setOpenSlide(!open);
+      setOpenSlide(!openSlide);
    };
 
    //******************************
@@ -255,7 +255,7 @@ function Navbar() {
                </Box>
             </StyledToolbar>
          </AppBar>
-         <SideList />
+         <SideList openSlide = {openSlide}/>
          <Login handleClose={handleClose} open={open} />
          <Register
             handleCloseRegister={handleCloseRegister}
