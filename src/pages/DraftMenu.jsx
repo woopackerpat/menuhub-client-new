@@ -1,4 +1,6 @@
+import ContainerDraftMenuPage from "../components/DraftMenuPage/ContainerDraftMenu";
+
 function DraftMenuPage() {
-   return <div>DraftMenuPage</div>;
+   return <ContainerDraftMenuPage />;
 }
 export default DraftMenuPage;

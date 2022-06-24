@@ -1,4 +1,3 @@
-import Footer from "./Footer";
 import Navbar from "./navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import { Box, Container } from "@mui/system";
@@ -24,7 +23,6 @@ function AuthLayout() {
                </Box>
             </Container>
          </div>
-         <Footer />
       </div>
    );
 }

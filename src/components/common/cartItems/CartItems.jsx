@@ -1,4 +1,4 @@
-import { Button, IconButton, styled, Typography } from "@mui/material";
+import { Button, IconButton, styled } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Box } from "@mui/system";
@@ -6,7 +6,6 @@ import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
 
 const Label = styled("div")(({ theme }) => ({
-   // backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
    display: "block",
    backgroundColor: theme.palette.cleanLight,
    ...theme.typography.body1,

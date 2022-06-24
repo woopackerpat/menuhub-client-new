@@ -118,7 +118,7 @@ function Navbar() {
                      <Button
                         variant="contained"
                         color="dark"
-                        sx={{ color: "white" }}
+                        sx={{ color: "white", fontWeight: "bold" }}
                      >
                         Home
                      </Button>
@@ -147,7 +147,7 @@ function Navbar() {
                         <Button
                            variant="contained"
                            color="error"
-                           sx={{ mr: "10px" }}
+                           sx={{ mr: "10px", fontWeight: "bold" }}
                            onClick={handleClickOpen}
                         >
                            Log in
@@ -156,6 +156,7 @@ function Navbar() {
                            variant="contained"
                            color="cleanLight"
                            onClick={handleClickOpenRegister}
+                           sx={{ fontWeight: "bold" }}
                         >
                            Sign up
                         </Button>

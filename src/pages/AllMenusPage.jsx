@@ -1,4 +1,13 @@
+import { CssBaseline } from "@mui/material";
+import BodyAllMenusPage from "../components/AllMenusPage/BodyAllMenusPage";
+
 function AllMenuPage() {
-   return <div>AllMenuPage</div>;
+   return (
+      <>
+         <CssBaseline>
+            <BodyAllMenusPage />
+         </CssBaseline>
+      </>
+   );
 }
 export default AllMenuPage;
