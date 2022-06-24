@@ -107,13 +107,11 @@ const mobData = [
 
 function BodyHome() {
    return (
-      <Box
-         // sx={{
-         //    minHeight: 829,
-         //    minWidth: 500,
-         // }}
-      >
-         <Masonry columns={{ xs: 2, sm: 3, md: 4, lg: 5 }} spacing={2}>
+      <Box>
+         <Masonry
+            columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
+            spacing={2}
+         >
             {mobData.map((item) => (
                <CartItems key={item.id} item={item} />
             ))}

@@ -5,12 +5,10 @@ function ContainerHome() {
    return (
       <>
          <CssBaseline>
-            <Container maxWidth="lg">
-               <Typography variant="h5" gutterBottom sx={{ mt: "20px" }}>
-                  Suggestion for you
-               </Typography>
-               <BodyHome />
-            </Container>
+            <Typography variant="h5" gutterBottom sx={{ mt: "20px" }}>
+               Suggestion for you
+            </Typography>
+            <BodyHome />
          </CssBaseline>
       </>
    );

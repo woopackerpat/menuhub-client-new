@@ -1,10 +1,16 @@
-import { Divider, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import {
+   Box,
+   Divider,
+   IconButton,
+   Menu,
+   MenuItem,
+   Typography,
+} from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import HistoryIcon from "@mui/icons-material/History";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar";
-import { Box } from "@mui/system";
 
 function DropdownProfile() {
    const [showDrop, setShowDrop] = useState(null);
@@ -33,6 +39,26 @@ function DropdownProfile() {
             Save
          </Typography>
          <SearchBar />
+         <MenuItem disabled>
+            <Typography variant="caption">
+               Quick save and organize later
+            </Typography>
+         </MenuItem>
+         <MenuItem>
+            <Box sx={{ display: "flex", gap: 2 }}>
+               <HistoryIcon />
+               <Typography>Profile</Typography>
+            </Box>
+         </MenuItem>
+         <MenuItem disabled>
+            <Typography variant="caption">Save to board</Typography>
+         </MenuItem>
+         <MenuItem>
+            <Box sx={{ display: "flex", gap: 2 }}>
+               <HistoryIcon />
+               <Typography>Board Name</Typography>
+            </Box>
+         </MenuItem>
          <MenuItem onClick={handleMenuClose}>Create menu</MenuItem>
          <MenuItem onClick={handleMenuClose}>My album</MenuItem>
          <Divider orientation="horizontal" />

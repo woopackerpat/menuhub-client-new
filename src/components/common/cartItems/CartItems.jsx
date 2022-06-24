@@ -3,7 +3,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DropdownProfile from "./DropdownProfile";
 
 const Label = styled("div")(({ theme }) => ({
@@ -47,7 +46,13 @@ function CartItems({ item }) {
          />
          {show && (
             <>
-               <Box sx={{ position: "absolute", top: 12, left: 12 }}>
+               <Box
+                  sx={{
+                     position: "absolute",
+                     top: 6,
+                     left: 12,
+                  }}
+               >
                   <DropdownProfile />
                </Box>
                <Box sx={{ position: "absolute", top: 12, right: 12 }}>
