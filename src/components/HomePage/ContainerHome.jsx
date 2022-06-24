@@ -1,14 +1,16 @@
-import { Container, CssBaseline, Typography } from "@mui/material";
+import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import BodyHome from "./BodyHome";
 
 function ContainerHome() {
    return (
       <>
          <CssBaseline>
-            <Typography variant="h5" gutterBottom sx={{ mt: "20px" }}>
-               Suggestion for you
-            </Typography>
-            <BodyHome />
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+               <Typography variant="h5" gutterBottom>
+                  Suggestion for you
+               </Typography>
+               <BodyHome />
+            </Box>
          </CssBaseline>
       </>
    );

@@ -64,12 +64,32 @@ function CartItems({ item }) {
                      Save
                   </Button>
                </Box>
-               <Box sx={{ position: "absolute", bottom: 40, right: 12 }}>
-                  <IconButton color="cleanLight">
-                     <ShareIcon color="cleanLight" />
+               <Box
+                  sx={{
+                     position: "absolute",
+                     bottom: 40,
+                     right: 12,
+                     display: "flex",
+                     gap: 1,
+                  }}
+               >
+                  <IconButton
+                     sx={{
+                        backgroundColor: "#f0f0f0",
+                        opacity: [0.9, 0.8, 0.7],
+                        "&:hover": { backgroundColor: "white", opacity: 1 },
+                     }}
+                  >
+                     <ShareIcon color="dark" />
                   </IconButton>
-                  <IconButton>
-                     <MoreHorizIcon color="cleanLight" />
+                  <IconButton
+                     sx={{
+                        backgroundColor: "#f0f0f0",
+                        opacity: [0.9, 0.8, 0.7],
+                        "&:hover": { backgroundColor: "white", opacity: 1 },
+                     }}
+                  >
+                     <MoreHorizIcon color="dark" />
                   </IconButton>
                </Box>
             </>

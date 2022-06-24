@@ -1,4 +1,10 @@
+import ContainerSearch from "../components/SearchPage/ContainerSearch";
+
 function SearchPage() {
-   return <div>SearchPage</div>;
+   return (
+      <div>
+         <ContainerSearch />
+      </div>
+   );
 }
 export default SearchPage;

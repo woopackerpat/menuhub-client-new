@@ -8,7 +8,7 @@ function AuthLayout() {
       <div>
          <div>
             <Navbar />
-            <Container maxWidth="xxl">
+            <Container maxWidth="xxl" sx={{ mt: "20px" }}>
                <Box
                   sx={{
                      px: {

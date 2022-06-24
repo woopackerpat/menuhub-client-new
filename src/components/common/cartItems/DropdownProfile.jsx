@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import HistoryIcon from "@mui/icons-material/History";
+import AddIcon from "@mui/icons-material/Add";
 
 import { useState } from "react";
 import SearchBar from "../SearchBar";
@@ -45,8 +46,27 @@ function DropdownProfile() {
             </Typography>
          </MenuItem>
          <MenuItem>
-            <Box sx={{ display: "flex", gap: 2 }}>
-               <HistoryIcon />
+            <Box
+               sx={{
+                  display: "flex",
+                  gap: 2,
+                  justifyContent: "center",
+                  alignItems: "center",
+               }}
+            >
+               <Box
+                  sx={{
+                     width: 40,
+                     height: 40,
+                     backgroundColor: "#efefef",
+                     display: "flex",
+                     justifyContent: "center",
+                     alignItems: "center",
+                     borderRadius: "10px",
+                  }}
+               >
+                  <HistoryIcon fontSize="large" />
+               </Box>
                <Typography>Profile</Typography>
             </Box>
          </MenuItem>
@@ -54,15 +74,57 @@ function DropdownProfile() {
             <Typography variant="caption">Save to board</Typography>
          </MenuItem>
          <MenuItem>
-            <Box sx={{ display: "flex", gap: 2 }}>
-               <HistoryIcon />
+            <Box
+               sx={{
+                  display: "flex",
+                  gap: 2,
+                  justifyContent: "center",
+                  alignItems: "center",
+               }}
+            >
+               <Box
+                  sx={{
+                     width: 40,
+                     height: 40,
+                     backgroundColor: "#efefef",
+                     display: "flex",
+                     justifyContent: "center",
+                     alignItems: "center",
+                     borderRadius: "10px",
+                  }}
+               >
+                  <img src="" alt="img"></img>
+               </Box>
                <Typography>Board Name</Typography>
             </Box>
          </MenuItem>
-         <MenuItem onClick={handleMenuClose}>Create menu</MenuItem>
-         <MenuItem onClick={handleMenuClose}>My album</MenuItem>
+
          <Divider orientation="horizontal" />
-         <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+         <MenuItem>
+            <Box
+               sx={{
+                  display: "flex",
+                  gap: 2,
+                  justifyContent: "center",
+                  alignItems: "center",
+               }}
+            >
+               <Box
+                  sx={{
+                     width: 40,
+                     height: 40,
+                     backgroundColor: "#efefef",
+                     display: "flex",
+                     justifyContent: "center",
+                     alignItems: "center",
+                     borderRadius: "10px",
+                  }}
+               >
+                  <AddIcon fontSize="large" />
+               </Box>
+               <Typography>Create board</Typography>
+            </Box>
+         </MenuItem>
       </Menu>
    );
    return (
