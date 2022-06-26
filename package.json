@@ -16,6 +16,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-login": "^5.2.2",
+    "react-infinite-scroller": "^1.2.6",
+    "react-query": "^3.39.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "validator": "^13.7.0",

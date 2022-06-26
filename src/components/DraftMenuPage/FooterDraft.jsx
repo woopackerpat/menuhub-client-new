@@ -39,18 +39,26 @@ function FooterDraft() {
       >
          {listDraft.map((item) => {
             return (
-               <img
-                  key={item.id}
-                  src={item.img}
-                  alt="img"
-                  loading="lazy"
-                  style={{
-                     objectFit: "cover",
+               <Box
+                  sx={{
                      width: "20%",
-                     borderRadius: "16px",
-                     cursor: "zoom-in",
+                     filter: "grayscale(50%)",
+                     "&:hover": { filter: "grayscale(0%)" },
                   }}
-               />
+               >
+                  <img
+                     key={item.id}
+                     src={item.img}
+                     alt="img"
+                     loading="lazy"
+                     style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        borderRadius: "16px",
+                        cursor: "zoom-in",
+                     }}
+                  />
+               </Box>
             );
          })}
       </Box>
