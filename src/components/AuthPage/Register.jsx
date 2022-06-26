@@ -9,13 +9,13 @@ import {
   Link,
   TextField,
   Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import RegisterForm from "./RegisterForm";
-import RegisterButton from "./RegisterButton";
-import LoginGoogle from "./LoginGoogle";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import { useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import RegisterForm from './RegisterForm';
+import RegisterButton from './RegisterButton';
+import LoginGoogle from './LoginGoogle';
 
 function Register({ handleCloseRegister, openRegister }) {
   return (
@@ -25,15 +25,15 @@ function Register({ handleCloseRegister, openRegister }) {
         onClose={handleCloseRegister}
         maxWidth="md"
         sx={{
-          textAlign: "center",
+          textAlign: 'center',
         }}
       >
         <Box
           display="flex"
           justifyContent="right"
           sx={{
-            mr: "10px",
-            mt: "10px",
+            mr: '10px',
+            mt: '10px',
           }}
         >
           <IconButton aria-label="close" onClick={handleCloseRegister}>
@@ -43,12 +43,12 @@ function Register({ handleCloseRegister, openRegister }) {
         <Box
           sx={{
             mx: 10,
-            borderRadius: "24px",
+            borderRadius: '24px',
           }}
         >
           <Box
             sx={{
-              mt: "60px",
+              mt: '60px',
             }}
           >
             <img
@@ -64,25 +64,27 @@ function Register({ handleCloseRegister, openRegister }) {
             }}
           >
             <RegisterForm />
-           
+
             <Box
               sx={{
-                my: "10px",
+                my: '10px',
               }}
             >
               <Typography
                 sx={{
                   mx: 0,
                   px: 0,
-                  fontWeight: "bold",
+                  fontWeight: 'bold',
                 }}
               >
                 OR
               </Typography>
             </Box>
             <Box>
-              <LoginGoogle />
-              <Box sx={{ mt: "30px" }}>
+              <Box display="flex" flexDirection="column">
+                <LoginGoogle />
+              </Box>
+              <Box sx={{ mt: '30px' }}>
                 By continuing, you agree to Menuhub's
               </Box>
               <Box>
@@ -91,11 +93,11 @@ function Register({ handleCloseRegister, openRegister }) {
               <Box>
                 <b>Privacy Policy</b>
               </Box>
-              <hr style={{ width: "60%", marginTop: "25px" }} />
+              <hr style={{ width: '60%', marginTop: '25px' }} />
               <Box>
                 <b>Not on Pinterest yet? Sign up</b>
               </Box>
-              <Box sx={{ mb: "20px" }}>
+              <Box sx={{ mb: '20px' }}>
                 <b>Are you a business? Get started here!</b>
               </Box>
             </Box>

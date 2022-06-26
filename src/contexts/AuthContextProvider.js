@@ -1,11 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "../config/axios";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from '../config/axios';
 import {
    getAccessToken,
    removeAccessToken,
    setAccessToken,
-} from "../services/localStorage";
+} from '../services/localStorage';
 
 const AuthContext = createContext();
 
@@ -19,30 +19,30 @@ function AuthContextProvider({ children }) {
             const token = getAccessToken();
 
             if (token) {
-               const resMe = await axios.get("/user/me");
+               const resMe = await axios.get('/user/me');
                setUser(resMe.data.user);
             }
          } catch (err) {
             removeAccessToken();
-            navigate("login");
+            navigate('login');
          }
       };
       fetchMe();
    }, []);
 
-   const register = async (input) => {
+   const register = async input => {
       try {
-         await axios.post("/auth/register", input);
+         await axios.post('/auth/register', input);
       } catch (err) {
          console.log(err);
       }
    };
 
    const login = async (email, password) => {
-      const res = await axios.post("/auth/login", { email, password });
+      const res = await axios.post('/auth/login', { email, password });
 
       setAccessToken(res.data.token);
-      const resMe = await axios.get("/user/me");
+      const resMe = await axios.get('/user/me');
       setUser(resMe.data.user);
    };
 

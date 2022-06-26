@@ -1,29 +1,29 @@
-import { Box, Link, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import LoginButton from "./LoginButton";
-import { useAuth } from "../../contexts/AuthContextProvider";
-import { validateLogin } from "../../services/validate";
+import { Box, Link, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoginButton from './LoginButton';
+import { useAuth } from '../../contexts/AuthContextProvider';
+import { validateLogin } from '../../services/validate';
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
   const { login } = useAuth();
 
-  const handleEmail = (e) => {
+  const handleEmail = e => {
     setEmail(e.target.value);
   };
-  const handlePassword = (e) => {
+  const handlePassword = e => {
     setPassword(e.target.value);
   };
 
   const [error, setError] = useState({});
-  const [apiError, setApiError] = useState("");
+  const [apiError, setApiError] = useState('');
 
-  const handleSubmitLogin = async (e) => {
+  const handleSubmitLogin = async e => {
     e.preventDefault();
     const errResult = validateLogin({
       email,
@@ -36,9 +36,9 @@ function LoginForm() {
       try {
         await login(email, password);
         setError({});
-        setEmail("");
-        setPassword("");
-        navigate("home");
+        setEmail('');
+        setPassword('');
+        navigate('home');
       } catch (err) {
         setApiError(err.response.data.message);
       }
@@ -47,7 +47,7 @@ function LoginForm() {
 
   return (
     <>
-      <Box component = "form" onSubmit = {handleSubmitLogin} autoComplete ="off">
+      <Box component="form" onSubmit={handleSubmitLogin} autoComplete="off">
         <TextField
           autoFocus
           margin="normal"
@@ -78,7 +78,7 @@ function LoginForm() {
           <Typography
             align="left"
             variant="subtitle2"
-            sx={{ fontWeight: "bold" }}
+            sx={{ fontWeight: 'bold' }}
           >
             Forgot your password?
           </Typography>

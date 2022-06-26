@@ -9,14 +9,13 @@ import {
   Link,
   TextField,
   Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import LoginForm from "./LoginForm";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import { useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import LoginForm from './LoginForm';
 
-import GoogleLogin from "react-google-login";
-import LoginGoogle from "./LoginGoogle";
+import LoginGoogle from './LoginGoogle';
 
 function Login({ handleClose, open }) {
   return (
@@ -26,15 +25,15 @@ function Login({ handleClose, open }) {
         onClose={handleClose}
         maxWidth="md"
         sx={{
-          textAlign: "center",
+          textAlign: 'center',
         }}
       >
         <Box
           display="flex"
           justifyContent="right"
           sx={{
-            mr: "10px",
-            mt: "10px",
+            mr: '10px',
+            mt: '10px',
           }}
         >
           <IconButton aria-label="close" onClick={handleClose}>
@@ -44,13 +43,12 @@ function Login({ handleClose, open }) {
         <Box
           sx={{
             mx: 10,
-
-            borderRadius: "24px",
+            borderRadius: '24px',
           }}
         >
           <Box
             sx={{
-              mt: "60px",
+              mt: '60px',
             }}
           >
             <img
@@ -69,14 +67,14 @@ function Login({ handleClose, open }) {
 
             <Box
               sx={{
-                my: "10px",
+                my: '10px',
               }}
             >
               <Typography
                 sx={{
                   mx: 0,
                   px: 0,
-                  fontWeight: "bold",
+                  fontWeight: 'bold',
                 }}
               >
                 OR
@@ -86,7 +84,7 @@ function Login({ handleClose, open }) {
               <Box display="flex" flexDirection="column">
                 <LoginGoogle />
               </Box>
-              <Box sx={{ mt: "30px" }}>
+              <Box sx={{ mt: '30px' }}>
                 By continuing, you agree to Menuhub's
               </Box>
               <Box>
@@ -95,11 +93,11 @@ function Login({ handleClose, open }) {
               <Box>
                 <b>Privacy Policy</b>
               </Box>
-              <hr style={{ width: "60%", marginTop: "25px" }} />
+              <hr style={{ width: '60%', marginTop: '25px' }} />
               <Box>
                 <b>Not on Pinterest yet? Sign up</b>
               </Box>
-              <Box sx={{ mb: "20px" }}>
+              <Box sx={{ mb: '20px' }}>
                 <b>Are you a business? Get started here!</b>
               </Box>
             </Box>

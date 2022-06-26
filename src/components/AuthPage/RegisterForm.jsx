@@ -1,38 +1,38 @@
-import { Box, Link, TextField, Typography } from "@mui/material";
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContextProvider";
-import RegisterButton from "./RegisterButton";
-import { validateRegister } from "../../services/validate";
-import axios from "../../config/axios";
+import { Box, Link, TextField, Typography } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContextProvider';
+import RegisterButton from './RegisterButton';
+import { validateRegister } from '../../services/validate';
+import axios from '../../config/axios';
 
 function RegisterForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [error, setError] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
-  const [apiError, setApiError] = useState("");
+  const [apiError, setApiError] = useState('');
 
   const navigate = useNavigate();
 
   const { register } = useAuth();
 
-  const handleEmail = (e) => {
+  const handleEmail = e => {
     setEmail(e.target.value);
   };
-  const handlePassword = (e) => {
+  const handlePassword = e => {
     setPassword(e.target.value);
   };
-  const handleConfirmPassword = (e) => {
+  const handleConfirmPassword = e => {
     setConfirmPassword(e.target.value);
   };
 
-  const handleSubmitForm = async (e) => {
+  const handleSubmitForm = async e => {
     e.preventDefault();
 
     const errResult = validateRegister({
@@ -46,7 +46,7 @@ function RegisterForm() {
     if (Object.keys(errResult).length === 0) {
       try {
         const res = await register({ email, password, confirmPassword });
-        navigate("/login");
+        navigate('/login');
       } catch (err) {
         console.log(err);
         setApiError(err.response.data.message);
@@ -100,7 +100,7 @@ function RegisterForm() {
           <Typography
             align="left"
             variant="subtitle2"
-            sx={{ fontWeight: "bold" }}
+            sx={{ fontWeight: 'bold' }}
           >
             Forgot your password?
           </Typography>
