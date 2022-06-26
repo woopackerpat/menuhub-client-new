@@ -22,6 +22,9 @@ export default makeStyles(() => ({
   pointer: {
     cursor: "pointer",
   },
+  buttonTag: {
+    fontSize: "12px " 
+  }
 
 
  

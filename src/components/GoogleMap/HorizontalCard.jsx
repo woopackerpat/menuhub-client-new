@@ -3,9 +3,13 @@ import { Box } from "@mui/system";
 import React from "react";
 import RoomIcon from "@mui/icons-material/Room";
 
-function HorizontalCard() {
+function HorizontalCard({ place, selected, refProp }) {
+  console.log(refProp)
+  if (selected)
+    refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
   return (
-    <Paper sx={{ mx: "20px", my: "15px",p: "5px", borderRadius: "24px" }} elevation = "3">
+    
       <Grid container>
         <Grid item xs={12} lg={5}>
           <Box sx={{ borderRadius: "24px", overflow: "hidden" }}>
@@ -24,7 +28,7 @@ function HorizontalCard() {
             </Typography>
             <Grid container>
               <Grid item xs={2}>
-                <RoomIcon color="error" fontSize="large" />
+                <RoomIcon color="error" fontSize="large" className = {selected && "mark-clicked"}/>
               </Grid>
               <Grid
                 item
@@ -44,7 +48,7 @@ function HorizontalCard() {
           </Box>
         </Grid>
       </Grid>
-    </Paper>
+   
   );
 }
 

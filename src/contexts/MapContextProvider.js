@@ -19,6 +19,7 @@ function MapContextProvider({ children }) {
   });
 
   const [childClicked, setChildClicked] = useState({});
+
   const [bounds, setBounds] = useState(null);
 
   const [places, setPlaces] = useState(initPlaces);
@@ -42,6 +43,7 @@ function MapContextProvider({ children }) {
         setChildClicked,
         setBounds,
         coordinates,
+        childClicked,
 
         places
       }}
