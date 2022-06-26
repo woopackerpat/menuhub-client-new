@@ -9,8 +9,9 @@ export default makeStyles(() => ({
     width: "100px",
   },
   mapContainer: {
-    height: "85vh",
+    height: "80vh",
     width: "100%",
+    
   },
   markerContainer: {
     position: "absolute",
@@ -21,4 +22,7 @@ export default makeStyles(() => ({
   pointer: {
     cursor: "pointer",
   },
+
+
+ 
 }));
