@@ -1,8 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Router from "./routes/Router";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { blue } from "@mui/material/colors";
+
+import { QueryClient, QueryClientProvider } from "react-query";
+import InfiniteScrollProvider from "./contexts/InfiniteScrollContext";
+
+const queryClient = new QueryClient();
 
 function App() {
    const theme = createTheme({
@@ -26,10 +29,10 @@ function App() {
             main: "#e60023",
          },
          blue: {
-           main: "#1976d2",
-           dark: "#1565c0",
-           contrastText: '#fff'
-         }
+            main: "#1976d2",
+            dark: "#1565c0",
+            contrastText: "#fff",
+         },
       },
       shape: {
          borderRadius: 16,
@@ -37,7 +40,11 @@ function App() {
    });
    return (
       <ThemeProvider theme={theme}>
-         <Router />
+         <QueryClientProvider client={queryClient}>
+            <InfiniteScrollProvider>
+               <Router />
+            </InfiniteScrollProvider>
+         </QueryClientProvider>
       </ThemeProvider>
    );
 }

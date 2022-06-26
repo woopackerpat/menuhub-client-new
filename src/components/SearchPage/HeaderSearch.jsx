@@ -63,9 +63,9 @@ function HeaderSearchPage() {
       } else if (isIpad) {
          setList(listRestaurant.slice(0, 4));
       } else if (isDesktop) {
-         setList(listRestaurant.slice(0, 9));
+         setList(listRestaurant.slice(0, 7));
       } else {
-         setList(listRestaurant.slice(0, 12));
+         setList(listRestaurant.slice(0, 9));
       }
    }, [isMobile]);
    return (

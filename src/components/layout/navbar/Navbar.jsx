@@ -30,7 +30,7 @@ const StyledToolbar = styled(Toolbar)({
 
 function Navbar() {
    // API
-   const user = false;
+   const user = true;
 
    // for dropdown Menu
    const [menu, setMenu] = useState(null);

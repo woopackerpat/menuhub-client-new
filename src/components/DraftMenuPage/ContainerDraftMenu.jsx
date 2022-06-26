@@ -22,7 +22,11 @@ function ContainerDraftMenuPage() {
                >
                   Create Your Own Menus
                </Typography>
+
+               {/* ================= Input Category ===================== */}
                <MainContentDraftMenu />
+
+               {/*=================== Draft Pic ========================= */}
                <FooterDraft />
             </Box>
          </CssBaseline>
