@@ -10,12 +10,20 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
-
-import "@reach/combobox/styles.css";
 import useOnclickOutside from "react-cool-onclickoutside";
+import "@reach/combobox/styles.css";
+import { useEffect, useState, useContext } from "react";
+import { useMap } from "../../contexts/MapContextProvider";
+import { TextField } from "@mui/material";
 
-function PlacesAutocomplete(props) {
-  const { setPlace, placeholder } = props;
+function PlacesAutocomplete() {
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const [googlePlaceId, setGooglePlaceId] = useState("");
+  const [address, setAddress] = useState("");
+
+  const { handleSubmitSearch } = useMap();
+
   const {
     ready,
     value,
@@ -31,17 +39,27 @@ function PlacesAutocomplete(props) {
   const ref = useOnclickOutside(() => {});
 
   const handleSelect = (val) => {
+    // หา googleId จาก dropdown ที่ถูกเลือก
     const matchObj = data.find((obj) => val === obj.description);
+
+    setGooglePlaceId(matchObj.place_id);
 
     setValue(val, false);
     const parameter = {
+      // config สำหรับ get detail
       placeId: matchObj.place_id,
-      fields: ["name", "address_components"],
+      fields: [
+        "name",
+        "address_components",
+        "formatted_address",
+        "adr_address",
+      ],
     };
 
     getDetails(parameter)
       .then((details) => {
-        console.log("PlaceName", details);
+        const { formatted_address, name } = details;
+        setAddress(formatted_address);
       })
       .catch((error) => {
         console.log(error);
@@ -50,7 +68,8 @@ function PlacesAutocomplete(props) {
     getGeocode({ address: val }).then((result) => {
       try {
         const { lat, lng } = getLatLng(result[0]);
-        console.log("Coordinates: ", { lat, lng });
+        setLat(lat);
+        setLng(lng);
       } catch (error) {
         console.log(error);
       }
@@ -59,26 +78,41 @@ function PlacesAutocomplete(props) {
     clearSuggestions();
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSubmitSearch({ lat, lng, googlePlaceId, address });
+    setLat("");
+    setLng("");
+    setGooglePlaceId("");
+    setAddress("");
+  };
+
   return (
-    <form ref={ref}>
-      <Combobox onSelect={handleSelect} aria-labelledby="demo">
-        <ComboboxInput
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
-          placeholder={placeholder}
-          className="form-control my-2 form-control-lg rounded fw-light fs-6 place-input place-input shadow-none"
-        />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === "OK" &&
-              data.map(({ place_id, description }) => (
-                <ComboboxOption key={place_id} value={description} />
-              ))}
-          </ComboboxList>
-        </ComboboxPopover>
-      </Combobox>
-    </form>
+    <>
+      <div className="col-9 col-lg-10  ">
+        <form ref={ref} onSubmit={(e) => handleSubmit(e)}>
+          <Combobox onSelect={handleSelect} aria-labelledby="demo">
+            <ComboboxInput
+              value={value}
+              onChange={handleInput}
+              disabled={!ready}
+              placeholder="Enter preferred location"
+              className="input-autocomplete"
+            />
+
+            <ComboboxPopover className="front-box">
+              <ComboboxList>
+                {status === "OK" &&
+                  data.map(({ place_id, description }) => (
+                    <ComboboxOption key={place_id} value={description} />
+                  ))}
+              </ComboboxList>
+            </ComboboxPopover>
+          </Combobox>
+          <button type="submit" style={{ display: "none" }}></button>
+        </form>
+      </div>
+    </>
   );
 }
 

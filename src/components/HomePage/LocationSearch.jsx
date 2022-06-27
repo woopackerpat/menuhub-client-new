@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { Box, Grid, TextField } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MapIcon from "@mui/icons-material/Map";
+import PlacesAutocomplete from "../common/PlacesAutocomplete";
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -40,7 +41,7 @@ BootstrapDialogTitle.propTypes = {
 };
 
 function LocationSearch() {
-  const { openSearch, handleCloseSearch, handleSubmitSearch } = useMap();
+  const { openSearch, handleCloseSearch, submitMyLocation } = useMap();
 
   return (
     <div>
@@ -54,7 +55,7 @@ function LocationSearch() {
           onClose={handleCloseSearch}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <MapIcon color = "error"/>
+            <MapIcon color="error" />
             <Typography variant="h5" sx={{ ml: "10px" }}>
               Search restaurants by location
             </Typography>
@@ -63,7 +64,7 @@ function LocationSearch() {
         <DialogContent>
           <Grid container sx={{ width: "500px", mt: "15px", mb: "20px" }}>
             <Grid item xs={10}>
-              <TextField
+              {/* <TextField
                 fullWidth
                 label="Enter preferred location"
                 onKeyPress={(e) => {
@@ -71,7 +72,8 @@ function LocationSearch() {
                     handleSubmitSearch(e.target.value);
                   }
                 }}
-              ></TextField>
+              ></TextField> */}
+              <PlacesAutocomplete />
             </Grid>
             <Grid
               item
@@ -82,7 +84,7 @@ function LocationSearch() {
                 justifyContent: "center",
               }}
             >
-              <a>
+              <a onClick={() => submitMyLocation()}>
                 <LocationOnIcon color="error" style={{ fontSize: "40px" }} />
               </a>
             </Grid>

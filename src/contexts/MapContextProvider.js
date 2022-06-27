@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 const MapContext = createContext();
@@ -19,9 +20,14 @@ function MapContextProvider({ children }) {
     // lng: 0
   });
 
+  const navigate = useNavigate();
+
   const [childClicked, setChildClicked] = useState(null);
 
   const [bounds, setBounds] = useState(null);
+
+  // เมื่อ bound เปลี่ยนจะยิง axios ไปหาร้านอาหาร
+  console.log(bounds);
 
   const [places, setPlaces] = useState(initPlaces);
 
@@ -41,19 +47,31 @@ function MapContextProvider({ children }) {
   };
 
   const handleSubmitSearch = (value) => {
-    console.log(value)
+    console.log(value);
+    const { lat, lng } = value;
+    // ยิง axios ที่นี่ พอได้ค่าแล้วทำการ setPlaces
+    setCoordinates({ lat, lng });
     setOpenSearch(false);
+    navigate("/map");
   };
 
-
-
-  useEffect(() => {
+  const submitMyLocation = () => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
+        console.log({ latitude, longitude });
         setCoordinates({ lat: latitude, lng: longitude });
+        navigate("/map");
       }
     );
-  }, []);
+  };
+
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     ({ coords: { latitude, longitude } }) => {
+  //       setCoordinates({ lat: latitude, lng: longitude });
+  //     }
+  //   );
+  // }, []);
 
   useEffect(() => {
     setMarkId((markId) =>
@@ -82,6 +100,8 @@ function MapContextProvider({ children }) {
         handleOpenSearch,
         handleCloseSearch,
         handleSubmitSearch,
+
+        submitMyLocation,
       }}
     >
       {children}
