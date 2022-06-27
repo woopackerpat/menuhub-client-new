@@ -33,10 +33,10 @@ function LoginGoogle() {
       prompt_parent_id: 'g_id_onload',
     })
     google.accounts.id.renderButton(document.getElementById('signInDiv'), {
-      theme: 'outline',
       size: 'large',
       width: buttonWidth.current.clientWidth,
       text: 'continue_with',
+      border: 'none',
     })
     google.accounts.id.prompt()
   }, [])
@@ -50,6 +50,7 @@ function LoginGoogle() {
         fullWidth
         size="large"
         color="light"
+        sx={{ border: '1px silver solid' }}
       >
         {/* <Grid
         container
