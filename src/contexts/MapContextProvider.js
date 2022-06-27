@@ -29,6 +29,23 @@ function MapContextProvider({ children }) {
 
   const [markId, setMarkId] = useState([]);
 
+  // search modal
+
+  const [openSearch, setOpenSearch] = useState(false);
+
+  const handleOpenSearch = () => {
+    setOpenSearch(true);
+  };
+  const handleCloseSearch = () => {
+    setOpenSearch(false);
+  };
+
+  const handleSubmitSearch = (value) => {
+    console.log(value)
+    setOpenSearch(false);
+  };
+
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -60,6 +77,11 @@ function MapContextProvider({ children }) {
         listClicked,
 
         markId,
+
+        openSearch,
+        handleOpenSearch,
+        handleCloseSearch,
+        handleSubmitSearch,
       }}
     >
       {children}
