@@ -1,4 +1,10 @@
+import ContainerSingleMenu from '../components/SingleMenuPage/ContainerSingleMenu'
+
 function SingleMenuPage() {
-   return <div>SingleMenuPage</div>;
+  return (
+    <div>
+      <ContainerSingleMenu />
+    </div>
+  )
 }
-export default SingleMenuPage;
+export default SingleMenuPage
