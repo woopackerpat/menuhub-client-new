@@ -15,12 +15,19 @@
   }
 }
 
-
-
-.card-clicked {
-  position: fixed;
-  animation: updown 0.5s ease infinite
+@keyframes eatme {
+  0% {
+    transform: scale(1)
+  }
+  
+  100% {
+    transform: scale(1.3);
+  }
 }
+
+
+
+
 
 .mark-clicked {
   color: rgb(107, 107, 107) !important;
@@ -36,5 +43,10 @@
 
 .mark-over {
   cursor: pointer;
+}
+
+.list-over {
+  animation: eatme 0.5s ease infinite;
+  color: rgb(255, 136, 0);
 }
 

@@ -7,8 +7,9 @@ import RoomIcon from "@mui/icons-material/Room";
 import { useMap } from "../contexts/MapContextProvider";
 import { useState, useEffect, createRef } from "react";
 
+
 function MapPage() {
-  const { places, childClicked } = useMap();
+  const { places, childClicked, markId } = useMap();
 
   const [elRefs, setElRefs] = useState([]);
 
@@ -73,7 +74,8 @@ function MapPage() {
                   selected={childClicked !== null && Number(childClicked) === i}
                   refProp={elRefs[i]}
                   place={place}
-                  
+                  markId = {markId[i]}
+                 
                 />
               </Paper>
             ))}

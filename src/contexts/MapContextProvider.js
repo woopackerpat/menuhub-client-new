@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const MapContext = createContext();
 
@@ -24,16 +25,26 @@ function MapContextProvider({ children }) {
 
   const [places, setPlaces] = useState(initPlaces);
 
- 
+  const [listClicked, setListClicked] = useState(null);
+
+  const [markId, setMarkId] = useState([]);
 
 
-    useEffect(() => {
-      navigator.geolocation.getCurrentPosition(
-        ({ coords: { latitude, longitude } }) => {
-          setCoordinates({ lat: latitude, lng: longitude });
-        }
-      );
-    }, []);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        setCoordinates({ lat: latitude, lng: longitude });
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    setMarkId((markId) =>
+      Array(places.length)
+        .fill()
+        .map((_, i) => markId[i] || uuidv4())
+    );
+  }, [places]);
 
   return (
     <MapContext.Provider
@@ -44,7 +55,11 @@ function MapContextProvider({ children }) {
         coordinates,
         childClicked,
 
-        places
+        places,
+        setListClicked,
+        listClicked,
+
+        markId,
       }}
     >
       {children}
