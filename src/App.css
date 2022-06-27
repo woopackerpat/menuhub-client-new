@@ -23,6 +23,18 @@
 }
 
 .mark-clicked {
-  color: rgb(0, 89, 255) !important;
+  color: rgb(107, 107, 107) !important;
   animation: updown 0.5s ease infinite
 }
+
+.mark-over:hover {
+  
+  transform: scale(1.3);
+  transition: 0.2s;
+  transition-timing-function: ease;
+}
+
+.mark-over {
+  cursor: pointer;
+}
+

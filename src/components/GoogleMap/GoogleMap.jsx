@@ -33,9 +33,20 @@ function GoogleMap() {
         }}
         onChildClick={(child) => setChildClicked(child)}
       >
-        <Marker lat={Number(coordinates.lat)} lng={Number(coordinates.lng)} color = "blue" />
+        <Marker
+          lat={Number(coordinates.lat)}
+          lng={Number(coordinates.lng)}
+          color="blue"
+        />
         {places.map((place, idx) => (
-          <Marker key={idx} lat={Number(place.lat)} lng={Number(place.lng)} color = "error" />
+         
+            <Marker
+              key={idx}
+              lat={Number(place.lat)}
+              lng={Number(place.lng)}
+              color="error"
+            />
+          
         ))}
       </GoogleMapReact>
     </Box>

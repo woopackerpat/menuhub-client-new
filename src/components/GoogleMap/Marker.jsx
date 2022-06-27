@@ -16,7 +16,7 @@ function Marker({ lat, lng, color }) {
       lat={Number(lat)}
       lng={Number(lng)}
     >
-      <RoomIcon color= {color} fontSize="large" />
+      <RoomIcon color= {color} fontSize="large" className = "mark-over"/>
     </div>
   );
 }

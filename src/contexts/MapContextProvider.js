@@ -18,7 +18,7 @@ function MapContextProvider({ children }) {
     // lng: 0
   });
 
-  const [childClicked, setChildClicked] = useState({});
+  const [childClicked, setChildClicked] = useState(null);
 
   const [bounds, setBounds] = useState(null);
 
@@ -26,7 +26,6 @@ function MapContextProvider({ children }) {
 
  
 
-//   const [elRefs, setElRefs] = useState([]);
 
     useEffect(() => {
       navigator.geolocation.getCurrentPosition(

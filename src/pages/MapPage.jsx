@@ -70,9 +70,10 @@ function MapPage() {
                 ref={elRefs[i]}
               >
                 <HorizontalCard
-                  selected={Number(childClicked) === i}
+                  selected={childClicked !== null && Number(childClicked) === i}
                   refProp={elRefs[i]}
                   place={place}
+                  
                 />
               </Paper>
             ))}

@@ -2,15 +2,25 @@ import { Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import RoomIcon from "@mui/icons-material/Room";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import useStyles from './styles'
+import {useMap} from '../../contexts/MapContextProvider'
 
 function HorizontalCard({ place, selected, refProp }) {
-  console.log(refProp)
+  const classes = useStyles()
+
+  const {setChildClicked} = useMap()
+
   if (selected)
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
+  const handleMouseOver = () => {
+    setChildClicked(null)
+  }
+
   return (
-    
-      <Grid container>
+    <a onMouseOver={() => handleMouseOver()} className = {classes.pointer}>
+      <Grid container className = "">
         <Grid item xs={12} lg={5}>
           <Box sx={{ borderRadius: "24px", overflow: "hidden" }}>
             <img
@@ -28,7 +38,14 @@ function HorizontalCard({ place, selected, refProp }) {
             </Typography>
             <Grid container>
               <Grid item xs={2}>
-                <RoomIcon color="error" fontSize="large" className = {selected && "mark-clicked"}/>
+                {selected ? (
+                  <RestaurantIcon
+                    className="mark-clicked"
+                    fontSize="large"
+                  ></RestaurantIcon>
+                ) : (
+                  <RoomIcon color="error" fontSize="large" />
+                )}
               </Grid>
               <Grid
                 item
@@ -48,7 +65,7 @@ function HorizontalCard({ place, selected, refProp }) {
           </Box>
         </Grid>
       </Grid>
-   
+    </a>
   );
 }
 
