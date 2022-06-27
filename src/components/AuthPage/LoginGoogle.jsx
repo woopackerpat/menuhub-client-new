@@ -1,28 +1,28 @@
-import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
-import { useEffect, useRef } from 'react';
-import axios from 'axios';
-import { setAccessToken } from '../../services/localStorage';
-import React from 'react';
-import GoogleLogo from './GoogleLogo';
+import { Avatar, Box, Button, Grid, Typography } from '@mui/material'
+import { useEffect, useRef } from 'react'
+import axios from 'axios'
+import { setAccessToken } from '../../services/localStorage'
+import React from 'react'
+import GoogleLogo from './GoogleLogo'
 
 function LoginGoogle() {
-  const buttonWidth = useRef();
+  const buttonWidth = useRef()
   const handleCallbackResponse = async res => {
     try {
-      const obj = { googleData: res.credential };
-      const login = await axios.post('http://localhost:8005/auth/google', obj);
-      console.log(login.data);
-      const token = login.data.token;
-      setAccessToken(token);
+      const obj = { googleData: res.credential }
+      const login = await axios.post('http://localhost:8005/auth/google', obj)
+      console.log(login.data)
+      const token = login.data.token
+      setAccessToken(token)
       // document.getElementById('signInDiv').hidden = true;
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   const handleSignout = event => {
-    document.getElementById('signInDiv').hidden = false;
-  };
+    document.getElementById('signInDiv').hidden = false
+  }
 
   useEffect(() => {
     /* global google */
@@ -30,26 +30,28 @@ function LoginGoogle() {
       client_id:
         '321447756040-07qa55lknl2mcuqr606akdl39ihl64s4.apps.googleusercontent.com',
       callback: handleCallbackResponse,
-    });
+      prompt_parent_id: 'g_id_onload',
+    })
     google.accounts.id.renderButton(document.getElementById('signInDiv'), {
       theme: 'outline',
-      size: 'medium',
+      size: 'large',
       width: buttonWidth.current.clientWidth,
       text: 'continue_with',
-    });
-    google.accounts.id.prompt();
-  }, []);
+    })
+    google.accounts.id.prompt()
+  }, [])
 
   return (
-    <Button
-      id="signInDiv"
-      ref={buttonWidth}
-      // variant="contained"
-      fullWidth
-      size="large"
-      color="light"
-    >
-      {/* <Grid
+    <>
+      <Button
+        id="signInDiv"
+        ref={buttonWidth}
+        // variant="contained"
+        fullWidth
+        size="large"
+        color="light"
+      >
+        {/* <Grid
         container
         spacing={0}
         sx={{
@@ -79,8 +81,9 @@ function LoginGoogle() {
           </Box>
         </Grid>
       </Grid> */}
-    </Button>
-  );
+      </Button>
+    </>
+  )
 }
 
-export default LoginGoogle;
+export default LoginGoogle
