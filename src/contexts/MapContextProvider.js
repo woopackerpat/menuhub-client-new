@@ -60,6 +60,7 @@ function MapContextProvider({ children }) {
       ({ coords: { latitude, longitude } }) => {
         console.log({ latitude, longitude });
         setCoordinates({ lat: latitude, lng: longitude });
+        setOpenSearch(false);
         navigate("/map");
       }
     );
