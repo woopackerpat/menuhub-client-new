@@ -1,6 +1,6 @@
 import { Box, Paper } from "@mui/material";
 import GoogleMapReact from "google-map-react";
-import { useState, useContext } from "react";
+import { useState, useEffect, createRef } from "react";
 import { useMap } from "../../contexts/MapContextProvider.js";
 import Marker from "./Marker.jsx";
 import RoomIcon from "@mui/icons-material/Room";
@@ -8,8 +8,15 @@ import RoomIcon from "@mui/icons-material/Room";
 import useStyles from "./styles.js";
 
 function GoogleMap() {
-  const { setCoordinates, setChildClicked, setBounds, coordinates, places } =
-    useMap();
+  const {
+    setCoordinates,
+    setChildClicked,
+    setBounds,
+    coordinates,
+    places,
+    markId,
+    listClicked,
+  } = useMap();
 
   const classes = useStyles();
 
@@ -33,9 +40,20 @@ function GoogleMap() {
         }}
         onChildClick={(child) => setChildClicked(child)}
       >
-        <Marker lat={Number(coordinates.lat)} lng={Number(coordinates.lng)} color = "blue" />
+        <Marker
+          lat={Number(coordinates.lat)}
+          lng={Number(coordinates.lng)}
+          color="blue"
+        />
         {places.map((place, idx) => (
-          <Marker key={idx} lat={Number(place.lat)} lng={Number(place.lng)} color = "error" />
+          <Marker
+            key={idx}
+            lat={Number(place.lat)}
+            lng={Number(place.lng)}
+            color="error"
+           
+            listSelected = {markId[idx] === listClicked}
+          />
         ))}
       </GoogleMapReact>
     </Box>

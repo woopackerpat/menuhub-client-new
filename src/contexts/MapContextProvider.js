@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const MapContext = createContext();
 
@@ -18,23 +20,67 @@ function MapContextProvider({ children }) {
     // lng: 0
   });
 
-  const [childClicked, setChildClicked] = useState({});
+  const navigate = useNavigate();
+
+  const [childClicked, setChildClicked] = useState(null);
 
   const [bounds, setBounds] = useState(null);
 
+  // เมื่อ bound เปลี่ยนจะยิง axios ไปหาร้านอาหาร
+  console.log(bounds);
+
   const [places, setPlaces] = useState(initPlaces);
 
- 
+  const [listClicked, setListClicked] = useState(null);
 
-//   const [elRefs, setElRefs] = useState([]);
+  const [markId, setMarkId] = useState([]);
 
-    useEffect(() => {
-      navigator.geolocation.getCurrentPosition(
-        ({ coords: { latitude, longitude } }) => {
-          setCoordinates({ lat: latitude, lng: longitude });
-        }
-      );
-    }, []);
+  // search modal
+
+  const [openSearch, setOpenSearch] = useState(false);
+
+  const handleOpenSearch = () => {
+    setOpenSearch(true);
+  };
+  const handleCloseSearch = () => {
+    setOpenSearch(false);
+  };
+
+  const handleSubmitSearch = (value) => {
+    console.log(value);
+    const { lat, lng } = value;
+    // ยิง axios ที่นี่ พอได้ค่าแล้วทำการ setPlaces
+    setCoordinates({ lat, lng });
+    setOpenSearch(false);
+    navigate("/map");
+  };
+
+  const submitMyLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        console.log({ latitude, longitude });
+        setCoordinates({ lat: latitude, lng: longitude });
+        setOpenSearch(false);
+        navigate("/map");
+      }
+    );
+  };
+
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     ({ coords: { latitude, longitude } }) => {
+  //       setCoordinates({ lat: latitude, lng: longitude });
+  //     }
+  //   );
+  // }, []);
+
+  useEffect(() => {
+    setMarkId((markId) =>
+      Array(places.length)
+        .fill()
+        .map((_, i) => markId[i] || uuidv4())
+    );
+  }, [places]);
 
   return (
     <MapContext.Provider
@@ -45,7 +91,18 @@ function MapContextProvider({ children }) {
         coordinates,
         childClicked,
 
-        places
+        places,
+        setListClicked,
+        listClicked,
+
+        markId,
+
+        openSearch,
+        handleOpenSearch,
+        handleCloseSearch,
+        handleSubmitSearch,
+
+        submitMyLocation,
       }}
     >
       {children}
