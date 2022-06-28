@@ -1,4 +1,4 @@
-import ContainerSingleMenu from '../components/SingleMenuPage/ContainerSingleMenuPage'
+import ContainerSingleMenu from '../components/SingleMenuPage/ContainerSingleMenu'
 
 function SingleMenuPage() {
   return (

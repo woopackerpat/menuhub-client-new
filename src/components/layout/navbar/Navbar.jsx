@@ -31,8 +31,13 @@ const StyledToolbar = styled(Toolbar)({
 })
 
 function Navbar() {
+<<<<<<< HEAD
    // API
    const user = false;
+=======
+  // API
+  const user = true
+>>>>>>> feat-single-menu
 
   // for dropdown Menu
   const [menu, setMenu] = useState(null)
