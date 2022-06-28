@@ -8,7 +8,7 @@ function MenuCardContainer() {
       sx={{
         display: 'flex',
         gap: 3,
-        width: '54%',
+        width: '60%',
         mx: 'auto',
         p: 3,
         boxShadow: '1px 1px 10px 8px #efefef',
