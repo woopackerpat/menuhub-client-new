@@ -10,6 +10,7 @@ import {
    styled,
    Toolbar,
    Link,
+   Dialog,
 } from "@mui/material";
 import logo from "../../../assets/images/logo.png";
 import AddIcon from "@mui/icons-material/Add";
@@ -49,6 +50,39 @@ function Navbar() {
       setMenu(null);
    };
 
+   //******************************
+
+   // for login
+   const [open, setOpen] = useState(false);
+
+   const handleClickOpen = () => {
+      setOpen(true);
+   };
+
+   const handleClose = () => {
+      setOpen(false);
+   };
+
+   // *****************************
+
+   // for register
+
+   const [openRegister, setOpenRegister] = useState(false);
+
+   const handleClickOpenRegister = () => {
+      setOpenRegister(true);
+   };
+
+   const handleCloseRegister = () => {
+      setOpenRegister(false);
+   };
+   // const handleCloseRegister = () => {
+   //    // setOpenRegister(false);
+
+   //    setOpenRegister((p) => !p);
+   //    setOpen((p) => !p);
+
+   // };
    // *****************************
 
    // for open map
@@ -73,6 +107,7 @@ function Navbar() {
          <Link href="/" underline="none">
             <MenuItem
                onClick={() => {
+                  handleClose();
                   logout();
                }}
             >
@@ -132,19 +167,22 @@ function Navbar() {
                            display: { xs: "none", sm: "flex" },
                         }}
                      >
-                        <Login
-                           title="login"
+                        <Button
                            variant="contained"
                            color="error"
                            sx={{ mr: "10px", fontWeight: "bold" }}
-                        />
-
-                        <Register
+                           onClick={handleClickOpen}
+                        >
+                           Log in
+                        </Button>
+                        <Button
                            variant="contained"
                            color="cleanLight"
+                           onClick={handleClickOpenRegister}
                            sx={{ fontWeight: "bold" }}
-                           title="Sign up"
-                        />
+                        >
+                           Sign up
+                        </Button>
                      </Box>
                   </>
                ) : (
@@ -180,6 +218,49 @@ function Navbar() {
                </Box>
             </StyledToolbar>
          </AppBar>
+         {/* {type === "login" && (
+            <Login handleClose={handleClose} open={open} setType={setType} />
+         )}
+         {type === "register" && (
+            <Register
+               handleCloseRegister={handleCloseRegister}
+               openRegister={openRegister}
+               setType={setType}
+            />
+         )} */}
+
+         {/* {type === "login" ? (
+            <Login handleClose={handleClose} open={open} setType={setType} />
+         ) : type === "register" ? (
+            <Register
+               handleCloseRegister={handleCloseRegister}
+               openRegister={openRegister}
+               setType={setType}
+            />
+         ) : (
+            <></>
+         )} */}
+         <>
+            {type === "login" ? (
+               <Login
+                  handleClose={handleClose}
+                  open={open}
+                  onClick={() => setType("register")}
+               />
+            ) : (
+               <Register
+                  handleCloseRegister={handleClose}
+                  openRegister={openRegister}
+                  onClick={() => setType("login")}
+               />
+            )}
+         </>
+
+         <Register
+            handleCloseRegister={handleCloseRegister}
+            openRegister={openRegister}
+            onClick={() => handleClickOpen()}
+         />
 
          <LocationSearch />
          {renderMenu}
