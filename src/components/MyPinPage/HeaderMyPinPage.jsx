@@ -1,6 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function HeaderMyPinPage() {
+   const navigate = useNavigate();
    return (
       <>
          <Box
@@ -56,6 +58,7 @@ function HeaderMyPinPage() {
                      },
                      fontWeight: "bold",
                   }}
+                  onClick={() => navigate("/myPin/edit-profile")}
                >
                   Edit
                </Button>
@@ -75,6 +78,7 @@ function HeaderMyPinPage() {
                            fontWeight: "bold",
                         },
                      }}
+                     onClick={() => navigate("created-pin")}
                   >
                      Created
                   </Button>
@@ -86,6 +90,7 @@ function HeaderMyPinPage() {
                            fontWeight: "bold",
                         },
                      }}
+                     onClick={() => navigate("/myPin")}
                   >
                      Saved
                   </Button>

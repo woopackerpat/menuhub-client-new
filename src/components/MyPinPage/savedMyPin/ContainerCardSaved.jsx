@@ -1,34 +1,25 @@
-import { Box, Typography } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
-import ContainerCardSaved from "./ContainerCardSaved";
+import {
+   Avatar,
+   Box,
+   ImageList,
+   ImageListItem,
+   Typography,
+} from "@mui/material";
+import ItemCardSaved from "./ItemCardSaved";
 
-function AlbumSaved() {
-   const navigate = useNavigate();
-   const { albumId } = useParams;
+function ContainerCardSaved() {
    return (
-      <Box>
-         <Box
-            sx={{
-               display: "flex",
-               mt: 10,
-               width: "300px",
-               cursor: "pointer",
-               border: "none",
-               borderRadius: "16px",
-               "&:hover": { filter: "grayscale(40%)" },
-            }}
-            onClick={() => navigate(`${albumId}`)}
-         >
-            {cardSaved.length > 0 && <ContainerCardSaved />}
-         </Box>
-         <Typography variant="h6" fontWeight="bold">
-            All pins
-         </Typography>
-      </Box>
+      <ImageList sx={{ display: "flex", width: "100%" }}>
+         {cardSaved.slice(0, 4).map((el, idx) => (
+            <ImageListItem sx={{ marginInlineEnd: "-110px" }}>
+               <ItemCardSaved key={idx} src={el.src} size="150px" />
+            </ImageListItem>
+         ))}
+      </ImageList>
    );
 }
 
-export default AlbumSaved;
+export default ContainerCardSaved;
 
 const cardSaved = [
    {

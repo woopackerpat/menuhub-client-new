@@ -1,6 +1,5 @@
-import { Box, IconButton, styled, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
-import { useState } from "react";
 
 function CartUpload() {
    return (
@@ -9,7 +8,6 @@ function CartUpload() {
             border: "2px dashed gray",
             height: "410px",
             borderRadius: "16px",
-            mx: "auto",
             p: 2,
          }}
       >

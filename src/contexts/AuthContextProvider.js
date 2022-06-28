@@ -64,5 +64,4 @@ const useAuth = () => {
 };
 
 export default AuthContextProvider;
-
 export { useAuth };

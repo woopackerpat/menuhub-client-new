@@ -1,19 +1,9 @@
-import { Button, IconButton, styled } from "@mui/material";
+import { Button, IconButton, styled, Typography } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
-
-const Label = styled("div")(({ theme }) => ({
-   display: "block",
-   backgroundColor: theme.palette.cleanLight,
-   ...theme.typography.body1,
-   padding: theme.spacing(0),
-
-   // textAlign: "center",
-   color: "dark",
-}));
 
 function CartItems({ post }) {
    const { download_url, author } = post;
@@ -96,7 +86,7 @@ function CartItems({ post }) {
                </Box>
             </>
          )}
-         <Label>{author}</Label>
+         <Typography fontWeight="bold">{author}</Typography>
       </Box>
    );
 }
