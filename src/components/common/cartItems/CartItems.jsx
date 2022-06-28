@@ -10,12 +10,13 @@ const Label = styled("div")(({ theme }) => ({
    backgroundColor: theme.palette.cleanLight,
    ...theme.typography.body1,
    padding: theme.spacing(0),
-   textAlign: "center",
-   color: theme.palette.text.secondary,
+
+   // textAlign: "center",
+   color: "dark",
 }));
 
-function CartItems({ item }) {
-   const { src, title } = item;
+function CartItems({ post }) {
+   const { download_url, author } = post;
    const [show, setShow] = useState(false);
 
    const handleMouseOver = () => {
@@ -27,22 +28,24 @@ function CartItems({ item }) {
    };
 
    return (
-      <div
-         style={{ position: "relative" }}
+      <Box
+         sx={{ position: "relative" }}
          onMouseOver={handleMouseOver}
          onMouseOut={handleMouseOut}
       >
-         <img
-            src={src}
-            alt="img"
-            loading="lazy"
-            style={{
-               objectFit: "cover",
-               width: "100%",
-               borderRadius: "16px",
-               cursor: "zoom-in",
-            }}
-         />
+         <Box sx={{ "&:hover": { filter: "grayscale(60%)" } }}>
+            <img
+               src={download_url}
+               alt="img"
+               loading="lazy"
+               style={{
+                  objectFit: "cover",
+                  width: "100%",
+                  borderRadius: "16px",
+                  cursor: "zoom-in",
+               }}
+            />
+         </Box>
          {show && (
             <>
                <Box
@@ -93,8 +96,8 @@ function CartItems({ item }) {
                </Box>
             </>
          )}
-         <Label>{title}</Label>
-      </div>
+         <Label>{author}</Label>
+      </Box>
    );
 }
 

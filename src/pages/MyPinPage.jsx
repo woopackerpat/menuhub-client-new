@@ -1,4 +1,6 @@
+import ContainerMyPinPage from "../components/MyPinPage/ContainerMyPinPage";
+
 function MyPinPage() {
-   return <div>MyPinPage</div>;
+   return <ContainerMyPinPage />;
 }
 export default MyPinPage;

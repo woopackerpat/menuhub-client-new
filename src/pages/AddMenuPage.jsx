@@ -1,4 +1,10 @@
+import ContainerAddMenusPage from "../components/AddMenusPage/ContainerAddMenusPage";
+
 function AddMenuPage() {
-   return <div>AddMenuPage</div>;
+   return (
+      <div>
+         <ContainerAddMenusPage />
+      </div>
+   );
 }
 export default AddMenuPage;

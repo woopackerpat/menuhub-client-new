@@ -1,38 +1,72 @@
-.App {
-  text-align: center;
+.gm-style div{
+  border-radius: 24px !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@keyframes updown {
+  0% {
+    transform: translateY(-30%)
+  }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  50% {
+    transform: translateY(0%)
+  }
+  100% {
+    transform: translateY(-30%);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@keyframes eatme {
+  0% {
+    transform: scale(1)
+  }
+  
+  100% {
+    transform: scale(1.3);
+  }
 }
 
-.App-link {
-  color: #61dafb;
+
+
+
+
+.mark-clicked {
+  color: rgb(107, 107, 107) !important;
+  animation: updown 0.5s ease infinite
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mark-over:hover {
+  
+  transform: scale(1.3);
+  transition: 0.2s;
+  transition-timing-function: ease;
+}
+
+.mark-over {
+  cursor: pointer;
+}
+
+.list-over {
+  animation: eatme 0.5s ease infinite;
+  color: rgb(255, 136, 0);
+}
+
+.front-box {
+  z-index: 10000;
+  border-radius: 8px;
+  
+}
+
+.input-autocomplete {
+  width: 100%;
+  line-height: 35px;
+  border-radius: 8px;
+  border: 1px solid #b1b1b1;
+  outline: none;
+  font-size: 16px;
+}
+
+
+
+a{
+  cursor: pointer;
 }

@@ -22,6 +22,8 @@ import Login from '../../AuthPage/Login'
 import Register from '../../AuthPage/Register'
 import SidebarMobile from './SidebarMobile'
 import SearchBar from '../../common/SearchBar'
+import { useMap } from '../../../contexts/MapContextProvider'
+import LocationSearch from '../../HomePage/LocationSearch'
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -30,7 +32,7 @@ const StyledToolbar = styled(Toolbar)({
 
 function Navbar() {
   // API
-  const user = false
+  const user = true
 
   // for dropdown Menu
   const [menu, setMenu] = useState(null)
@@ -71,6 +73,9 @@ function Navbar() {
     setOpenRegister(false)
   }
   // *****************************
+
+  // for open map
+  const { handleOpenSearch } = useMap()
 
   const menuId = 'primary-search-account-menu'
   const renderMenu = (
@@ -127,7 +132,7 @@ function Navbar() {
                 <AddIcon />
               </IconButton>
             </Link>
-            <Link href="/map">
+            <Link onClick={() => handleOpenSearch()}>
               <IconButton size="large">
                 <MapIcon />
               </IconButton>
@@ -196,6 +201,7 @@ function Navbar() {
         handleCloseRegister={handleCloseRegister}
         openRegister={openRegister}
       />
+      <LocationSearch />
       {renderMenu}
     </>
   )

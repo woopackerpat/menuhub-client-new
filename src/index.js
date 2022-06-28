@@ -8,14 +8,15 @@ import AuthContextProvider from "./contexts/AuthContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+
+  // <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
         <App />
       </AuthContextProvider>
     </BrowserRouter>
-  </React.StrictMode>
-);
+  // </React.StrictMode>
 
+);
 
 reportWebVitals();
