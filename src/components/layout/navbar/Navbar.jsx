@@ -5,7 +5,6 @@ import {
    Button,
    Divider,
    IconButton,
-   InputBase,
    Menu,
    MenuItem,
    styled,
@@ -13,7 +12,6 @@ import {
    Link,
 } from "@mui/material";
 import logo from "../../../assets/images/logo.png";
-import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import MapIcon from "@mui/icons-material/Map";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -30,7 +28,7 @@ const StyledToolbar = styled(Toolbar)({
 
 function Navbar() {
    // API
-   const user = true;
+   const user = false;
 
    // for dropdown Menu
    const [menu, setMenu] = useState(null);
