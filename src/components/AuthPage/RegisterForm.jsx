@@ -7,18 +7,6 @@ import { validateRegister } from '../../services/validate';
 import axios from '../../config/axios';
 
 function RegisterForm() {
-<<<<<<< HEAD
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
-  const [error, setError] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-  const [apiError, setApiError] = useState('');
-=======
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
    const [email, setEmail] = useState("");
@@ -31,26 +19,11 @@ function RegisterForm() {
       confirmPassword: "",
    });
    const [apiError, setApiError] = useState("");
->>>>>>> feature-navbar
 
    const navigate = useNavigate();
 
    const { register } = useAuth();
 
-<<<<<<< HEAD
-  const handleEmail = e => {
-    setEmail(e.target.value);
-  };
-  const handlePassword = e => {
-    setPassword(e.target.value);
-  };
-  const handleConfirmPassword = e => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handleSubmitForm = async e => {
-    e.preventDefault();
-=======
    const handleFirstName = (e) => {
       setFirstName(e.target.value);
    };
@@ -58,7 +31,6 @@ function RegisterForm() {
    const handleLastName = (e) => {
       setLastName(e.target.value);
    };
->>>>>>> feature-navbar
 
    const handleEmail = (e) => {
       setEmail(e.target.value);
@@ -73,15 +45,6 @@ function RegisterForm() {
    const handleSubmitForm = async (e) => {
       e.preventDefault();
 
-<<<<<<< HEAD
-    if (Object.keys(errResult).length === 0) {
-      try {
-        const res = await register({ email, password, confirmPassword });
-        navigate('/login');
-      } catch (err) {
-        console.log(err);
-        setApiError(err.response.data.message);
-=======
       const errResult = validateRegister({
          email,
          password,
@@ -98,7 +61,6 @@ function RegisterForm() {
             console.log(err);
             setApiError(err.response.data.message);
          }
->>>>>>> feature-navbar
       }
    };
    return (
@@ -157,34 +119,6 @@ function RegisterForm() {
                helperText={error.password}
             />
 
-<<<<<<< HEAD
-        <TextField
-          autoFocus
-          margin="normal"
-          id="confirmPassword"
-          label="Confirm Password"
-          type="text"
-          fullWidth
-          onChange={handleConfirmPassword}
-          value={confirmPassword}
-          required
-          error={error.email ? true : false}
-          helperText={error.confirmPassword}
-        />
-        <Link href="#">
-          <Typography
-            align="left"
-            variant="subtitle2"
-            sx={{ fontWeight: 'bold' }}
-          >
-            Forgot your password?
-          </Typography>
-        </Link>
-      </Box>
-      <RegisterButton />
-    </>
-  );
-=======
             <TextField
                autoFocus
                margin="normal"
@@ -211,7 +145,6 @@ function RegisterForm() {
          <RegisterButton />
       </>
    );
->>>>>>> feature-navbar
 }
 
 export default RegisterForm;
