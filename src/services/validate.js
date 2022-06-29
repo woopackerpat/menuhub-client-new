@@ -3,6 +3,14 @@ import validator from "validator";
 export function validateRegister(input) {
    const err = {};
 
+   if (!input.firstName) {
+      err.firstName = "First name is required";
+   }
+
+   if (!input.lastName) {
+      err.lastName = "Last name is required";
+   }
+
    if (!validator.isEmail(input.email)) {
       err.email = "Email is not correct";
    }
