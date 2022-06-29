@@ -2,7 +2,8 @@ import { Masonry } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
 import CartItems from "../common/cartItems/CartItems";
 
-function ContainerPinId() {
+function ContainerPinId({ pin }) {
+   const { name } = pin;
    return (
       <Box
          sx={{
@@ -14,7 +15,7 @@ function ContainerPinId() {
          }}
       >
          <Typography variant="h5" fontWeight="bold">
-            All Pins
+            {name}
          </Typography>
          <Box>
             <Masonry

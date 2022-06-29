@@ -5,7 +5,7 @@ import { useAuth } from "../../contexts/AuthContextProvider";
 function HeaderMyPinPage() {
    const navigate = useNavigate();
    const { user } = useAuth();
-   const { firstName, lastName, email, profilePicUrl } = user;
+   const { firstName, lastName, profilePicUrl } = user;
    return (
       <>
          <Box

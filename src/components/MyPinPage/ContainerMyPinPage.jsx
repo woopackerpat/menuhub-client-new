@@ -11,7 +11,7 @@ function ContainerMyPinPage() {
          <CssBaseline>
             <HeaderMyPinPage />
             {pathname === "/myPin" && (
-               <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+               <Box sx={{ width: "270px" }}>
                   <AlbumSaved />
                </Box>
             )}
