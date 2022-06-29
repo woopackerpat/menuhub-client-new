@@ -13,3 +13,4 @@ const useMenus = () => {
 
 export default MenusContextProvider;
 
+export { useMenus };

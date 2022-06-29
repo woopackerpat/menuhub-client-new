@@ -54,7 +54,7 @@ function MapContextProvider({ children }) {
   };
 
   const handleSubmitSearch = (value) => {
-    console.log(value);
+    
     const { lat, lng } = value;
     // ยิง axios ที่นี่ พอได้ค่าแล้วทำการ setPlaces
     setCoordinates({ lat, lng });
@@ -65,7 +65,7 @@ function MapContextProvider({ children }) {
   const submitMyLocation = () => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
-        console.log({ latitude, longitude });
+        
         setCoordinates({ lat: latitude, lng: longitude });
         setOpenSearch(false);
         navigate("/map");
