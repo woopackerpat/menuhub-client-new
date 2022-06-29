@@ -1,8 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContextProvider";
 
 function HeaderMyPinPage() {
    const navigate = useNavigate();
+   const { user } = useAuth();
+   const { firstName, lastName, email, profilePicUrl } = user;
    return (
       <>
          <Box
@@ -15,7 +18,7 @@ function HeaderMyPinPage() {
             }}
          >
             <img
-               src="https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1095550.jpg&fm=jpg"
+               src={profilePicUrl}
                alt="logo"
                style={{
                   borderRadius: "50%",
@@ -26,10 +29,10 @@ function HeaderMyPinPage() {
                }}
             />
             <Typography variant="body2" color="secondary">
-               @isasrestaurant
+               {`@${firstName}${lastName}`}
             </Typography>
             <Typography variant="h4" fontWeight="bold">
-               ISAS restaurant
+               {`${firstName} ${lastName}`}
             </Typography>
             <Typography variant="body2">0 followers</Typography>
             <Box sx={{ display: "flex", gap: 4 }}>

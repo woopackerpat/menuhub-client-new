@@ -15,7 +15,6 @@ import Login from "./Login";
 
 function Register({ title, variant, color, sx }) {
    const [open, setOpen] = useState(false);
-   console.log(open);
    const handleCloseRegister = () => {
       setOpen(false);
    };
@@ -108,10 +107,7 @@ function Register({ title, variant, color, sx }) {
                         <b>Privacy Policy</b>
                      </Box>
                      <hr style={{ width: "60%", marginTop: "25px" }} />
-                     <Login
-                        // onClick={() => setOpen(false)}
-                        title="Not on Pinterest yet? Sign in"
-                     />
+                     <Login title="Not on Pinterest yet? Sign in" />
 
                      <Box sx={{ mb: "20px" }}>
                         <b>Are you a business? Get started here!</b>

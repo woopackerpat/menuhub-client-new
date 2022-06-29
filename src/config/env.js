@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 export const API_ENDPOINT_URL = "http://103.74.253.58:8000";
-=======
-export const API_ENDPOINT_URL = "http://103.74.253.58:8000";
->>>>>>> develop
