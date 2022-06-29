@@ -1,9 +1,9 @@
 import { Button, IconButton, styled, Typography } from "@mui/material";
-import ShareIcon from "@mui/icons-material/Share";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
+import DropdownShare from "./DropdownShare";
 
 function CartItems({ post }) {
    const { download_url, author } = post;
@@ -65,15 +65,7 @@ function CartItems({ post }) {
                      gap: 1,
                   }}
                >
-                  <IconButton
-                     sx={{
-                        backgroundColor: "#f0f0f0",
-                        opacity: [0.9, 0.8, 0.7],
-                        "&:hover": { backgroundColor: "white", opacity: 1 },
-                     }}
-                  >
-                     <ShareIcon color="dark" />
-                  </IconButton>
+                  <DropdownShare />
                   <IconButton
                      sx={{
                         backgroundColor: "#f0f0f0",
