@@ -4,6 +4,7 @@ import { useState, useEffect, createRef } from "react";
 import { useMap } from "../../contexts/MapContextProvider.js";
 import Marker from "./Marker.jsx";
 import RoomIcon from "@mui/icons-material/Room";
+import { useMediaQuery } from "@mui/material";
 
 import useStyles from "./styles.js";
 
@@ -48,11 +49,10 @@ function GoogleMap() {
         {places.map((place, idx) => (
           <Marker
             key={idx}
-            lat={Number(place.lat)}
-            lng={Number(place.lng)}
+            lat={Number(place.latitude)}
+            lng={Number(place.longitude)}
             color="error"
-           
-            listSelected = {markId[idx] === listClicked}
+            listSelected={markId[idx] === listClicked}
           />
         ))}
       </GoogleMapReact>
