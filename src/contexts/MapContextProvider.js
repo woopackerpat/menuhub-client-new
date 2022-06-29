@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { getRestaurantApi } from "../api/map";
 
 const MapContext = createContext();
 
@@ -16,8 +17,6 @@ function MapContextProvider({ children }) {
   const [coordinates, setCoordinates] = useState({
     lat: 13.744698844170392,
     lng: 100.52341741373984,
-    // lat: 0,
-    // lng: 0
   });
 
   const navigate = useNavigate();
@@ -27,7 +26,18 @@ function MapContextProvider({ children }) {
   const [bounds, setBounds] = useState(null);
 
   // เมื่อ bound เปลี่ยนจะยิง axios ไปหาร้านอาหาร
-  console.log(bounds);
+  useEffect(() => {
+    const run = async () => {
+      const res = await getRestaurantApi();
+      const restaurants = res.data;
+      console.log(restaurants);
+    };
+    try {
+      run();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [bounds]);
 
   const [places, setPlaces] = useState(initPlaces);
 

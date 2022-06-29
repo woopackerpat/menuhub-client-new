@@ -6,10 +6,11 @@ function CartUpload() {
       <Box
          sx={{
             border: "2px dashed gray",
-            height: "410px",
+           
             borderRadius: "16px",
             p: 2,
          }}
+        
       >
          <Box
             sx={{
@@ -29,6 +30,7 @@ function CartUpload() {
                   alignItems: "center",
                   mt: "40%",
                }}
+               
             >
                <UploadIcon sx={{ fontSize: "70px" }} color="secondary" />
 
