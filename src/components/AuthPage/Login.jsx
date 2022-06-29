@@ -1,13 +1,9 @@
 import {
-   Avatar,
    Button,
    Dialog,
    DialogContent,
    DialogTitle,
-   Grid,
    IconButton,
-   Link,
-   TextField,
    Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -20,7 +16,6 @@ import { useState } from "react";
 
 function Login({ handleClose, variant, color, sx, title }) {
    const [open, setOpen] = useState(false);
-   console.log("open", open);
 
    return (
       <>
@@ -110,10 +105,7 @@ function Login({ handleClose, variant, color, sx, title }) {
                         <b>Privacy Policy</b>
                      </Box>
                      <hr style={{ width: "60%", marginTop: "25px" }} />
-                     <Register
-                        // onClick={() => true}
-                        title="Not on Pinterest yet? Sign up"
-                     />
+                     <Register title="Not on Pinterest yet? Sign up" />
 
                      <Box sx={{ mb: "20px" }}>
                         <b>Are you a business? Get started here!</b>

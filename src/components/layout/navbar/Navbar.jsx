@@ -33,9 +33,9 @@ function Navbar() {
    const { logout } = useAuth();
    const [type, setType] = useState("login");
 
-   console.log(type);
    // API
    const { user } = useAuth();
+   const { profilePicUrl } = user;
 
    // for dropdown Menu
    const [menu, setMenu] = useState(null);
@@ -157,7 +157,10 @@ function Navbar() {
                   >
                      <Link href="/myPin">
                         <IconButton size="small">
-                           <Avatar sx={{ cursor: "pointer" }} />
+                           <Avatar
+                              sx={{ cursor: "pointer" }}
+                              src={profilePicUrl}
+                           />
                         </IconButton>
                      </Link>
                      <IconButton

@@ -7,9 +7,19 @@ import {
    Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useAuth } from "../../../contexts/AuthContextProvider";
 import EditPassword from "./EditPassword";
 
 function EditProfile() {
+   const { user, EditUser } = useAuth();
+   console.log(user);
+   const { firstName, lastName, email, profilePicUrl } = user;
+
+   const [nameEdit, setNameEdit] = useState(firstName || "");
+   const [nameLastEdit, setNameLastEdit] = useState(lastName || "");
+   const [emailEdit, setEmailEdit] = useState(email);
+   const [profilePicEdit, setProfilePicEdit] = useState(profilePicUrl || "");
+
    // Modal for Password Edit
    const [openPassword, setOpenPassword] = useState(false);
 
@@ -21,6 +31,15 @@ function EditProfile() {
       setOpenPassword(false);
    };
    // ************************************
+
+   const handleSubmitEdit = async (e) => {
+      try {
+         e.preventDefault();
+         await EditUser({ firstName, lastName, profilePicUrl });
+      } catch (err) {
+         console.log(err);
+      }
+   };
 
    const Inputs = styled("input")({
       display: "none",
@@ -47,7 +66,7 @@ function EditProfile() {
             <Box>
                <Typography color="#767676">Photo</Typography>
                <Box sx={{ display: "flex", gap: 2 }}>
-                  <Avatar />
+                  <Avatar src={profilePicEdit || ""} />
                   <Button variant="contained" color="error">
                      <label htmlFor={`icon-button-file`}>
                         <Inputs
@@ -61,10 +80,18 @@ function EditProfile() {
                </Box>
             </Box>
             <Box sx={{ display: "flex", gap: 2 }}>
-               <TextField label="First Name" />
-               <TextField label="Last Name" />
+               <TextField
+                  label="First Name"
+                  value={nameEdit}
+                  onChange={(e) => setNameEdit(e.target.value)}
+               />
+               <TextField
+                  label="Last Name"
+                  value={nameLastEdit}
+                  onChange={(e) => setNameLastEdit(e.target.value)}
+               />
             </Box>
-            <TextField label="Email" fullWidth />
+            <TextField disabled label="Email" fullWidth value={emailEdit} />
             <Button variant="contained" fullWidth onClick={handleClickOpen}>
                Edit password
             </Button>
@@ -72,7 +99,11 @@ function EditProfile() {
                <Button variant="contained" color="cleanLight">
                   Resent
                </Button>
-               <Button variant="contained" color="error">
+               <Button
+                  variant="contained"
+                  color="error"
+                  onClick={handleSubmitEdit}
+               >
                   Save
                </Button>
             </Box>

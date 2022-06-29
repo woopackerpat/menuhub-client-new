@@ -10,7 +10,8 @@ import {
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-   const [user, setUser] = useState(null);
+   const [user, setUser] = useState("");
+   const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
 
    const fetchMe = async () => {
@@ -26,6 +27,7 @@ function AuthContextProvider({ children }) {
          navigate("/");
       }
    };
+
    useEffect(() => {
       fetchMe();
    }, []);
@@ -51,8 +53,26 @@ function AuthContextProvider({ children }) {
       setUser(null);
    };
 
+   const EditUser = async (profilePicUrl, firstName, lastName) => {
+      try {
+         setLoading(true);
+         const formData = new FormData();
+         formData.append("profilePicUrl", profilePicUrl);
+         formData.append("firstName", firstName);
+         formData.append("lastName", lastName);
+         await axios.patch("/user", formData);
+         fetchMe();
+      } catch (err) {
+         console.log(err);
+      } finally {
+         setLoading(false);
+      }
+   };
+
    return (
-      <AuthContext.Provider value={{ register, user, login, logout, fetchMe }}>
+      <AuthContext.Provider
+         value={{ register, user, login, logout, fetchMe, loading, EditUser }}
+      >
          {children}
       </AuthContext.Provider>
    );
