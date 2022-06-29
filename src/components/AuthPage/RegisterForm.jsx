@@ -1,10 +1,10 @@
-import { Box, Link, TextField, Typography } from '@mui/material';
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContextProvider';
-import RegisterButton from './RegisterButton';
-import { validateRegister } from '../../services/validate';
-import axios from '../../config/axios';
+import { Box, Link, TextField, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContextProvider";
+import RegisterButton from "./RegisterButton";
+import { validateRegister } from "../../services/validate";
+import axios from "../../config/axios";
 
 function RegisterForm() {
    const [firstName, setFirstName] = useState("");
