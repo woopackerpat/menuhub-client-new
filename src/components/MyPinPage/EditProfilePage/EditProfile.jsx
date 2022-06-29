@@ -2,7 +2,6 @@ import {
    Avatar,
    Box,
    Button,
-   IconButton,
    styled,
    TextField,
    Typography,
@@ -10,11 +9,9 @@ import {
 import { useState } from "react";
 import { useAuth } from "../../../contexts/AuthContextProvider";
 import EditPassword from "./EditPassword";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function EditProfile() {
    const { user, EditUser } = useAuth();
-   console.log(user);
    const { firstName, lastName, email, profilePicUrl } = user;
 
    const [nameEdit, setNameEdit] = useState(firstName || "");
@@ -43,8 +40,8 @@ function EditProfile() {
    };
 
    const handleClearEdit = () => {
-      setNameEdit("");
-      setNameLastEdit("");
+      setNameEdit(firstName);
+      setNameLastEdit(lastName);
    };
 
    const Inputs = styled("input")({
@@ -52,7 +49,7 @@ function EditProfile() {
    });
 
    return (
-      <div style={{ position: "relative" }}>
+      <>
          <Box
             sx={{
                display: "flex",
@@ -71,27 +68,30 @@ function EditProfile() {
             </Box>
             <Box>
                <Typography color="#767676">Photo</Typography>
-               <Box sx={{ display: "flex", gap: 2 }}>
+               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                   <Avatar
+                     sx={{ width: "150px", height: "150px" }}
                      src={
                         profilePicEdit
                            ? URL.createObjectURL(profilePicEdit)
                            : profilePicUrl
                      }
                   />
-                  <Button variant="contained" color="error">
-                     <label htmlFor={`icon-button-file`}>
-                        <Inputs
-                           accept="image/*"
-                           id={`icon-button-file`}
-                           type="file"
-                           onChange={(e) =>
-                              setProfilePicEdit(e.target.files[0])
-                           }
-                        />
-                        Change
-                     </label>
-                  </Button>
+                  <Box>
+                     <Button variant="contained" color="error">
+                        <label htmlFor={`icon-button-file`}>
+                           <Inputs
+                              accept="image/*"
+                              id={`icon-button-file`}
+                              type="file"
+                              onChange={(e) =>
+                                 setProfilePicEdit(e.target.files[0])
+                              }
+                           />
+                           Change
+                        </label>
+                     </Button>
+                  </Box>
                </Box>
             </Box>
             <Box sx={{ display: "flex", gap: 2 }}>
@@ -107,13 +107,13 @@ function EditProfile() {
                />
             </Box>
             <TextField disabled fullWidth value={email} />
-            <Button
+            {/* <Button
                variant="contained"
                fullWidth
                onClick={() => handleClickOpen}
             >
                Edit password
-            </Button>
+            </Button> */}
             <Box sx={{ display: "flex", gap: 2 }}>
                <Button
                   variant="contained"
@@ -131,14 +131,9 @@ function EditProfile() {
                </Button>
             </Box>
          </Box>
-         <IconButton>
-            <ArrowBackIcon
-               color="dark"
-               sx={{ fontSize: "48px", position: "absolute" }}
-            />
-         </IconButton>
-         <EditPassword handleClosePass={handleClosePass} open={openPassword} />
-      </div>
+
+         {/* <EditPassword handleClosePass={handleClosePass} open={openPassword} /> */}
+      </>
    );
 }
 

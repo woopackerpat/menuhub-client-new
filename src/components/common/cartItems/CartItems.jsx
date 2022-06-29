@@ -17,6 +17,10 @@ function CartItems({ post }) {
       setShow(false);
    };
 
+   const handleCreateAlbum = (e) => {
+      e.stopPropagation();
+   };
+
    return (
       <Box
          sx={{ position: "relative" }}
@@ -50,7 +54,7 @@ function CartItems({ post }) {
                <Box sx={{ position: "absolute", top: 12, right: 12 }}>
                   <Button
                      variant="contained"
-                     onClick={(e) => e.stopPropagation()}
+                     onClick={() => handleCreateAlbum}
                      color="error"
                   >
                      Save
