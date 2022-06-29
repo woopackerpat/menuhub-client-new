@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import DetailContainer from './CardDetailContainer/DetailContainer'
 
 function MenuCardContainer() {
-  const src = 'https://picsum.photos/300/520'
+  const src = 'https://picsum.photos/300/300'
   return (
     <Box
       sx={{
@@ -27,7 +27,7 @@ function MenuCardContainer() {
             style={{
               borderRadius: '16px',
               width: '100%',
-              height: '100%',
+              // height: '100%',
               // maxHeight: '500px',
             }}
           />
