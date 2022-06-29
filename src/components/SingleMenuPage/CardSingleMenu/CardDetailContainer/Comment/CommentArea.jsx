@@ -1,25 +1,28 @@
-import { Avatar, Box, IconButton, Link, Typography } from '@mui/material'
+import { Avatar, Box, IconButton, Link, Typography } from "@mui/material"
 
 function CommentArea({ userComment }) {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
         gap: 2,
-        maxHeight: '10em',
-        overflowY: 'auto',
-        scrollbarWidth: 'none',
+        maxHeight: "10em",
+        overflowY: "auto",
+        scrollbarWidth: "none",
       }}
     >
       {userComment.map(el => (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box
+          key={el.userId}
+          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+        >
           <Link href={`/myPin`}>
-            <IconButton size="small">
+            <IconButton size='small'>
               <Avatar src={el.profilePic} />
             </IconButton>
           </Link>
-          <Typography fontWeight="bold">{el.user}</Typography>
+          <Typography fontWeight='bold'>{el.user}</Typography>
           <Typography>{el.title}</Typography>
         </Box>
       ))}
