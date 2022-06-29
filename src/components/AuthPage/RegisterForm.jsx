@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 import { Box, Link, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContextProvider";
 import RegisterButton from "./RegisterButton";
 import { validateRegister } from "../../services/validate";
+=======
+import { Box, Link, TextField, Typography } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContextProvider';
+import RegisterButton from './RegisterButton';
+import { validateRegister } from '../../services/validate';
+import axios from '../../config/axios';
+>>>>>>> develop
 
 function RegisterForm({ setType, handleCloseRegister }) {
    const { register } = useAuth();
