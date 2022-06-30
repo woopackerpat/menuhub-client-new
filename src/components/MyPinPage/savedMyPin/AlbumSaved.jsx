@@ -5,14 +5,12 @@ import ContainerAllPins from "./ContainerAllPins";
 
 function AlbumSaved() {
    const { pin } = usePin();
-   console.log(pin);
    return (
       <>
          <Box
             sx={{
                display: "flex",
                mt: 10,
-               width: "270px",
                cursor: "pointer",
                border: "none",
                borderRadius: "16px",
@@ -20,15 +18,25 @@ function AlbumSaved() {
                "&:hover": { filter: "grayscale(40%)" },
             }}
          >
-            <Box sx={{ display: "flex" }}>
+            <Box
+               sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "center",
+               }}
+            >
                <ContainerAllPins />
-               {pin?.map((pins) => (
-                  <ContainerAlbumCart
-                     key={pins.id}
-                     id={pins.id}
-                     name={pins.name}
-                  />
-               ))}
+               {pin?.map((pins) => {
+                  return (
+                     <ContainerAlbumCart
+                        key={pins.id}
+                        id={pins.id}
+                        name={pins.name}
+                        Restaurants={pins.Restaurants}
+                     />
+                  );
+               })}
             </Box>
          </Box>
       </>

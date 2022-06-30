@@ -5,8 +5,10 @@ import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
 import DropdownShare from "./DropdownShare";
 
-function CartItems({ post }) {
-   const { download_url, author } = post;
+function CartItems({ Menus, items }) {
+   const { name, id } = items;
+   const ImageUrl = Menus.map((menu) => menu.imageUrl);
+
    const [show, setShow] = useState(false);
 
    const handleMouseOver = () => {
@@ -29,7 +31,7 @@ function CartItems({ post }) {
       >
          <Box sx={{ "&:hover": { filter: "grayscale(60%)" } }}>
             <img
-               src={download_url}
+               src={ImageUrl}
                alt="img"
                loading="lazy"
                style={{
@@ -49,7 +51,7 @@ function CartItems({ post }) {
                      left: 12,
                   }}
                >
-                  <DropdownProfile post={post} />
+                  {<DropdownProfile id={id} />}
                </Box>
                <Box sx={{ position: "absolute", top: 12, right: 12 }}>
                   <Button
@@ -82,7 +84,7 @@ function CartItems({ post }) {
                </Box>
             </>
          )}
-         <Typography fontWeight="bold">{author}</Typography>
+         <Typography fontWeight="bold">{name}</Typography>
       </Box>
    );
 }

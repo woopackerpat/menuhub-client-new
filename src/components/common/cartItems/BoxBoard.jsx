@@ -2,9 +2,14 @@ import { Box, Button, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
 import { usePin } from "../../../contexts/PinContextProvider";
 
-function BoxBoard({ name, id, restaurantId }) {
+function BoxBoard({ name, id, restaurantId, Restaurants }) {
    const [showBoardBtn, setShowBoardBtn] = useState(false);
    const { savePinRes } = usePin();
+
+   const getImage = Restaurants.map((el) =>
+      el.Menus.map((item) => item.imageUrl)
+   );
+   console.log("getImage     ", getImage);
 
    const handleSaveRestaurant = async (e) => {
       try {
@@ -48,7 +53,7 @@ function BoxBoard({ name, id, restaurantId }) {
                }}
             >
                <img
-                  src="https://picsum.photos/50/50"
+                  src={getImage[0]}
                   style={{ borderRadius: "10px", maxWidth: "40px" }}
                   alt="img"
                ></img>

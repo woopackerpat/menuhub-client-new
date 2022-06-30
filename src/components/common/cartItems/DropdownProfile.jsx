@@ -17,11 +17,15 @@ import { usePin } from "../../../contexts/PinContextProvider";
 import ModalCreatePin from "./ModalCreatePin";
 import BoxBoard from "./BoxBoard";
 
-function DropdownProfile({ post }) {
-   console.log(post, "post");
+function DropdownProfile({ id }) {
+   // console.log(item, "post");
    const { pin } = usePin();
    const [showDrop, setShowDrop] = useState(null);
    const [showProfileBtn, setShowProfileBtn] = useState(false);
+
+   //    const getImage = Restaurants.map((el) =>
+   //    el.Menus.map((item) => item.imageUrl)
+   // );
 
    //Modal Create
    const [open, setOpen] = useState(false);
@@ -108,10 +112,11 @@ function DropdownProfile({ post }) {
          <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
             {pin?.map((pins) => (
                <BoxBoard
+                  Restaurants={pins.Restaurants}
                   key={pins.id}
                   name={pins.name}
                   id={pins.id}
-                  restaurantId={post.id}
+                  restaurantId={id}
                />
             ))}
          </Box>
