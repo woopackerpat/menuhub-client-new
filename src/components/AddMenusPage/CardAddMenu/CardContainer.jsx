@@ -23,6 +23,8 @@ function CardAddMenus({
   menuDetails,
   restaurantName,
   handleUpdate,
+  handleDelete,
+  handleInsert,
 }) {
   const { title: Title, description: Description, imageUrl } = menuDetails;
 
@@ -97,7 +99,12 @@ function CardAddMenus({
               justifyContent: "space-between",
             }}
           >
-            <DropdownCardMenu />
+            <DropdownCardMenu
+              handleDelete={handleDelete}
+              menuId={menuDetails?.id}
+              handleInsert={handleInsert}
+              idx={idx}
+            />
             <ButtonGroup
               variant="contained"
               color="error"
