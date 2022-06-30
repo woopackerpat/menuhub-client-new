@@ -1,9 +1,21 @@
 import { Box, Button, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
+import { usePin } from "../../../contexts/PinContextProvider";
 
-function BoxBoard({ name }) {
+function BoxBoard({ name, id, restaurantId }) {
    const [showBoardBtn, setShowBoardBtn] = useState(false);
+   const { savePinRes } = usePin();
 
+   const handleSaveRestaurant = async (e) => {
+      try {
+         e.stopPropagation();
+         await savePinRes({ pinId: id, restaurantId: restaurantId });
+         console.log(id);
+         console.log(restaurantId);
+      } catch (err) {
+         console.log(err);
+      }
+   };
    return (
       <MenuItem
          sx={{
@@ -46,7 +58,7 @@ function BoxBoard({ name }) {
          {showBoardBtn && (
             <Button
                variant="contained"
-               onClick={(e) => e.stopPropagation()}
+               onClick={handleSaveRestaurant}
                color="error"
                sx={{ textTransform: "none", fontWeight: "bold" }}
             >

@@ -49,7 +49,7 @@ function CartItems({ post }) {
                      left: 12,
                   }}
                >
-                  <DropdownProfile />
+                  <DropdownProfile post={post} />
                </Box>
                <Box sx={{ position: "absolute", top: 12, right: 12 }}>
                   <Button

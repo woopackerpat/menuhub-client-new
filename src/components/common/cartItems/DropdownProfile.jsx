@@ -17,9 +17,9 @@ import { usePin } from "../../../contexts/PinContextProvider";
 import ModalCreatePin from "./ModalCreatePin";
 import BoxBoard from "./BoxBoard";
 
-function DropdownProfile() {
+function DropdownProfile({ post }) {
+   console.log(post, "post");
    const { pin } = usePin();
-   console.log(pin);
    const [showDrop, setShowDrop] = useState(null);
    const [showProfileBtn, setShowProfileBtn] = useState(false);
 
@@ -95,7 +95,6 @@ function DropdownProfile() {
             {showProfileBtn && (
                <Button
                   variant="contained"
-                  onClick={(e) => e.stopPropagation()}
                   color="error"
                   sx={{ textTransform: "none", fontWeight: "bold" }}
                >
@@ -108,7 +107,12 @@ function DropdownProfile() {
          </MenuItem>
          <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
             {pin?.map((pins) => (
-               <BoxBoard key={pins?.id} name={pins?.name} />
+               <BoxBoard
+                  key={pins.id}
+                  name={pins.name}
+                  id={pins.id}
+                  restaurantId={post.id}
+               />
             ))}
          </Box>
 
