@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 
 function ContainerAddMenusPage() {
   const [input, setInput] = useState([{}]);
+  console.log(input);
 
   const { restaurantId } = useParams();
 
@@ -31,7 +32,7 @@ function ContainerAddMenusPage() {
     const newObj = [
       ...input,
       {
-        restaurantId: "",
+        Restaurant: { id: "", name: "" },
         orderNumber: "",
         title: "",
         imageUrl: "",
@@ -62,15 +63,12 @@ function ContainerAddMenusPage() {
           alignItems: "center",
         }}
       >
-        {input.map((el, idx) => (
+        {input.map((menuDetails, idx) => (
           <CardContainer
             key={idx}
             idx={idx}
-            orderNumber={el.orderNumber}
-            restaurantId={el.restaurantId}
-            description={el.description}
-            imageUrl={el.imageUrl}
             handleSave={handleSave}
+            menuDetails={menuDetails}
           />
         ))}
 

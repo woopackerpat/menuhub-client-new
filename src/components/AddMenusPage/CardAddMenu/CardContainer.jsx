@@ -11,23 +11,41 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddImage from "./AddImage";
 import CartUpload from "./CartUpload";
 import DropdownCardMenu from "./DropdownCardMenu";
 
-function CardAddMenus({ idx, setInput, handleSave }) {
+function CardAddMenus({ idx, handleSave, menuDetails }) {
   const data = [{ id: 19, name: "Rakthai" }];
+
+  // console.log(menuDetails);
+
+  const {
+    Restaurant,
+    title: Title,
+    description: Description,
+    imageUrl,
+  } = menuDetails;
+
+  console.log(Restaurant);
+
+  // console.log(Restaurant.id, Restaurant.name, Title, Description, imageUrl);
+
+  useEffect(() => {
+    setRestaurant(Restaurant);
+    setTitle(Title);
+    setDescription(Description);
+    setImage(imageUrl);
+  }, [menuDetails]);
 
   const ariaLabel = { "aria-label": "description" };
   const [restaurant, setRestaurant] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [imageUrl, setImage] = useState(
-    "https://www.cookwithkushi.com/wp-content/uploads/2020/10/IMG_0094.jpg"
-  );
+  const [image, setImage] = useState(null);
 
-  console.log({ title, description, imageUrl, orderNumber: idx });
+  // console.log({ title, description, image, orderNumber: idx });
 
   return (
     <>
@@ -76,7 +94,7 @@ function CardAddMenus({ idx, setInput, handleSave }) {
                 onClick={() =>
                   handleSave({
                     title,
-                    imageUrl,
+                    imageUrl: image,
                     description,
                     orderNumber: idx + 1,
                   })
@@ -91,7 +109,7 @@ function CardAddMenus({ idx, setInput, handleSave }) {
               {/* <AddImage
                 handleImage={(e) => setImage(e.target.files[0])}
                 idx={idx}
-                image={imageUrl}
+                image={image}
                 setImage={setImage}
               /> */}
             </Grid>
@@ -149,7 +167,7 @@ function CardAddMenus({ idx, setInput, handleSave }) {
                   >
                     <Avatar />
                     <Typography sx={{ fontWeight: "600" }}>
-                      {restaurant.name}
+                      {restaurant?.name}
                     </Typography>
                   </Box>
                   <Box
