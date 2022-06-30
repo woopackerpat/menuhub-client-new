@@ -24,7 +24,8 @@ function Router() {
           <Route path="allMenus" element={<AllMenusPage />} />
           <Route path="singleMenu" element={<SingleMenuPage />} />
           <Route path="draftMenu" element={<DraftMenuPage />} />
-          <Route path="addMenu" element={<AddMenuPage />} />
+
+          <Route path="draftMenu/:restaurantId" element={<AddMenuPage />} />
           <Route path="myPin" element={<MyPinPage />}>
             <Route path="edit-profile" element={<MyPinPage />} />
             <Route path="created-pin" element={<MyPinPage />} />

@@ -7,7 +7,7 @@ import AddMenusLocation from "./AddMenusLocation";
 import validator from "validator";
 import { useMap } from "../../contexts/MapContextProvider";
 import { createRestaurant } from "../../api/menu";
-// import useNavigate from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function MainContentDraftMenu() {
   const [name, setName] = useState("");
@@ -19,7 +19,7 @@ function MainContentDraftMenu() {
 
   const { submitMyLocation } = useMap();
 
-  // navigate = useNavigate();
+  const navigate = useNavigate();
 
   let error = {};
 
@@ -48,13 +48,14 @@ function MainContentDraftMenu() {
       categoryArr,
     });
     const newRes = res.data;
+    const { restaurantIdForMenus, restaurantNameForMenus } = newRes;
     setName("");
     setLocation({});
     setCategoryArr([]);
     setChecked(true);
     setLineId("");
     setPhone("");
-    // navigate("home");
+    navigate(`/draftMenu/${restaurantIdForMenus}`);
   };
 
   return (
