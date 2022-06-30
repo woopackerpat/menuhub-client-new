@@ -16,31 +16,27 @@ import AddImage from "./AddImage";
 import CartUpload from "./CartUpload";
 import DropdownCardMenu from "./DropdownCardMenu";
 
-function CardAddMenus({ idx, handleSave, menuDetails }) {
-  const data = [{ id: 19, name: "Rakthai" }];
-
-  // console.log(menuDetails);
-
+function CardAddMenus({ idx, handleSave, menuDetails, restaurantName }) {
   const {
-    Restaurant,
+    
     title: Title,
     description: Description,
     imageUrl,
   } = menuDetails;
 
-  console.log(Restaurant);
+  console.log(restaurantName)
 
   // console.log(Restaurant.id, Restaurant.name, Title, Description, imageUrl);
 
   useEffect(() => {
-    setRestaurant(Restaurant);
+    
     setTitle(Title);
     setDescription(Description);
     setImage(imageUrl);
   }, [menuDetails]);
 
   const ariaLabel = { "aria-label": "description" };
-  const [restaurant, setRestaurant] = useState({});
+  
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -167,7 +163,7 @@ function CardAddMenus({ idx, handleSave, menuDetails }) {
                   >
                     <Avatar />
                     <Typography sx={{ fontWeight: "600" }}>
-                      {restaurant?.name}
+                      {restaurantName}
                     </Typography>
                   </Box>
                   <Box

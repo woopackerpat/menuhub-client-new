@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 function ContainerAddMenusPage() {
   const [input, setInput] = useState([{}]);
-  console.log(input);
+  // console.log(input);
 
   const { restaurantId } = useParams();
 
@@ -69,6 +69,9 @@ function ContainerAddMenusPage() {
             idx={idx}
             handleSave={handleSave}
             menuDetails={menuDetails}
+            restaurantName={
+              Object.keys(menuDetails).length && menuDetails?.Restaurant.name
+            }
           />
         ))}
 
