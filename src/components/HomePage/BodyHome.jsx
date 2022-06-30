@@ -18,8 +18,6 @@ function BodyHome() {
          },
       });
 
-   console.log(data);
-
    return (
       <Box>
          {isLoading ? (

@@ -1,6 +1,5 @@
 import { Box, ImageList, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { usePin } from "../../../contexts/PinContextProvider";
 import ItemCardSaved from "./ItemCardSaved";
 
 function ContainerAllPins() {

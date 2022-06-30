@@ -19,6 +19,7 @@ import BoxBoard from "./BoxBoard";
 
 function DropdownProfile() {
    const { pin } = usePin();
+   console.log(pin);
    const [showDrop, setShowDrop] = useState(null);
    const [showProfileBtn, setShowProfileBtn] = useState(false);
 
@@ -107,7 +108,7 @@ function DropdownProfile() {
          </MenuItem>
          <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
             {pin?.map((pins) => (
-               <BoxBoard key={pins.id} name={pins.name} />
+               <BoxBoard key={pins?.id} name={pins?.name} />
             ))}
          </Box>
 
