@@ -4,10 +4,11 @@ import AddIcon from "@mui/icons-material/Add";
 import { useEffect, useState } from "react";
 import { createMenu, getAllMenusOfRestaurant } from "../../api/menu";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function ContainerAddMenusPage() {
   const [input, setInput] = useState([{}]);
-  // console.log(input);
+  console.log(input);
 
   const { restaurantId } = useParams();
 
@@ -32,7 +33,6 @@ function ContainerAddMenusPage() {
     const newObj = [
       ...input,
       {
-        Restaurant: { id: "", name: "" },
         orderNumber: "",
         title: "",
         imageUrl: "",
@@ -45,6 +45,15 @@ function ContainerAddMenusPage() {
   //   จัดการ handleSave ตรงนีส่งค่าสร้าง menu
   const handleSave = async (menu) => {
     await createMenu(restaurantId, menu);
+
+    const res = await getAllMenusOfRestaurant(restaurantId);
+    const menus = res.data.Menus;
+
+    setInput(menus);
+  };
+
+  const handleUpdate = async (menuId, updatedMenu) => {
+    const update = await axios.patch(`/restaurant/menu/${menuId}`, updatedMenu);
 
     const res = await getAllMenusOfRestaurant(restaurantId);
     const menus = res.data.Menus;
@@ -68,9 +77,10 @@ function ContainerAddMenusPage() {
             key={idx}
             idx={idx}
             handleSave={handleSave}
+            handleUpdate={handleUpdate}
             menuDetails={menuDetails}
             restaurantName={
-              Object.keys(menuDetails).length && menuDetails?.Restaurant.name
+              Object.keys(menuDetails).length && input[0].Restaurant.name
             }
           />
         ))}
