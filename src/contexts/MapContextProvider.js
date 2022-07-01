@@ -6,13 +6,7 @@ import { getRestaurantApi } from "../api/map";
 const MapContext = createContext();
 
 function MapContextProvider({ children }) {
-  const initPlaces = [
-    { lat: 13.7447988666444, lng: 100.5239174666444 },
-    { lat: 13.7433988666444, lng: 100.5262174666444 },
-    { lat: 13.7479988666444, lng: 100.5282174666444 },
-    { lat: 13.7429988666444, lng: 100.5243174666444 },
-    { lat: 13.7446988666444, lng: 100.5227174666444 },
-  ];
+  const initPlaces = [];
 
   const [coordinates, setCoordinates] = useState({
     lat: 13.744698844170392,
@@ -23,14 +17,19 @@ function MapContextProvider({ children }) {
 
   const [childClicked, setChildClicked] = useState(null);
 
-  const [bounds, setBounds] = useState(null);
+  const [places, setPlaces] = useState(initPlaces);
 
-  // เมื่อ bound เปลี่ยนจะยิง axios ไปหาร้านอาหาร
+
+  const [bounds, setBounds] = useState({});
+
+  const { ne, sw } = bounds;
+
+  // get Restaurant API
   useEffect(() => {
     const run = async () => {
-      const res = await getRestaurantApi();
+      const res = await getRestaurantApi(ne, sw, coordinates);
       const restaurants = res.data;
-      console.log(restaurants);
+      setPlaces(restaurants)
     };
     try {
       run();
@@ -38,8 +37,6 @@ function MapContextProvider({ children }) {
       console.log(err);
     }
   }, [bounds]);
-
-  const [places, setPlaces] = useState(initPlaces);
 
   const [listClicked, setListClicked] = useState(null);
 
@@ -57,7 +54,7 @@ function MapContextProvider({ children }) {
   };
 
   const handleSubmitSearch = (value) => {
-    console.log(value);
+    
     const { lat, lng } = value;
     // ยิง axios ที่นี่ พอได้ค่าแล้วทำการ setPlaces
     setCoordinates({ lat, lng });
@@ -68,7 +65,7 @@ function MapContextProvider({ children }) {
   const submitMyLocation = () => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
-        console.log({ latitude, longitude });
+        
         setCoordinates({ lat: latitude, lng: longitude });
         setOpenSearch(false);
         navigate("/map");

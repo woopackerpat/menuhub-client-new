@@ -7,17 +7,23 @@ import AlbumSaved from "./savedMyPin/AlbumSaved";
 function ContainerMyPinPage() {
    const { pathname } = useLocation();
    return (
-      <div>
+      <>
          <CssBaseline>
             <HeaderMyPinPage />
             {pathname === "/myPin" && (
-               <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+               <Box
+                  sx={{
+                     display: "flex",
+                     justifyContent: "center",
+                     alignItems: "center",
+                  }}
+               >
                   <AlbumSaved />
                </Box>
             )}
             {pathname === "/myPin/created-pin" && <AlbumCreated />}
          </CssBaseline>
-      </div>
+      </>
    );
 }
 export default ContainerMyPinPage;

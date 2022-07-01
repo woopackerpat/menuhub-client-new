@@ -1,10 +1,12 @@
-import { Grid, Paper, Typography } from "@mui/material";
+import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import RoomIcon from "@mui/icons-material/Room";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import useStyles from "./styles";
 import { useMap } from "../../contexts/MapContextProvider";
+import MessageIcon from "@mui/icons-material/Message";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 function HorizontalCard({ place, selected, refProp, markId }) {
   const classes = useStyles();
@@ -23,17 +25,24 @@ function HorizontalCard({ place, selected, refProp, markId }) {
     setListClicked(null);
   };
 
+  const shortMenus = place.Menus.slice(0, 3);
+  
   return (
     <a
       onMouseOver={() => handleMouseOver()}
       onMouseOut={() => handleMouseOut()}
       className={classes.pointer}
     >
-      <Grid container className="">
-        <Grid item xs={12} lg={5}>
-          <Box sx={{ borderRadius: "24px", overflow: "hidden" }}>
+      <Grid container>
+        <Grid item xs={12} lg={5} disableGutters>
+          <Box
+            sx={{ borderRadius: "24px", overflow: "hidden", height: "100%" }}
+          >
             <img
-              src="https://img.freepik.com/free-photo/american-shrimp-fried-rice-served-with-chili-fish-sauce-thai-food_1150-26576.jpg?t=st=1656231277~exp=1656231877~hmac=2ff8da4bb6f809aef1d5e5e2f62e9927e65e7d07c08c82b2e1011082e1565b2f&w=1380"
+              src={
+                place.Menus[0]?.imageUrl ||
+                "https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?w=2000"
+              }
               alt=""
               width="100%"
               height="100%"
@@ -43,9 +52,9 @@ function HorizontalCard({ place, selected, refProp, markId }) {
         <Grid item xs={12} lg={7}>
           <Box sx={{ px: "20px", py: "15px" }}>
             <Typography variant="h5" component="h2" gutterBottom>
-              Restaurant Name ABC
+              {place.name || "Restaurant ABCD"}
             </Typography>
-            <Grid container>
+            <Grid container sx={{ mb: "0.5rem" }}>
               <Grid item xs={2}>
                 {selected ? (
                   <RestaurantIcon
@@ -65,12 +74,48 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                   variant="caption"
                   sx={{ lineHeight: 1.5, color: "#626262" }}
                 >
-                  Mint tower 719 Banthadthong road Wangmai Pathumwan Bangkok
-                  10330
+                  {place.address ||
+                    "Mint tower 719 Banthadthong road Wangmai Pathumwan Bangkok 10330"}
                 </Typography>
               </Grid>
             </Grid>
-            <Box style={{ backgroundColor: "white" }}>tag</Box>
+            <Stack direction="row" spacing={1} sx={{ mb: "8px" }}>
+              <Chip
+                icon={<PhoneIcon />}
+                label={place.number || "Phone"}
+                variant="outlined"
+                color="primary"
+                size="small"
+              />
+              <Chip
+                icon={<MessageIcon />}
+                label={place.lineId || "Line"}
+                color="success"
+                size="small"
+                variant="outlined"
+                // style = {{backgroundColor: "#44b34f"}}
+              />
+              {place.isOfficial && (
+                <Chip
+                  label={place.isOfficial && "Offical"}
+                  color="error"
+                  size="small"
+                  variant="outlined"
+                />
+              )}
+            </Stack>
+            {Boolean(Object.keys(shortMenus).length) && (
+              <Stack direction="row" spacing={1}>
+                {shortMenus.map((item) => (
+                  <Chip
+                    label={item.title}
+                    color="primary"
+                    variant="outlined"
+                    size="small"
+                  />
+                ))}
+              </Stack>
+            )}
           </Box>
         </Grid>
       </Grid>

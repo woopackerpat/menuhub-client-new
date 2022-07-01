@@ -55,10 +55,14 @@ function MapPage() {
         <Grid container>
           <Grid
             item
-            xs={6}
-            sx={{
-              display: { xs: "none", lg: "block" },
-            }}
+            xs={12}
+            lg = {6}
+            // sx={{
+            //   display: { xs: "none", lg: "block" },
+             
+            // }}
+
+           
           >
             <GoogleMap />
           </Grid>

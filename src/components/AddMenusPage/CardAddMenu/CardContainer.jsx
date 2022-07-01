@@ -11,49 +11,79 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddImage from "./AddImage";
 import CartUpload from "./CartUpload";
 import DropdownCardMenu from "./DropdownCardMenu";
+import { uploadImage } from "../../../services/uploadImage";
 
-function CardAddMenus({  idx, setInput }) {
-  const data = [
-    { id: 1, name: "Rakthai" },
-    { id: 2, name: "McDonald" },
-    { id: 3, name: "Seafood" },
-  ];
+function CardAddMenus({
+  idx,
+  handleSave,
+  menuDetails,
+  restaurantName,
+  handleUpdate,
+  handleDelete,
+  handleInsert,
+}) {
+  const { title: Title, description: Description, imageUrl } = menuDetails;
+
+  // console.log(Restaurant.id, Restaurant.name, Title, Description, imageUrl);
 
   const ariaLabel = { "aria-label": "description" };
-  const [restaurant, setRestaurant] = useState({});
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [cloudUrl, setCloudUrl] = useState("");
+  const [isEdit, setIsEdit] = useState(false);
 
+  useEffect(() => {
+    setTitle(Title);
+    setDescription(Description);
+    setImage(imageUrl);
+  }, [menuDetails]);
 
+  useEffect(() => {
+    if (!menuDetails?.id) {
+      setIsEdit(true);
+    }
+  }, []);
 
-  // const handleTitle = (e) => {
-  //   const clone = [...input];
-  //   clone[idx].title = e.target.value;
-  //   console.log(idx);
-  //   setInput(clone);
-  // };
+  useEffect(() => {
+    const run = async () => {
+      if (image) {
+        const url = await uploadImage(image);
+        setCloudUrl(url);
+      }
+    };
+    run();
+  }, [image]);
 
-  // const handleDescription = (e) => {
-  //   const clone = [...input];
-  //   clone[idx].description = e.target.value;
-  //   console.log(idx);
-  //   setInput(clone);
-  // };
+  const handleClick = () => {
+    if (isEdit && menuDetails?.id) {
+      handleUpdate(menuDetails?.id, {
+        title,
+        imageUrl: cloudUrl,
+        description,
+        orderNumber: idx + 1,
+      });
+    } else if (isEdit && !menuDetails?.id) {
+      handleSave({
+        title,
+        imageUrl: cloudUrl,
+        description,
+        orderNumber: idx + 1,
+      });
+    }
+    setIsEdit((isEdit) => !isEdit);
+  };
 
-  // const handleImage = (e) => {
-  //   const clone = [...input];
-  //   clone[idx].img = e.target.files[0];
-  //   console.log(idx);
-  //   setInput(clone);
-  // };
+  // console.log({ title, description, image, orderNumber: idx });
 
   return (
     <>
+      
       <Paper elevation={2} sx={{ width: "880px" }}>
         <Box
           sx={{
@@ -70,26 +100,30 @@ function CardAddMenus({  idx, setInput }) {
               justifyContent: "space-between",
             }}
           >
-            <DropdownCardMenu />
+            <DropdownCardMenu
+              handleDelete={handleDelete}
+              menuId={menuDetails?.id}
+              handleInsert={handleInsert}
+              idx={idx}
+            />
             <ButtonGroup
               variant="contained"
               color="error"
               aria-label="outlined primary button group"
-              sx={{ boxShadow: "none", display: "flex", alignItems: "center" }}
+              sx={{
+                boxShadow: "none",
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              <TextField
-                select
-                value = {restaurant.name}
-                sx={{ width: "250px", mr: "-70px" }}
-                onChange={(e) => setRestaurant(e.target.value)}
+              {/* จัดการ handleSave ตรงนี้ */}
+              <Button
+                sx={{ fontWeight: "bold", height: "100%" }}
+                variant={isEdit ? "contained" : "outlined"}
+                onClick={() => handleClick()}
               >
-                {data.map((item) => (
-                  <MenuItem value={item} name="test">
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <Button sx={{ fontWeight: "bold", height: "100%" }}>Save</Button>
+                {isEdit ? "Save" : "Edit"}
+              </Button>
             </ButtonGroup>
           </Box>
           <Grid container sx={{ pb: "20px" }}>
@@ -97,9 +131,11 @@ function CardAddMenus({  idx, setInput }) {
               <AddImage
                 handleImage={(e) => setImage(e.target.files[0])}
                 idx={idx}
-                
                 image={image}
-                setImage = {setImage}
+                setImage={setImage}
+                cloudUrl={cloudUrl}
+                setCloudUrl={setCloudUrl}
+                isEdit={isEdit}
               />
             </Grid>
             {/* ปรับช่องขวา */}
@@ -134,6 +170,7 @@ function CardAddMenus({  idx, setInput }) {
                     autoComplete="off"
                   >
                     <Input
+                      disabled={isEdit ? false : true}
                       placeholder="Add your menu"
                       inputProps={ariaLabel}
                       value={title}
@@ -156,7 +193,7 @@ function CardAddMenus({  idx, setInput }) {
                   >
                     <Avatar />
                     <Typography sx={{ fontWeight: "600" }}>
-                      Restaurant's Name
+                      {restaurantName}
                     </Typography>
                   </Box>
                   <Box
@@ -165,6 +202,7 @@ function CardAddMenus({  idx, setInput }) {
                     }}
                   >
                     <TextField
+                      disabled={isEdit ? false : true}
                       fullWidth
                       label="description"
                       id="fullWidth"
