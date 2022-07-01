@@ -1,18 +1,17 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ContainerMyPinPage from "../components/MyPinPage/ContainerMyPinPage";
 import ContainerPinId from "../components/MyPinPage/ContainerPinId";
 import ContainerEditProfile from "../components/MyPinPage/EditProfilePage/ContainerEditProfile";
-import { usePin } from "../contexts/PinContextProvider";
 
 function MyPinPage() {
    const { pathname } = useLocation();
-   const { pin } = usePin();
-   const { id } = pin;
+   const { albumId } = useParams();
    return (
       <>
          {pathname === "/myPin" && <ContainerMyPinPage />}
+         {pathname === "/myPin/created-pin" && <ContainerMyPinPage />}
          {pathname === "/myPin/edit-profile" && <ContainerEditProfile />}
-         {pathname === `/myPin/${id}` && <ContainerPinId />}
+         {pathname === `/myPin/${albumId}` && <ContainerPinId />}
       </>
    );
 }

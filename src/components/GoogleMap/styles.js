@@ -18,16 +18,12 @@ export default makeStyles(() => ({
     transform: "translate(-50%, -50%)",
     zIndex: 1,
     "&:hover": { zIndex: 2 },
-   
   },
   pointer: {
     cursor: "pointer",
   },
   buttonTag: {
     fontSize: "12px " 
-  },
-  smallMap: {
-    height: "50%"
   }
 
 

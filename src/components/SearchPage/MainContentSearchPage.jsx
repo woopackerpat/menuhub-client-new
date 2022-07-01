@@ -1,9 +1,9 @@
 import { Masonry } from "@mui/lab";
 import { Box } from "@mui/material";
 import { useInfiniteScroll } from "../../contexts/InfiniteScrollContext";
+import CartItems from "../common/cartItems/CartItems";
 import { useInfiniteQuery } from "react-query";
 import InfiniteScroll from "react-infinite-scroller";
-import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 
 function MainContentSearchPage() {
    const { fetchPosts } = useInfiniteScroll();
@@ -32,7 +32,7 @@ function MainContentSearchPage() {
                >
                   {data.pages.map((page) =>
                      page.results.map((post) => (
-                        <CartItemsRestaurant key={post.id} post={post} />
+                        <CartItems key={post.id} post={post} />
                      ))
                   )}
                </Masonry>

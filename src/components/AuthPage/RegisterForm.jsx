@@ -1,11 +1,12 @@
-import { Box, Link, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { useAuth } from "../../contexts/AuthContextProvider";
-import RegisterButton from "./RegisterButton";
-import { validateRegister } from "../../services/validate";
+import { Box, Link, TextField, Typography } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContextProvider';
+import RegisterButton from './RegisterButton';
+import { validateRegister } from '../../services/validate';
+import axios from '../../config/axios';
 
-function RegisterForm({ setType, handleCloseRegister }) {
-   const { register } = useAuth();
+function RegisterForm() {
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
    const [email, setEmail] = useState("");
@@ -13,13 +14,15 @@ function RegisterForm({ setType, handleCloseRegister }) {
    const [confirmPassword, setConfirmPassword] = useState("");
 
    const [error, setError] = useState({
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
       confirmPassword: "",
    });
    const [apiError, setApiError] = useState("");
+
+   const navigate = useNavigate();
+
+   const { register } = useAuth();
 
    const handleFirstName = (e) => {
       setFirstName(e.target.value);
@@ -43,8 +46,6 @@ function RegisterForm({ setType, handleCloseRegister }) {
       e.preventDefault();
 
       const errResult = validateRegister({
-         firstName,
-         lastName,
          email,
          password,
          confirmPassword,
@@ -54,14 +55,8 @@ function RegisterForm({ setType, handleCloseRegister }) {
 
       if (Object.keys(errResult).length === 0) {
          try {
-            const res = await register({
-               firstName,
-               lastName,
-               email,
-               password,
-               confirmPassword,
-            });
-            handleCloseRegister();
+            const res = await register({ email, password, confirmPassword });
+            navigate("/login");
          } catch (err) {
             console.log(err);
             setApiError(err.response.data.message);
@@ -129,7 +124,7 @@ function RegisterForm({ setType, handleCloseRegister }) {
                margin="normal"
                id="confirmPassword"
                label="Confirm Password"
-               type="password"
+               type="text"
                fullWidth
                onChange={handleConfirmPassword}
                value={confirmPassword}
@@ -146,8 +141,8 @@ function RegisterForm({ setType, handleCloseRegister }) {
                   Forgot your password?
                </Typography>
             </Link>
-            <RegisterButton />
          </Box>
+         <RegisterButton />
       </>
    );
 }

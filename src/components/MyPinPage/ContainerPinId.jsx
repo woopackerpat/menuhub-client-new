@@ -1,9 +1,8 @@
 import { Masonry } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
-import CartItems from "../common/cartItems/CartItemsRestaurant";
+import CartItems from "../common/cartItems/CartItems";
 
-function ContainerPinId({ pin }) {
-   const { name } = pin;
+function ContainerPinId() {
    return (
       <Box
          sx={{
@@ -15,18 +14,18 @@ function ContainerPinId({ pin }) {
          }}
       >
          <Typography variant="h5" fontWeight="bold">
-            {name}
+            All Pins
          </Typography>
-         {/* <Box>
+         <Box>
             <Masonry
                columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
                spacing={2}
             >
-               {pin.map((post) => (
+               {data.map((post) => (
                   <CartItems key={post.id} post={post} />
                ))}
             </Masonry>
-         </Box> */}
+         </Box>
       </Box>
    );
 }

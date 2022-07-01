@@ -1,26 +1,25 @@
-import { Box, ImageList, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import {
+   Avatar,
+   Box,
+   ImageList,
+   ImageListItem,
+   Typography,
+} from "@mui/material";
 import ItemCardSaved from "./ItemCardSaved";
 
-function ContainerAllPins() {
-   const navigate = useNavigate();
+function ContainerCardSaved() {
    return (
-      <Box onClick={() => navigate("/myPin/allPins")}>
-         <ImageList sx={{ display: "flex" }}>
-            {cardSaved.slice(0, 4).map((el) => (
-               <Box sx={{ marginInlineEnd: "-110px" }}>
-                  <ItemCardSaved key={el.id} src={el.src} size="150px" />
-               </Box>
-            ))}
-         </ImageList>
-         <Typography variant="h6" fontWeight="bold">
-            All pins
-         </Typography>
-      </Box>
+      <ImageList sx={{ display: "flex", width: "100%" }}>
+         {cardSaved.slice(0, 4).map((el, idx) => (
+            <ImageListItem sx={{ marginInlineEnd: "-110px" }}>
+               <ItemCardSaved key={idx} src={el.src} size="150px" />
+            </ImageListItem>
+         ))}
+      </ImageList>
    );
 }
 
-export default ContainerAllPins;
+export default ContainerCardSaved;
 
 const cardSaved = [
    {

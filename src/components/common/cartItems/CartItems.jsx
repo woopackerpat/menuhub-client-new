@@ -1,16 +1,12 @@
-import { Button, IconButton, Typography } from "@mui/material";
+import { Button, IconButton, styled, Typography } from "@mui/material";
+import ShareIcon from "@mui/icons-material/Share";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
-import DropdownShare from "./DropdownShare";
-import { useNavigate } from "react-router-dom";
 
-function CartItemsRestaurant({ Menus, items }) {
-   const { name, id } = items;
-   const ImageUrl = Menus.map((menu) => menu.imageUrl);
-   const navigate = useNavigate();
-
+function CartItems({ post }) {
+   const { download_url, author } = post;
    const [show, setShow] = useState(false);
 
    const handleMouseOver = () => {
@@ -21,22 +17,15 @@ function CartItemsRestaurant({ Menus, items }) {
       setShow(false);
    };
 
-   const handleCreateAlbum = (e) => {
-      e.stopPropagation();
-   };
-
    return (
       <Box
          sx={{ position: "relative" }}
          onMouseOver={handleMouseOver}
          onMouseOut={handleMouseOut}
       >
-         <Box
-            sx={{ "&:hover": { filter: "grayscale(60%)" } }}
-            onClick={() => navigate(`/allMenus/${id}`)}
-         >
+         <Box sx={{ "&:hover": { filter: "grayscale(60%)" } }}>
             <img
-               src={ImageUrl}
+               src={download_url}
                alt="img"
                loading="lazy"
                style={{
@@ -56,12 +45,12 @@ function CartItemsRestaurant({ Menus, items }) {
                      left: 12,
                   }}
                >
-                  {<DropdownProfile id={id} />}
+                  <DropdownProfile />
                </Box>
                <Box sx={{ position: "absolute", top: 12, right: 12 }}>
                   <Button
                      variant="contained"
-                     onClick={() => handleCreateAlbum}
+                     onClick={(e) => e.stopPropagation()}
                      color="error"
                   >
                      Save
@@ -76,7 +65,15 @@ function CartItemsRestaurant({ Menus, items }) {
                      gap: 1,
                   }}
                >
-                  <DropdownShare />
+                  <IconButton
+                     sx={{
+                        backgroundColor: "#f0f0f0",
+                        opacity: [0.9, 0.8, 0.7],
+                        "&:hover": { backgroundColor: "white", opacity: 1 },
+                     }}
+                  >
+                     <ShareIcon color="dark" />
+                  </IconButton>
                   <IconButton
                      sx={{
                         backgroundColor: "#f0f0f0",
@@ -89,9 +86,9 @@ function CartItemsRestaurant({ Menus, items }) {
                </Box>
             </>
          )}
-         <Typography fontWeight="bold">{name}</Typography>
+         <Typography fontWeight="bold">{author}</Typography>
       </Box>
    );
 }
 
-export default CartItemsRestaurant;
+export default CartItems;
