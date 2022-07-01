@@ -1,59 +1,33 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const listRestaurant = [
-   {
-      id: 1,
-      title: "McDonald",
-   },
-   {
-      id: 2,
-      title: "MK Suki",
-   },
-   {
-      id: 3,
-      title: "Pizza Company",
-   },
-   {
-      id: 4,
-      title: "KFC",
-   },
-   {
-      id: 5,
-      title: "Rak Thai",
-   },
-   {
-      id: 6,
-      title: "Teenoi Suki",
-   },
-   {
-      id: 7,
-      title: "LekYai Noodle",
-   },
-   {
-      id: 8,
-      title: "KFC",
-   },
-   {
-      id: 9,
-      title: "Rak Thai",
-   },
-   {
-      id: 10,
-      title: "Teenoi Suki",
-   },
-   {
-      id: 11,
-      title: "LekYai Noodle",
-   },
-];
-
-function HeaderSearchPage() {
+function HeaderSearchPage(props) {
    const isMobile = useMediaQuery("(max-width: 420px)");
    const isSurface = useMediaQuery("(max-width: 550px)");
    const isIpad = useMediaQuery("(max-width: 900px)");
    const isDesktop = useMediaQuery("(max-width: 1300px)");
-   const [list, setList] = useState(listRestaurant);
+   const [list, setList] = useState([]);
+   const [listRestaurant, setListRestaurant] = useState([])
+   const [loading, setLoading] = useState(0)
+   const refId = props.refId
+   const location = useLocation()
+
+   useEffect(() => {
+      const fetchSuggestions = async (refId) => {
+         try {
+            const res = await axios.post('/restaurant/suggestions', { refId: refId })
+            setListRestaurant(res.data)
+            setLoading(1)
+         } catch (err) {
+            console.log('fetchSuggestions error')
+         }
+      }
+      if (refId) {
+         fetchSuggestions(refId)
+      }
+   }, [refId, location])
 
    useEffect(() => {
       if (isMobile) {
@@ -67,7 +41,8 @@ function HeaderSearchPage() {
       } else {
          setList(listRestaurant.slice(0, 9));
       }
-   }, [isMobile]);
+   }, [loading, location]);
+
    return (
       <div>
          <Box
@@ -87,22 +62,27 @@ function HeaderSearchPage() {
                   flexWrap: "wrap",
                }}
             >
-               {list.map((item) => (
-                  <Button
-                     key={item.id}
-                     sx={{
-                        padding: 1,
-                        backgroundColor: "#767676",
-                        color: "white",
-                        "&:hover": {
-                           color: "#000000",
-                           backgroundColor: "#efefef",
-                        },
-                     }}
-                  >
-                     <Typography>{item.title}</Typography>
-                  </Button>
-               ))}
+               {list ? (
+                  list?.map((suggestion) => (
+                     <Link to={`/search?search=${suggestion.name}`}>
+                        <Button
+                           key={suggestion.id}
+                           sx={{
+                              padding: 1,
+                              backgroundColor: "#767676",
+                              color: "white",
+                              "&:hover": {
+                                 color: "#000000",
+                                 backgroundColor: "#efefef",
+                              },
+                           }}
+                        >
+                           <Typography>{suggestion.name}</Typography>
+                        </Button>
+                     </Link>
+                  ))
+               ) : (<div></div>)}
+
             </Box>
          </Box>
       </div>

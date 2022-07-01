@@ -1,8 +1,14 @@
 import { Box, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function ContainerAlbumCart({ name, id }) {
+function ContainerAlbumCart({ name, id, Restaurants }) {
+   console.log("containerAlbumCart    ", Restaurants);
    const navigate = useNavigate();
+
+   const getImage = Restaurants.map((el) =>
+      el.Menus.map((item) => item.imageUrl)
+   );
+   console.log("getImage     ", getImage);
    return (
       <Box
          sx={{ display: "flex", flexDirection: "column" }}
@@ -15,7 +21,16 @@ function ContainerAlbumCart({ name, id }) {
                   height: "180px",
                   backgroundColor: "#efefef",
                }}
-            ></Box>
+            >
+               <img
+                  src={getImage ? getImage[0] : ""}
+                  alt=""
+                  style={{
+                     objectFit: "cover",
+                     width: "100%",
+                  }}
+               />
+            </Box>
             <Box
                sx={{
                   width: "90px",
@@ -31,14 +46,32 @@ function ContainerAlbumCart({ name, id }) {
                      height: "50%",
                      border: "10px",
                   }}
-               ></Box>
+               >
+                  <img
+                     src={getImage ? getImage[1] : ""}
+                     alt=""
+                     style={{
+                        objectFit: "cover",
+                        width: "100%",
+                     }}
+                  />
+               </Box>
                <Box
                   sx={{
                      backgroundColor: "#efefef",
                      width: "90px",
                      height: "50%",
                   }}
-               ></Box>
+               >
+                  <img
+                     src={getImage ? getImage[2] : ""}
+                     alt=""
+                     style={{
+                        objectFit: "cover",
+                        width: "100%",
+                     }}
+                  />
+               </Box>
             </Box>
          </Container>
          <Typography variant="h6" fontWeight="bold">

@@ -1,9 +1,28 @@
+import { LoadingButton } from "@mui/lab";
 import { Box, Button, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
+import { usePin } from "../../../contexts/PinContextProvider";
 
-function BoxBoard({ name }) {
+function BoxBoard({ name, id, restaurantId, Restaurants }) {
    const [showBoardBtn, setShowBoardBtn] = useState(false);
+   const { savePinRes } = usePin();
+   const [loading, setLoading] = useState(false);
 
+   const getImage = Restaurants.map((el) =>
+      el.Menus.map((item) => item.imageUrl)
+   );
+
+   const handleSaveRestaurant = async (e) => {
+      try {
+         e.stopPropagation();
+         setLoading(true);
+         await savePinRes({ pinId: id, restaurantId: restaurantId });
+      } catch (err) {
+         console.log(err);
+      } finally {
+         setLoading(false);
+      }
+   };
    return (
       <MenuItem
          sx={{
@@ -36,7 +55,7 @@ function BoxBoard({ name }) {
                }}
             >
                <img
-                  src="https://picsum.photos/50/50"
+                  src={getImage[0]}
                   style={{ borderRadius: "10px", maxWidth: "40px" }}
                   alt="img"
                ></img>
@@ -44,14 +63,15 @@ function BoxBoard({ name }) {
             <Typography>{name}</Typography>
          </Box>
          {showBoardBtn && (
-            <Button
+            <LoadingButton
+               loading={loading}
                variant="contained"
-               onClick={(e) => e.stopPropagation()}
+               onClick={handleSaveRestaurant}
                color="error"
                sx={{ textTransform: "none", fontWeight: "bold" }}
             >
                Save
-            </Button>
+            </LoadingButton>
          )}
       </MenuItem>
    );

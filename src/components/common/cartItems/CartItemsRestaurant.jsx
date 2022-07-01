@@ -1,12 +1,16 @@
-import { Button, IconButton, styled, Typography } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
 import DropdownShare from "./DropdownShare";
+import { useNavigate } from "react-router-dom";
 
-function CartItems({ post }) {
-   const { download_url, author } = post;
+function CartItemsRestaurant({ Menus, items }) {
+   const { name, id } = items;
+   const ImageUrl = Menus.map((menu) => menu.imageUrl);
+   const navigate = useNavigate();
+
    const [show, setShow] = useState(false);
 
    const handleMouseOver = () => {
@@ -27,9 +31,12 @@ function CartItems({ post }) {
          onMouseOver={handleMouseOver}
          onMouseOut={handleMouseOut}
       >
-         <Box sx={{ "&:hover": { filter: "grayscale(60%)" } }}>
+         <Box
+            sx={{ "&:hover": { filter: "grayscale(60%)" } }}
+            onClick={() => navigate(`/allMenus/${id}`)}
+         >
             <img
-               src={download_url}
+               src={ImageUrl}
                alt="img"
                loading="lazy"
                style={{
@@ -49,7 +56,7 @@ function CartItems({ post }) {
                      left: 12,
                   }}
                >
-                  <DropdownProfile />
+                  {<DropdownProfile id={id} />}
                </Box>
                <Box sx={{ position: "absolute", top: 12, right: 12 }}>
                   <Button
@@ -82,9 +89,9 @@ function CartItems({ post }) {
                </Box>
             </>
          )}
-         <Typography fontWeight="bold">{author}</Typography>
+         <Typography fontWeight="bold">{name}</Typography>
       </Box>
    );
 }
 
-export default CartItems;
+export default CartItemsRestaurant;

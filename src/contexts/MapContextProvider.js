@@ -32,7 +32,7 @@ function MapContextProvider({ children }) {
       setPlaces(restaurants)
     };
     try {
-      run();
+      // run();
     } catch (err) {
       console.log(err);
     }
