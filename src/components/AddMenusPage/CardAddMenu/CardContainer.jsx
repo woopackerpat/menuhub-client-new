@@ -134,6 +134,7 @@ function CardAddMenus({
                 setImage={setImage}
                 cloudUrl={cloudUrl}
                 setCloudUrl={setCloudUrl}
+                isEdit={isEdit}
               />
             </Grid>
             {/* ปรับช่องขวา */}

@@ -51,6 +51,7 @@ function ContainerAddMenusPage() {
     // เพิ่ม neworder เข้าไปใน function
 
     await reorderMenu(restaurantId, order);
+
     const res = await getAllMenusOfRestaurant(restaurantId);
     const menus = res.data.Menus;
 
@@ -85,9 +86,10 @@ function ContainerAddMenusPage() {
       description: "",
     });
 
-    const newOrder = newObj.map((el, idx) => ({ id: el.id, orderNumber: idx }));
-
-    console.log(newOrder);
+    const newOrder = newObj.map((el, idx) => ({
+      id: el.id,
+      orderNumber: idx + 1,
+    }));
 
     setOrder(newOrder);
     setInput(newObj);

@@ -9,8 +9,12 @@ const getAllMenusOfRestaurant = (restaurantId) =>
 const createMenu = (restaurantId, menu) =>
   axios.post(`/restaurant/menu/${restaurantId}`, menu);
 
-const reorderMenu = (restaurantId, newOrder) =>{
-  console.log({restaurantId, newOrder})
-  return axios.patch("/restaurant/menuorder", { restaurantId, newOrder });}
+const reorderMenu = (restaurantId, newOrder) => {
+  console.log({ restaurantId, newOrder });
+  return axios.patch("/restaurant/menuorder", { restaurantId, newOrder });
+ 
+};
 
-export { createRestaurant, getAllMenusOfRestaurant, createMenu, reorderMenu };
+const getMyDraft = () => axios.get("/restaurant/mydraft");
+
+export { createRestaurant, getAllMenusOfRestaurant, createMenu, reorderMenu, getMyDraft };
