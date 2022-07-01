@@ -11,7 +11,6 @@ function BoxBoard({ name, id, restaurantId, Restaurants }) {
    const getImage = Restaurants.map((el) =>
       el.Menus.map((item) => item.imageUrl)
    );
-   console.log("getImage     ", getImage);
 
    const handleSaveRestaurant = async (e) => {
       try {

@@ -1,10 +1,10 @@
 import { Masonry } from "@mui/lab";
 import { Box } from "@mui/material";
-import CartItems from "../common/cartItems/CartItems";
 import InfiniteScroll from "react-infinite-scroller";
 import { useInfiniteQuery } from "react-query";
 import { useInfiniteScroll } from "../../contexts/InfiniteScrollContext";
 import { useRestaurant } from "../../contexts/RestaurantContextProvider";
+import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 
 function BodyHome() {
    const { restaurant } = useRestaurant();
@@ -66,7 +66,11 @@ function BodyHome() {
             spacing={2}
          >
             {restaurant?.map((items) => (
-               <CartItems key={items.id} Menus={items.Menus} items={items} />
+               <CartItemsRestaurant
+                  key={items.id}
+                  Menus={items.Menus}
+                  items={items}
+               />
             ))}
          </Masonry>
       </Box>

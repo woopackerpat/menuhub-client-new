@@ -19,15 +19,10 @@ import BoxBoard from "./BoxBoard";
 import { LoadingButton } from "@mui/lab";
 
 function DropdownProfile({ id }) {
-   // console.log(item, "post");
    const { pin } = usePin();
    const [showDrop, setShowDrop] = useState(null);
    const [showProfileBtn, setShowProfileBtn] = useState(false);
    const [loading, setLoading] = useState(false);
-
-   //    const getImage = Restaurants.map((el) =>
-   //    el.Menus.map((item) => item.imageUrl)
-   // );
 
    //Modal Create
    const [open, setOpen] = useState(false);

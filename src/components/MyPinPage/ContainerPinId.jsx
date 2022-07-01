@@ -1,6 +1,6 @@
 import { Masonry } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
-import CartItems from "../common/cartItems/CartItems";
+import CartItems from "../common/cartItems/CartItemsRestaurant";
 
 function ContainerPinId({ pin }) {
    const { name } = pin;

@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const RestaurantContext = createContext();
 
 function RestaurantContextProvider({ children }) {
-   const [restaurant, setRestaurant] = useState();
+   const [restaurant, setRestaurant] = useState([]);
 
    const fetchRestaurant = async () => {
       try {
