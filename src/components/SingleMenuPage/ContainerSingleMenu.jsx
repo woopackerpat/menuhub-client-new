@@ -1,18 +1,19 @@
-import { Box } from '@mui/material'
-import MenuCardContainer from './CardSingleMenu/MenuCardContainer'
+import { Box } from "@mui/material";
+import { useParams } from "react-router-dom";
+import MenuCardContainer from "./CardSingleMenu/MenuCardContainer";
 
 function ContainerSingleMenu() {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        // gap: '20px',
-      }}
-    >
-      <MenuCardContainer />
-    </Box>
-  )
+   const { menuId } = useParams();
+   return (
+      <Box
+         sx={{
+            display: "flex",
+            flexDirection: "column",
+         }}
+      >
+         <MenuCardContainer menuId={menuId} />
+      </Box>
+   );
 }
 
-export default ContainerSingleMenu
+export default ContainerSingleMenu;

@@ -1,13 +1,15 @@
-import { Button, IconButton, styled, Typography } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
 import DropdownShare from "./DropdownShare";
+import { useNavigate } from "react-router-dom";
 
-function CartItems({ Menus, items }) {
+function CartItemsRestaurant({ Menus, items }) {
    const { name, id } = items;
    const ImageUrl = Menus.map((menu) => menu.imageUrl);
+   const navigate = useNavigate();
 
    const [show, setShow] = useState(false);
 
@@ -29,7 +31,10 @@ function CartItems({ Menus, items }) {
          onMouseOver={handleMouseOver}
          onMouseOut={handleMouseOut}
       >
-         <Box sx={{ "&:hover": { filter: "grayscale(60%)" } }}>
+         <Box
+            sx={{ "&:hover": { filter: "grayscale(60%)" } }}
+            onClick={() => navigate(`/allMenus/${id}`)}
+         >
             <img
                src={ImageUrl}
                alt="img"
@@ -89,4 +94,4 @@ function CartItems({ Menus, items }) {
    );
 }
 
-export default CartItems;
+export default CartItemsRestaurant;
