@@ -11,6 +11,7 @@ function MyPinPage() {
    return (
       <>
          {pathname === "/myPin" && <ContainerMyPinPage />}
+         {pathname === "/myPin/created-pin" && <ContainerMyPinPage />}
          {pathname === "/myPin/edit-profile" && <ContainerEditProfile />}
          {pathname === `/myPin/${id}` && <ContainerPinId />}
       </>
