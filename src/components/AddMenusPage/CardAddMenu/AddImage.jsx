@@ -11,6 +11,7 @@ function AddImage({
   setImage,
   cloudUrl,
   setCloudUrl,
+  isEdit,
 }) {
   const Inputs = styled("input")({
     display: "none",
@@ -55,9 +56,11 @@ function AddImage({
                 right: "0",
               }}
             >
-              <Button onClick={handleDeleteImage}>
-                <CloseIcon color="light" style={{ fontSize: "30px" }} />
-              </Button>
+              {isEdit && (
+                <Button onClick={handleDeleteImage}>
+                  <CloseIcon color="light" style={{ fontSize: "30px" }} />
+                </Button>
+              )}
             </Box>
             <img
               src={cloudUrl}
