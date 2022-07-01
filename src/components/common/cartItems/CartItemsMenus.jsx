@@ -29,11 +29,9 @@ function CartItemsMenus({ item }) {
          sx={{ position: "relative" }}
          onMouseOver={handleMouseOver}
          onMouseOut={handleMouseOut}
+         className="hvr-grow"
       >
-         <Box
-            sx={{ "&:hover": { filter: "grayscale(60%)" } }}
-            onClick={() => navigate(`/singleMenu/${id}`)}
-         >
+         <Box onClick={() => navigate(`/singleMenu/${id}`)}>
             <img
                src={imageUrl}
                alt="img"
