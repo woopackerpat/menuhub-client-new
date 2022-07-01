@@ -1,8 +1,10 @@
 import {
    Avatar,
    Box,
+   Button,
    IconButton,
    Link,
+   styled,
    TextField,
    Typography,
 } from "@mui/material";
@@ -12,6 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "../../../../../config/axios";
 import { useState } from "react";
+import DropdownCommentEdit from "./DropdownCommentEdit";
 
 function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
    const {
@@ -48,6 +51,21 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
       }
    };
 
+   const CommentBtn = styled("div")(() => ({
+      display: "flex",
+      flex: 1,
+      position: "relative",
+      borderRadius: "50px",
+      backgroundColor: "#efefef",
+      color: "#888",
+      marginLeft: 0,
+      width: "80%",
+      padding: "0.8em 1em",
+      "&:hover": {
+         cursor: "text",
+      },
+   }));
+
    return (
       <>
          <Box sx={{ position: "relative" }}>
@@ -58,7 +76,13 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
                         <Avatar src={profilePicUrl} />
                      </IconButton>
                   </Link>
-                  <Box>
+                  <Box
+                     sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                     }}
+                  >
                      <Typography fontWeight="bold">{`${firstName} ${lastName}`}</Typography>
                      {user.id === id && (
                         <Box
@@ -68,27 +92,75 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
                               top: 8,
                            }}
                         >
-                           <IconButton onClick={() => setIsEdit(true)}>
-                              <EditIcon fontSize="small" />
-                           </IconButton>
-                           <IconButton onClick={handleDelete}>
-                              <DeleteIcon fontSize="small" />
-                           </IconButton>
+                           <DropdownCommentEdit
+                              isEdit={isEdit}
+                              setIsEdit={setIsEdit}
+                           />
                         </Box>
                      )}
                   </Box>
                </Box>
                {isEdit ? (
                   <Box sx={{ position: "relative" }}>
-                     <TextField
-                        fullWidth
-                        multiline={true}
-                        autoFocus
-                        onChange={(e) => setTextEdit(e.target.value)}
-                     />
-                     <CloseIcon
+                     <Box
+                        component="form"
+                        onSubmit={handleEdit}
+                        sx={{
+                           display: "flex",
+                           flexDirection: "column",
+                           gap: 2,
+                        }}
+                     >
+                        <TextField
+                           fullWidth
+                           multiline={true}
+                           maxRows={4}
+                           autoFocus
+                           onChange={(e) => setTextEdit(e.target.value)}
+                        />
+                        <Box
+                           sx={{
+                              display: "flex",
+                              justifyContent: "end",
+                              gap: 1,
+                           }}
+                        >
+                           <Button
+                              variant="contained"
+                              color="secondary"
+                              sx={{
+                                 textTransform: "none",
+                                 borderRadius: "30px",
+                                 backgroundColor: "#ccc",
+                                 color: "black",
+                                 fontWeight: "bold",
+                              }}
+                              onClick={() => {
+                                 setIsEdit(false);
+                                 setTextEdit("");
+                              }}
+                           >
+                              Cancel
+                           </Button>
+                           <Button
+                              type="submit"
+                              variant="contained"
+                              {...(text === ""
+                                 ? { color: "secondary", disabled: true }
+                                 : { color: "error" })}
+                              sx={{
+                                 textTransform: "none",
+                                 borderRadius: "30px",
+                                 fontWeight: "bold",
+                              }}
+                           >
+                              Done
+                           </Button>
+                        </Box>
+                     </Box>
+                     {/* <CloseIcon
                         sx={{ position: "absolute", top: 16, right: 10 }}
-                     />
+                     /> */}
                   </Box>
                ) : (
                   <Typography>{text}</Typography>
