@@ -4,15 +4,7 @@ import CartUpload from "./CartUpload";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 
-function AddImage({
-  handleImage,
-  idx,
-  image,
-  setImage,
-  cloudUrl,
-  setCloudUrl,
-  isEdit,
-}) {
+function AddImage({ handleImage, idx, image, setImage }) {
   const Inputs = styled("input")({
     display: "none",
   });
@@ -20,7 +12,6 @@ function AddImage({
   const handleDeleteImage = (e) => {
     e.stopPropagation();
     setImage(null);
-    setCloudUrl("");
   };
 
   return (
@@ -44,26 +35,17 @@ function AddImage({
           type="file"
           onChange={handleImage}
         />
-        {!cloudUrl ? (
+        {!image ? (
           <CartUpload />
         ) : (
-          <div style={{ position: "relative" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "end",
-                position: "absolute",
-                right: "0",
-              }}
-            >
-              {isEdit && (
-                <Button onClick={handleDeleteImage}>
-                  <CloseIcon color="light" style={{ fontSize: "30px" }} />
-                </Button>
-              )}
+          <div style={{position: "relative"}}>
+            <Box sx={{ display: "flex", justifyContent: "end", position: "absolute", right: "0"  }}>
+              <Button onClick={handleDeleteImage}>
+                <CloseIcon color = "light" style = {{fontSize: "30px"}}/>
+              </Button>
             </Box>
             <img
-              src={cloudUrl}
+              src={URL.createObjectURL(image)}
               alt="Img"
               loading="lazy"
               style={{

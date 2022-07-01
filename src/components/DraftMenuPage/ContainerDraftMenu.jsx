@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Typography } from "@mui/material";
+import { Box, CssBaseline, ImageList, Typography } from "@mui/material";
 import FooterDraft from "./FooterDraft";
 import MainContentDraftMenu from "./MainContentDraftMenu";
 
