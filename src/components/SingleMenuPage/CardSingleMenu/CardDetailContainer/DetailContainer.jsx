@@ -1,23 +1,37 @@
-import { Box } from '@mui/material'
-import DropdownComment from './Comment/DropdownComment'
-import MenuInfo from './MenuInfo'
-import UserAction from './UserAction'
+import { Box } from "@mui/material";
+import DropdownComment from "./Comment/DropdownComment";
+import MenuInfo from "./MenuInfo";
+import UserAction from "./UserAction";
 
-function DetailContainer() {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 3,
-        p: 3,
-      }}
-    >
-      <UserAction />
-      <MenuInfo />
-      <DropdownComment />
-    </Box>
-  )
+function DetailContainer({
+   title,
+   id,
+   description,
+   fetchMenusById,
+   setComments,
+   comments,
+   menuId,
+}) {
+   return (
+      <Box
+         sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 3,
+            p: 3,
+         }}
+      >
+         <UserAction />
+         <MenuInfo description={description} title={title} />
+         <DropdownComment
+            fetchMenusById={fetchMenusById}
+            comments={comments}
+            setComments={setComments}
+            id={id}
+            menuId={menuId}
+         />
+      </Box>
+   );
 }
 
-export default DetailContainer
+export default DetailContainer;
