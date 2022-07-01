@@ -12,9 +12,18 @@ const createMenu = (restaurantId, menu) =>
 const reorderMenu = (restaurantId, newOrder) => {
   console.log({ restaurantId, newOrder });
   return axios.patch("/restaurant/menuorder", { restaurantId, newOrder });
- 
 };
+
+const updateRestaurant = (restaurantId, details) =>
+  axios.patch(`/restaurant/update/${restaurantId}`, details);
 
 const getMyDraft = () => axios.get("/restaurant/mydraft");
 
-export { createRestaurant, getAllMenusOfRestaurant, createMenu, reorderMenu, getMyDraft };
+export {
+  createRestaurant,
+  getAllMenusOfRestaurant,
+  createMenu,
+  reorderMenu,
+  getMyDraft,
+  updateRestaurant,
+};
