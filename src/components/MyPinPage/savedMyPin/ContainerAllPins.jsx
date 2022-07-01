@@ -6,6 +6,7 @@ function ContainerAllPins({ pin }) {
   const getImage = pin?.map(el =>
     el.Restaurants?.map(el => el.Menus?.map(el => el.imageUrl))
   )
+  console.log(pin)
 
   const navigate = useNavigate()
   return (

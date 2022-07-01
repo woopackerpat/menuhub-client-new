@@ -5,7 +5,6 @@ import ContainerAllPins from "./ContainerAllPins"
 
 function AlbumSaved() {
   const { pin } = usePin()
-  console.log(pin)
   return (
     <Box
       sx={{

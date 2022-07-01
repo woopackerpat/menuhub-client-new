@@ -6,7 +6,7 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
   const navigate = useNavigate()
 
   const getImage = Restaurants.map(el => el.Menus.map(item => item.imageUrl))
-  //   console.log("getImage     ", getImage)
+  // console.log("getImage     ", getImage)
   return (
     <Box
       sx={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
@@ -37,6 +37,7 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
         <Box
           sx={{
             width: "90px",
+            height: "180px",
             display: "flex",
             flexDirection: "column",
             gap: "1px",
@@ -45,7 +46,6 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
           <Box
             sx={{
               backgroundColor: "#efefef",
-              width: "90px",
               height: "50%",
               border: "10px",
               borderRadius: "0 16px 0 0",
@@ -67,7 +67,6 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
           <Box
             sx={{
               backgroundColor: "#efefef",
-              width: "90px",
               height: "50%",
               borderRadius: "0 0 16px 0",
             }}
