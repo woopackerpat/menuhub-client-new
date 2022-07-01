@@ -7,9 +7,9 @@ function ContainerAllPins() {
    return (
       <Box onClick={() => navigate("/myPin/allPins")}>
          <ImageList sx={{ display: "flex" }}>
-            {cardSaved.slice(0, 4).map((el, idx) => (
+            {cardSaved.slice(0, 4).map((el) => (
                <Box sx={{ marginInlineEnd: "-110px" }}>
-                  <ItemCardSaved key={idx} src={el.src} size="150px" />
+                  <ItemCardSaved key={el.id} src={el.src} size="150px" />
                </Box>
             ))}
          </ImageList>

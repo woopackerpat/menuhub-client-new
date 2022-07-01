@@ -19,8 +19,17 @@ function RestaurantContextProvider({ children }) {
       fetchRestaurant();
    }, []);
 
+   const createLike = async (restaurantId) => {
+      try {
+         const res = await axios.put("/restaurant/like/" + restaurantId);
+         fetchRestaurant();
+      } catch (err) {
+         console.log(err);
+      }
+   };
+
    return (
-      <RestaurantContext.Provider value={{ restaurant }}>
+      <RestaurantContext.Provider value={{ restaurant, createLike }}>
          {children}
       </RestaurantContext.Provider>
    );

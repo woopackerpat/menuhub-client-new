@@ -16,12 +16,14 @@ import SearchBar from "../SearchBar";
 import { usePin } from "../../../contexts/PinContextProvider";
 import ModalCreatePin from "./ModalCreatePin";
 import BoxBoard from "./BoxBoard";
+import { LoadingButton } from "@mui/lab";
 
 function DropdownProfile({ id }) {
    // console.log(item, "post");
    const { pin } = usePin();
    const [showDrop, setShowDrop] = useState(null);
    const [showProfileBtn, setShowProfileBtn] = useState(false);
+   const [loading, setLoading] = useState(false);
 
    //    const getImage = Restaurants.map((el) =>
    //    el.Menus.map((item) => item.imageUrl)
@@ -41,6 +43,9 @@ function DropdownProfile({ id }) {
       setShowDrop(null);
    };
 
+   const handleClickSave = () => {
+      setLoading(true);
+   };
    // ********************************
 
    const dropId = "drop-profile";
@@ -97,13 +102,15 @@ function DropdownProfile({ id }) {
                <Typography>Profile</Typography>
             </Box>
             {showProfileBtn && (
-               <Button
+               <LoadingButton
+                  loading={loading}
+                  onClick={handleClickSave}
                   variant="contained"
                   color="error"
                   sx={{ textTransform: "none", fontWeight: "bold" }}
                >
                   Save
-               </Button>
+               </LoadingButton>
             )}
          </MenuItem>
          <MenuItem disabled>

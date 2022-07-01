@@ -5,6 +5,7 @@ const PinContext = createContext();
 
 function PinContextProvider({ children }) {
    const [pin, setPin] = useState([]);
+   const [loading, setLoading] = useState(false);
 
    const fetchPin = async () => {
       try {
@@ -21,35 +22,56 @@ function PinContextProvider({ children }) {
 
    const createNewPin = async (name, restaurantId) => {
       try {
+         setLoading(true);
          await axios.post("/pin", { name, restaurantId });
          fetchPin();
       } catch (err) {
          console.log(err);
+      } finally {
+         setLoading(false);
       }
    };
 
    const savePinRes = async (input) => {
       try {
-         console.log(input);
+         setLoading(true);
          const res = await axios.patch("/pin/restaurant", input);
          fetchPin();
-         console.log(res.data, "res");
       } catch (err) {
          console.log(err);
+      } finally {
+         setLoading(false);
       }
    };
 
    const deletePin = async (pinId) => {
       try {
+         setLoading(true);
          await axios.delete("/pin", { pinId });
          fetchPin();
       } catch (err) {
          console.log(err);
+      } finally {
+         setLoading(false);
+      }
+   };
+
+   const RemoveRestaurant = async (restaurantId, pinId) => {
+      try {
+         setLoading(true);
+         await axios.delete("/pin/restaurant", { restaurantId, pinId });
+         fetchPin();
+      } catch (err) {
+         console.log(err);
+      } finally {
+         setLoading(false);
       }
    };
 
    return (
-      <PinContext.Provider value={{ createNewPin, pin, deletePin, savePinRes }}>
+      <PinContext.Provider
+         value={{ createNewPin, pin, deletePin, savePinRes, RemoveRestaurant }}
+      >
          {children}
       </PinContext.Provider>
    );

@@ -17,16 +17,16 @@ function ContainerPinId({ pin }) {
          <Typography variant="h5" fontWeight="bold">
             {name}
          </Typography>
-         <Box>
+         {/* <Box>
             <Masonry
                columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
                spacing={2}
             >
-               {data.map((post) => (
+               {pin.map((post) => (
                   <CartItems key={post.id} post={post} />
                ))}
             </Masonry>
-         </Box>
+         </Box> */}
       </Box>
    );
 }

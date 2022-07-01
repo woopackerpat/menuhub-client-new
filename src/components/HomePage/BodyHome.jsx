@@ -8,6 +8,7 @@ import { useRestaurant } from "../../contexts/RestaurantContextProvider";
 
 function BodyHome() {
    const { restaurant } = useRestaurant();
+   console.log("restaurant  ", restaurant);
    // const { fetchPosts } = useInfiniteScroll();
    // const { data, isLoading, isError, hasNextPage, fetchNextPage } =
    //    useInfiniteQuery("posts", fetchPosts, {
