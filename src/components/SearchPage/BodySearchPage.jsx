@@ -1,9 +1,9 @@
 import { Box, CssBaseline } from "@mui/material";
 import axios from "../../config/axios";
 import { useEffect, useState } from "react";
-import { useLocation } from 'react-router'
 import HeaderSearchPage from "./HeaderSearch";
 import MainContentSearchPage from "./MainContentSearchPage";
+import { useLocation } from "react-router-dom";
 
 function BodySearchPage() {
 
@@ -11,14 +11,8 @@ function BodySearchPage() {
    const [page, setPage] = useState()
    const [refId, setRefId] = useState()
 
-   let history = useLocation()
-
-   useEffect(() => {
-      if (history) {
-         console.log(history)
-      }
-   }, [history])
-
+   const location = useLocation()
+   
    useEffect(() => {
       const fetchData = async () => {
          try {
@@ -32,21 +26,17 @@ function BodySearchPage() {
          }
       }
       fetchData()
-   }, [])
+   }, [location])
 
    useEffect(() => {
       if (resArr.length != 0) {
          setPage(resArr)
          setRefId(resArr[0].id)
       }
-   }, [resArr])
+   }, [resArr, location])
 
    useEffect(() => {
-      if (refId) {
-         console.log(refId)
-         console.log(page)
-      }
-   }, [refId, page])
+   }, [location])
 
    return (
       <>

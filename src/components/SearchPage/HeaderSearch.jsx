@@ -1,7 +1,7 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function HeaderSearchPage(props) {
    const isMobile = useMediaQuery("(max-width: 420px)");
@@ -12,7 +12,7 @@ function HeaderSearchPage(props) {
    const [listRestaurant, setListRestaurant] = useState([])
    const [loading, setLoading] = useState(0)
    const refId = props.refId
-   const navigate = useNavigate()
+   const location = useLocation()
 
    useEffect(() => {
       const fetchSuggestions = async (refId) => {
@@ -27,7 +27,7 @@ function HeaderSearchPage(props) {
       if (refId) {
          fetchSuggestions(refId)
       }
-   }, [refId])
+   }, [refId, location])
 
    useEffect(() => {
       if (isMobile) {
@@ -41,7 +41,7 @@ function HeaderSearchPage(props) {
       } else {
          setList(listRestaurant.slice(0, 9));
       }
-   }, [loading]);
+   }, [loading, location]);
 
    return (
       <div>
