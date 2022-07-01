@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, Link, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import UserCommentBox from "./UserCommentBox";
 
 function CommentArea({ comments, fetchMenusById, id, setComments, menuId }) {

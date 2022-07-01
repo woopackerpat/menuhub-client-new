@@ -3,7 +3,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import { useState } from "react";
 
-function DropdownCommentEdit({ handleDelete, menuId, handleInsert, idx }) {
+function DropdownCommentEdit({ handleDelete, setIsEdit }) {
    const [showDrop, setShowDrop] = useState(null);
 
    const isSettingDrop = Boolean(showDrop);
@@ -26,10 +26,10 @@ function DropdownCommentEdit({ handleDelete, menuId, handleInsert, idx }) {
          open={isSettingDrop}
          onClose={handleMenuClose}
       >
-         <MenuItem onClick={() => handleDelete(menuId)}>
+         <MenuItem onClick={() => setIsEdit(true)}>
             <Typography>Edit</Typography>
          </MenuItem>
-         <MenuItem onClick={() => handleInsert(idx)}>
+         <MenuItem onClick={handleDelete}>
             <Typography>Delete</Typography>
          </MenuItem>
       </Menu>

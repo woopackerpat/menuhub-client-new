@@ -23,17 +23,23 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
       text,
    } = comment;
 
-   const [textEdit, setTextEdit] = useState("");
+   const [textEdit, setTextEdit] = useState(text || "");
 
    const [isEdit, setIsEdit] = useState(false);
 
    const { user } = useAuth();
 
-   const handleEdit = async () => {
+   const handleEdit = async (e) => {
+      e.preventDefault();
       try {
-         await axios.patch("/restaurant/comment", { commentId, text });
+         await axios.patch("/restaurant/comment", {
+            commentId,
+            text: textEdit,
+         });
          const response = await fetchMenusById(menuId);
          setComments(response.data.Comments);
+         setIsEdit(false);
+         console.log(response.data);
       } catch (err) {
          console.log(err);
       }
@@ -44,27 +50,11 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
          console.log(commentId);
          await axios.delete("/restaurant/comment/" + commentId);
          const response = await fetchMenusById(menuId);
-         console.log(response.data.Comments);
          setComments(response.data.Comments);
       } catch (err) {
          console.log(err);
       }
    };
-
-   const CommentBtn = styled("div")(() => ({
-      display: "flex",
-      flex: 1,
-      position: "relative",
-      borderRadius: "50px",
-      backgroundColor: "#efefef",
-      color: "#888",
-      marginLeft: 0,
-      width: "80%",
-      padding: "0.8em 1em",
-      "&:hover": {
-         cursor: "text",
-      },
-   }));
 
    return (
       <>
@@ -93,74 +83,70 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
                            }}
                         >
                            <DropdownCommentEdit
-                              isEdit={isEdit}
                               setIsEdit={setIsEdit}
+                              handleDelete={handleDelete}
                            />
                         </Box>
                      )}
                   </Box>
                </Box>
                {isEdit ? (
-                  <Box sx={{ position: "relative" }}>
+                  <Box
+                     component="form"
+                     onSubmit={handleEdit}
+                     sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 2,
+                     }}
+                  >
+                     <TextField
+                        fullWidth
+                        multiline={true}
+                        maxRows={4}
+                        autoFocus
+                        value={textEdit}
+                        onChange={(e) => setTextEdit(e.target.value)}
+                     />
                      <Box
-                        component="form"
-                        onSubmit={handleEdit}
                         sx={{
                            display: "flex",
-                           flexDirection: "column",
-                           gap: 2,
+                           justifyContent: "end",
+                           gap: 1,
                         }}
                      >
-                        <TextField
-                           fullWidth
-                           multiline={true}
-                           maxRows={4}
-                           autoFocus
-                           onChange={(e) => setTextEdit(e.target.value)}
-                        />
-                        <Box
+                        <Button
+                           variant="contained"
+                           color="secondary"
                            sx={{
-                              display: "flex",
-                              justifyContent: "end",
-                              gap: 1,
+                              textTransform: "none",
+                              borderRadius: "30px",
+                              backgroundColor: "#ccc",
+                              color: "black",
+                              fontWeight: "bold",
+                           }}
+                           onClick={() => {
+                              setIsEdit(false);
+                              setTextEdit("");
                            }}
                         >
-                           <Button
-                              variant="contained"
-                              color="secondary"
-                              sx={{
-                                 textTransform: "none",
-                                 borderRadius: "30px",
-                                 backgroundColor: "#ccc",
-                                 color: "black",
-                                 fontWeight: "bold",
-                              }}
-                              onClick={() => {
-                                 setIsEdit(false);
-                                 setTextEdit("");
-                              }}
-                           >
-                              Cancel
-                           </Button>
-                           <Button
-                              type="submit"
-                              variant="contained"
-                              {...(text === ""
-                                 ? { color: "secondary", disabled: true }
-                                 : { color: "error" })}
-                              sx={{
-                                 textTransform: "none",
-                                 borderRadius: "30px",
-                                 fontWeight: "bold",
-                              }}
-                           >
-                              Done
-                           </Button>
-                        </Box>
+                           Cancel
+                        </Button>
+                        <Button
+                           type="submit"
+                           variant="contained"
+                           {...(textEdit === text
+                              ? { color: "secondary", disabled: true }
+                              : { color: "error" })}
+                           sx={{
+                              textTransform: "none",
+                              borderRadius: "30px",
+                              fontWeight: "bold",
+                           }}
+                        >
+                           Done
+                        </Button>
                      </Box>
-                     {/* <CloseIcon
-                        sx={{ position: "absolute", top: 16, right: 10 }}
-                     /> */}
                   </Box>
                ) : (
                   <Typography>{text}</Typography>

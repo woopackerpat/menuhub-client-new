@@ -18,7 +18,6 @@ function MenuCardContainer({ menuId }) {
    useEffect(() => {
       const run = async () => {
          const res = await fetchMenusById(menuId);
-         console.log(res.data);
          const menus = res.data.Menu;
          setMenus(menus);
          const comments = res.data.Comments;
@@ -57,6 +56,11 @@ function MenuCardContainer({ menuId }) {
                   style={{
                      borderRadius: "16px",
                      width: "100%",
+                     height: "100%",
+                     objectFit: "cover",
+                     display: "flex",
+                     alignItems: "center",
+                     justifyContent: "center",
                   }}
                   alt=""
                />
