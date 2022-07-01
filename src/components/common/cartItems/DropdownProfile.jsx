@@ -16,11 +16,13 @@ import SearchBar from "../SearchBar";
 import { usePin } from "../../../contexts/PinContextProvider";
 import ModalCreatePin from "./ModalCreatePin";
 import BoxBoard from "./BoxBoard";
+import { LoadingButton } from "@mui/lab";
 
-function DropdownProfile() {
+function DropdownProfile({ id }) {
    const { pin } = usePin();
    const [showDrop, setShowDrop] = useState(null);
    const [showProfileBtn, setShowProfileBtn] = useState(false);
+   const [loading, setLoading] = useState(false);
 
    //Modal Create
    const [open, setOpen] = useState(false);
@@ -36,6 +38,9 @@ function DropdownProfile() {
       setShowDrop(null);
    };
 
+   const handleClickSave = () => {
+      setLoading(true);
+   };
    // ********************************
 
    const dropId = "drop-profile";
@@ -92,14 +97,15 @@ function DropdownProfile() {
                <Typography>Profile</Typography>
             </Box>
             {showProfileBtn && (
-               <Button
+               <LoadingButton
+                  loading={loading}
+                  onClick={handleClickSave}
                   variant="contained"
-                  onClick={(e) => e.stopPropagation()}
                   color="error"
                   sx={{ textTransform: "none", fontWeight: "bold" }}
                >
                   Save
-               </Button>
+               </LoadingButton>
             )}
          </MenuItem>
          <MenuItem disabled>
@@ -107,7 +113,13 @@ function DropdownProfile() {
          </MenuItem>
          <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
             {pin?.map((pins) => (
-               <BoxBoard key={pins.id} name={pins.name} />
+               <BoxBoard
+                  Restaurants={pins.Restaurants}
+                  key={pins.id}
+                  name={pins.name}
+                  id={pins.id}
+                  restaurantId={id}
+               />
             ))}
          </Box>
 

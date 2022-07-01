@@ -83,6 +83,7 @@ function CardAddMenus({
 
   return (
     <>
+      
       <Paper elevation={2} sx={{ width: "880px" }}>
         <Box
           sx={{
@@ -134,6 +135,7 @@ function CardAddMenus({
                 setImage={setImage}
                 cloudUrl={cloudUrl}
                 setCloudUrl={setCloudUrl}
+                isEdit={isEdit}
               />
             </Grid>
             {/* ปรับช่องขวา */}
