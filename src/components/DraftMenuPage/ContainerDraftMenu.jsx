@@ -2,7 +2,7 @@ import { Box, CssBaseline, Typography } from "@mui/material";
 import FooterDraft from "./FooterDraft";
 import MainContentDraftMenu from "./MainContentDraftMenu";
 
-function ContainerDraftMenuPage() {
+function ContainerDraftMenuPage({restaurantId}) {
    return (
       <>
          <CssBaseline>
@@ -24,7 +24,7 @@ function ContainerDraftMenuPage() {
                </Typography>
 
                {/* ================= Input Category ===================== */}
-               <MainContentDraftMenu />
+               <MainContentDraftMenu restaurantId = {restaurantId}/>
 
                {/*=================== Draft Pic ========================= */}
                <FooterDraft />

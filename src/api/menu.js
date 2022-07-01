@@ -19,6 +19,9 @@ const updateRestaurant = (restaurantId, details) =>
 
 const getMyDraft = () => axios.get("/restaurant/mydraft");
 
+const getRestaurantDetails = (restaurantId) =>
+  axios.get(`/restaurant/get/${restaurantId}`);
+
 export {
   createRestaurant,
   getAllMenusOfRestaurant,
@@ -26,4 +29,5 @@ export {
   reorderMenu,
   getMyDraft,
   updateRestaurant,
+  getRestaurantDetails,
 };
