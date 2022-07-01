@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../config/axios";
 
 const createRestaurant = (restaurant) =>
   axios.post("/restaurant/new", restaurant);
@@ -9,4 +9,8 @@ const getAllMenusOfRestaurant = (restaurantId) =>
 const createMenu = (restaurantId, menu) =>
   axios.post(`/restaurant/menu/${restaurantId}`, menu);
 
-export { createRestaurant, getAllMenusOfRestaurant, createMenu };
+const reorderMenu = (restaurantId, newOrder) =>{
+  console.log({restaurantId, newOrder})
+  return axios.patch("/restaurant/menuorder", { restaurantId, newOrder });}
+
+export { createRestaurant, getAllMenusOfRestaurant, createMenu, reorderMenu };
