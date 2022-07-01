@@ -16,6 +16,9 @@ function MainContentDraftMenu() {
   const [checked, setChecked] = useState(true);
   const [lineId, setLineId] = useState("");
   const [phone, setPhone] = useState("");
+  const [website, setWebsite] = useState("");
+
+
 
   const { submitMyLocation } = useMap();
 
@@ -46,6 +49,7 @@ function MainContentDraftMenu() {
       lineId,
       number: phone,
       categoryArr,
+      websiteUrl: website,
     });
     const newRes = res.data;
     const { restaurantIdForMenus, restaurantNameForMenus } = newRes;
@@ -55,6 +59,7 @@ function MainContentDraftMenu() {
     setChecked(true);
     setLineId("");
     setPhone("");
+    setWebsite("");
     navigate(`/draftMenu/${restaurantIdForMenus}`);
   };
 
@@ -107,6 +112,16 @@ function MainContentDraftMenu() {
           value={phone}
         />
       </Box>
+      <Box sx={{ "& .MuiTextField-root": { m: 1, width: "50ch" } }}>
+        <TextField
+          error={error?.website && true}
+          id="outlined-required"
+          label="Website"
+          onChange={(e) => setWebsite(e.target.value)}
+          placeholder="Website"
+          value={website}
+        />
+      </Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
         <ControlledCheckbox handleCheck={handleCheck} checked={checked} />
         <Typography>I am the restaurant owner</Typography>
@@ -125,7 +140,7 @@ function MainContentDraftMenu() {
         <Button
           variant="contained"
           color="error"
-          sx={{ fontWeight: "bold" }}
+          sx={{ fontWeight: "bold", lineHeight: "40px", fontSize: "18px" }}
           onClick={() => handleCreateRestaurant()}
         >
           Create
@@ -140,7 +155,7 @@ function MainContentDraftMenu() {
           sx={{
             display: "absolute",
             left: 450,
-            bottom: 460,
+            bottom: 550,
             color: "#e60023",
           }}
         >
