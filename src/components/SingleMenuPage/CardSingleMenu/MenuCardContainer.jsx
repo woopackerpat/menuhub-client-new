@@ -7,7 +7,6 @@ import DetailContainer from "./CardDetailContainer/DetailContainer";
 function MenuCardContainer({ menuId }) {
    const [menus, setMenus] = useState([]);
    const [comments, setComments] = useState([]);
-
    const fetchMenusById = async (id) => {
       try {
          return await axios.get("restaurant/menu/" + id);
@@ -30,24 +29,29 @@ function MenuCardContainer({ menuId }) {
       }
    }, []);
 
-   const { imageUrl, title, id, description } = menus;
+   const { imageUrl, title, id, description, restaurantId } = menus;
 
    return (
       <Box
          sx={{
-            display: "flex",
+            display: {
+               xs: { flexWrap: "wrap" },
+               lg: "flex",
+               xl: "flex",
+            },
             gap: 3,
             width: "60%",
             mx: "auto",
-            p: 3,
             boxShadow: "1px 1px 10px 8px #efefef",
             borderRadius: "16px",
+            p: 3,
             mt: 10,
          }}
       >
          <Box
             sx={{
-               width: "50%",
+               display: { xs: { width: "50%" }, md: { width: "50%" } },
+               width: { xl: "100%", lg: "100%", md: "100%" },
             }}
          >
             <Box sx={{ height: "100%" }}>
@@ -68,7 +72,9 @@ function MenuCardContainer({ menuId }) {
          </Box>
          <Box
             sx={{
-               width: "50%",
+               display: { xs: { width: "50%" } },
+               width: { xl: "100%", lg: "100%", md: "100%" },
+               height: "100%",
                borderRadius: "0 16px 16px 0",
                backgroundColor: "white",
             }}
@@ -81,6 +87,7 @@ function MenuCardContainer({ menuId }) {
                setComments={setComments}
                fetchMenusById={fetchMenusById}
                menuId={menuId}
+               restaurantId={restaurantId}
             />
          </Box>
       </Box>

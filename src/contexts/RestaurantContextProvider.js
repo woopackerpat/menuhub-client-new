@@ -22,6 +22,7 @@ function RestaurantContextProvider({ children }) {
    const createLike = async (restaurantId) => {
       try {
          const res = await axios.put("/restaurant/like/" + restaurantId);
+         console.log(res.data);
          fetchRestaurant();
       } catch (err) {
          console.log(err);
