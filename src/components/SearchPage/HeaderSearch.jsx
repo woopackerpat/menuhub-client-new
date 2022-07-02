@@ -81,7 +81,7 @@ function HeaderSearchPage(props) {
                            },
                         }}
                         onClick={() => {
-                           inputSearch(suggestion)
+                           inputSearch(suggestion.name)
                            // navigate(`../search?search=${suggestion.name}`)
                         }}
                      >

@@ -38,8 +38,12 @@ function SearchContextProvider({ children }) {
     }
 
     const inputSearch = (input) => {
-        setSearch(input.name)
-        naviagate(`../search?search=${input.name}`)
+        if (input.length > 0) {
+            setSearch(input.name)
+            naviagate(`../search?search=${input.name}`)
+        }
+        setSearch(input)
+        naviagate(`../search?search=${input}`)
     }
 
     return (
