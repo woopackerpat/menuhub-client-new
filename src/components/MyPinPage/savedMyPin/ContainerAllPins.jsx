@@ -34,7 +34,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          <ItemCardSaved src={img1} size='100%' />
+          {img1 && <ItemCardSaved src={img1} size='100%' />}
         </Box>
         <Box
           sx={{
@@ -49,7 +49,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          <ItemCardSaved src={img2} size='100%' />
+          {img2 && <ItemCardSaved src={img2} size='100%' />}
         </Box>
         <Box
           sx={{
@@ -64,7 +64,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          <ItemCardSaved src={img3} size='100%' />
+          {img3 && <ItemCardSaved src={img3} size='100%' />}
         </Box>
         <Box
           sx={{
@@ -78,7 +78,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          <ItemCardSaved src={img4} size='100%' />
+          {img4 && <ItemCardSaved src={img4} size='100%' />}
         </Box>
       </Box>
       <Typography variant='h6' fontWeight='bold'>
