@@ -1,14 +1,19 @@
 function ItemCardSaved({ src, size }) {
-   return (
-      <>
-         <img
-            style={{ borderRadius: "16px", objectFit: "cover" }}
-            alt=""
-            src={src}
-            width={size}
-            height={size}
-         />
-      </>
-   );
+  return (
+    <>
+      {(src?.length !== 0 || src !== undefined) && (
+        <img
+          src={src}
+          alt=''
+          style={{
+            objectFit: "cover",
+            width: size,
+            height: size,
+            borderRadius: "16px",
+          }}
+        />
+      )}
+    </>
+  )
 }
-export default ItemCardSaved;
+export default ItemCardSaved
