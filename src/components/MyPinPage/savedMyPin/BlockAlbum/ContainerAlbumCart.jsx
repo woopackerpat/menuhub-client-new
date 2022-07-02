@@ -1,16 +1,25 @@
 import { Box, Container, Typography } from "@mui/material"
 import { useNavigate } from "react-router-dom"
+import { usePin } from "../../../../contexts/PinContextProvider"
 
 function ContainerAlbumCart({ name, id, Restaurants }) {
-  //   console.log("containerAlbumCart    ", Restaurants)
+  const { fetchPinById } = usePin()
   const navigate = useNavigate()
 
-  const getImage = Restaurants.map(el => el.Menus.map(item => item.imageUrl))
-  // console.log("getImage     ", getImage)
+  const getImage = Restaurants?.slice(0, 3)
+  const img1 = getImage[0]?.Menus[0]?.imageUrl
+  const img2 = getImage[1]?.Menus[0]?.imageUrl
+  const img3 = getImage[2]?.Menus[0]?.imageUrl
+
+  const handleClickPin = async () => {
+    await fetchPinById(id)
+    navigate(`/myPin/${id}`)
+  }
+
   return (
     <Box
       sx={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
-      onClick={() => navigate(`/myPin/${id}`)}
+      onClick={handleClickPin}
     >
       <Box sx={{ display: "flex", width: "270px", gap: "1px" }}>
         <Box
@@ -21,9 +30,9 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
             borderRadius: "16px 0 0 16px",
           }}
         >
-          {getImage[0] && (
+          {img1 && (
             <img
-              src={getImage[0]}
+              src={img1}
               alt=''
               style={{
                 objectFit: "cover",
@@ -51,9 +60,9 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
               borderRadius: "0 16px 0 0",
             }}
           >
-            {getImage[1] && (
+            {img2 && (
               <img
-                src={getImage[1]}
+                src={img2}
                 alt=''
                 style={{
                   objectFit: "cover",
@@ -71,9 +80,9 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
               borderRadius: "0 0 16px 0",
             }}
           >
-            {getImage[2] && (
+            {img3 && (
               <img
-                src={getImage[2]}
+                src={img3}
                 alt=''
                 style={{
                   objectFit: "cover",

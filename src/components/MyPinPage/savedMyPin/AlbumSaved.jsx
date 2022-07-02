@@ -18,7 +18,7 @@ function AlbumSaved() {
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
-          gap: 3,
+          gap: 3.4,
         }}
       >
         <ContainerAllPins pin={pin} />

@@ -1,7 +1,7 @@
 function ItemCardSaved({ src, size }) {
   return (
     <>
-      {src?.length !== 0 && (
+      {(src?.length !== 0 || src !== undefined) && (
         <img
           src={src}
           alt=''

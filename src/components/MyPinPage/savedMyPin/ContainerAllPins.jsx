@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom"
 import ItemCardSaved from "./ItemCardSaved"
 
 function ContainerAllPins({ pin }) {
-  const getImage = pin?.map(el =>
-    el.Restaurants?.map(el => el.Menus?.map(el => el.imageUrl))
-  )
-  console.log(pin)
+  const getImage = pin?.slice(0, 4)
+
+  const img1 = getImage[0]?.Restaurants[0]?.Menus[0]?.imageUrl
+  const img2 = getImage[1]?.Restaurants[0]?.Menus[0]?.imageUrl
+  const img3 = getImage[2]?.Restaurants[0]?.Menus[0]?.imageUrl
+  const img4 = getImage[3]?.Restaurants[0]?.Menus[0]?.imageUrl
 
   const navigate = useNavigate()
   return (
@@ -32,7 +34,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          <ItemCardSaved src={getImage[0]} size='100%' />
+          <ItemCardSaved src={img1} size='100%' />
         </Box>
         <Box
           sx={{
@@ -47,7 +49,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          <ItemCardSaved src={getImage[1]} size='100%' />
+          <ItemCardSaved src={img2} size='100%' />
         </Box>
         <Box
           sx={{
@@ -62,7 +64,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          <ItemCardSaved src={getImage[2]} size='100%' />
+          <ItemCardSaved src={img3} size='100%' />
         </Box>
         <Box
           sx={{
@@ -76,7 +78,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          <ItemCardSaved src={getImage[3]} size='100%' />
+          <ItemCardSaved src={img4} size='100%' />
         </Box>
       </Box>
       <Typography variant='h6' fontWeight='bold'>
