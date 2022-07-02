@@ -4,40 +4,48 @@ import { createContext, useContext, useEffect, useState } from "react";
 const RestaurantContext = createContext();
 
 function RestaurantContextProvider({ children }) {
-   const [restaurant, setRestaurant] = useState([]);
 
-   const fetchRestaurant = async () => {
-      try {
-         const res = await axios.get("/restaurant/all");
-         setRestaurant(res.data.allRestaurant);
-      } catch (err) {
-         console.log(err);
-      }
-   };
+  const [restaurant, setRestaurant] = useState([]);
 
-   useEffect(() => {
+  const [isEditRestaurant, setIsEditRestaurant] = useState(false);
+
+  const fetchRestaurant = async () => {
+    try {
+      const res = await axios.get("/restaurant/all");
+      setRestaurant(res.data.allRestaurant);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchRestaurant();
+  }, []);
+
+  const createLike = async (restaurantId) => {
+    try {
+      const res = await axios.put("/restaurant/like/" + restaurantId);
       fetchRestaurant();
-   }, []);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-   const createLike = async (restaurantId) => {
-      try {
-         const res = await axios.put("/restaurant/like/" + restaurantId);
-         fetchRestaurant();
-      } catch (err) {
-         console.log(err);
-      }
-   };
 
-   return (
-      <RestaurantContext.Provider value={{ restaurant, createLike }}>
-         {children}
-      </RestaurantContext.Provider>
-   );
+
+  return (
+    <RestaurantContext.Provider
+      value={{ restaurant, createLike, isEditRestaurant, setIsEditRestaurant }}
+    >
+      {children}
+    </RestaurantContext.Provider>
+  );
+
 }
 
 const useRestaurant = () => {
-   const ctx = useContext(RestaurantContext);
-   return ctx;
+  const ctx = useContext(RestaurantContext);
+  return ctx;
 };
 
 export default RestaurantContextProvider;

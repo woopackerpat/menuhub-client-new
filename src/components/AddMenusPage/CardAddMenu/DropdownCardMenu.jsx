@@ -15,21 +15,31 @@ function DropdownCardMenu({ handleDelete, menuId, handleInsert, idx }) {
     setShowDrop(null);
   };
 
+  const handleClickDelete = () => {
+    handleDelete(menuId);
+    handleMenuClose();
+  };
+
+  const handleClickInsert = () => {
+    handleInsert(idx);
+    handleMenuClose();
+  };
+
   // ********************************
 
   const dropId = "drop-profile";
   const renderSettingDropdown = (
     <Menu
       anchorEl={showDrop}
-      id={dropId}
+      // id={dropId}
       keepMounted
       open={isSettingDrop}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={() => handleDelete(menuId)}>
+      <MenuItem onClick={() => handleClickDelete()}>
         <Typography>Delete</Typography>
       </MenuItem>
-      <MenuItem onClick={() => handleInsert(idx)}>
+      <MenuItem onClick={() => handleClickInsert()}>
         <Typography>Insert</Typography>
       </MenuItem>
     </Menu>

@@ -7,17 +7,19 @@ import {
   getAllMenusOfRestaurant,
   updateRestaurant,
 } from "../../api/menu";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../config/axios";
 import { reorderMenu } from "../../api/menu";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function ContainerAddMenusPage() {
   const [input, setInput] = useState([{}]);
 
   const [order, setOrder] = useState([]);
-  console.log(input);
 
   const { restaurantId } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const run = async () => {
@@ -103,6 +105,24 @@ function ContainerAddMenusPage() {
     await updateRestaurant(id, details);
   };
 
+  const handleOnDragEnd = async (result) => {
+    const items = [...input];
+    const [item] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, item);
+    setInput(items)
+    const newDragObj = [...items];
+    const newDragOrder = newDragObj.map((el, idx) => ({
+      id: el.id,
+      orderNumber: idx + 1,
+    }));
+    await reorderMenu(restaurantId, newDragOrder);
+    const res = await getAllMenusOfRestaurant(restaurantId);
+    const menus = res.data.Menus;
+    setInput(menus);
+  };
+
+
+
   return (
     <Box sx={{ pt: "20px" }}>
       <Container
@@ -134,47 +154,72 @@ function ContainerAddMenusPage() {
                 fontWeight: "normal",
                 textTransform: "none",
                 fontSize: "18px",
+                ml: "10px",
               }}
-              onClick={() => handlePublish(restaurantId, { isDraft: true })}
+              onClick={() =>
+                handlePublish(restaurantId, { isDraft: "unpublish" })
+              }
             >
               Publish
             </Button>
           </Box>
         </Container>
       </Container>
-      <Container
-        fixed
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 5,
-          alignItems: "center",
-        }}
-      >
-        {input.map((menuDetails, idx) => (
-          <CardContainer
-            key={menuDetails.id}
-            idx={idx}
-            handleSave={handleSave}
-            handleUpdate={handleUpdate}
-            handleDelete={handleDelete}
-            handleInsert={handleInsert}
-            menuDetails={menuDetails}
-            restaurantName={
-              Object.keys(menuDetails).length && input[0].Restaurant.name
-            }
-          />
-        ))}
-
-        <Button
-          variant="contained"
-          color="error"
-          sx={{ borderRadius: "50px" }}
-          onClick={handleAdd}
-        >
-          <AddIcon fontSize="large" sx={{ fontWeight: "bold" }} />
-        </Button>
-      </Container>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="addMenus">
+          {(provided, snapshot) => (
+            <Container
+              fixed
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 5,
+                alignItems: "center",
+              }}
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {input.map((menuDetails, idx) => (
+                <Draggable
+                  key={menuDetails.id}
+                  draggableId={"" + menuDetails.id}
+                  index={idx}
+                >
+                  {(provided) => (
+                    <span
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      <CardContainer
+                        idx={idx}
+                        handleSave={handleSave}
+                        handleUpdate={handleUpdate}
+                        handleDelete={handleDelete}
+                        handleInsert={handleInsert}
+                        menuDetails={menuDetails}
+                        restaurantName={
+                          Object.keys(menuDetails).length &&
+                          input[0].Restaurant.name
+                        }
+                      />
+                    </span>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+              <Button
+                variant="contained"
+                color="error"
+                sx={{ borderRadius: "50px" }}
+                onClick={handleAdd}
+              >
+                <AddIcon fontSize="large" sx={{ fontWeight: "bold" }} />
+              </Button>
+            </Container>
+          )}
+        </Droppable>
+      </DragDropContext>
     </Box>
   );
 }
