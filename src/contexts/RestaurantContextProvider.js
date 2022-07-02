@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const RestaurantContext = createContext();
 
 function RestaurantContextProvider({ children }) {
+
   const [restaurant, setRestaurant] = useState([]);
 
   const [isEditRestaurant, setIsEditRestaurant] = useState(false);
@@ -24,7 +25,8 @@ function RestaurantContextProvider({ children }) {
   const createLike = async (restaurantId) => {
     try {
       const res = await axios.put("/restaurant/like/" + restaurantId);
-      fetchRestaurant();    } catch (err) {
+      fetchRestaurant();
+    } catch (err) {
       console.log(err);
     }
   };
@@ -39,6 +41,7 @@ function RestaurantContextProvider({ children }) {
     </RestaurantContext.Provider>
   );
 
+}
 
 const useRestaurant = () => {
   const ctx = useContext(RestaurantContext);
