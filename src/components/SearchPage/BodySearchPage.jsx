@@ -38,8 +38,7 @@ function BodySearchPage() {
          <CssBaseline>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                {refId ? (<HeaderSearchPage refId={`${refId}`} />) : (<div></div>)}
-
-               {/* <MainContentSearchPage /> */}
+               <MainContentSearchPage />
             </Box>
          </CssBaseline>
       </>
