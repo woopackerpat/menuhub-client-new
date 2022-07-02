@@ -97,6 +97,9 @@ function MainContentDraftMenu({ restaurantId }) {
       googleId: location.googleId,
       categoryArr,
       isRequest: checked,
+      lineId,
+      number: phone,
+      websiteUrl: website,
     });
     navigate("/myPin/created-pin");
     setName("");
