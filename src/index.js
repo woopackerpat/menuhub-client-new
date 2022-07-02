@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import AuthContextProvider from "./contexts/AuthContextProvider";
 import PinContextProvider from "./contexts/PinContextProvider";
 import RestaurantContextProvider from "./contexts/RestaurantContextProvider";
+import SearchContextProvider from "./contexts/SearchContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +15,9 @@ root.render(
       <AuthContextProvider>
          <PinContextProvider>
             <RestaurantContextProvider>
-               <App />
+               <SearchContextProvider>
+                  <App />
+               </SearchContextProvider>
             </RestaurantContextProvider>
          </PinContextProvider>
       </AuthContextProvider>

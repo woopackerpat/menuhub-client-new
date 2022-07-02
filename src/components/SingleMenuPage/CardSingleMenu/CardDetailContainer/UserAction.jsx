@@ -6,10 +6,18 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Box, Button, IconButton } from "@mui/material";
 import DropdownProfile from "../../../common/cartItems/DropdownProfile";
+import { useRestaurant } from "../../../../contexts/RestaurantContextProvider";
 
-function UserActionNavbar() {
+function UserActionNavbar({ restaurantId }) {
    // like state for testing
    const [isLike, setIsLike] = useState(false);
+   const { createLike, restaurant } = useRestaurant();
+   console.log(restaurant);
+   const handleClickLike = async () => {
+      await createLike(restaurantId);
+      setIsLike((prev) => !prev);
+      console.log(restaurantId);
+   };
 
    return (
       <Box
@@ -46,18 +54,20 @@ function UserActionNavbar() {
                sx={{
                   color: "black",
                }}
-               onClick={() => setIsLike((prev) => !prev)}
+               onClick={handleClickLike}
             >
-               {isLike ? (
+               {!isLike ? (
                   <FavoriteIcon fontSize="large" color="error" />
                ) : (
                   <FavoriteBorderIcon fontSize="large" />
                )}
             </IconButton>
          </Box>
-         <Box sx={{ display: "flex" }}>
+         <Box sx={{ display: "flex", gap: 1 }}>
             <DropdownProfile color="dark" />
-            <Button variant="contained">Save</Button>
+            <Button variant="contained" color="error">
+               Save
+            </Button>
          </Box>
       </Box>
    );

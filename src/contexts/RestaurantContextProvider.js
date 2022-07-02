@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const RestaurantContext = createContext();
 
 function RestaurantContextProvider({ children }) {
+
   const [restaurant, setRestaurant] = useState([]);
 
   const [isEditRestaurant, setIsEditRestaurant] = useState(false);
@@ -30,6 +31,8 @@ function RestaurantContextProvider({ children }) {
     }
   };
 
+
+
   return (
     <RestaurantContext.Provider
       value={{ restaurant, createLike, isEditRestaurant, setIsEditRestaurant }}
@@ -37,6 +40,7 @@ function RestaurantContextProvider({ children }) {
       {children}
     </RestaurantContext.Provider>
   );
+
 }
 
 const useRestaurant = () => {

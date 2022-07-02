@@ -11,6 +11,7 @@ function DetailContainer({
    setComments,
    comments,
    menuId,
+   restaurantId,
 }) {
    return (
       <Box
@@ -21,7 +22,7 @@ function DetailContainer({
             p: 3,
          }}
       >
-         <UserAction />
+         <UserAction restaurantId={restaurantId} />
          <MenuInfo description={description} title={title} />
          <DropdownComment
             fetchMenusById={fetchMenusById}
