@@ -15,12 +15,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import axios from "../../../../../config/axios";
 import { useState } from "react";
 import DropdownCommentEdit from "./DropdownCommentEdit";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
+   dayjs.extend(relativeTime);
    const {
       User: { firstName, lastName, id, profilePicUrl },
       id: commentId,
       text,
+      createdAt,
    } = comment;
 
    const [textEdit, setTextEdit] = useState(text || "");
@@ -58,9 +62,29 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
 
    return (
       <>
-         <Box sx={{ position: "relative" }}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 5 }}>
-               <Box sx={{ display: "flex", alignItems: "center" }}>
+         <Box
+            sx={{
+               display: "flex",
+               alignItems: "center",
+               gap: 5,
+            }}
+         >
+            <Box
+               sx={{
+                  display: "flex",
+                  justifyContent: "centers",
+                  gap: 4,
+                  minWidth: "100px",
+               }}
+            >
+               <Box
+                  sx={{
+                     display: "flex",
+                     alignItems: "center",
+                     justifyContent: "center",
+                     gap: 2,
+                  }}
+               >
                   <Link href={`/myPin`}>
                      <IconButton size="small">
                         <Avatar src={profilePicUrl} />
@@ -82,76 +106,87 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
                               top: 8,
                            }}
                         >
-                           <DropdownCommentEdit
-                              setIsEdit={setIsEdit}
-                              handleDelete={handleDelete}
-                           />
+                           <Box
+                              sx={{
+                                 display: "flex",
+                                 gap: 1,
+                                 alignItems: "center",
+                                 minWidth: "130px",
+                              }}
+                           >
+                              <Typography variant="caption" gutterBottom>
+                                 {dayjs(createdAt).fromNow()}
+                              </Typography>
+                              <DropdownCommentEdit
+                                 setIsEdit={setIsEdit}
+                                 handleDelete={handleDelete}
+                              />
+                           </Box>
                         </Box>
                      )}
                   </Box>
                </Box>
-               {isEdit ? (
+            </Box>
+            {isEdit ? (
+               <Box
+                  component="form"
+                  onSubmit={handleEdit}
+                  sx={{
+                     display: "flex",
+                     flexDirection: "column",
+                     gap: 2,
+                  }}
+               >
+                  <TextField
+                     fullWidth
+                     multiline={true}
+                     maxRows={4}
+                     value={textEdit}
+                     onChange={(e) => setTextEdit(e.target.value)}
+                  />
                   <Box
-                     component="form"
-                     onSubmit={handleEdit}
                      sx={{
                         display: "flex",
-                        flexDirection: "column",
-                        gap: 2,
+                        justifyContent: "end",
+                        gap: 1,
                      }}
                   >
-                     <TextField
-                        fullWidth
-                        multiline={true}
-                        maxRows={4}
-                        autoFocus
-                        value={textEdit}
-                        onChange={(e) => setTextEdit(e.target.value)}
-                     />
-                     <Box
+                     <Button
+                        variant="contained"
+                        color="secondary"
                         sx={{
-                           display: "flex",
-                           justifyContent: "end",
-                           gap: 1,
+                           textTransform: "none",
+                           borderRadius: "30px",
+                           backgroundColor: "#ccc",
+                           color: "black",
+                           fontWeight: "bold",
+                        }}
+                        onClick={() => {
+                           setIsEdit(false);
+                           setTextEdit("");
                         }}
                      >
-                        <Button
-                           variant="contained"
-                           color="secondary"
-                           sx={{
-                              textTransform: "none",
-                              borderRadius: "30px",
-                              backgroundColor: "#ccc",
-                              color: "black",
-                              fontWeight: "bold",
-                           }}
-                           onClick={() => {
-                              setIsEdit(false);
-                              setTextEdit("");
-                           }}
-                        >
-                           Cancel
-                        </Button>
-                        <Button
-                           type="submit"
-                           variant="contained"
-                           {...(textEdit === text
-                              ? { color: "secondary", disabled: true }
-                              : { color: "error" })}
-                           sx={{
-                              textTransform: "none",
-                              borderRadius: "30px",
-                              fontWeight: "bold",
-                           }}
-                        >
-                           Done
-                        </Button>
-                     </Box>
+                        Cancel
+                     </Button>
+                     <Button
+                        type="submit"
+                        variant="contained"
+                        {...(textEdit === text
+                           ? { color: "secondary", disabled: true }
+                           : { color: "error" })}
+                        sx={{
+                           textTransform: "none",
+                           borderRadius: "30px",
+                           fontWeight: "bold",
+                        }}
+                     >
+                        Done
+                     </Button>
                   </Box>
-               ) : (
-                  <Typography>{text}</Typography>
-               )}
-            </Box>
+               </Box>
+            ) : (
+               <Typography sx={{ display: "" }}>{text}</Typography>
+            )}
          </Box>
       </>
    );

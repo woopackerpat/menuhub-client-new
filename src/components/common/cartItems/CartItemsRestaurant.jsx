@@ -33,10 +33,7 @@ function CartItemsRestaurant({ Menus, items }) {
          onMouseOut={handleMouseOut}
          className="hvr-grow"
       >
-         <Box
-            // sx={{ "&:hover": { transfor }}
-            onClick={() => navigate(`/allMenus/${id}`)}
-         >
+         <Box onClick={() => navigate(`/allMenus/${id}`)}>
             <img
                src={ImageUrl}
                alt="img"
