@@ -2,6 +2,7 @@ import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSearch } from "../../contexts/SearchContextProvider";
 
 function HeaderSearchPage(props) {
    const isMobile = useMediaQuery("(max-width: 420px)");
@@ -10,16 +11,18 @@ function HeaderSearchPage(props) {
    const isDesktop = useMediaQuery("(max-width: 1300px)");
    const [list, setList] = useState([]);
    const [listRestaurant, setListRestaurant] = useState([])
-   const [loading, setLoading] = useState(0)
+
+   const {inputSearch} = useSearch()
+
    const refId = props.refId
    const location = useLocation()
+   const navigate = useNavigate()
 
    useEffect(() => {
       const fetchSuggestions = async (refId) => {
          try {
             const res = await axios.post('/restaurant/suggestions', { refId: refId })
             setListRestaurant(res.data)
-            setLoading(1)
          } catch (err) {
             console.log('fetchSuggestions error')
          }
@@ -30,18 +33,20 @@ function HeaderSearchPage(props) {
    }, [refId, location])
 
    useEffect(() => {
-      if (isMobile) {
-         setList(listRestaurant.slice(0, 0));
-      } else if (isSurface) {
-         setList(listRestaurant.slice(0, 2));
-      } else if (isIpad) {
-         setList(listRestaurant.slice(0, 4));
-      } else if (isDesktop) {
-         setList(listRestaurant.slice(0, 7));
-      } else {
-         setList(listRestaurant.slice(0, 9));
+      if (listRestaurant.length != 0) {
+         if (isMobile) {
+            setList(listRestaurant.slice(0, 0));
+         } else if (isSurface) {
+            setList(listRestaurant.slice(0, 2));
+         } else if (isIpad) {
+            setList(listRestaurant.slice(0, 4));
+         } else if (isDesktop) {
+            setList(listRestaurant.slice(0, 7));
+         } else {
+            setList(listRestaurant.slice(0, 9));
+         }
       }
-   }, [loading, location]);
+   }, [listRestaurant]);
 
    return (
       <div>
@@ -64,22 +69,24 @@ function HeaderSearchPage(props) {
             >
                {list ? (
                   list?.map((suggestion) => (
-                     <Link to={`/search?search=${suggestion.name}`}>
-                        <Button
-                           key={suggestion.id}
-                           sx={{
-                              padding: 1,
-                              backgroundColor: "#767676",
-                              color: "white",
-                              "&:hover": {
-                                 color: "#000000",
-                                 backgroundColor: "#efefef",
-                              },
-                           }}
-                        >
-                           <Typography>{suggestion.name}</Typography>
-                        </Button>
-                     </Link>
+                     <Button
+                        key={suggestion.id}
+                        sx={{
+                           padding: 1,
+                           backgroundColor: "#767676",
+                           color: "white",
+                           "&:hover": {
+                              color: "#000000",
+                              backgroundColor: "#efefef",
+                           },
+                        }}
+                        onClick={() => {
+                           inputSearch(suggestion)
+                           // navigate(`../search?search=${suggestion.name}`)
+                        }}
+                     >
+                        <Typography>{suggestion.name}</Typography>
+                     </Button>
                   ))
                ) : (<div></div>)}
 
