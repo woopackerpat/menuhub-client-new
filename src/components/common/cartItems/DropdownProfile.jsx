@@ -18,7 +18,7 @@ import ModalCreatePin from "./ModalCreatePin";
 import BoxBoard from "./BoxBoard";
 import { LoadingButton } from "@mui/lab";
 
-function DropdownProfile({ id }) {
+function DropdownProfile({ id, color }) {
    const { pin } = usePin();
    const [showDrop, setShowDrop] = useState(null);
    const [showProfileBtn, setShowProfileBtn] = useState(false);
@@ -162,10 +162,13 @@ function DropdownProfile({ id }) {
             aria-controls={dropId}
             onClick={handleProfileDropdown}
          >
-            <Typography variant="subtitle1" sx={{ color: "white" }}>
+            <Typography
+               variant="subtitle1"
+               sx={{ color: color ? color : "white" }}
+            >
                profile
             </Typography>
-            <KeyboardArrowDownIcon sx={{ color: "white" }} />
+            <KeyboardArrowDownIcon sx={{ color: color ? color : "white" }} />
          </IconButton>
          <ModalCreatePin open={open} handleClose={handleClose} />
          {renderMenuDropdown}

@@ -7,7 +7,7 @@ import {
   getAllMenusOfRestaurant,
   updateRestaurant,
 } from "../../api/menu";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../config/axios";
 import { reorderMenu } from "../../api/menu";
 
@@ -15,9 +15,10 @@ function ContainerAddMenusPage() {
   const [input, setInput] = useState([{}]);
 
   const [order, setOrder] = useState([]);
-  console.log(input);
-
+  
   const { restaurantId } = useParams();
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const run = async () => {
@@ -101,6 +102,7 @@ function ContainerAddMenusPage() {
 
   const handlePublish = async (id, details) => {
     await updateRestaurant(id, details);
+
   };
 
   return (
@@ -127,6 +129,7 @@ function ContainerAddMenusPage() {
             Add menus
           </Typography>
           <Box sx={{ display: "flex", alignItems: "baseline" }}>
+            
             <Button
               variant="contained"
               color="error"
@@ -134,8 +137,9 @@ function ContainerAddMenusPage() {
                 fontWeight: "normal",
                 textTransform: "none",
                 fontSize: "18px",
+                ml: "10px"
               }}
-              onClick={() => handlePublish(restaurantId, { isDraft: true })}
+              onClick={() => handlePublish(restaurantId, { isDraft: 'unpublish' })}
             >
               Publish
             </Button>

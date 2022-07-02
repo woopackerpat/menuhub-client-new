@@ -9,9 +9,13 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { useAuth } from "../../../../../contexts/AuthContextProvider";
 function AddComment({ comments, id, setComments, fetchMenusById }) {
    const [isComment, setIsComment] = useState(false);
    const [text, setText] = useState("");
+
+   const { user } = useAuth();
+   const { profilePicUrl } = user;
 
    const handleSubmitComment = async (e) => {
       e.preventDefault();
@@ -95,8 +99,12 @@ function AddComment({ comments, id, setComments, fetchMenusById }) {
          ) : (
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                <Link href="/myPin">
-                  <IconButton size="small">
-                     <Avatar s sx={{ cursor: "pointer" }} />
+                  <IconButton>
+                     <Avatar
+                        sizes="large"
+                        sx={{ cursor: "pointer" }}
+                        src={profilePicUrl}
+                     />
                   </IconButton>
                </Link>
                <CommentBtn onClick={() => setIsComment(true)}>

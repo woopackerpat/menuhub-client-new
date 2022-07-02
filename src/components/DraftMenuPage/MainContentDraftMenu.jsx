@@ -2,14 +2,16 @@ import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import CategoryDraftMenuPage from "./CategoryDraftMenuPage";
 import ControlledCheckbox from "../common/ControlledCheckbox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddMenusLocation from "./AddMenusLocation";
 import validator from "validator";
 import { useMap } from "../../contexts/MapContextProvider";
-import { createRestaurant } from "../../api/menu";
+import { createRestaurant, updateRestaurant } from "../../api/menu";
 import { useNavigate } from "react-router-dom";
+import { useRestaurant } from "../../contexts/RestaurantContextProvider";
+import { getRestaurantDetails } from "../../api/menu";
 
-function MainContentDraftMenu() {
+function MainContentDraftMenu({ restaurantId }) {
   const [name, setName] = useState("");
   const [location, setLocation] = useState({});
   const [categoryArr, setCategoryArr] = useState([]);
@@ -18,11 +20,35 @@ function MainContentDraftMenu() {
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState("");
 
-
+  const { isEditRestaurant, setIsEditRestaurant } = useRestaurant();
 
   const { submitMyLocation } = useMap();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const run = async () => {
+      const res = await getRestaurantDetails(restaurantId);
+      const restaurantDetails = res.data.Restaurant;
+
+      setName(restaurantDetails.name);
+      setLocation({
+        address: restaurantDetails.address,
+        googleId: restaurantDetails.googleId,
+        latitude: restaurantDetails.latitude,
+        longitude: restaurantDetails.longitude,
+      });
+
+      const catArr = restaurantDetails.Categories.map((el) => el.name);
+      setCategoryArr(catArr);
+      setLineId(restaurantDetails.lineId);
+      setPhone(restaurantDetails.number + "");
+      setWebsite(restaurantDetails.websiteUrl || "");
+    };
+    if (isEditRestaurant) {
+      run();
+    }
+  }, [isEditRestaurant]);
 
   let error = {};
 
@@ -61,6 +87,30 @@ function MainContentDraftMenu() {
     setPhone("");
     setWebsite("");
     navigate(`/draftMenu/${restaurantIdForMenus}`);
+  };
+
+  const handleUpdateRestaurant = async () => {
+    const res = await updateRestaurant(restaurantId, {
+      name,
+      latitude: location.latitude,
+      longitude: location.longitude,
+      googleId: location.googleId,
+      categoryArr,
+      isRequest: checked,
+      lineId,
+      number: phone,
+      websiteUrl: website,
+    });
+    navigate("/myPin/created-pin");
+    setName("");
+    setLocation({});
+    setCategoryArr([]);
+    setChecked(true);
+    setLineId("");
+    setPhone("");
+    setWebsite("");
+
+    setIsEditRestaurant(false);
   };
 
   return (
@@ -141,9 +191,13 @@ function MainContentDraftMenu() {
           variant="contained"
           color="error"
           sx={{ fontWeight: "bold", lineHeight: "40px", fontSize: "18px" }}
-          onClick={() => handleCreateRestaurant()}
+          onClick={
+            isEditRestaurant
+              ? () => handleUpdateRestaurant()
+              : () => handleCreateRestaurant()
+          }
         >
-          Create
+          {isEditRestaurant ? "Save" : "Create"}
         </Button>
         <Typography align="center" fontWeight="bold" variant="h6">
           Your Draft

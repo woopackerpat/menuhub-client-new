@@ -53,6 +53,7 @@ function FooterDraft() {
       {listDraft.map((item) => {
         return (
           <Grid
+            key={item.id}
             item
             xs={3}
             sx={{
@@ -61,7 +62,7 @@ function FooterDraft() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
             onClick={() => navigate(`/draftMenu/${item.id}`)}
             // style={{ backgroundColor: "red" }}
