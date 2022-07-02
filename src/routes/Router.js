@@ -8,7 +8,6 @@ import DraftMenuPage from "../pages/DraftMenu"
 import AddMenuPage from "../pages/AddMenuPage"
 import MyPinPage from "../pages/MyPinPage"
 import MapPage from "../pages/MapPage"
-
 import AuthPage from "../pages/AuthPage"
 import AuthRegister from "../pages/AuthRegister"
 import MapContextProvider from "../contexts/MapContextProvider"
