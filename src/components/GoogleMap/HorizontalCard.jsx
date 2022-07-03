@@ -1,4 +1,14 @@
-import { Chip, Grid, Paper, Skeleton, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Chip,
+  Fab,
+  Grid,
+  Menu,
+  Paper,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import RoomIcon from "@mui/icons-material/Room";
@@ -7,11 +17,15 @@ import useStyles from "./styles";
 import { useMap } from "../../contexts/MapContextProvider";
 import MessageIcon from "@mui/icons-material/Message";
 import PhoneIcon from "@mui/icons-material/Phone";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useNavigate } from "react-router-dom";
 
 function HorizontalCard({ place, selected, refProp, markId }) {
   const classes = useStyles();
 
   const { setChildClicked, setListClicked, isLoading } = useMap();
+
+  const navigate = useNavigate();
 
   if (selected)
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -26,6 +40,11 @@ function HorizontalCard({ place, selected, refProp, markId }) {
   };
 
   const shortMenus = place.Menus.slice(0, 3);
+
+  const handleNavigate = (e) => {
+    e.stopPropagation();
+    navigate(`/allMenus/${place.id}`);
+  };
 
   return (
     <a
@@ -65,13 +84,24 @@ function HorizontalCard({ place, selected, refProp, markId }) {
         </Grid>
         <Grid item xs={12} lg={7}>
           <Box sx={{ px: "20px", py: "15px" }}>
-            <Typography variant="h5" component="h2" gutterBottom>
-              {isLoading ? (
-                <Skeleton width="50%" variant="text" animation="wave" />
-              ) : (
-                place.name || "Restaurant ABCD"
-              )}
-            </Typography>
+            <Grid container>
+              <Grid item xs={11}>
+                <Typography variant="h5" component="h2" gutterBottom>
+                  {isLoading ? (
+                    <Skeleton width="50%" variant="text" animation="wave" />
+                  ) : (
+                    place.name || "Restaurant ABCD"
+                  )}
+                </Typography>
+              </Grid>
+              <Grid item xs={1}>
+                <Box onClick={handleNavigate} sx = {{mt: "-10px"}}>
+                  <Fab size="small" color="white" className="eat-button">
+                    <MoreHorizIcon />
+                  </Fab>
+                </Box>
+              </Grid>
+            </Grid>
             <Grid container sx={{ mb: "0.5rem" }}>
               <Grid item xs={2}>
                 {isLoading ? (

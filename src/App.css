@@ -70,6 +70,13 @@ a {
   
 }
 
+.eat-button {
+  background-color: white !important;
+  box-shadow: none !important;
+  border: 1px solid #d4d4d4 !important;
+  color: #747373 !important;
+}
+
 
 
 
