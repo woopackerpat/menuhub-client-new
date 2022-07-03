@@ -29,10 +29,11 @@ function MapContextProvider({ children }) {
     const run = async () => {
       const res = await getRestaurantApi(ne, sw, coordinates);
       const restaurants = res.data;
+      
       setPlaces(restaurants)
     };
     try {
-      // run();
+      run();
     } catch (err) {
       console.log(err);
     }

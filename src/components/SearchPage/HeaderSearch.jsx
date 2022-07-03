@@ -18,6 +18,8 @@ function HeaderSearchPage(props) {
    const location = useLocation()
    const navigate = useNavigate()
 
+   
+
    useEffect(() => {
       const fetchSuggestions = async (refId) => {
          try {

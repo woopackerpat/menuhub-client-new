@@ -13,6 +13,8 @@ function MapPage() {
 
   const [elRefs, setElRefs] = useState([]);
 
+  console.log(places)
+
   useEffect(() => {
     setElRefs((refs) =>
       Array(places.length)
@@ -20,6 +22,7 @@ function MapPage() {
         .map((_, i) => refs[i] || createRef())
     );
   }, [places]);
+
 
   return (
     <Container fluid maxWidth="xl">
