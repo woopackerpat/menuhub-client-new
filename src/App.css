@@ -75,6 +75,16 @@ a {
   box-shadow: none !important;
   border: 1px solid #d4d4d4 !important;
   color: #747373 !important;
+
+}
+
+.eat-button:hover {
+  background-color: #e4e4e4 !important;
+  color: #747373 !important;
+  border-color: none !important;
+  transform: scale(1.1);
+  transition:  0.3s;
+  transition-timing-function: ease; ;
 }
 
 

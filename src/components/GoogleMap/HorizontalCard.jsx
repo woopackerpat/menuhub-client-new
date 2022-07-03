@@ -19,6 +19,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router-dom";
+import FastfoodIcon from '@mui/icons-material/Fastfood';
 
 function HorizontalCard({ place, selected, refProp, markId }) {
   const classes = useStyles();
@@ -97,7 +98,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
               <Grid item xs={1}>
                 <Box onClick={handleNavigate} sx = {{mt: "-10px"}}>
                   <Fab size="small" color="white" className="eat-button">
-                    <MoreHorizIcon />
+                    <FastfoodIcon />
                   </Fab>
                 </Box>
               </Grid>
