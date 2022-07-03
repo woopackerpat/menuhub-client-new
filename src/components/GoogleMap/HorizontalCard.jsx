@@ -34,7 +34,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
       className={classes.pointer}
     >
       <Grid container>
-        <Grid item xs={12} lg={5} disableGutters>
+        <Grid item xs={12} lg={5}>
           <Box
             sx={{ borderRadius: "24px", overflow: "hidden", height: "100%" }}
           >
@@ -201,8 +201,9 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                     </Skeleton>
                   </>
                 ) : (
-                  shortMenus.map((item) => (
+                  shortMenus.map((item, idx) => (
                     <Chip
+                      key={idx}
                       label={item.title}
                       color="primary"
                       variant="outlined"

@@ -6,9 +6,9 @@ function ContainerHome() {
       <>
          <CssBaseline>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-               <Typography variant="h5" gutterBottom>
+               {/* <Typography variant="h5" gutterBottom>
                   Suggestion for you
-               </Typography>
+               </Typography> */}
                <BodyHome />
             </Box>
          </CssBaseline>

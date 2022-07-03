@@ -27,20 +27,20 @@ function MapContextProvider({ children }) {
 
   // get Restaurant API
   useEffect(() => {
-    const run = async () => {
-      const res = await getRestaurantApi(ne, sw, coordinates);
-      const restaurants = res.data;
-
-      setPlaces(restaurants);
-    };
     try {
-      setIsLoading(true);
+      const run = async () => {
+        setIsLoading(true);
+        const res = await getRestaurantApi(ne, sw, coordinates);
+        const restaurants = res.data;
+        setPlaces(restaurants);
+      };
       run();
     } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
     }
+   
   }, [bounds]);
 
   const [listClicked, setListClicked] = useState(null);
@@ -114,7 +114,7 @@ function MapContextProvider({ children }) {
 
         submitMyLocation,
 
-        isLoading
+        isLoading,
       }}
     >
       {children}

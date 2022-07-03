@@ -9,12 +9,14 @@ function SearchContextProvider({ children }) {
     const [data, setData] = useState()
     const [page, setPage] = useState()
     const [search, setSearch] = useState()
+    const [isLoading, setIsLoading] = useState(false)
 
     const naviagate = useNavigate()
     const location = useLocation()
 
     const fetchData = async () => {
         try {
+            setIsLoading(true)
             const urlParams = new URLSearchParams(window.location.search);
             const query = urlParams.get('search')
             // const query = 'burger'
@@ -23,6 +25,8 @@ function SearchContextProvider({ children }) {
             console.log(res.data)
         } catch {
             console.log('fetchData error')
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -47,7 +51,7 @@ function SearchContextProvider({ children }) {
     }
 
     return (
-        <SearchContext.Provider value={{ fetchData, parseData, inputSearch , data, page, refId, location}}>
+        <SearchContext.Provider value={{ fetchData, parseData, inputSearch , data, page, refId, location, isLoading}}>
             {children}
         </SearchContext.Provider>
     )

@@ -8,11 +8,14 @@ function RestaurantContextProvider({ children }) {
 
   const [isEditRestaurant, setIsEditRestaurant] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+
+  
 
   const fetchRestaurant = async () => {
     try {
       setIsLoading(true)
+      
       const res = await axios.get("/restaurant/all");
       setRestaurant(res.data.allRestaurant);
     } catch (err) {

@@ -63,7 +63,7 @@ function Navbar() {
          open={isMenuOpen}
          onClose={handleMenuClose}
       >
-         <Link href="/addMenu" underline="none">
+         <Link href="/draftMenu" underline="none">
             <MenuItem onClick={handleMenuClose}>Create menu</MenuItem>
          </Link>
          <Link href="/myPin" underline="none">
