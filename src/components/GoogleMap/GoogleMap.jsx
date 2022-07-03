@@ -19,7 +19,7 @@ function GoogleMap() {
     listClicked,
   } = useMap();
 
-  console.log(places)
+
 
   const classes = useStyles();
 

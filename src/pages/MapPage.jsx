@@ -6,14 +6,14 @@ import Suggestion from "../components/GoogleMap/Suggestion";
 import RoomIcon from "@mui/icons-material/Room";
 import { useMap } from "../contexts/MapContextProvider";
 import { useState, useEffect, createRef } from "react";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 function MapPage() {
-  const { places, childClicked, markId } = useMap();
+  const { places, childClicked, markId, isLoading } = useMap();
 
   const [elRefs, setElRefs] = useState([]);
-
-  console.log(places)
 
   useEffect(() => {
     setElRefs((refs) =>
@@ -22,7 +22,6 @@ function MapPage() {
         .map((_, i) => refs[i] || createRef())
     );
   }, [places]);
-
 
   return (
     <Container fluid maxWidth="xl">
@@ -59,15 +58,26 @@ function MapPage() {
           <Grid
             item
             xs={12}
-            lg = {6}
+            lg={6}
             // sx={{
             //   display: { xs: "none", lg: "block" },
-             
-            // }}
 
-           
+            // }}
           >
-            <GoogleMap />
+            
+              <Backdrop
+                sx={{
+                  color: "#fff",
+                  zIndex: (theme) => theme.zIndex.drawer + 1,
+                }}
+                open={isLoading}
+                
+              >
+                <CircularProgress color="inherit" />
+              </Backdrop>
+            
+              <GoogleMap />
+           
           </Grid>
           <Grid item xs={12} lg={6} sx={{ height: "80vh", overflow: "scroll" }}>
             {places?.map((place, i) => (
@@ -81,8 +91,7 @@ function MapPage() {
                   selected={childClicked !== null && Number(childClicked) === i}
                   refProp={elRefs[i]}
                   place={place}
-                  markId = {markId[i]}
-                 
+                  markId={markId[i]}
                 />
               </Paper>
             ))}

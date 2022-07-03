@@ -8,7 +8,7 @@ import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 
 function BodyHome() {
    const { restaurant } = useRestaurant();
-   console.log("restaurant  ", restaurant);
+   // console.log("restaurant  ", restaurant);
    // const { fetchPosts } = useInfiniteScroll();
    // const { data, isLoading, isError, hasNextPage, fetchNextPage } =
    //    useInfiniteQuery("posts", fetchPosts, {

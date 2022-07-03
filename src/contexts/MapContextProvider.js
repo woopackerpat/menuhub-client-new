@@ -19,6 +19,7 @@ function MapContextProvider({ children }) {
 
   const [places, setPlaces] = useState(initPlaces);
 
+  const [isLoading, setIsLoading] = useState(false);
 
   const [bounds, setBounds] = useState({});
 
@@ -29,13 +30,16 @@ function MapContextProvider({ children }) {
     const run = async () => {
       const res = await getRestaurantApi(ne, sw, coordinates);
       const restaurants = res.data;
-      
-      setPlaces(restaurants)
+
+      setPlaces(restaurants);
     };
     try {
+      setIsLoading(true);
       run();
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }, [bounds]);
 
@@ -55,7 +59,6 @@ function MapContextProvider({ children }) {
   };
 
   const handleSubmitSearch = (value) => {
-    
     const { lat, lng } = value;
     // ยิง axios ที่นี่ พอได้ค่าแล้วทำการ setPlaces
     setCoordinates({ lat, lng });
@@ -66,7 +69,6 @@ function MapContextProvider({ children }) {
   const submitMyLocation = () => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
-        
         setCoordinates({ lat: latitude, lng: longitude });
         setOpenSearch(false);
         navigate("/map");
@@ -111,6 +113,8 @@ function MapContextProvider({ children }) {
         handleSubmitSearch,
 
         submitMyLocation,
+
+        isLoading
       }}
     >
       {children}

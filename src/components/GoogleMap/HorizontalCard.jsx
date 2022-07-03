@@ -1,4 +1,4 @@
-import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Chip, Grid, Paper, Skeleton, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import RoomIcon from "@mui/icons-material/Room";
@@ -11,7 +11,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 function HorizontalCard({ place, selected, refProp, markId }) {
   const classes = useStyles();
 
-  const { setChildClicked, setListClicked } = useMap();
+  const { setChildClicked, setListClicked, isLoading } = useMap();
 
   if (selected)
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -26,7 +26,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
   };
 
   const shortMenus = place.Menus.slice(0, 3);
-  
+
   return (
     <a
       onMouseOver={() => handleMouseOver()}
@@ -38,25 +38,50 @@ function HorizontalCard({ place, selected, refProp, markId }) {
           <Box
             sx={{ borderRadius: "24px", overflow: "hidden", height: "100%" }}
           >
-            <img
-              src={
-                place.Menus[0]?.imageUrl ||
-                "https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?w=2000"
-              }
-              alt=""
-              width="100%"
-              height="100%"
-            />
+            {isLoading ? (
+              <Skeleton animation="wave" variant="rectangular">
+                <img
+                  src={
+                    place.Menus[0]?.imageUrl ||
+                    "https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?w=2000"
+                  }
+                  alt=""
+                  width="100%"
+                  height="100%"
+                />
+              </Skeleton>
+            ) : (
+              <img
+                src={
+                  place.Menus[0]?.imageUrl ||
+                  "https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?w=2000"
+                }
+                alt=""
+                width="100%"
+                height="100%"
+              />
+            )}
           </Box>
         </Grid>
         <Grid item xs={12} lg={7}>
           <Box sx={{ px: "20px", py: "15px" }}>
             <Typography variant="h5" component="h2" gutterBottom>
-              {place.name || "Restaurant ABCD"}
+              {isLoading ? (
+                <Skeleton width="50%" variant="text" animation="wave" />
+              ) : (
+                place.name || "Restaurant ABCD"
+              )}
             </Typography>
             <Grid container sx={{ mb: "0.5rem" }}>
               <Grid item xs={2}>
-                {selected ? (
+                {isLoading ? (
+                  <Skeleton
+                    variant="circular"
+                    width="35px"
+                    height="35px"
+                    animation="wave"
+                  />
+                ) : selected ? (
                   <RestaurantIcon
                     className="mark-clicked"
                     fontSize="large"
@@ -74,46 +99,117 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                   variant="caption"
                   sx={{ lineHeight: 1.5, color: "#626262" }}
                 >
-                  {place.address ||
-                    "Mint tower 719 Banthadthong road Wangmai Pathumwan Bangkok 10330"}
+                  {isLoading ? (
+                    <>
+                      <Skeleton width="230px" variant="text" animation="wave" />
+                      <Skeleton width="190px" variant="text" animation="wave" />
+                    </>
+                  ) : (
+                    place.address ||
+                    "Mint tower 719 Banthadthong road Wangmai Pathumwan Bangkok 10330"
+                  )}
                 </Typography>
               </Grid>
             </Grid>
             <Stack direction="row" spacing={1} sx={{ mb: "8px" }}>
-              <Chip
-                icon={<PhoneIcon />}
-                label={place.number || "Phone"}
-                variant="outlined"
-                color="primary"
-                size="small"
-              />
-              <Chip
-                icon={<MessageIcon />}
-                label={place.lineId || "Line"}
-                color="success"
-                size="small"
-                variant="outlined"
-                // style = {{backgroundColor: "#44b34f"}}
-              />
-              {place.isOfficial && (
-                <Chip
-                  label={place.isOfficial && "Offical"}
-                  color="error"
-                  size="small"
-                  variant="outlined"
-                />
+              {isLoading ? (
+                <>
+                  <Skeleton animation="wave">
+                    <Chip
+                      icon={<PhoneIcon />}
+                      label={"Phone"}
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                    />
+                  </Skeleton>
+                  <Skeleton animation="wave">
+                    <Chip
+                      icon={<PhoneIcon />}
+                      label={"Line"}
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                    />
+                  </Skeleton>
+                  <Skeleton animation="wave">
+                    <Chip
+                      icon={<PhoneIcon />}
+                      label={"Official"}
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                    />
+                  </Skeleton>
+                </>
+              ) : (
+                <>
+                  <Chip
+                    icon={<PhoneIcon />}
+                    label={place.number || "Phone"}
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                  />
+                  <Chip
+                    icon={<MessageIcon />}
+                    label={place.lineId || "Line"}
+                    color="success"
+                    size="small"
+                    variant="outlined"
+                    // style = {{backgroundColor: "#44b34f"}}
+                  />
+
+                  {place.isOfficial && (
+                    <Chip
+                      label={place.isOfficial && "Offical"}
+                      color="error"
+                      size="small"
+                      variant="outlined"
+                    />
+                  )}
+                </>
               )}
             </Stack>
             {Boolean(Object.keys(shortMenus).length) && (
               <Stack direction="row" spacing={1}>
-                {shortMenus.map((item) => (
-                  <Chip
-                    label={item.title}
-                    color="primary"
-                    variant="outlined"
-                    size="small"
-                  />
-                ))}
+                {isLoading ? (
+                  <>
+                    <Skeleton animation="wave">
+                      <Chip
+                        label="aaaaaaaaa"
+                        color="primary"
+                        variant="outlined"
+                        size="small"
+                      />
+                    </Skeleton>
+                    <Skeleton animation="wave">
+                      <Chip
+                        label="aaaaaaaaa"
+                        color="primary"
+                        variant="outlined"
+                        size="small"
+                      />
+                    </Skeleton>
+                    <Skeleton animation="wave">
+                      <Chip
+                        label="aaaaaaaaa"
+                        color="primary"
+                        variant="outlined"
+                        size="small"
+                      />
+                    </Skeleton>
+                  </>
+                ) : (
+                  shortMenus.map((item) => (
+                    <Chip
+                      label={item.title}
+                      color="primary"
+                      variant="outlined"
+                      size="small"
+                    />
+                  ))
+                )}
               </Stack>
             )}
           </Box>

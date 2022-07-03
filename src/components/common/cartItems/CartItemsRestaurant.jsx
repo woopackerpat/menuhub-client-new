@@ -6,11 +6,13 @@ import DropdownProfile from "./DropdownProfile"
 import DropdownShare from "./DropdownShare"
 import { useNavigate } from "react-router-dom"
 import { Scale } from "@mui/icons-material"
+import { useRestaurant } from "../../../contexts/RestaurantContextProvider"
 
 function CartItemsRestaurant({ Menus, items }) {
   const { name, id } = items
   const ImageUrl = Menus.map(menu => menu.imageUrl)
   const navigate = useNavigate()
+  const {isLoading} = useRestaurant()
 
   const [show, setShow] = useState(false)
 
@@ -33,6 +35,7 @@ function CartItemsRestaurant({ Menus, items }) {
       onMouseOut={handleMouseOut}
       className='hvr-grow'
     >
+      
       <Box onClick={() => navigate(`/allMenus/${id}`)}>
         <img
           src={ImageUrl}
