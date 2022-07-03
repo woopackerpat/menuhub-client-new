@@ -8,9 +8,10 @@ function SearchContextProvider({ children }) {
     const [refId, setRefId] = useState()
     const [data, setData] = useState()
     const [page, setPage] = useState()
+    const [click, setClick] = useState()
     const [search, setSearch] = useState()
 
-    const naviagate = useNavigate()
+    const navigate = useNavigate()
     const location = useLocation()
 
     const fetchData = async () => {
@@ -40,14 +41,28 @@ function SearchContextProvider({ children }) {
     const inputSearch = (input) => {
         if (input.length > 0) {
             setSearch(input.name)
-            naviagate(`../search?search=${input.name}`)
+            navigate(`../search?search=${input.name}`)
         }
         setSearch(input)
-        naviagate(`../search?search=${input}`)
+        navigate(`../search?search=${input}`)
     }
 
+    const addClick = async (id) => {
+        try {
+            if (id) {
+                await axios.patch(`restaurant/click/${id}`)
+            }
+        } catch {
+            console.log('addClick error')
+        }
+    }
+
+    useEffect(() => {
+        addClick(click)
+    }, [click])
+
     return (
-        <SearchContext.Provider value={{ fetchData, parseData, inputSearch , data, page, refId, location}}>
+        <SearchContext.Provider value={{ fetchData, parseData, inputSearch, addClick, data, page, refId, location, click }}>
             {children}
         </SearchContext.Provider>
     )

@@ -6,11 +6,13 @@ import DropdownProfile from "./DropdownProfile"
 import DropdownShare from "./DropdownShare"
 import { useNavigate } from "react-router-dom"
 import { Scale } from "@mui/icons-material"
+import { useSearch } from "../../../contexts/SearchContextProvider"
 
 function CartItemsRestaurant({ Menus, items }) {
   const { name, id } = items
   const ImageUrl = Menus.map(menu => menu.imageUrl)
   const navigate = useNavigate()
+  const { addClick } = useSearch()
 
   const [show, setShow] = useState(false)
 
@@ -26,6 +28,11 @@ function CartItemsRestaurant({ Menus, items }) {
     e.stopPropagation()
   }
 
+  const handleClick = (id) => {
+    addClick(id)
+    navigate(`/allMenus/${id}`)
+  }
+
   return (
     <Box
       sx={{ position: "relative" }}
@@ -33,7 +40,9 @@ function CartItemsRestaurant({ Menus, items }) {
       onMouseOut={handleMouseOut}
       className='hvr-grow'
     >
-      <Box onClick={() => navigate(`/allMenus/${id}`)}>
+      <Box onClick={() => {
+        handleClick(id)
+      }}>
         <img
           src={ImageUrl}
           alt='img'
