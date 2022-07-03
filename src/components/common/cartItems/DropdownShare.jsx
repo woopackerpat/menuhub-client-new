@@ -50,6 +50,7 @@ function DropdownShare() {
                justifyContent: "center",
                p: 2,
             }}
+            onClick={handleMenuCloseShare}
          >
             <Box
                sx={{

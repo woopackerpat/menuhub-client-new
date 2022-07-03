@@ -77,6 +77,7 @@ function SearchBar() {
       onSubmit={(e) => {
         handleSubmit(e);
       }}
+      style={{width: "100%"}}
     >
       <Search>
         <SearchIconWrapper>

@@ -56,17 +56,20 @@ function HeaderSearchPage(props) {
             sx={{
                display: "flex",
                alignItems: "center",
-               justifyContent: "space-between",
+               // justifyContent: "space-between",
             }}
          >
-            <Typography variant="h5" gutterBottom>
-               Suggest only for you
+            <Typography variant="h5" 
+            // gutterBottom
+            >
+               Suggest for you:
             </Typography>
             <Box
                sx={{
                   display: "flex",
                   gap: 1,
                   flexWrap: "wrap",
+                  pl: "2em"
                }}
             >
                {list ? (
