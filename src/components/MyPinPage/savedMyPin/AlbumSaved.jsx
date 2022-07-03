@@ -8,31 +8,24 @@ function AlbumSaved() {
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "center",
         mt: 10,
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, 270px)",
+        justifyContent: "center",
+        gap: 4,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          gap: 3.4,
-        }}
-      >
-        <ContainerAllPins pin={pin} />
-        {pin?.map(pins => {
-          return (
-            <ContainerAlbumCart
-              key={pins.id}
-              id={pins.id}
-              name={pins.name}
-              Restaurants={pins.Restaurants}
-            />
-          )
-        })}
-      </Box>
+      <ContainerAllPins pin={pin} />
+      {pin?.map(pins => {
+        return (
+          <ContainerAlbumCart
+            key={pins.id}
+            id={pins.id}
+            name={pins.name}
+            Restaurants={pins.Restaurants}
+          />
+        )
+      })}
     </Box>
   )
 }

@@ -7,7 +7,6 @@ import ContainerEditProfile from "../components/MyPinPage/EditProfilePage/Contai
 function MyPinPage() {
   const { pathname } = useLocation()
   const { albumId } = useParams()
-  console.log(albumId)
   return (
     <>
       {pathname === "/myPin" && <ContainerMyPinPage />}
