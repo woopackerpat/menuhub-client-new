@@ -5,6 +5,7 @@ import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
 import DropdownShare from "./DropdownShare";
 import { useNavigate } from "react-router-dom";
+import DropdownReport from "./DropdownReport";
 
 function CartItemsMenus({ item }) {
    const { title, imageUrl, id } = item;
@@ -74,15 +75,7 @@ function CartItemsMenus({ item }) {
                   }}
                >
                   <DropdownShare />
-                  <IconButton
-                     sx={{
-                        backgroundColor: "#f0f0f0",
-                        opacity: [0.9, 0.8, 0.7],
-                        "&:hover": { backgroundColor: "white", opacity: 1 },
-                     }}
-                  >
-                     <MoreHorizIcon color="dark" />
-                  </IconButton>
+                  <DropdownReport />
                </Box>
             </>
          )}

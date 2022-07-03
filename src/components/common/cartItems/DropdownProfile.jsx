@@ -26,7 +26,10 @@ function DropdownProfile({ id, color }) {
 
    //Modal Create
    const [open, setOpen] = useState(false);
-   const handleOpen = () => setOpen(true);
+   const handleOpen = () => {
+      setOpen(true);
+      handleMenuClose();
+   };
    const handleClose = () => setOpen(false);
 
    const isMenuDrop = Boolean(showDrop);

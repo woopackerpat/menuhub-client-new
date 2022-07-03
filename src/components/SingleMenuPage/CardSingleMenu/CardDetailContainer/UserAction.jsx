@@ -7,6 +7,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Box, Button, IconButton } from "@mui/material";
 import DropdownProfile from "../../../common/cartItems/DropdownProfile";
 import { useRestaurant } from "../../../../contexts/RestaurantContextProvider";
+import DropdownShare from "../../../common/cartItems/DropdownShare";
+import DropdownReport from "../../../common/cartItems/DropdownReport";
 
 function UserActionNavbar({ restaurantId }) {
    // like state for testing
@@ -28,21 +30,9 @@ function UserActionNavbar({ restaurantId }) {
             gap: 1.5,
          }}
       >
-         <Box>
-            <IconButton
-               sx={{
-                  color: "black",
-               }}
-            >
-               <MoreHorizIcon fontSize="large" />
-            </IconButton>
-            <IconButton
-               sx={{
-                  color: "black",
-               }}
-            >
-               <ShareIcon fontSize="large" />
-            </IconButton>
+         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <DropdownReport />
+            <DropdownShare />
             <IconButton
                sx={{
                   color: "black",
@@ -63,7 +53,7 @@ function UserActionNavbar({ restaurantId }) {
                )}
             </IconButton>
          </Box>
-         <Box sx={{ display: "flex", gap: 1 }}>
+         <Box sx={{ display: "flex" }}>
             <DropdownProfile color="dark" />
             <Button variant="contained" color="error">
                Save

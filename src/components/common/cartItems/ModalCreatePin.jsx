@@ -45,6 +45,7 @@ function ModalCreatePin({ open, handleClose }) {
                      fullWidth
                      label="Create board name"
                      value={boardName}
+                     placeholder="Create board name"
                      onChange={(e) => setBoardName(e.target.value)}
                   />
                   <Button variant="contained" onClick={handleClickCreate}>
