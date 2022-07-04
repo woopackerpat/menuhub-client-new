@@ -17,13 +17,11 @@ import { useMap } from "../../contexts/MapContextProvider";
 import { TextField } from "@mui/material";
 
 function PlacesAutocomplete() {
-
-  
-
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [googlePlaceId, setGooglePlaceId] = useState("");
   const [address, setAddress] = useState("");
+  const [name, setName] = useState("");
 
   const { handleSubmitSearch } = useMap();
 
@@ -63,6 +61,7 @@ function PlacesAutocomplete() {
       .then((details) => {
         const { formatted_address, name } = details;
         setAddress(formatted_address);
+        setName(name);
       })
       .catch((error) => {
         console.log(error);
@@ -83,7 +82,7 @@ function PlacesAutocomplete() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSubmitSearch({ lat, lng, googlePlaceId, address });
+    handleSubmitSearch({ lat, lng, googlePlaceId, address, name });
     setLat("");
     setLng("");
     setGooglePlaceId("");

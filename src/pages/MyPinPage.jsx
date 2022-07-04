@@ -11,7 +11,7 @@ function MyPinPage() {
   return (
     <Box
     sx={{
-      pt: "20px",
+      // pt: "20px",
       px: {
         xs: "0",
         xl: "70px",

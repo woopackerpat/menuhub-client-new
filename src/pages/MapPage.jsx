@@ -10,7 +10,9 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function MapPage() {
-  const { places, childClicked, markId, isLoading } = useMap();
+  const { places, childClicked, markId, isLoading, placeName } = useMap();
+
+  
 
   const [elRefs, setElRefs] = useState([]);
 
@@ -46,7 +48,7 @@ function MapPage() {
           mt: "15px",
         }}
       >
-        <Typography variant="h5" sx={{ fontWeight: 600 }}>
+        <Typography variant="h5" sx={{ fontWeight: 600, pl: "20px" }}>
           Suggest only for you
         </Typography>
         <Suggestion />
@@ -54,7 +56,7 @@ function MapPage() {
       <Box sx={{ mb: "10px", pl: "10px", display: "flex" }}>
         <RoomIcon color="error" fontSize="large" />
         <Typography variant="h6" sx={{ ml: "10px" }}>
-          Restaurants near Mint Tower
+          {`Restaurants near ${placeName}`}
         </Typography>
       </Box>
       <Paper
@@ -79,7 +81,7 @@ function MapPage() {
           >
             <GoogleMap />
           </Grid>
-          <Grid item xs={12} lg={6} sx={{ height: "80vh", overflow: "scroll" }}>
+          <Grid item xs={12} lg={6} sx={{ height: "75vh", overflow: "auto" }}>
             {places?.map((place, i) => (
               <Paper
                 key={place.id}
