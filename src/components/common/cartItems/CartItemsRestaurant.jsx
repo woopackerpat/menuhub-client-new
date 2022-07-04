@@ -35,6 +35,11 @@ function CartItemsRestaurant({ Menus, items }) {
     setShow(false);
   };
 
+  const handleClick = (id) => {
+    addClick(id)
+    navigate(`/allMenus/${id}`)
+  }
+
   const handleSaveRestaurant = async () => {
     try {
       setIsLoading(true);
@@ -59,7 +64,7 @@ function CartItemsRestaurant({ Menus, items }) {
           variant="rectangular"
           sx={{ borderRadius: "24px" }}
         >
-          <Box onClick={() => navigate(`/allMenus/${id}`)}>
+          <Box>
             <img
               src={ImageUrl}
               alt="img"
@@ -98,7 +103,7 @@ function CartItemsRestaurant({ Menus, items }) {
                   gap: 1,
                 }}
               >
-                <DropdownShare id={id} />
+                <DropdownShare id={restaurantId} />
                 <DropdownReport />
               </Box>
             </>
@@ -107,7 +112,7 @@ function CartItemsRestaurant({ Menus, items }) {
         </Skeleton>
       ) : (
         <>
-          <Box onClick={() => navigate(`/allMenus/${id}`)}>
+          <Box onClick={() => handleClick(restaurantId)}>
             <img
               src={ImageUrl}
               alt="img"
