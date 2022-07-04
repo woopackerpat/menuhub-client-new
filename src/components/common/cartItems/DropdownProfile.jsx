@@ -115,15 +115,18 @@ function DropdownProfile({ id, color }) {
             <Typography variant="caption">Save to board</Typography>
          </MenuItem>
          <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
-            {pin?.map((pins) => (
-               <BoxBoard
-                  Restaurants={pins.Restaurants}
-                  key={pins.id}
-                  name={pins.name}
-                  id={pins.id}
-                  restaurantId={id}
-               />
-            ))}
+            {pin?.map((pins) => {
+               console.log("id", pins.Restaurants);
+               return (
+                  <BoxBoard
+                     Restaurants={pins.Restaurants}
+                     key={pins.id}
+                     name={pins.name}
+                     id={pins.id}
+                     restaurantId={pins.Restaurants}
+                  />
+               );
+            })}
          </Box>
 
          <Divider orientation="horizontal" />

@@ -8,6 +8,9 @@ function BoxBoard({ name, id, restaurantId, Restaurants }) {
    const { savePinRes } = usePin();
    const [loading, setLoading] = useState(false);
 
+   const idRes = restaurantId?.map((i) => i.id);
+   console.log({ idRes });
+
    const getImage = Restaurants.map((el) =>
       el.Menus.map((item) => item.imageUrl)
    );
@@ -16,7 +19,7 @@ function BoxBoard({ name, id, restaurantId, Restaurants }) {
       try {
          e.stopPropagation();
          setLoading(true);
-         await savePinRes({ pinId: id, restaurantId: restaurantId });
+         await savePinRes({ pinId: id, restaurantId: idRes });
       } catch (err) {
          console.log(err);
       } finally {
