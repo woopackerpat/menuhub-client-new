@@ -1,5 +1,5 @@
 import { Masonry } from "@mui/lab";
-import { Box } from "@mui/material";
+import { Backdrop, Box, CircularProgress } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroller";
 import { useInfiniteQuery } from "react-query";
 import { useInfiniteScroll } from "../../contexts/InfiniteScrollContext";
@@ -7,23 +7,23 @@ import { useRestaurant } from "../../contexts/RestaurantContextProvider";
 import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 
 function BodyHome() {
-   const { restaurant } = useRestaurant();
-   console.log("restaurant  ", restaurant);
-   // const { fetchPosts } = useInfiniteScroll();
-   // const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-   //    useInfiniteQuery("posts", fetchPosts, {
-   //       getNextPageParam: (lastPage, pages) => {
-   //          if (lastPage.nextPage < lastPage.totalPages) {
-   //             return lastPage.nextPage;
-   //          } else {
-   //             return undefined;
-   //          }
-   //       },
-   //    });
+  const { restaurant, isLoading } = useRestaurant();
+  // console.log("restaurant  ", restaurant);
+  // const { fetchPosts } = useInfiniteScroll();
+  // const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+  //    useInfiniteQuery("posts", fetchPosts, {
+  //       getNextPageParam: (lastPage, pages) => {
+  //          if (lastPage.nextPage < lastPage.totalPages) {
+  //             return lastPage.nextPage;
+  //          } else {
+  //             return undefined;
+  //          }
+  //       },
+  //    });
 
-   return (
-      <Box>
-         {/* {isLoading ? (
+  return (
+    <Box>
+      {/* {isLoading ? (
             <p>Loading...</p>
          ) : isError ? (
             <p>There was an error</p>
@@ -42,7 +42,7 @@ function BodyHome() {
             </InfiniteScroll>
          )} */}
 
-         {/* <Masonry
+      {/* <Masonry
             columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
             spacing={2}
          >
@@ -61,19 +61,28 @@ function BodyHome() {
             
          </Masonry> */}
 
-         <Masonry
-            columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
-            spacing={2}
-         >
-            {restaurant?.map((items) => (
-               <CartItemsRestaurant
-                  key={items.id}
-                  Menus={items.Menus}
-                  items={items}
-               />
-            ))}
-         </Masonry>
-      </Box>
-   );
+      <Masonry
+        columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
+        spacing={2}
+      >
+        {restaurant?.map((items) => (
+          <CartItemsRestaurant
+            key={items.id}
+            Menus={items.Menus}
+            items={items}
+          />
+        ))}
+      </Masonry>
+      <Backdrop
+        sx={{
+          color: "#fff",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={isLoading}
+      >
+        <CircularProgress color="error" />
+      </Backdrop>
+    </Box>
+  );
 }
 export default BodyHome;

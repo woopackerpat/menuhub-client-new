@@ -6,12 +6,16 @@ import DetailContainer from "./CardDetailContainer/DetailContainer";
 
 function MenuCardContainer({ menuId }) {
    const [menus, setMenus] = useState([]);
+   const [isLoading, setIsLoading] = useState(true)
    const [comments, setComments] = useState([]);
    const fetchMenusById = async (id) => {
       try {
+         setIsLoading(true)
          return await axios.get("restaurant/menu/" + id);
       } catch (err) {
          console.log(err);
+      } finally {
+         setIsLoading(false)
       }
    };
    useEffect(() => {

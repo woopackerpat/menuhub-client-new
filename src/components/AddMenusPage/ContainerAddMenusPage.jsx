@@ -1,4 +1,11 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Typography,
+} from "@mui/material";
 import CardContainer from "./CardAddMenu/CardContainer";
 import AddIcon from "@mui/icons-material/Add";
 import { useEffect, useState } from "react";
@@ -17,26 +24,33 @@ function ContainerAddMenusPage() {
 
   const [order, setOrder] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { restaurantId } = useParams();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const run = async () => {
-      const res = await getAllMenusOfRestaurant(restaurantId);
-      const menus = res.data.Menus;
-      if (!menus.length) {
-        return;
-      }
-      setInput(menus);
-    };
-
     try {
+      setIsLoading(true);
+      const run = async () => {
+        const res = await getAllMenusOfRestaurant(restaurantId);
+        const menus = res.data.Menus;
+        if (!menus.length) {
+          return;
+        }
+        setInput(menus);
+      };
+
       run();
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
+
+ 
 
   const handleAdd = () => {
     const newObj = [
@@ -102,14 +116,22 @@ function ContainerAddMenusPage() {
   };
 
   const handlePublish = async (id, details) => {
-    await updateRestaurant(id, details);
+    try {
+      setIsLoading(true);
+      await updateRestaurant(id, details);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      navigate("/draftMenu");
+      setIsLoading(false);
+    }
   };
 
   const handleOnDragEnd = async (result) => {
     const items = [...input];
     const [item] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, item);
-    setInput(items)
+    setInput(items);
     const newDragObj = [...items];
     const newDragOrder = newDragObj.map((el, idx) => ({
       id: el.id,
@@ -120,8 +142,6 @@ function ContainerAddMenusPage() {
     const menus = res.data.Menus;
     setInput(menus);
   };
-
-
 
   return (
     <Box sx={{ pt: "20px" }}>
@@ -220,6 +240,15 @@ function ContainerAddMenusPage() {
           )}
         </Droppable>
       </DragDropContext>
+      <Backdrop
+        sx={{
+          color: "#fff",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={isLoading}
+      >
+        <CircularProgress color="error" />
+      </Backdrop>
     </Box>
   );
 }

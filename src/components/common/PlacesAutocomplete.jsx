@@ -17,6 +17,9 @@ import { useMap } from "../../contexts/MapContextProvider";
 import { TextField } from "@mui/material";
 
 function PlacesAutocomplete() {
+
+  
+
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [googlePlaceId, setGooglePlaceId] = useState("");

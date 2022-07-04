@@ -19,6 +19,8 @@ function GoogleMap() {
     listClicked,
   } = useMap();
 
+
+
   const classes = useStyles();
 
   return (

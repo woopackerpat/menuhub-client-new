@@ -6,7 +6,7 @@ axios.defaults.baseURL = API_ENDPOINT_URL
 
 axios.interceptors.request.use(
   config => {
-    if (config.url.includes("https://api.cloudinary.com")) {
+    if (config.url.includes("cloudinary.com" )) {
       return config
     }
     const token = getAccessToken()
