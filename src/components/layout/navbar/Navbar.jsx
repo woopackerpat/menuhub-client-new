@@ -112,7 +112,9 @@ function Navbar() {
                   fontWeight: "bold",
                   lineHeight: "35px",
                   borderRadius: "24px",
+                  textTransform: 'none'
                 }}
+                
               >
                 Home
               </Button>

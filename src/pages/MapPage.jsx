@@ -23,7 +23,20 @@ function MapPage() {
   }, [places]);
 
   return (
-    <Container fluid maxWidth="xl">
+    <Container
+      fluid
+      maxWidth="xl"
+      sx={{
+        pt: "20px",
+        px: {
+          xs: "0",
+          xl: "70px",
+          lg: "40px",
+          md: "40px",
+          sm: "10px",
+        },
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -40,7 +53,7 @@ function MapPage() {
       </Box>
       <Box sx={{ mb: "10px", pl: "10px", display: "flex" }}>
         <RoomIcon color="error" fontSize="large" />
-        <Typography variant="h6"  sx={{ ml: "10px" }}>
+        <Typography variant="h6" sx={{ ml: "10px" }}>
           Restaurants near Mint Tower
         </Typography>
       </Box>
@@ -71,7 +84,7 @@ function MapPage() {
               <Paper
                 key={place.id}
                 sx={{ mx: "20px", my: "15px", p: "5px", borderRadius: "24px" }}
-                elevation= {1}
+                elevation={1}
                 ref={elRefs[i]}
               >
                 <HorizontalCard
