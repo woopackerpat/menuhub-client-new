@@ -56,7 +56,7 @@ function CartItemsMenus({ item, menu, restaurantId }) {
                      gap: 1,
                   }}
                >
-                  <DropdownShare />
+                  <DropdownShare id={id} />
                   <DropdownReport />
                </Box>
             </>
