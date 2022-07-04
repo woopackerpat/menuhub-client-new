@@ -1,5 +1,6 @@
 import axios from "../config/axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "./AuthContextProvider";
 
 const PinContext = createContext();
 
@@ -8,6 +9,8 @@ function PinContextProvider({ children }) {
   const [pinById, setPinById] = useState([]);
   const [createdPin, setCreatedPin] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const { user } = useAuth();
 
   const fetchPin = async () => {
     try {
@@ -21,6 +24,10 @@ function PinContextProvider({ children }) {
   useEffect(() => {
     fetchPin();
   }, []);
+
+  useEffect(() => {
+    fetchPin();
+  }, [user.id]);
 
   const fetchPinById = async pinId => {
     try {
