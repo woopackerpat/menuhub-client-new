@@ -56,11 +56,11 @@ function MapPage() {
           mt: "15px",
         }}
       >
-        <Typography variant="h5" sx={{ fontWeight: 600, pl: "20px" }}>
+        {/* <Typography variant="h5" sx={{ fontWeight: 600, pl: "20px" }}>
           Suggest only for you
-        </Typography> 
+        </Typography>  */}
         <HeaderSearchPage refId={`${refId}`} />
-        <Suggestion />
+        {/* <Suggestion /> */}
       </Box>
       <Box sx={{ mb: "10px", pl: "10px", display: "flex" }}>
         <RoomIcon color="error" fontSize="large" />

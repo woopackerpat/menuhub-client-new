@@ -63,7 +63,7 @@ function HeaderSearchPage(props) {
           variant="h5"
           // gutterBottom
         >
-          Suggest for you:
+          Suggestions:
         </Typography>
         <Box
           sx={{
