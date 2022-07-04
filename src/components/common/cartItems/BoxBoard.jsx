@@ -3,23 +3,23 @@ import { Box, Button, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
 import { usePin } from "../../../contexts/PinContextProvider";
 
-function BoxBoard({ name, id, restaurantId, Restaurants }) {
+function BoxBoard({ name, pinId, restaurantId, Restaurants }) {
    const [showBoardBtn, setShowBoardBtn] = useState(false);
    const { savePinRes } = usePin();
    const [loading, setLoading] = useState(false);
 
-   const idRes = restaurantId?.map((i) => i.id);
-   console.log({ idRes });
-
-   const getImage = Restaurants.map((el) =>
-      el.Menus.map((item) => item.imageUrl)
+   const getImage = Restaurants?.map((el) =>
+      el?.Menus.map((item) => item.imageUrl)
    );
 
    const handleSaveRestaurant = async (e) => {
       try {
+         console.log(restaurantId, name, pinId);
          e.stopPropagation();
          setLoading(true);
-         await savePinRes({ pinId: id, restaurantId: idRes });
+         console.log(pinId, "pinId");
+         console.log(restaurantId, "resId");
+         await savePinRes({ pinId: pinId, restaurantId: restaurantId });
       } catch (err) {
          console.log(err);
       } finally {
@@ -57,11 +57,15 @@ function BoxBoard({ name, id, restaurantId, Restaurants }) {
                   borderRadius: "10px",
                }}
             >
-               <img
-                  src={getImage[0]}
-                  style={{ borderRadius: "10px", maxWidth: "40px" }}
-                  alt="img"
-               ></img>
+               {getImage[0]?.length > 0 ? (
+                  <img
+                     src={getImage[0]}
+                     style={{ borderRadius: "10px", maxWidth: "40px" }}
+                     alt="img"
+                  />
+               ) : (
+                  ""
+               )}
             </Box>
             <Typography>{name}</Typography>
          </Box>

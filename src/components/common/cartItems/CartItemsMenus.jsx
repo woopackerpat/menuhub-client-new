@@ -7,7 +7,7 @@ import DropdownShare from "./DropdownShare";
 import { useNavigate } from "react-router-dom";
 import DropdownReport from "./DropdownReport";
 
-function CartItemsMenus({ item }) {
+function CartItemsMenus({ item, menu }) {
    const { title, imageUrl, id } = item;
    const navigate = useNavigate();
 
@@ -47,24 +47,6 @@ function CartItemsMenus({ item }) {
          </Box>
          {show && (
             <>
-               <Box
-                  sx={{
-                     position: "absolute",
-                     top: 6,
-                     left: 12,
-                  }}
-               >
-                  {<DropdownProfile id={id} />}
-               </Box>
-               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                  <Button
-                     variant="contained"
-                     onClick={() => handleCreateAlbum}
-                     color="error"
-                  >
-                     Save
-                  </Button>
-               </Box>
                <Box
                   sx={{
                      position: "absolute",

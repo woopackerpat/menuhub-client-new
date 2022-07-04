@@ -54,7 +54,7 @@ function UserActionNavbar({ restaurantId }) {
             </IconButton>
          </Box>
          <Box sx={{ display: "flex" }}>
-            <DropdownProfile color="dark" restaurantId={restaurantId} />
+            <DropdownProfile color="dark" id={restaurantId} />
             <Button variant="contained" color="error">
                Save
             </Button>
