@@ -2,7 +2,7 @@ import ContainerAddMenusPage from "../components/AddMenusPage/ContainerAddMenusP
 
 function AddMenuPage() {
    return (
-      <div>
+      <div className = "addmenu-background">
          <ContainerAddMenusPage />
       </div>
    );

@@ -19,7 +19,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router-dom";
-import FastfoodIcon from '@mui/icons-material/Fastfood';
+import FastfoodIcon from "@mui/icons-material/Fastfood";
 
 function HorizontalCard({ place, selected, refProp, markId }) {
   const classes = useStyles();
@@ -41,6 +41,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
   };
 
   const shortMenus = place.Menus.slice(0, 3);
+  
 
   const handleNavigate = (e) => {
     e.stopPropagation();
@@ -53,7 +54,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
       onMouseOut={() => handleMouseOut()}
       className={classes.pointer}
     >
-      <Grid container>
+      <Grid container >
         <Grid item xs={12} lg={5}>
           <Box
             sx={{ borderRadius: "24px", overflow: "hidden", height: "100%" }}
@@ -96,7 +97,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                 </Typography>
               </Grid>
               <Grid item xs={1}>
-                <Box onClick={handleNavigate} sx = {{mt: "-10px"}}>
+                <Box onClick={handleNavigate} sx={{ mt: "-10px" }}>
                   <Fab size="small" color="white" className="eat-button">
                     <FastfoodIcon />
                   </Fab>
@@ -233,13 +234,14 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                   </>
                 ) : (
                   shortMenus.map((item, idx) => (
-                    <Chip
+                    // console.log(item)
+                   item?.title ?  (<Chip
                       key={idx}
                       label={item.title}
                       color="primary"
                       variant="outlined"
                       size="small"
-                    />
+                    />): ''
                   ))
                 )}
               </Stack>

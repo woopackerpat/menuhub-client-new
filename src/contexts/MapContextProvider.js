@@ -23,6 +23,10 @@ function MapContextProvider({ children }) {
 
   const [bounds, setBounds] = useState({});
 
+  const [placeName, setPlaceName] = useState('')
+
+  
+
   const { ne, sw } = bounds;
 
   // get Restaurant API
@@ -59,10 +63,11 @@ function MapContextProvider({ children }) {
   };
 
   const handleSubmitSearch = (value) => {
-    const { lat, lng } = value;
+    const { lat, lng, name } = value;
     // ยิง axios ที่นี่ พอได้ค่าแล้วทำการ setPlaces
     setCoordinates({ lat, lng });
     setOpenSearch(false);
+    setPlaceName(name)
     navigate("/map");
   };
 
@@ -115,6 +120,7 @@ function MapContextProvider({ children }) {
         submitMyLocation,
 
         isLoading,
+        placeName
       }}
     >
       {children}

@@ -12,8 +12,10 @@ import { useSearch } from "../contexts/SearchContextProvider";
 import HeaderSearchPage from "../components/SearchPage/HeaderSearch";
 
 function MapPage() {
-  const { places, childClicked, markId, isLoading } = useMap();
+
+  const { places, childClicked, markId, isLoading, placeName  } = useMap();
   const { refId, parseMap } = useSearch()
+
 
   const [elRefs, setElRefs] = useState([]);
 
@@ -31,7 +33,20 @@ function MapPage() {
   }, [places]);
 
   return (
-    <Container fluid maxWidth="xl">
+    <Container
+      fluid
+      maxWidth="xl"
+      sx={{
+        pt: "20px",
+        px: {
+          xs: "0",
+          xl: "70px",
+          lg: "40px",
+          md: "40px",
+          sm: "10px",
+        },
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -41,16 +56,16 @@ function MapPage() {
           mt: "15px",
         }}
       >
-        {/* <Typography variant="h5" sx={{ fontWeight: 600 }}>
+        <Typography variant="h5" sx={{ fontWeight: 600, pl: "20px" }}>
           Suggest only for you
-        </Typography> */}
+        </Typography> 
         <HeaderSearchPage refId={`${refId}`} />
-        {/* <Suggestion /> */}
+        <Suggestion />
       </Box>
       <Box sx={{ mb: "10px", pl: "10px", display: "flex" }}>
         <RoomIcon color="error" fontSize="large" />
         <Typography variant="h6" sx={{ ml: "10px" }}>
-          Restaurants near Mint Tower
+          {`Restaurants near ${placeName}`}
         </Typography>
       </Box>
       <Paper
@@ -75,7 +90,7 @@ function MapPage() {
           >
             <GoogleMap />
           </Grid>
-          <Grid item xs={12} lg={6} sx={{ height: "80vh", overflow: "scroll" }}>
+          <Grid item xs={12} lg={6} sx={{ height: "75vh", overflow: "auto" }}>
             {places?.map((place, i) => (
               <Paper
                 key={place.id}

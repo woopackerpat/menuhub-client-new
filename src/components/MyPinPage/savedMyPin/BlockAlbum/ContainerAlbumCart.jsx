@@ -1,20 +1,20 @@
-import { Box, Container, Typography } from "@mui/material"
-import { useNavigate } from "react-router-dom"
-import { usePin } from "../../../../contexts/PinContextProvider"
+import { Box, Container, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { usePin } from "../../../../contexts/PinContextProvider";
 
 function ContainerAlbumCart({ name, id, Restaurants }) {
-  const { fetchPinById } = usePin()
-  const navigate = useNavigate()
+  const { fetchPinById } = usePin();
+  const navigate = useNavigate();
 
-  const getImage = Restaurants?.slice(0, 3)
-  const img1 = getImage[0]?.Menus[0]?.imageUrl
-  const img2 = getImage[1]?.Menus[0]?.imageUrl
-  const img3 = getImage[2]?.Menus[0]?.imageUrl
+  const getImage = Restaurants?.slice(0, 3);
+  const img1 = getImage[0]?.Menus[0]?.imageUrl;
+  const img2 = getImage[1]?.Menus[0]?.imageUrl;
+  const img3 = getImage[2]?.Menus[0]?.imageUrl;
 
   const handleClickPin = async () => {
-    await fetchPinById(id)
-    navigate(`/myPin/${id}`)
-  }
+    await fetchPinById(id);
+    navigate(`/myPin/${id}`);
+  };
 
   return (
     <Box
@@ -33,7 +33,7 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
           {img1 && (
             <img
               src={img1}
-              alt=''
+              alt=""
               style={{
                 objectFit: "cover",
                 width: "100%",
@@ -63,7 +63,7 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
             {img2 && (
               <img
                 src={img2}
-                alt=''
+                alt=""
                 style={{
                   objectFit: "cover",
                   width: "100%",
@@ -83,7 +83,7 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
             {img3 && (
               <img
                 src={img3}
-                alt=''
+                alt=""
                 style={{
                   objectFit: "cover",
                   width: "100%",
@@ -95,10 +95,10 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
           </Box>
         </Box>
       </Box>
-      <Typography variant='h6' fontWeight='bold'>
+      <Typography variant="h6" fontWeight="bold" sx={{ mt: "8px", ml: "8px" }}>
         {name}
       </Typography>
     </Box>
-  )
+  );
 }
-export default ContainerAlbumCart
+export default ContainerAlbumCart;

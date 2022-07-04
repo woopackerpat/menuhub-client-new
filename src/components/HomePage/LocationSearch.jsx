@@ -49,20 +49,39 @@ function LocationSearch() {
         onClose={handleCloseSearch}
         aria-labelledby="customized-dialog-title"
         open={openSearch}
+        sx={{
+          "& .MuiDialog-paper": {
+            py: "10px",
+            px: "10px",
+          },
+        }}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
           onClose={handleCloseSearch}
+          sx={{ pl: "20px" }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <MapIcon color="error" />
-            <Typography variant="h5" sx={{ ml: "10px" }}>
+            <MapIcon color="error" sx={{ fontSize: "40px" }} />
+            <Typography
+              variant="h5"
+              sx={{ ml: "10px", fontWeight: 600 }}
+              style={{ color: "#545454" }}
+            >
               Search restaurants by location
             </Typography>
           </Box>
         </BootstrapDialogTitle>
         <DialogContent>
-          <Grid container sx={{ width: "500px", mt: "15px", mb: "20px" }}>
+          <Grid
+            container
+            sx={{
+              width: "500px",
+              mt: "15px",
+              mb: "20px",
+              
+            }}
+          >
             <Grid item xs={10}>
               {/* <TextField
                 fullWidth

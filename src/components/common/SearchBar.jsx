@@ -62,31 +62,29 @@ function SearchBar() {
     try {
       e.preventDefault();
       inputSearch(input);
-      setInput('')
+      setInput("");
     } catch {
       console.log("handleSubmit error");
     }
   };
 
-  useEffect(() => {
-
-  }, [search])
+  useEffect(() => {}, [search]);
 
   return (
     <form
       onSubmit={(e) => {
         handleSubmit(e);
       }}
-      style={{width: "100%"}}
+      style={{ width: "100%" }}
     >
       <Search>
         <SearchIconWrapper>
-          <SearchIcon />
+          <SearchIcon style={{ color: "#727272", fontSize: "30px",  }}  />
         </SearchIconWrapper>
         <StyledInputBase
           placeholder="Search ..."
           inputProps={{ "aria-label": "search" }}
-          sx={{ display: "flex", flex: 1 }}
+          sx={{ display: "flex", flex: 1, height: "50px" }}
           value={input}
           onChange={handleInput}
         />

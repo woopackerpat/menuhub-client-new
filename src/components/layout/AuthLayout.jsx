@@ -3,12 +3,16 @@ import { Outlet } from "react-router-dom";
 import { Box, Container } from "@mui/system";
 
 function AuthLayout() {
-   return (
+  return (
+    <div>
       <div>
-         <div>
-            <Navbar />
-            <Container maxWidth="xxl" sx={{ mt: "20px" }}>
-               <Box
+        <Navbar />
+        <Container
+          maxWidth="xxl"
+          disableGutters
+          // style={{ backgroundColor: "#d85252" }}
+        >
+          {/* <Box
                   sx={{
                      px: {
                         xs: "0",
@@ -18,12 +22,12 @@ function AuthLayout() {
                         sm: "10px",
                      },
                   }}
-               >
-                  <Outlet />
-               </Box>
-            </Container>
-         </div>
+               > */}
+          <Outlet />
+          {/* </Box> */}
+        </Container>
       </div>
-   );
+    </div>
+  );
 }
 export default AuthLayout;

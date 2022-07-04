@@ -25,10 +25,12 @@ function CardAddMenus({
   handleUpdate,
   handleDelete,
   handleInsert,
+  creator
 }) {
   const { title: Title, description: Description, imageUrl } = menuDetails;
 
   // console.log(Restaurant.id, Restaurant.name, Title, Description, imageUrl);
+  
 
   const ariaLabel = { "aria-label": "description" };
 
@@ -191,9 +193,9 @@ function CardAddMenus({
                       gap: 4,
                     }}
                   >
-                    <Avatar />
+                    <Avatar src = {creator.profilePicUrl}/>
                     <Typography sx={{ fontWeight: "600" }}>
-                      {restaurantName}
+                      {creator.firstName} {creator.lastName}
                     </Typography>
                   </Box>
                   <Box

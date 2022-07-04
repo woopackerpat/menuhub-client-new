@@ -49,7 +49,10 @@ function HeaderMyPinPage() {
               fontSize: "16px",
               fontWeight: "bold",
               textTransform: "none",
+              borderRadius: "24px"
             }}
+            size = "large"
+            disableElevation
           >
             Share
           </Button>
@@ -65,7 +68,10 @@ function HeaderMyPinPage() {
               fontSize: "16px",
               fontWeight: "bold",
               textTransform: "none",
+              borderRadius: "24px"
             }}
+            disableElevation
+            size = "large"
             onClick={() => navigate("/myPin/edit-profile")}
           >
             Edit

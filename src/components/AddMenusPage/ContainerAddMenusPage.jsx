@@ -26,6 +26,8 @@ function ContainerAddMenusPage() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [creator, setCreator] = useState({});
+
   const { restaurantId } = useParams();
 
   const navigate = useNavigate();
@@ -36,10 +38,13 @@ function ContainerAddMenusPage() {
       const run = async () => {
         const res = await getAllMenusOfRestaurant(restaurantId);
         const menus = res.data.Menus;
+        const poster = res.data.Creator;
+
         if (!menus.length) {
           return;
         }
         setInput(menus);
+        setCreator(poster);
       };
 
       run();
@@ -49,8 +54,6 @@ function ContainerAddMenusPage() {
       setIsLoading(false);
     }
   }, []);
-
- 
 
   const handleAdd = () => {
     const newObj = [
@@ -164,7 +167,7 @@ function ContainerAddMenusPage() {
             sx={{ fontWeight: "bold" }}
             style={{ fontColor: "#5b5b5b" }}
           >
-            Add menus
+            {input[0]?.Restaurant?.name}
           </Typography>
           <Box sx={{ display: "flex", alignItems: "baseline" }}>
             <Button
@@ -222,6 +225,7 @@ function ContainerAddMenusPage() {
                           Object.keys(menuDetails).length &&
                           input[0].Restaurant.name
                         }
+                        creator={creator}
                       />
                     </span>
                   )}
