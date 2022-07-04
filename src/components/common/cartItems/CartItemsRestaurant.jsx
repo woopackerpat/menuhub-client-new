@@ -9,6 +9,7 @@ import { Scale } from "@mui/icons-material";
 import DropdownReport from "./DropdownReport";
 import { useRestaurant } from "../../../contexts/RestaurantContextProvider";
 import { useSearch } from "../../../contexts/SearchContextProvider";
+import ButtonSave from "../ButtonSave";
 
 function CartItemsRestaurant({ Menus, items }) {
   const { name, id } = items;
@@ -71,13 +72,7 @@ function CartItemsRestaurant({ Menus, items }) {
                 <DropdownProfile id={id} />
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <Button
-                  variant="contained"
-                  onClick={() => handleCreateAlbum}
-                  color="error"
-                >
-                  Save
-                </Button>
+                <ButtonSave onClick={handleCreateAlbum} restaurantId={id} />
               </Box>
               <Box
                 sx={{
