@@ -14,13 +14,13 @@ function CartItemsRestaurant({ Menus, items }) {
   const { pin, savePinRes } = usePin();
   const { name, id } = items;
 
+  const { addClick } = useSearch();
   const profilePin = pin?.slice(0, 1).map(el => el.id);
 
   const restaurantId = id;
   const pinId = profilePin[0];
 
   const ImageUrl = Menus[0]?.imageUrl;
-  const { addClick } = useSearch();
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
@@ -34,6 +34,11 @@ function CartItemsRestaurant({ Menus, items }) {
   const handleMouseOut = () => {
     setShow(false);
   };
+
+  const handleClick = (id) => {
+    addClick(id)
+    navigate(`/allMenus/${id}`)
+  }
 
   const handleSaveRestaurant = async () => {
     try {
@@ -59,7 +64,7 @@ function CartItemsRestaurant({ Menus, items }) {
           variant="rectangular"
           sx={{ borderRadius: "24px" }}
         >
-          <Box onClick={() => navigate(`/allMenus/${id}`)}>
+          <Box>
             <img
               src={ImageUrl}
               alt="img"
@@ -98,7 +103,7 @@ function CartItemsRestaurant({ Menus, items }) {
                   gap: 1,
                 }}
               >
-                <DropdownShare />
+                <DropdownShare id={id} />
                 <DropdownReport />
               </Box>
             </>
@@ -107,7 +112,7 @@ function CartItemsRestaurant({ Menus, items }) {
         </Skeleton>
       ) : (
         <>
-          <Box onClick={() => navigate(`/allMenus/${id}`)}>
+          <Box onClick={() => handleClick(restaurantId)}>
             <img
               src={ImageUrl}
               alt="img"
@@ -129,7 +134,7 @@ function CartItemsRestaurant({ Menus, items }) {
                   left: 12,
                 }}
               >
-                {<DropdownProfile restaurantId={id} />}
+                {<DropdownProfile shareId={`${id}`} />}
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
                 <ButtonSave
@@ -146,7 +151,7 @@ function CartItemsRestaurant({ Menus, items }) {
                   gap: 1,
                 }}
               >
-                <DropdownShare />
+                <DropdownShare id={id} />
                 <DropdownReport />
               </Box>
             </>

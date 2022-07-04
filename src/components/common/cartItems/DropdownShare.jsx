@@ -9,19 +9,35 @@ import {
    EmailShareButton,
 } from "react-share";
 import { FacebookIcon, LineIcon, TwitterIcon, EmailIcon } from "react-share";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-function DropdownShare() {
+function DropdownShare({id}) {
    const [showShare, setShowShare] = useState(null);
+   const [shareLink, setShareLink] = useState()
 
+   const location = useLocation()
+   // const id = 5
+   
    const isMenuShare = Boolean(showShare);
-
+   
    const handleShareDropdown = (event) => {
       setShowShare(event.currentTarget);
    };
    const handleMenuCloseShare = () => {
       setShowShare(null);
    };
-
+   
+   useEffect(() => {
+      if (id) {
+         if (location.pathname.split('/')[1] === 'allMenus' || location.pathname.split('/')[1] === 'singleMenu') {
+            setShareLink(`http://localhost:3000/singleMenu/${id}`)
+         } else {
+            setShareLink(`http://localhost:3000/allMenus/${id}`)
+         }
+      }
+   }, [id])
+   
    const dropId = "drop-share";
 
    const renderDropShareMenu = (
@@ -50,7 +66,6 @@ function DropdownShare() {
                justifyContent: "center",
                p: 2,
             }}
-            onClick={handleMenuCloseShare}
          >
             <Box
                sx={{
@@ -60,7 +75,7 @@ function DropdownShare() {
                   alignItems: "center",
                }}
             >
-               <FacebookShareButton url="https://www.youtube.com/watch?v=2BnTYEafRQc">
+               <FacebookShareButton url={`${shareLink}`}>
                   <FacebookIcon round={true} size={48}></FacebookIcon>
                </FacebookShareButton>
                <Typography variant="body2">Facebook</Typography>
@@ -73,7 +88,7 @@ function DropdownShare() {
                   alignItems: "center",
                }}
             >
-               <LineShareButton url="https://www.youtube.com/watch?v=2BnTYEafRQc">
+               <LineShareButton url={`${shareLink}`}>
                   <LineIcon round={true} size={48}></LineIcon>
                </LineShareButton>
                <Typography variant="body2">Line</Typography>
@@ -86,7 +101,7 @@ function DropdownShare() {
                   alignItems: "center",
                }}
             >
-               <TwitterShareButton url="https://www.youtube.com/watch?v=2BnTYEafRQc">
+               <TwitterShareButton url={`${shareLink}`}>
                   <TwitterIcon round={true} size={48}></TwitterIcon>
                </TwitterShareButton>
                <Typography variant="body2">Twitter</Typography>
@@ -101,7 +116,7 @@ function DropdownShare() {
                   alignItems: "center",
                }}
             >
-               <EmailShareButton url="https://www.youtube.com/watch?v=2BnTYEafRQc">
+               <EmailShareButton url={`${shareLink}`}>
                   <EmailIcon round={true} size={48}></EmailIcon>
                </EmailShareButton>
                <Typography variant="body2">Email</Typography>
@@ -114,7 +129,7 @@ function DropdownShare() {
                   alignItems: "center",
                }}
             >
-               <IconButton sx={{ mt: 2 }}>
+               <IconButton sx={{ mt: 2 }} onClick={() => navigator.clipboard.writeText(shareLink)}>
                   <FileCopyIcon fontSize="60px" />
                </IconButton>
                <Typography variant="body2">Copy Link</Typography>
