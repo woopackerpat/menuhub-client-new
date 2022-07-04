@@ -1,18 +1,24 @@
-import { Button, IconButton, Skeleton, Typography } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
 import DropdownShare from "./DropdownShare";
 import { useNavigate } from "react-router-dom";
-import { Scale } from "@mui/icons-material";
 import DropdownReport from "./DropdownReport";
 import { useRestaurant } from "../../../contexts/RestaurantContextProvider";
 import { useSearch } from "../../../contexts/SearchContextProvider";
 import ButtonSave from "../ButtonSave";
+import { usePin } from "../../../contexts/PinContextProvider";
+import { LoadingButton } from "@mui/lab";
 
 function CartItemsRestaurant({ Menus, items }) {
+  const { pin, savePinRes } = usePin();
   const { name, id } = items;
+
+  const profilePin = pin?.slice(0, 1).map(el => el.id);
+
+  const restaurantId = id;
+  const pinId = profilePin[0];
 
   const ImageUrl = Menus[0]?.imageUrl;
   const { addClick } = useSearch();
@@ -20,7 +26,7 @@ function CartItemsRestaurant({ Menus, items }) {
 
   const [show, setShow] = useState(false);
 
-  const { isLoading } = useRestaurant();
+  const { isLoading, setIsLoading } = useRestaurant();
 
   const handleMouseOver = () => {
     setShow(true);
@@ -30,8 +36,15 @@ function CartItemsRestaurant({ Menus, items }) {
     setShow(false);
   };
 
-  const handleCreateAlbum = e => {
-    e.stopPropagation();
+  const handleSaveRestaurant = async () => {
+    try {
+      setIsLoading(true);
+      await savePinRes({ pinId, restaurantId });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -69,10 +82,18 @@ function CartItemsRestaurant({ Menus, items }) {
                   left: 12,
                 }}
               >
-                <DropdownProfile id={id} />
+                <DropdownProfile restaurantId={id} />
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSave onClick={handleCreateAlbum} restaurantId={id} />
+                <LoadingButton
+                  loading={isLoading}
+                  onClick={handleSaveRestaurant}
+                  variant="contained"
+                  color="error"
+                  sx={{ textTransform: "none", fontWeight: "bold" }}
+                >
+                  Save
+                </LoadingButton>
               </Box>
               <Box
                 sx={{
@@ -114,16 +135,18 @@ function CartItemsRestaurant({ Menus, items }) {
                   left: 12,
                 }}
               >
-                {<DropdownProfile id={id} />}
+                {<DropdownProfile restaurantId={id} />}
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <Button
+                <LoadingButton
+                  loading={isLoading}
+                  onClick={handleSaveRestaurant}
                   variant="contained"
-                  onClick={() => handleCreateAlbum}
                   color="error"
+                  sx={{ textTransform: "none", fontWeight: "bold" }}
                 >
                   Save
-                </Button>
+                </LoadingButton>
               </Box>
               <Box
                 sx={{

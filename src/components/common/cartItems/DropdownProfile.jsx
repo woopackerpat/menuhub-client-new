@@ -1,4 +1,5 @@
 import {
+  Backdrop,
   Box,
   Divider,
   IconButton,
@@ -17,17 +18,18 @@ import ModalCreatePin from "./ModalCreatePin";
 import BoxBoard from "./BoxBoard";
 import { LoadingButton } from "@mui/lab";
 
-function DropdownProfile({ id, color }) {
-  const { pin } = usePin();
+function DropdownProfile({ restaurantId, color }) {
+  const { pin, savePinRes } = usePin();
   const [showDrop, setShowDrop] = useState(null);
   const [showProfileBtn, setShowProfileBtn] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const profilePinId = pin?.slice(0, 1).map(el => el.id);
+  const profilePin = pin?.slice(0, 1).map(el => el.id);
   const createdPin = pin?.slice(1, pin?.length);
 
-  console.log(profilePinId[0]);
-  console.log(createdPin);
+  const pinId = profilePin[0];
+  //   console.log(pinId);
+  //   console.log(createdPin);
 
   //Modal Create
   const [open, setOpen] = useState(false);
@@ -46,8 +48,15 @@ function DropdownProfile({ id, color }) {
     setShowDrop(null);
   };
 
-  const handleClickSave = () => {
-    setLoading(true);
+  const handleClickSave = async () => {
+    try {
+      setLoading(true);
+      await savePinRes({ pinId, restaurantId });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
   // ********************************
 
@@ -125,7 +134,7 @@ function DropdownProfile({ id, color }) {
               key={pins.id}
               name={pins.name}
               pinId={pins.id}
-              restaurantId={id}
+              restaurantId={restaurantId}
             />
           );
         })}
@@ -171,7 +180,7 @@ function DropdownProfile({ id, color }) {
         onClick={handleProfileDropdown}
       >
         <Typography variant="subtitle1" sx={{ color: color ? color : "white" }}>
-          profile
+          Profile
         </Typography>
         <KeyboardArrowDownIcon sx={{ color: color ? color : "white" }} />
       </IconButton>

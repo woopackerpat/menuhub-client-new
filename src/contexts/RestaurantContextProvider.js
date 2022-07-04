@@ -15,7 +15,7 @@ function RestaurantContextProvider({ children }) {
       setIsLoading(true);
 
       // const res = await axios.get("/restaurant/all");
-      const res = await axios.get("/restaurant/all?page=1");
+      const res = await axios.get("/restaurant/all?page=1&limit=30");
       setRestaurant(res.data.allRestaurant);
     } catch (err) {
       console.log(err);
@@ -45,6 +45,7 @@ function RestaurantContextProvider({ children }) {
         isEditRestaurant,
         setIsEditRestaurant,
         isLoading,
+        setIsLoading,
       }}
     >
       {children}
