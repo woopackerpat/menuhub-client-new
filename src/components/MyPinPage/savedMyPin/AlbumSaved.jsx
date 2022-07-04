@@ -5,6 +5,7 @@ import ContainerAllPins from "./ContainerAllPins";
 
 function AlbumSaved() {
   const { pin } = usePin();
+  const createdPin = pin?.slice(1, pin?.length);
   return (
     <Box
       sx={{
@@ -16,7 +17,7 @@ function AlbumSaved() {
       }}
     >
       <ContainerAllPins pin={pin} />
-      {pin?.map(pins => {
+      {createdPin?.map(pins => {
         return (
           <ContainerAlbumCart
             key={pins.id}

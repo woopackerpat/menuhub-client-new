@@ -5,7 +5,7 @@ import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 
 function ContainerPinId() {
   const { pinById } = usePin();
-  console.log(pinById);
+  // console.log(pinById);
   return (
     <Box
       sx={{
@@ -24,7 +24,7 @@ function ContainerPinId() {
           columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
           spacing={2}
         >
-          {pinById?.Restaurants.map(items => (
+          {pinById.Restaurants?.map(items => (
             <CartItemsRestaurant
               key={items?.id}
               Menus={items.Menus}
