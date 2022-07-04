@@ -24,7 +24,7 @@ function AlbumCreated() {
     >
       {createdPin?.length === 0 ? (
         <Typography fontWeight="bold" variant="h4">
-          No created Pins yet
+          No created restaurants yet
         </Typography>
       ) : (
         <Masonry

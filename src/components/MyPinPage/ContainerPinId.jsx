@@ -5,7 +5,7 @@ import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 
 function ContainerPinId() {
   const { pinById } = usePin();
-  console.log(pinById);
+  // console.log(pinById);
   return (
     <Box
       sx={{

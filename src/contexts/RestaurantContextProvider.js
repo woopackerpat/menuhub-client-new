@@ -8,20 +8,19 @@ function RestaurantContextProvider({ children }) {
 
   const [isEditRestaurant, setIsEditRestaurant] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false)
-
-  
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchRestaurant = async () => {
     try {
-      setIsLoading(true)
-      
-      const res = await axios.get("/restaurant/all");
+      setIsLoading(true);
+
+      // const res = await axios.get("/restaurant/all");
+      const res = await axios.get("/restaurant/all?page=1");
       setRestaurant(res.data.allRestaurant);
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -29,7 +28,7 @@ function RestaurantContextProvider({ children }) {
     fetchRestaurant();
   }, []);
 
-  const createLike = async (restaurantId) => {
+  const createLike = async restaurantId => {
     try {
       const res = await axios.put("/restaurant/like/" + restaurantId);
       fetchRestaurant();
@@ -40,7 +39,13 @@ function RestaurantContextProvider({ children }) {
 
   return (
     <RestaurantContext.Provider
-      value={{ restaurant, createLike, isEditRestaurant, setIsEditRestaurant, isLoading }}
+      value={{
+        restaurant,
+        createLike,
+        isEditRestaurant,
+        setIsEditRestaurant,
+        isLoading,
+      }}
     >
       {children}
     </RestaurantContext.Provider>

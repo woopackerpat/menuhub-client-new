@@ -1,10 +1,10 @@
 import {
-   Box,
-   Divider,
-   IconButton,
-   Menu,
-   MenuItem,
-   Typography,
+  Box,
+  Divider,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import HistoryIcon from "@mui/icons-material/History";
@@ -18,167 +18,166 @@ import BoxBoard from "./BoxBoard";
 import { LoadingButton } from "@mui/lab";
 
 function DropdownProfile({ id, color }) {
-   const { pin } = usePin();
-   const [showDrop, setShowDrop] = useState(null);
-   const [showProfileBtn, setShowProfileBtn] = useState(false);
-   const [loading, setLoading] = useState(false);
+  const { pin } = usePin();
+  const [showDrop, setShowDrop] = useState(null);
+  const [showProfileBtn, setShowProfileBtn] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-   // console.log("pin", pin);
+  const profilePinId = pin?.slice(0, 1).map(el => el.id);
+  const createdPin = pin?.slice(1, pin?.length);
 
-   //Modal Create
-   const [open, setOpen] = useState(false);
-   const handleOpen = () => {
-      setOpen(true);
-      handleMenuClose();
-   };
-   const handleClose = () => setOpen(false);
+  console.log(profilePinId[0]);
+  console.log(createdPin);
 
-   const isMenuDrop = Boolean(showDrop);
+  //Modal Create
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+    handleMenuClose();
+  };
+  const handleClose = () => setOpen(false);
 
-   const handleProfileDropdown = (event) => {
-      setShowDrop(event.currentTarget);
-   };
-   const handleMenuClose = () => {
-      setShowDrop(null);
-   };
+  const isMenuDrop = Boolean(showDrop);
 
-   const handleClickSave = () => {
-      setLoading(true);
-   };
-   // ********************************
+  const handleProfileDropdown = event => {
+    setShowDrop(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setShowDrop(null);
+  };
 
-   const dropId = "drop-profile";
-   const renderMenuDropdown = (
-      <Menu
-         anchorEl={showDrop}
-         id={dropId}
-         keepMounted
-         open={isMenuDrop}
-         onClose={handleMenuClose}
+  const handleClickSave = () => {
+    setLoading(true);
+  };
+  // ********************************
+
+  const dropId = "drop-profile";
+  const renderMenuDropdown = (
+    <Menu
+      anchorEl={showDrop}
+      id={dropId}
+      keepMounted
+      open={isMenuDrop}
+      onClose={handleMenuClose}
+    >
+      <Typography variant="h6" align="center">
+        Save
+      </Typography>
+      <SearchBar />
+      <MenuItem disabled>
+        <Typography variant="caption">Quick save and organize later</Typography>
+      </MenuItem>
+      <MenuItem
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "20rem",
+          borderRadius: "10px",
+          m: "10px",
+        }}
+        onMouseOver={() => setShowProfileBtn(true)}
+        onMouseOut={() => setShowProfileBtn(false)}
+        onClick={e => e.stopPropagation()}
       >
-         <Typography variant="h6" align="center">
-            Save
-         </Typography>
-         <SearchBar />
-         <MenuItem disabled>
-            <Typography variant="caption">
-               Quick save and organize later
-            </Typography>
-         </MenuItem>
-         <MenuItem
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Box
             sx={{
-               display: "flex",
-               justifyContent: "space-between",
-               width: "20rem",
-               borderRadius: "10px",
-               m: "10px",
+              width: 40,
+              height: 40,
+              backgroundColor: showProfileBtn ? "#ffffff" : "#efefef",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "10px",
             }}
-            onMouseOver={() => setShowProfileBtn(true)}
-            onMouseOut={() => setShowProfileBtn(false)}
-            onClick={(e) => e.stopPropagation()}
-         >
-            <Box
-               sx={{
-                  display: "flex",
-                  gap: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-               }}
-            >
-               <Box
-                  sx={{
-                     width: 40,
-                     height: 40,
-                     backgroundColor: showProfileBtn ? "#ffffff" : "#efefef",
-                     display: "flex",
-                     justifyContent: "center",
-                     alignItems: "center",
-                     borderRadius: "10px",
-                  }}
-               >
-                  <HistoryIcon fontSize="large" />
-               </Box>
-               <Typography>Profile</Typography>
-            </Box>
-            {showProfileBtn && (
-               <LoadingButton
-                  loading={loading}
-                  onClick={handleClickSave}
-                  variant="contained"
-                  color="error"
-                  sx={{ textTransform: "none", fontWeight: "bold" }}
-               >
-                  Save
-               </LoadingButton>
-            )}
-         </MenuItem>
-         <MenuItem disabled>
-            <Typography variant="caption">Save to board</Typography>
-         </MenuItem>
-         <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
-            {pin?.map((pins) => {
-               return (
-                  <BoxBoard
-                     Restaurants={pins.Restaurants}
-                     key={pins.id}
-                     name={pins.name}
-                     pinId={pins.id}
-                     restaurantId={id}
-                  />
-               );
-            })}
-         </Box>
+          >
+            <HistoryIcon fontSize="large" />
+          </Box>
+          <Typography>Profile</Typography>
+        </Box>
+        {showProfileBtn && (
+          <LoadingButton
+            loading={loading}
+            onClick={handleClickSave}
+            variant="contained"
+            color="error"
+            sx={{ textTransform: "none", fontWeight: "bold" }}
+          >
+            Save
+          </LoadingButton>
+        )}
+      </MenuItem>
+      <MenuItem disabled>
+        <Typography variant="caption">Save to board</Typography>
+      </MenuItem>
+      <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
+        {createdPin?.map(pins => {
+          return (
+            <BoxBoard
+              Restaurants={pins.Restaurants}
+              key={pins.id}
+              name={pins.name}
+              pinId={pins.id}
+              restaurantId={id}
+            />
+          );
+        })}
+      </Box>
 
-         <Divider orientation="horizontal" />
-         <MenuItem>
-            <Box
-               sx={{
-                  display: "flex",
-                  gap: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "10px",
-                  m: "10px",
-                  border: "none",
-               }}
-               onClick={handleOpen}
-            >
-               <Box
-                  sx={{
-                     width: 40,
-                     height: 40,
-                     backgroundColor: "#efefef",
-                     display: "flex",
-                     justifyContent: "center",
-                     alignItems: "center",
-                     borderRadius: "10px",
-                  }}
-               >
-                  <AddIcon fontSize="large" />
-               </Box>
-               <Typography>Create board</Typography>
-            </Box>
-         </MenuItem>
-      </Menu>
-   );
-   return (
-      <>
-         <IconButton
-            size="large"
-            aria-controls={dropId}
-            onClick={handleProfileDropdown}
-         >
-            <Typography
-               variant="subtitle1"
-               sx={{ color: color ? color : "white" }}
-            >
-               profile
-            </Typography>
-            <KeyboardArrowDownIcon sx={{ color: color ? color : "white" }} />
-         </IconButton>
-         <ModalCreatePin open={open} handleClose={handleClose} />
-         {renderMenuDropdown}
-      </>
-   );
+      <Divider orientation="horizontal" />
+      <MenuItem>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "10px",
+            m: "10px",
+            border: "none",
+          }}
+          onClick={handleOpen}
+        >
+          <Box
+            sx={{
+              width: 40,
+              height: 40,
+              backgroundColor: "#efefef",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "10px",
+            }}
+          >
+            <AddIcon fontSize="large" />
+          </Box>
+          <Typography>Create board</Typography>
+        </Box>
+      </MenuItem>
+    </Menu>
+  );
+  return (
+    <>
+      <IconButton
+        size="large"
+        aria-controls={dropId}
+        onClick={handleProfileDropdown}
+      >
+        <Typography variant="subtitle1" sx={{ color: color ? color : "white" }}>
+          profile
+        </Typography>
+        <KeyboardArrowDownIcon sx={{ color: color ? color : "white" }} />
+      </IconButton>
+      <ModalCreatePin open={open} handleClose={handleClose} />
+      {renderMenuDropdown}
+    </>
+  );
 }
 export default DropdownProfile;
