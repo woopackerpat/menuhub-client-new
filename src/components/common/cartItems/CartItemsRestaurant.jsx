@@ -25,7 +25,7 @@ function CartItemsRestaurant({ Menus, items }) {
 
   const [show, setShow] = useState(false);
 
-  const { isLoading, setIsLoading } = useRestaurant();
+  const { isLoading } = useRestaurant();
 
   const handleMouseOver = () => {
     setShow(true);
@@ -37,12 +37,12 @@ function CartItemsRestaurant({ Menus, items }) {
 
   const handleSaveRestaurant = async () => {
     try {
-      setIsLoading(true);
+      // setIsLoading(true);
       await savePinRes({ pinId, restaurantId });
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
