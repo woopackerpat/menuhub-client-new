@@ -1,12 +1,16 @@
-import { Button } from "@mui/material";
-import { useState } from "react";
-import { useRestaurant } from "../../contexts/RestaurantContextProvider";
+import { LoadingButton } from "@mui/lab";
 
-function ButtonSave({ onClick }) {
+function ButtonSave({ onClick, loading }) {
   return (
-    <Button variant="contained" onClick={() => onClick} color="error">
+    <LoadingButton
+      loading={loading}
+      onClick={onClick}
+      variant="contained"
+      color="error"
+      sx={{ textTransform: "none", fontWeight: "bold" }}
+    >
       Save
-    </Button>
+    </LoadingButton>
   );
 }
 

@@ -7,9 +7,8 @@ import { useNavigate } from "react-router-dom";
 import DropdownReport from "./DropdownReport";
 import { useRestaurant } from "../../../contexts/RestaurantContextProvider";
 import { useSearch } from "../../../contexts/SearchContextProvider";
-import ButtonSave from "../ButtonSave";
 import { usePin } from "../../../contexts/PinContextProvider";
-import { LoadingButton } from "@mui/lab";
+import ButtonSave from "../ButtonSave";
 
 function CartItemsRestaurant({ Menus, items }) {
   const { pin, savePinRes } = usePin();
@@ -85,15 +84,10 @@ function CartItemsRestaurant({ Menus, items }) {
                 <DropdownProfile restaurantId={id} />
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <LoadingButton
+                <ButtonSave
                   loading={isLoading}
                   onClick={handleSaveRestaurant}
-                  variant="contained"
-                  color="error"
-                  sx={{ textTransform: "none", fontWeight: "bold" }}
-                >
-                  Save
-                </LoadingButton>
+                />
               </Box>
               <Box
                 sx={{
@@ -138,15 +132,10 @@ function CartItemsRestaurant({ Menus, items }) {
                 {<DropdownProfile restaurantId={id} />}
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <LoadingButton
+                <ButtonSave
                   loading={isLoading}
                   onClick={handleSaveRestaurant}
-                  variant="contained"
-                  color="error"
-                  sx={{ textTransform: "none", fontWeight: "bold" }}
-                >
-                  Save
-                </LoadingButton>
+                />
               </Box>
               <Box
                 sx={{

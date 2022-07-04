@@ -1,11 +1,4 @@
-import { LoadingButton } from "@mui/lab";
-import {
-  Backdrop,
-  Box,
-  Button,
-  CircularProgress,
-  Typography,
-} from "@mui/material";
+import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
 import { usePin } from "../../contexts/PinContextProvider";
 import { useRestaurant } from "../../contexts/RestaurantContextProvider";
 import ButtonSave from "../common/ButtonSave";
@@ -20,9 +13,8 @@ function HeaderAllMenusPage({ restaurantId, menus }) {
 
   const pinId = profilePin[0];
 
-  const handleSaveRestaurant = async e => {
+  const handleSaveRestaurant = async () => {
     try {
-      e.stopPropagation();
       setIsLoading(true);
       await savePinRes({ pinId, restaurantId });
     } catch (err) {
@@ -75,15 +67,7 @@ function HeaderAllMenusPage({ restaurantId, menus }) {
             </Typography>
           </Box>
         </Box>
-        <LoadingButton
-          loading={isLoading}
-          onClick={handleSaveRestaurant}
-          variant="contained"
-          color="error"
-          sx={{ textTransform: "none", fontWeight: "bold" }}
-        >
-          Save
-        </LoadingButton>
+        <ButtonSave loading={isLoading} onClick={handleSaveRestaurant} />
       </Box>
       <Backdrop
         sx={{
