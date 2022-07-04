@@ -13,8 +13,7 @@ import DropdownReport from "../../../common/cartItems/DropdownReport";
 function UserActionNavbar({ restaurantId }) {
    // like state for testing
    const [isLike, setIsLike] = useState(false);
-   const { createLike, restaurant } = useRestaurant();
-   console.log(restaurant);
+   const { createLike } = useRestaurant();
    const handleClickLike = async () => {
       await createLike(restaurantId);
       setIsLike((prev) => !prev);

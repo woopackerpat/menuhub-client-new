@@ -8,14 +8,23 @@ function RestaurantContextProvider({ children }) {
 
   const [isEditRestaurant, setIsEditRestaurant] = useState(false);
 
+  // infinite Scroller
+  const [page, setPage] = useState(2);
+  const [totalData, setTotalData] = useState();
+  const limit = 6;
+
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchRestaurant = async () => {
     try {
       setIsLoading(true);
 
-      const res = await axios.get("/restaurant/all");
+      const res = await axios.get(`/restaurant/all?page=${1}&limit=${limit}`);
+
+      console.log(res.data);
       setRestaurant(res.data.allRestaurant);
+      setTotalData(res.data.totalRecords);
+      setPage(2);
     } catch (err) {
       console.log(err);
     } finally {
@@ -27,9 +36,21 @@ function RestaurantContextProvider({ children }) {
     fetchRestaurant();
   }, []);
 
+  const allLoadMore = async () => {
+    console.log("isLoadMore");
+    try {
+      const res = await axios.get(
+        `/restaurant/all?page=${page}&limit=${limit}`
+      );
+      setRestaurant([...restaurant, ...res.data.allRestaurant]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const createLike = async restaurantId => {
     try {
-      const res = await axios.put("/restaurant/like/" + restaurantId);
+      await axios.put("/restaurant/like/" + restaurantId);
       fetchRestaurant();
     } catch (err) {
       console.log(err);
@@ -44,7 +65,8 @@ function RestaurantContextProvider({ children }) {
         isEditRestaurant,
         setIsEditRestaurant,
         isLoading,
-        setIsLoading,
+        allLoadMore,
+        totalData,
       }}
     >
       {children}
