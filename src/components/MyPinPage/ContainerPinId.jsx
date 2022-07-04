@@ -1,11 +1,11 @@
-import { Masonry } from "@mui/lab"
-import { Box, Typography } from "@mui/material"
-import { usePin } from "../../contexts/PinContextProvider"
-import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant"
+import { Masonry } from "@mui/lab";
+import { Box, Typography } from "@mui/material";
+import { usePin } from "../../contexts/PinContextProvider";
+import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 
 function ContainerPinId() {
-  const { pinById } = usePin()
-  console.log(pinById)
+  const { pinById } = usePin();
+  console.log(pinById);
   return (
     <Box
       sx={{
@@ -16,7 +16,7 @@ function ContainerPinId() {
         gap: 2,
       }}
     >
-      <Typography variant='h5' fontWeight='bold'>
+      <Typography variant="h6" fontWeight="bold" sx={{ m: 2 }}>
         {pinById.name}
       </Typography>
       <Box>
@@ -34,10 +34,10 @@ function ContainerPinId() {
         </Masonry>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default ContainerPinId
+export default ContainerPinId;
 
 const data = [
   {
@@ -50,4 +50,4 @@ const data = [
     download_url:
       "https://images.pexels.com/photos/1824353/pexels-photo-1824353.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
-]
+];

@@ -1,4 +1,6 @@
+
 import { Button, IconButton, Skeleton, Typography } from "@mui/material";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
 import { Box } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
 import DropdownProfile from "./DropdownProfile";
@@ -7,14 +9,16 @@ import { useNavigate } from "react-router-dom";
 import { Scale } from "@mui/icons-material";
 import DropdownReport from "./DropdownReport";
 import { useRestaurant } from "../../../contexts/RestaurantContextProvider";
+import { useSearch } from "../../../contexts/SearchContextProvider"
 
 
 function CartItemsRestaurant({ Menus, items }) {
   const { name, id } = items;
   
   const ImageUrl = Menus[0]?.imageUrl;
-  
+  const { addClick } = useSearch()
   const navigate = useNavigate();
+
 
   const [show, setShow] = useState(false);
 
