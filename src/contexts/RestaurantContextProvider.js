@@ -5,9 +5,9 @@ const RestaurantContext = createContext();
 
 function RestaurantContextProvider({ children }) {
    const [restaurant, setRestaurant] = useState([]);
-
+   const [like, setLike] = useState(null);
    const [isEditRestaurant, setIsEditRestaurant] = useState(false);
-
+   console.log(like);
    // infinite Scroller
    const [page, setPage] = useState(2);
    const [totalData, setTotalData] = useState();
@@ -34,6 +34,11 @@ function RestaurantContextProvider({ children }) {
       }
    };
 
+   const fetchLike = async (restaurantId) => {
+      const res = await axios.get("/restaurant/getlike/" + restaurantId);
+      console.log(res.data);
+      setLike(res.data);
+   };
    useEffect(() => {
       fetchRestaurant();
    }, []);
@@ -52,8 +57,9 @@ function RestaurantContextProvider({ children }) {
 
    const createLike = async (restaurantId) => {
       try {
-         await axios.put("/restaurant/like/" + restaurantId);
-         fetchRestaurant();
+         const res = await axios.patch("/restaurant/like/" + restaurantId);
+         // setLike(res.data.Like);
+         fetchLike();
       } catch (err) {
          console.log(err);
       }
@@ -69,6 +75,8 @@ function RestaurantContextProvider({ children }) {
             isLoading,
             allLoadMore,
             totalData,
+            like,
+            fetchLike,
          }}
       >
          {children}
