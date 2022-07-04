@@ -9,9 +9,6 @@ function PinContextProvider({ children }) {
    const [createdPin, setCreatedPin] = useState([]);
    const [loading, setLoading] = useState(false);
 
-   console.log(pin.length, "length");
-   console.log(pin, "pin");
-
    const fetchPin = async () => {
       try {
          const res = await axios.get("/pin");

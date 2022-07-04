@@ -7,7 +7,7 @@ import DropdownShare from "./DropdownShare";
 import { useNavigate } from "react-router-dom";
 import DropdownReport from "./DropdownReport";
 
-function CartItemsMenus({ item, menu }) {
+function CartItemsMenus({ item, menu, restaurantId }) {
    const { title, imageUrl, id } = item;
    const navigate = useNavigate();
 
