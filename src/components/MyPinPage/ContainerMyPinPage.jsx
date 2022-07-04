@@ -1,11 +1,11 @@
-import { Box, CssBaseline } from "@mui/material"
-import { useLocation } from "react-router-dom"
-import AlbumCreated from "./createdMyPin/AlbumCreated"
-import HeaderMyPinPage from "./HeaderMyPinPage"
-import AlbumSaved from "./savedMyPin/AlbumSaved"
+import { Box, CssBaseline } from "@mui/material";
+import { useLocation } from "react-router-dom";
+import AlbumCreated from "./createdMyPin/AlbumCreated";
+import HeaderMyPinPage from "./HeaderMyPinPage";
+import AlbumSaved from "./savedMyPin/AlbumSaved";
 
 function ContainerMyPinPage() {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   return (
     <>
       <CssBaseline>
@@ -16,6 +16,6 @@ function ContainerMyPinPage() {
         </Box>
       </CssBaseline>
     </>
-  )
+  );
 }
-export default ContainerMyPinPage
+export default ContainerMyPinPage;

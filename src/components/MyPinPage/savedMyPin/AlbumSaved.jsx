@@ -1,10 +1,10 @@
-import { Box, Grid } from "@mui/material"
-import { usePin } from "../../../contexts/PinContextProvider"
-import ContainerAlbumCart from "./BlockAlbum/ContainerAlbumCart"
-import ContainerAllPins from "./ContainerAllPins"
+import { Box, Grid } from "@mui/material";
+import { usePin } from "../../../contexts/PinContextProvider";
+import ContainerAlbumCart from "./BlockAlbum/ContainerAlbumCart";
+import ContainerAllPins from "./ContainerAllPins";
 
 function AlbumSaved() {
-  const { pin } = usePin()
+  const { pin } = usePin();
   return (
     <Box
       sx={{
@@ -12,7 +12,7 @@ function AlbumSaved() {
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, 270px)",
         justifyContent: "center",
-        gap: 4,
+        gap: 2,
       }}
     >
       <ContainerAllPins pin={pin} />
@@ -24,10 +24,10 @@ function AlbumSaved() {
             name={pins.name}
             Restaurants={pins.Restaurants}
           />
-        )
+        );
       })}
     </Box>
-  )
+  );
 }
 
-export default AlbumSaved
+export default AlbumSaved;

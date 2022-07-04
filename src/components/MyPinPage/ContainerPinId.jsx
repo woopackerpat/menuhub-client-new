@@ -16,7 +16,7 @@ function ContainerPinId() {
         gap: 2,
       }}
     >
-      <Typography variant="h6" fontWeight="bold">
+      <Typography variant="h6" fontWeight="bold" sx={{ m: 2 }}>
         {pinById.name}
       </Typography>
       <Box>
