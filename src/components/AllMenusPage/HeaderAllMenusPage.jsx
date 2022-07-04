@@ -7,9 +7,12 @@ function HeaderAllMenusPage({ restaurantId, menus }) {
   const { pin, savePinRes } = usePin();
   const { isLoading, setIsLoading } = useRestaurant();
 
+  console.log(menus);
+
   const profilePin = pin?.slice(0, 1).map(el => el.id);
 
   const name = menus[0]?.Restaurant.name;
+  const imageUrl = menus[0]?.imageUrl;
 
   const pinId = profilePin[0];
 
@@ -42,7 +45,7 @@ function HeaderAllMenusPage({ restaurantId, menus }) {
           }}
         >
           <img
-            src="https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1095550.jpg&fm=jpg"
+            src={imageUrl || ""}
             alt="logo"
             style={{
               borderRadius: "50%",
