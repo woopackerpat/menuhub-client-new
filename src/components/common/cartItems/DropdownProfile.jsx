@@ -1,6 +1,5 @@
 import {
    Box,
-   Button,
    Divider,
    IconButton,
    Menu,
@@ -23,6 +22,8 @@ function DropdownProfile({ id, color }) {
    const [showDrop, setShowDrop] = useState(null);
    const [showProfileBtn, setShowProfileBtn] = useState(false);
    const [loading, setLoading] = useState(false);
+
+   // console.log("pin", pin);
 
    //Modal Create
    const [open, setOpen] = useState(false);
@@ -115,15 +116,17 @@ function DropdownProfile({ id, color }) {
             <Typography variant="caption">Save to board</Typography>
          </MenuItem>
          <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
-            {pin?.map((pins) => (
-               <BoxBoard
-                  Restaurants={pins.Restaurants}
-                  key={pins.id}
-                  name={pins.name}
-                  id={pins.id}
-                  restaurantId={id}
-               />
-            ))}
+            {pin?.map((pins) => {
+               return (
+                  <BoxBoard
+                     Restaurants={pins.Restaurants}
+                     key={pins.id}
+                     name={pins.name}
+                     pinId={pins.id}
+                     restaurantId={id}
+                  />
+               );
+            })}
          </Box>
 
          <Divider orientation="horizontal" />
