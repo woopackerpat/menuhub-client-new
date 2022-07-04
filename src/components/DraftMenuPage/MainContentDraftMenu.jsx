@@ -117,6 +117,7 @@ function MainContentDraftMenu({ restaurantId }) {
     <div>
       <Box sx={{ "& .MuiTextField-root": { m: 1, width: "50ch" } }}>
         <TextField
+          autoComplete= "off"
           required
           id="outlined-required"
           label="Restaurant name"
@@ -145,6 +146,7 @@ function MainContentDraftMenu({ restaurantId }) {
       </Box>
       <Box sx={{ "& .MuiTextField-root": { m: 1, width: "50ch" } }}>
         <TextField
+        autoComplete= "off"
           id="outlined-required"
           label="Line Id"
           onChange={(e) => setLineId(e.target.value)}
@@ -154,6 +156,7 @@ function MainContentDraftMenu({ restaurantId }) {
       </Box>
       <Box sx={{ "& .MuiTextField-root": { m: 1, width: "50ch" } }}>
         <TextField
+        autoComplete= "off"
           error={error?.phone && true}
           id="outlined-required"
           label="Phone number"
@@ -164,6 +167,7 @@ function MainContentDraftMenu({ restaurantId }) {
       </Box>
       <Box sx={{ "& .MuiTextField-root": { m: 1, width: "50ch" } }}>
         <TextField
+        autoComplete= "off"
           error={error?.website && true}
           id="outlined-required"
           label="Website"
