@@ -12,12 +12,12 @@ import { FacebookIcon, LineIcon, TwitterIcon, EmailIcon } from "react-share";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-function DropdownShare({shareId}) {
+function DropdownShare({id}) {
    const [showShare, setShowShare] = useState(null);
    const [shareLink, setShareLink] = useState()
 
    const location = useLocation()
-   const id = 5
+   // const id = 5
    
    const isMenuShare = Boolean(showShare);
    
@@ -29,18 +29,16 @@ function DropdownShare({shareId}) {
    };
    
    useEffect(() => {
-      if (shareId) {
-         
+      if (id) {
          if (location.pathname.split('/')[1] === 'allMenus' || location.pathname.split('/')[1] === 'singleMenu') {
-            setShareLink(`http://localhost:3000/singleMenu/${id.id}`)
+            setShareLink(`http://localhost:3000/singleMenu/${id}`)
          } else {
-            setShareLink(`http://localhost:3000/allMenus/${id.id}`)
+            setShareLink(`http://localhost:3000/allMenus/${id}`)
          }
       }
-   }, [shareId])
+   }, [id])
    
    const dropId = "drop-share";
-   console.log(shareId)
 
    const renderDropShareMenu = (
       <Menu
