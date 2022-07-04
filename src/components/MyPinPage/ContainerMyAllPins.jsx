@@ -1,30 +1,13 @@
 import { Masonry } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
 import { usePin } from "../../contexts/PinContextProvider";
+import { getAllPins } from "../../services/getAllPinsUnique";
 import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 
 function ContainerMyAllPins() {
   const { pin } = usePin();
-  const allPins = pin?.map(el => el.Restaurants);
-  // console.log(allPins);
 
-  // gather all restaurants into one array
-  const arr = [];
-  allPins.forEach(pins => {
-    pins.forEach(data => {
-      arr.push(data);
-    });
-  });
-  // console.log(arr);
-
-  // make it unique by id
-  let uniqueRes = [...new Map(arr?.map(item => [item["id"], item])).values()];
-  // console.log(uniqueRes);
-
-  // sort by createdAt
-  const allRestaurants = uniqueRes.sort(
-    (a, b) => new Date(b.createdAt).getDate() - new Date(a.createdAt).getDate()
-  );
+  const allRestaurants = getAllPins(pin);
   // console.log(allRestaurants);
 
   return (
