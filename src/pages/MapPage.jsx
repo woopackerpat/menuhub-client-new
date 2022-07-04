@@ -8,11 +8,18 @@ import { useMap } from "../contexts/MapContextProvider";
 import { useState, useEffect, createRef } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useSearch } from "../contexts/SearchContextProvider";
+import HeaderSearchPage from "../components/SearchPage/HeaderSearch";
 
 function MapPage() {
   const { places, childClicked, markId, isLoading } = useMap();
+  const { refId, parseMap } = useSearch()
 
   const [elRefs, setElRefs] = useState([]);
+
+  const handleSuggestionData = async () => {
+    parseMap(places)
+  }
 
   useEffect(() => {
     setElRefs((refs) =>
@@ -20,6 +27,7 @@ function MapPage() {
         .fill()
         .map((_, i) => refs[i] || createRef())
     );
+    handleSuggestionData()
   }, [places]);
 
   return (
@@ -33,14 +41,15 @@ function MapPage() {
           mt: "15px",
         }}
       >
-        <Typography variant="h5" sx={{ fontWeight: 600 }}>
+        {/* <Typography variant="h5" sx={{ fontWeight: 600 }}>
           Suggest only for you
-        </Typography>
-        <Suggestion />
+        </Typography> */}
+        <HeaderSearchPage refId={`${refId}`} />
+        {/* <Suggestion /> */}
       </Box>
       <Box sx={{ mb: "10px", pl: "10px", display: "flex" }}>
         <RoomIcon color="error" fontSize="large" />
-        <Typography variant="h6"  sx={{ ml: "10px" }}>
+        <Typography variant="h6" sx={{ ml: "10px" }}>
           Restaurants near Mint Tower
         </Typography>
       </Box>
@@ -59,10 +68,10 @@ function MapPage() {
             item
             xs={12}
             lg={6}
-            // sx={{
-            //   display: { xs: "none", lg: "block" },
+          // sx={{
+          //   display: { xs: "none", lg: "block" },
 
-            // }}
+          // }}
           >
             <GoogleMap />
           </Grid>
@@ -71,7 +80,7 @@ function MapPage() {
               <Paper
                 key={place.id}
                 sx={{ mx: "20px", my: "15px", p: "5px", borderRadius: "24px" }}
-                elevation= {1}
+                elevation={1}
                 ref={elRefs[i]}
               >
                 <HorizontalCard

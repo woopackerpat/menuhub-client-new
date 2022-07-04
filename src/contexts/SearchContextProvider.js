@@ -42,6 +42,10 @@ function SearchContextProvider({ children }) {
     }
   };
 
+  const parseMap = async (places) => {
+    setRefId(places[0].id)
+  }
+
   const inputSearch = (input) => {
     if (input.length > 0) {
       setSearch(input.name);
@@ -70,6 +74,7 @@ function SearchContextProvider({ children }) {
       value={{
         fetchData,
         parseData,
+        parseMap,
         inputSearch,
         addClick,
         data,
