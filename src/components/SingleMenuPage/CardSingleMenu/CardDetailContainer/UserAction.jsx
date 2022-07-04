@@ -31,7 +31,7 @@ function UserActionNavbar({ restaurantId }) {
       >
          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <DropdownReport />
-            <DropdownShare />
+            <DropdownShare id={restaurantId} />
             <IconButton
                sx={{
                   color: "black",
