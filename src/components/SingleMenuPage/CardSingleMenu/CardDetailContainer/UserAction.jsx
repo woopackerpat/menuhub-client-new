@@ -1,6 +1,4 @@
-import { useState } from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import ShareIcon from "@mui/icons-material/Share";
+import { useEffect, useState } from "react";
 import LinkIcon from "@mui/icons-material/Link";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -9,16 +7,26 @@ import DropdownProfile from "../../../common/cartItems/DropdownProfile";
 import { useRestaurant } from "../../../../contexts/RestaurantContextProvider";
 import DropdownShare from "../../../common/cartItems/DropdownShare";
 import DropdownReport from "../../../common/cartItems/DropdownReport";
+import axios from "../../../../config/axios";
 
 function UserActionNavbar({ restaurantId }) {
    // like state for testing
-   const [isLike, setIsLike] = useState(false);
+
+   const { like, fetchLike } = useRestaurant();
+   console.log(like);
+
    const { createLike } = useRestaurant();
    const handleClickLike = async () => {
       await createLike(restaurantId);
-      setIsLike((prev) => !prev);
-      console.log(restaurantId);
+      fetchLike(restaurantId);
    };
+
+   useEffect(() => {
+      if (restaurantId) {
+         fetchLike(restaurantId);
+         console.log("test");
+      }
+   }, [restaurantId]);
 
    return (
       <Box
@@ -45,7 +53,7 @@ function UserActionNavbar({ restaurantId }) {
                }}
                onClick={handleClickLike}
             >
-               {!isLike ? (
+               {like ? (
                   <FavoriteIcon fontSize="large" color="error" />
                ) : (
                   <FavoriteBorderIcon fontSize="large" />

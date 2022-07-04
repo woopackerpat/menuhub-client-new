@@ -4,79 +4,89 @@ import { createContext, useContext, useEffect, useState } from "react";
 const RestaurantContext = createContext();
 
 function RestaurantContextProvider({ children }) {
-  const [restaurant, setRestaurant] = useState([]);
+   const [restaurant, setRestaurant] = useState([]);
+   const [like, setLike] = useState(null);
+   const [isEditRestaurant, setIsEditRestaurant] = useState(false);
+   console.log(like);
+   // infinite Scroller
+   const [page, setPage] = useState(2);
+   const [totalData, setTotalData] = useState();
+   const limit = 6;
 
-  const [isEditRestaurant, setIsEditRestaurant] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
 
-  // infinite Scroller
-  const [page, setPage] = useState(2);
-  const [totalData, setTotalData] = useState();
-  const limit = 6;
+   const fetchRestaurant = async () => {
+      try {
+         setIsLoading(true);
 
-  const [isLoading, setIsLoading] = useState(false);
+         const res = await axios.get(
+            `/restaurant/all?page=${1}&limit=${limit}`
+         );
 
-  const fetchRestaurant = async () => {
-    try {
-      setIsLoading(true);
+         console.log(res.data);
+         setRestaurant(res.data.allRestaurant);
+         setTotalData(res.data.totalRecords);
+         setPage(2);
+      } catch (err) {
+         console.log(err);
+      } finally {
+         setIsLoading(false);
+      }
+   };
 
-      const res = await axios.get(`/restaurant/all?page=${1}&limit=${limit}`);
-
+   const fetchLike = async (restaurantId) => {
+      const res = await axios.get("/restaurant/getlike/" + restaurantId);
       console.log(res.data);
-      setRestaurant(res.data.allRestaurant);
-      setTotalData(res.data.totalRecords);
-      setPage(2);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchRestaurant();
-  }, []);
-
-  const allLoadMore = async () => {
-    console.log("isLoadMore");
-    try {
-      const res = await axios.get(
-        `/restaurant/all?page=${page}&limit=${limit}`
-      );
-      setRestaurant([...restaurant, ...res.data.allRestaurant]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const createLike = async restaurantId => {
-    try {
-      await axios.put("/restaurant/like/" + restaurantId);
+      setLike(res.data);
+   };
+   useEffect(() => {
       fetchRestaurant();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+   }, []);
 
-  return (
-    <RestaurantContext.Provider
-      value={{
-        restaurant,
-        createLike,
-        isEditRestaurant,
-        setIsEditRestaurant,
-        isLoading,
-        allLoadMore,
-        totalData,
-      }}
-    >
-      {children}
-    </RestaurantContext.Provider>
-  );
+   const allLoadMore = async () => {
+      console.log("isLoadMore");
+      try {
+         const res = await axios.get(
+            `/restaurant/all?page=${page}&limit=${limit}`
+         );
+         setRestaurant([...restaurant, ...res.data.allRestaurant]);
+      } catch (err) {
+         console.log(err);
+      }
+   };
+
+   const createLike = async (restaurantId) => {
+      try {
+         const res = await axios.patch("/restaurant/like/" + restaurantId);
+         // setLike(res.data.Like);
+         fetchLike();
+      } catch (err) {
+         console.log(err);
+      }
+   };
+
+   return (
+      <RestaurantContext.Provider
+         value={{
+            restaurant,
+            createLike,
+            isEditRestaurant,
+            setIsEditRestaurant,
+            isLoading,
+            allLoadMore,
+            totalData,
+            like,
+            fetchLike,
+         }}
+      >
+         {children}
+      </RestaurantContext.Provider>
+   );
 }
 
 const useRestaurant = () => {
-  const ctx = useContext(RestaurantContext);
-  return ctx;
+   const ctx = useContext(RestaurantContext);
+   return ctx;
 };
 
 export default RestaurantContextProvider;

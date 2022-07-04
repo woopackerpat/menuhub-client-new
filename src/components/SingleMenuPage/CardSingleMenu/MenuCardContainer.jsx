@@ -42,9 +42,13 @@ function MenuCardContainer({ menuId }) {
    useEffect(() => {
       const fetchMenus = async () => {
          try {
-            setIsLoading(true);
-            const res = await axios.get("/restaurant/menuall/" + restaurantId);
-            setAllMenus(res.data.Menus);
+            if (restaurantId) {
+               setIsLoading(true);
+               const res = await axios.get(
+                  "/restaurant/menuall/" + restaurantId
+               );
+               setAllMenus(res.data.Menus);
+            }
          } catch (err) {
             console.log(err);
          } finally {
