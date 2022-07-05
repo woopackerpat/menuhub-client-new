@@ -67,10 +67,15 @@ function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize
                     sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
                     src={profilePicUrl}
                 />
-            ) : (
+            ) : firstName ? (
                 <Avatar
                     sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
                     {...stringAvatar(`${firstName} ${lastName}`)}
+                />
+            ) : (
+                <Avatar
+                    sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
+                    // src={profilePicUrl}
                 />
             )}
         </div>
