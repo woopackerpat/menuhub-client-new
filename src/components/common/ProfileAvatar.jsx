@@ -2,7 +2,7 @@ import { Avatar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContextProvider";
 
-function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize, commenter}) {
+function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize, commenterPic, commenterFirstName, commenterLastName}) {
     const { user } = useAuth()
     const { profilePicUrl, firstName, lastName } = user
     const [fullName, setFullname] = useState()
@@ -52,6 +52,16 @@ function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize
                 sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
                 src={profilePicEdit}
             />
+            ) : commenterPic ? (
+                <Avatar
+                    sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
+                    src={commenterPic}
+                />
+            ) : commenterFirstName ? (
+                <Avatar
+                    sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
+                    {...stringAvatar(`${commenterFirstName} ${commenterLastName}`)}
+                />
             ) : profilePicUrl ? (
                 <Avatar
                     sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
