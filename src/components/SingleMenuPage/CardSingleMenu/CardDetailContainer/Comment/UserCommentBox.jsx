@@ -17,6 +17,7 @@ import { useState } from "react";
 import DropdownCommentEdit from "./DropdownCommentEdit";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import ProfileAvatar from "../../../../common/ProfileAvatar";
 
 function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
    dayjs.extend(relativeTime);
@@ -87,7 +88,12 @@ function UserCommentBox({ comment, fetchMenusById, setComments, menuId }) {
                >
                   <Link href={`/myPin`}>
                      <IconButton size="small">
-                        <Avatar src={profilePicUrl} />
+                        <ProfileAvatar 
+                        commenterPic={profilePicUrl}
+                        commenterFirstName={firstName}
+                        commenterLastName={lastName}
+                        />
+                        {/* <Avatar src={profilePicUrl} /> */}
                      </IconButton>
                   </Link>
                   <Box

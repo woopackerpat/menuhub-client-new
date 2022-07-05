@@ -12,6 +12,9 @@ function DetailContainer({
    comments,
    menuId,
    restaurantId,
+   creator,
+   websiteUrl,
+   posts
 }) {
    return (
       <Box
@@ -23,7 +26,7 @@ function DetailContainer({
          }}
       >
          <UserAction restaurantId={restaurantId} />
-         <MenuInfo description={description} title={title} />
+         <MenuInfo description={description} title={title} creator={creator} websiteUrl={websiteUrl} posts={posts}/>
          <DropdownComment
             fetchMenusById={fetchMenusById}
             comments={comments}
