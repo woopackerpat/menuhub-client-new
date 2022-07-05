@@ -1,4 +1,4 @@
-import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, Grid, Typography, useMediaQuery } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -43,66 +43,90 @@ function HeaderSearchPage(props) {
       } else if (isIpad) {
         setList(listRestaurant.slice(0, 4));
       } else if (isDesktop) {
-        setList(listRestaurant.slice(0, 7));
+        setList(listRestaurant.slice(0, 5));
       } else {
-        setList(listRestaurant.slice(0, 9));
+        setList(listRestaurant.slice(0, 6));
       }
     }
   }, [listRestaurant]);
 
+  const color = [
+    "564e4e",
+    "564242",
+    "563131",
+    "542121",
+    "591212",
+    "5b0909",
+    "6d6565",
+    "870909",
+    "994040",
+    "a07272",
+    "a05272",
+  ];
+
   return (
-    <div>
-      <Box
+    <>
+      <Grid
         sx={{
           display: "flex",
           alignItems: "center",
-          // justifyContent: "space-between",
+          justifyContent: "space-between",
         }}
+        container
       >
-        <Typography
-          variant="h5"
-          // gutterBottom
-        >
-          Suggestions:
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            gap: 1,
-            flexWrap: "wrap",
-            pl: "2em",
-          }}
-        >
-          {list ? (
-            list?.map((suggestion) => (
-              <Button
-                key={suggestion.id}
-                sx={{
-                  padding: 2,
-                  backgroundColor: "#767676",
-                  color: "white",
-                  borderRadius: "36px",
-                  textTransform: "none",
+        <Grid item xs={2}>
+          <Typography
+            variant="h5"
 
-                  "&:hover": {
-                    color: "#000000",
-                    backgroundColor: "#efefef",
-                  },
-                }}
-                onClick={() => {
-                  inputSearch(suggestion.name);
-                  // navigate(`../search?search=${suggestion.name}`)
-                }}
-              >
-                <Typography>{suggestion.name}</Typography>
-              </Button>
-            ))
-          ) : (
-            <div></div>
-          )}
-        </Box>
-      </Box>
-    </div>
+            // gutterBottom
+          >
+            Suggestions:
+          </Typography>
+        </Grid>
+        <Grid item xs={10} sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: 1,
+              // flexWrap: "wrap",
+              // pl: "2em",
+            }}
+          >
+            {list ? (
+              list?.map((suggestion, idx) => (
+                <Button
+                  key={suggestion.id}
+                  sx={{
+                    padding: 2,
+                    backgroundColor: `#${color[Math.ceil(Math.random()*10)]}`,
+                    color: "white",
+                    borderRadius: "36px",
+                    textTransform: "none",
+                    
+                    "&:hover": {
+                      color: "#000000",
+                      backgroundColor: "#efefef",
+                    },
+                    
+                  }}
+                  
+                  onClick={() => {
+                    inputSearch(suggestion.name);
+                    // navigate(`../search?search=${suggestion.name}`)
+                  }}
+                  className = "transition-hover"
+                >
+                  <Typography>{suggestion.name}</Typography>
+                </Button>
+              ))
+            ) : (
+              <div></div>
+            )}
+          </Box>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 
