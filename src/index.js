@@ -7,6 +7,7 @@ import AuthContextProvider from "./contexts/AuthContextProvider";
 import PinContextProvider from "./contexts/PinContextProvider";
 import RestaurantContextProvider from "./contexts/RestaurantContextProvider";
 import SearchContextProvider from "./contexts/SearchContextProvider";
+import SuccessContextProvider from "./contexts/SuccessContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,11 +15,13 @@ root.render(
    <BrowserRouter>
       <AuthContextProvider>
          <PinContextProvider>
-            <RestaurantContextProvider>
-               <SearchContextProvider>
-                  <App />
-               </SearchContextProvider>
-            </RestaurantContextProvider>
+            <SuccessContextProvider>
+               <RestaurantContextProvider>
+                  <SearchContextProvider>
+                     <App />
+                  </SearchContextProvider>
+               </RestaurantContextProvider>
+            </SuccessContextProvider>
          </PinContextProvider>
       </AuthContextProvider>
    </BrowserRouter>

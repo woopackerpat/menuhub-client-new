@@ -124,9 +124,11 @@ function MenuCardContainer({ menuId }) {
                columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
                spacing={2}
             >
-               {allMenus?.map((item) => (
-                  <CartItemsMenus key={item.id} item={item} />
-               ))}
+               {allMenus?.map((item) => {
+                  if (item.id !== id) {
+                     return <CartItemsMenus key={item.id} item={item} />;
+                  }
+               })}
             </Masonry>
          </Box>
       </>

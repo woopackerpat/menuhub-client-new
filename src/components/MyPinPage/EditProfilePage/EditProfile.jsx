@@ -8,32 +8,25 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useAuth } from "../../../contexts/AuthContextProvider";
-import EditPassword from "./EditPassword";
+import { useSuccess } from "../../../contexts/SuccessContextProvider";
+import ToastMessage from "../../common/ToastMessage";
 
 function EditProfile() {
+   const { success, setSuccess } = useSuccess();
    const { user, EditUser } = useAuth();
    const { firstName, lastName, email, profilePicUrl } = user;
+   const [openToast, setOpenToast] = useState(false);
 
    const [nameEdit, setNameEdit] = useState(firstName || "");
    const [nameLastEdit, setNameLastEdit] = useState(lastName || "");
    const [profilePicEdit, setProfilePicEdit] = useState(null);
 
-   // Modal for Password Edit
-   const [openPassword, setOpenPassword] = useState(false);
-
-   const handleClickOpen = () => {
-      setOpenPassword(true);
-   };
-
-   const handleClosePass = () => {
-      setOpenPassword(false);
-   };
-   // ************************************
-
    const handleSubmitEdit = async (e) => {
       try {
          e.preventDefault();
-         await EditUser(nameEdit, nameLastEdit, profilePicEdit);
+         const res = await EditUser(nameEdit, nameLastEdit, profilePicEdit);
+         setSuccess(res.data.message);
+         setOpenToast(true);
       } catch (err) {
          console.log(err);
       }
@@ -107,13 +100,7 @@ function EditProfile() {
                />
             </Box>
             <TextField disabled fullWidth value={email} />
-            {/* <Button
-               variant="contained"
-               fullWidth
-               onClick={() => handleClickOpen}
-            >
-               Edit password
-            </Button> */}
+
             <Box sx={{ display: "flex", gap: 2 }}>
                <Button
                   variant="contained"
@@ -130,9 +117,8 @@ function EditProfile() {
                   Save
                </Button>
             </Box>
+            {success && <ToastMessage openToast={openToast} text={success} />}
          </Box>
-
-         {/* <EditPassword handleClosePass={handleClosePass} open={openPassword} /> */}
       </>
    );
 }

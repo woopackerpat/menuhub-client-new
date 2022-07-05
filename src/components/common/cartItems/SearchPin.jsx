@@ -1,9 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect } from "react";
-import { useRef } from "react";
 import { useState } from "react";
-import { usePin } from "../../contexts/PinContextProvider";
-import { useSearch } from "../../contexts/SearchContextProvider";
+import { usePin } from "../../../contexts/PinContextProvider";
 const { styled, InputBase } = require("@mui/material");
 
 const Search = styled("div")(({ theme }) => ({
@@ -40,7 +38,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    color: "inherit",
    "& .MuiInputBase-input": {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create("width"),
       width: "100%",
@@ -50,35 +47,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    },
 }));
 
-function SearchBar() {
-   const { inputSearch, search } = useSearch();
-   const [input, setInput] = useState();
-   const { pin, setPin } = usePin();
+function SearchPin({ searchPin, setSearchPin, createdPin }) {
+   const [input, setInput] = useState("");
 
    const handleInput = (e) => {
+      e.stopPropagation();
       setInput(e.target.value);
-      console.log(input);
-   };
 
-   const handleSubmit = async (e) => {
-      try {
-         e.preventDefault();
-         inputSearch(input);
-         setInput("");
-      } catch {
-         console.log("handleSubmit error");
+      if (e.target.value) {
+         const filterPin = searchPin?.filter((el) => {
+            // console.log(el.name.toLowerCase().includes(input));
+            return el.name.toLowerCase().includes(e.target.value.toLowerCase());
+         });
+         setSearchPin(filterPin);
       }
+      if (e.target.value === "") setSearchPin(createdPin);
    };
-
-   useEffect(() => {}, [search]);
 
    return (
-      <form
-         onSubmit={(e) => {
-            handleSubmit(e);
-         }}
-         style={{ width: "100%" }}
-      >
+      <form style={{ width: "100%" }}>
          <Search>
             <SearchIconWrapper>
                <SearchIcon style={{ color: "#727272", fontSize: "30px" }} />
@@ -88,11 +75,11 @@ function SearchBar() {
                inputProps={{ "aria-label": "search" }}
                sx={{ display: "flex", flex: 1, height: "50px" }}
                value={input}
-               onChange={handleInput}
+               onChange={(e) => handleInput(e)}
             />
          </Search>
       </form>
    );
 }
 
-export default SearchBar;
+export default SearchPin;
