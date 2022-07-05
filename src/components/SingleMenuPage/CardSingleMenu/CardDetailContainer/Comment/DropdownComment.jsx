@@ -13,7 +13,7 @@ function DropdownComment({
 }) {
    const [show, setShow] = useState(true);
    return (
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1, mt: "30px" }}>
          <Box
             sx={{
                display: "flex",
