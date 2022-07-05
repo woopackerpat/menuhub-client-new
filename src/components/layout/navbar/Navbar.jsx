@@ -23,6 +23,7 @@ import SearchBar from "../../common/SearchBar";
 import { useMap } from "../../../contexts/MapContextProvider";
 import LocationSearch from "../../HomePage/LocationSearch";
 import { useAuth } from "../../../contexts/AuthContextProvider";
+import ProfileAvatar from "../../common/ProfileAvatar";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -163,9 +164,10 @@ function Navbar() {
                 alignItems: "center",
               }}
             >
-              <Link href="/myPin">
+              <Link href="/myPin" sx={{textDecoration: "none"}}>
                 <IconButton size="small">
-                  <Avatar sx={{ cursor: "pointer", width: 32, height: 32 }} src={profilePicUrl} />
+                  <ProfileAvatar cursor="pointer" width={`${23}`} height={`${23}`} />
+                  {/* <Avatar sx={{ cursor: "pointer", width: 32, height: 32 }} src={profilePicUrl} /> */}
                 </IconButton>
               </Link>
               <IconButton
