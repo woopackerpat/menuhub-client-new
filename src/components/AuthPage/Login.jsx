@@ -105,7 +105,10 @@ function Login({ handleClose, variant, color, sx, title }) {
                         <b>Privacy Policy</b>
                      </Box>
                      <hr style={{ width: "60%", marginTop: "25px" }} />
-                     <Register title="Not on Pinterest yet? Sign up" />
+                     <Register
+                        title="Not on Pinterest yet? Sign up"
+                        setOpenLogin={setOpen}
+                     />
 
                      <Box sx={{ mb: "20px" }}>
                         <b>Are you a business? Get started here!</b>

@@ -12,11 +12,21 @@ import RegisterForm from "./RegisterForm";
 import LoginGoogle from "./LoginGoogle";
 import { useState } from "react";
 import Login from "./Login";
+import { useEffect } from "react";
 
-function Register({ title, variant, color, sx }) {
+function Register({ title, variant, color, sx, setOpenLogin }) {
    const [open, setOpen] = useState(false);
    const handleCloseRegister = () => {
       setOpen(false);
+   };
+
+   const handleSetOpenRegister = () => {
+      if (setOpenLogin) {
+         setOpenLogin((p) => !p);
+
+         return;
+      }
+      setOpen((p) => !p);
    };
 
    return (
@@ -26,7 +36,7 @@ function Register({ title, variant, color, sx }) {
             color={color}
             sx={sx}
             component="button"
-            onClick={() => setOpen((p) => !p)}
+            onClick={() => handleSetOpenRegister()}
          >
             <b>{title}</b>
          </Button>
