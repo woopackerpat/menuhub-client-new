@@ -2,7 +2,7 @@ import { Avatar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContextProvider";
 
-function ProfileAvatar({ cursor, width, height, margin }) {
+function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize}) {
     const { user } = useAuth()
     const { profilePicUrl, firstName, lastName } = user
     const [fullName, setFullname] = useState()
@@ -34,7 +34,8 @@ function ProfileAvatar({ cursor, width, height, margin }) {
                 cursor,
                 width,
                 height,
-                margin
+                margin,
+                fontSize
             },
             children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
         };
@@ -42,11 +43,16 @@ function ProfileAvatar({ cursor, width, height, margin }) {
 
     useEffect(() => {
         console.log(width)
-    }, [])
+    }, [profilePicEdit])
 
     return (
         <div>
-            {profilePicUrl ? (
+            {profilePicEdit ? (
+                <Avatar
+                sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
+                src={profilePicEdit}
+            />
+            ) : profilePicUrl ? (
                 <Avatar
                     sx={{ cursor: `${cursor}`, width: `${width}`, height: `${height}`, margin: margin }}
                     src={profilePicUrl}
