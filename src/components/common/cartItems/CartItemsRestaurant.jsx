@@ -136,7 +136,7 @@ function CartItemsRestaurant({ Menus, items }) {
                   left: 12,
                 }}
               >
-                {<DropdownProfile shareId={`${id}`} />}
+                {<DropdownProfile restaurantId={id} />}
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
                 <ButtonSaveProfile

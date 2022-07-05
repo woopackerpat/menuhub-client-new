@@ -1,11 +1,16 @@
 import { Masonry } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { usePin } from "../../contexts/PinContextProvider";
 import CartItemsPinId from "../common/cartItems/CartItemsPinId";
 
-function ContainerPinId() {
-  const { pinById } = usePin();
-  console.log(pinById);
+function ContainerPinId({ id }) {
+  const { pinById, fetchPinById } = usePin();
+
+  useEffect(() => {
+    fetchPinById(id);
+  }, []);
+
   return (
     <Box
       sx={{
