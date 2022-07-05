@@ -8,7 +8,7 @@ function ContainerMyAllPins() {
   const { pin } = usePin();
 
   const allRestaurants = getAllPins(pin);
-  // console.log(allRestaurants);
+  console.log(allRestaurants);
 
   return (
     <Box
@@ -23,22 +23,20 @@ function ContainerMyAllPins() {
       <Typography variant="h6" fontWeight="bold" sx={{ m: 2 }}>
         All Pins
       </Typography>
-      <Box>
-        {pin && (
-          <Masonry
-            columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
-            spacing={2}
-          >
-            {allRestaurants?.map(items => (
-              <CartItemsRestaurant
-                key={items.id}
-                Menus={items.Menus}
-                items={items}
-              />
-            ))}
-          </Masonry>
-        )}
-      </Box>
+      {pin && (
+        <Masonry
+          columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
+          spacing={2}
+        >
+          {allRestaurants?.map(items => (
+            <CartItemsRestaurant
+              key={items.id}
+              Menus={items.Menus}
+              items={items}
+            />
+          ))}
+        </Masonry>
+      )}
     </Box>
   );
 }

@@ -8,17 +8,15 @@ import DropdownReport from "./DropdownReport";
 import { useRestaurant } from "../../../contexts/RestaurantContextProvider";
 import { useSearch } from "../../../contexts/SearchContextProvider";
 import { usePin } from "../../../contexts/PinContextProvider";
-import ButtonSaveProfile from "../ButtonSaveProfile";
+import ButtonSave from "../ButtonSave";
 
-function CartItemsRestaurant({ Menus, items }) {
-  const { pin, savePinRes } = usePin();
+function CartItemsPinId({ pinId, Menus, items }) {
+  const { savePinRes } = usePin();
   const { name, id } = items;
 
   const { addClick } = useSearch();
-  const profilePin = pin?.slice(0, 1).map(el => el.id);
 
   const restaurantId = id;
-  const pinId = profilePin[0];
 
   const ImageUrl = Menus[0]?.imageUrl;
   const navigate = useNavigate();
@@ -89,7 +87,7 @@ function CartItemsRestaurant({ Menus, items }) {
                 <DropdownProfile restaurantId={id} />
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSaveProfile
+                <ButtonSave
                   loading={isLoading}
                   onClick={handleSaveRestaurant}
                   restaurantId={id}
@@ -139,7 +137,7 @@ function CartItemsRestaurant({ Menus, items }) {
                 {<DropdownProfile shareId={`${id}`} />}
               </Box>
               <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSaveProfile
+                <ButtonSave
                   loading={isLoading}
                   onClick={handleSaveRestaurant}
                   restaurantId={id}
@@ -160,13 +158,11 @@ function CartItemsRestaurant({ Menus, items }) {
               </Box>
             </>
           )}
-          <Typography fontWeight="bold" sx={{ pl: "12px" }}>
-            {name}
-          </Typography>
+          <Typography fontWeight="bold">{name}</Typography>
         </>
       )}
     </Box>
   );
 }
 
-export default CartItemsRestaurant;
+export default CartItemsPinId;

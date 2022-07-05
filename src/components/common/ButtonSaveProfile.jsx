@@ -3,14 +3,16 @@ import { useState } from "react";
 import { usePin } from "../../contexts/PinContextProvider";
 import { getAllPins } from "../../services/getAllPinsUnique";
 
-function ButtonSave({ onClick, loading, restaurantId, pinId }) {
+function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
   const [deleting, setDeleting] = useState(false);
 
   const { pin, removeRestaurant } = usePin();
+
   const allRes = getAllPins(pin);
-  const isSaved = allRes
-    ?.slice(1, allRes?.length)
-    .findIndex(el => el.id === +restaurantId);
+
+  const isSaved = allRes?.findIndex(
+    el => el.id === +restaurantId && el.Pin_Restaurant.PinId === pinId
+  );
 
   const handleRemoveRes = async () => {
     try {
@@ -50,4 +52,4 @@ function ButtonSave({ onClick, loading, restaurantId, pinId }) {
   );
 }
 
-export default ButtonSave;
+export default ButtonSaveProfile;
