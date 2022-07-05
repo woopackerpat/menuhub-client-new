@@ -7,8 +7,7 @@ import DropdownProfile from "../../../common/cartItems/DropdownProfile";
 import { useRestaurant } from "../../../../contexts/RestaurantContextProvider";
 import DropdownShare from "../../../common/cartItems/DropdownShare";
 import DropdownReport from "../../../common/cartItems/DropdownReport";
-import axios from "../../../../config/axios";
-import ButtonSave from "../../../common/ButtonSave";
+import ButtonSaveProfile from "../../../common/ButtonSaveProfile";
 import { usePin } from "../../../../contexts/PinContextProvider";
 
 function UserActionNavbar({ restaurantId }) {
@@ -82,10 +81,11 @@ function UserActionNavbar({ restaurantId }) {
       </Box>
       <Box sx={{ display: "flex" }}>
         <DropdownProfile color="dark" id={restaurantId} />
-        <ButtonSave
+        <ButtonSaveProfile
           loading={loading}
           onClick={handleSaveRestaurant}
           restaurantId={restaurantId}
+          pinId={pinId}
         />
       </Box>
     </Box>

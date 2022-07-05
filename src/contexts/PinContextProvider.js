@@ -90,10 +90,12 @@ function PinContextProvider({ children }) {
     }
   };
 
-  const RemoveRestaurant = async (restaurantId, pinId) => {
+  const removeRestaurant = async (restaurantId, pinId) => {
     try {
       setLoading(true);
-      await axios.delete("/pin/restaurant", { restaurantId, pinId });
+      await axios.delete(
+        `/pin/restaurant?restaurantId=${restaurantId}&pinId=${pinId}`
+      );
       fetchPin();
     } catch (err) {
       console.log(err);
@@ -112,7 +114,7 @@ function PinContextProvider({ children }) {
         loading,
         deletePin,
         savePinRes,
-        RemoveRestaurant,
+        removeRestaurant,
         fetchPinById,
         fetchMyCreated,
       }}

@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllPins } from "../../../services/getAllPinsUnique";
 import ItemCardSaved from "./ItemCardSaved";
@@ -13,8 +14,9 @@ function ContainerAllPins({ pin }) {
   const img4 = getImage[3]?.Menus[0]?.imageUrl;
 
   const navigate = useNavigate();
+
   return (
-    <Box onClick={() => navigate("/myPin/allPins")}>
+    <Box onClick={() => navigate("/myPin/allPins")} className="hvr-grow">
       <Box
         sx={{
           position: "relative",

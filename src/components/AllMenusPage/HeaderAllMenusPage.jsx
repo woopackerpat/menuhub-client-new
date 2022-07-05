@@ -1,8 +1,7 @@
 import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
 import { usePin } from "../../contexts/PinContextProvider";
-import { useRestaurant } from "../../contexts/RestaurantContextProvider";
-import ButtonSave from "../common/ButtonSave";
+import ButtonSaveProfile from "../common/ButtonSaveProfile";
 
 function HeaderAllMenusPage({ restaurantId, menus }) {
   const [loading, setLoading] = useState(false);
@@ -75,10 +74,11 @@ function HeaderAllMenusPage({ restaurantId, menus }) {
             </Typography>
           </Box>
         </Box>
-        <ButtonSave
+        <ButtonSaveProfile
           loading={loading}
           onClick={handleSaveRestaurant}
           restaurantId={restaurantId}
+          pinId={pinId}
         />
       </Box>
       <Backdrop
