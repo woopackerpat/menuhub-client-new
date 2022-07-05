@@ -13,6 +13,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Avatar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import ProfileAvatar from "../../common/ProfileAvatar";
 
 function SidebarMobile() {
    const [state, setState] = React.useState({
@@ -67,10 +68,11 @@ function SidebarMobile() {
          onClick={toggleDrawer(anchor, false)}
          onKeyDown={toggleDrawer(anchor, false)}
       >
-         <Avatar
-            sx={{ margin: "0.5rem auto", width: "50px", height: "50px" }}
+         <ProfileAvatar margin="0.5rem auto" width="50px" height="50px" />
+         {/* <Avatar
+            sx={{ margin: "0.5rem auto", width: "100px", height: "100px" }}
             alt="profilePic"
-         />
+         /> */}
          <Divider />
          <List>
             {listItems.map((item) => (

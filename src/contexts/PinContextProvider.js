@@ -109,6 +109,7 @@ function PinContextProvider({ children }) {
       value={{
         createNewPin,
         pin,
+        setPin,
         pinById,
         createdPin,
         loading,

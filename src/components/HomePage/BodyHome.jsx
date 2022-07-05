@@ -3,26 +3,39 @@ import { Backdrop, Box, CircularProgress } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroller";
 import { useRestaurant } from "../../contexts/RestaurantContextProvider";
 import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
+import Spinner from "../common/Spinner";
 
 function BodyHome() {
    const { restaurant, isLoading, allLoadMore, totalData } = useRestaurant();
-
-   console.log(restaurant.length < totalData);
 
    return (
       <>
          <InfiniteScroll
             hasMore={restaurant.length < totalData}
-            loadMore={allLoadMore}
+            loadMore={() =>
+               setTimeout(() => {
+                  allLoadMore();
+               }, 1000)
+            }
+            loader={
+               <Box sx={{ display: "flex", justifyContent: "center", gap: 4 }}>
+                  <Spinner />
+               </Box>
+            }
             pageStart={0}
+            endMessage={
+               <p style={{ textAlign: "center" }}>
+                  <b>Yay! you have seen it all</b>
+               </p>
+            }
          >
             <Masonry
                columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
                spacing={2}
             >
-               {restaurant?.map((items) => (
+               {restaurant?.map((items, idx) => (
                   <CartItemsRestaurant
-                     key={items.id}
+                     key={idx}
                      Menus={items.Menus}
                      items={items}
                   />

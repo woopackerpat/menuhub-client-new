@@ -16,6 +16,8 @@ import AddImage from "./AddImage";
 import CartUpload from "./CartUpload";
 import DropdownCardMenu from "./DropdownCardMenu";
 import { uploadImage } from "../../../services/uploadImage";
+import ProfileAvatar from "../../common/ProfileAvatar";
+
 
 function CardAddMenus({
   idx,
@@ -193,7 +195,8 @@ function CardAddMenus({
                       gap: 4,
                     }}
                   >
-                    <Avatar src = {creator.profilePicUrl}/>
+                    <ProfileAvatar commenterPic={creator.profilePicUrl} />
+                    {/* <Avatar src = {creator.profilePicUrl}/> */}
                     <Typography sx={{ fontWeight: "600" }}>
                       {creator.firstName} {creator.lastName}
                     </Typography>

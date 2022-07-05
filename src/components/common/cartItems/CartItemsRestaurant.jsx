@@ -160,7 +160,9 @@ function CartItemsRestaurant({ Menus, items }) {
               </Box>
             </>
           )}
-          <Typography fontWeight="bold">{name}</Typography>
+          <Typography fontWeight="bold" sx={{ pl: "12px" }}>
+            {name}
+          </Typography>
         </>
       )}
     </Box>
