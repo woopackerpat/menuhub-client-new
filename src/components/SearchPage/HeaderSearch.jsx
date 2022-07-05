@@ -117,7 +117,7 @@ function HeaderSearchPage(props) {
                   }}
                   className = "transition-hover"
                 >
-                  <Typography>{suggestion.name}</Typography>
+                  <Typography>{suggestion.name.length > 18 ? suggestion.name.slice(0,18) + "...": suggestion.name}</Typography>
                 </Button>
               ))
             ) : (
