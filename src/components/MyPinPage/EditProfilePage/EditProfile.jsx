@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useAuth } from "../../../contexts/AuthContextProvider";
 import { useSuccess } from "../../../contexts/SuccessContextProvider";
 import ToastMessage from "../../common/ToastMessage";
+import ProfileAvatar from "../../common/ProfileAvatar";
 
 function EditProfile() {
    const { success, setSuccess } = useSuccess();
@@ -62,14 +63,22 @@ function EditProfile() {
             <Box>
                <Typography color="#767676">Photo</Typography>
                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                  <Avatar
-                     sx={{ width: "150px", height: "150px" }}
-                     src={
-                        profilePicEdit
-                           ? URL.createObjectURL(profilePicEdit)
-                           : profilePicUrl
-                     }
-                  />
+                  {profilePicEdit ? (
+                     <Avatar
+                        sx={{ width: "150px", height: "150px" }}
+                        src={
+                           profilePicEdit
+                              ? URL.createObjectURL(profilePicEdit)
+                              : profilePicUrl
+                        }
+                     />
+                  ) : (
+                     <ProfileAvatar
+                        width="150px"
+                        height="150px"
+                        fontSize="100px"
+                     />
+                  )}
                   <Box>
                      <Button variant="contained" color="error">
                         <label htmlFor={`icon-button-file`}>

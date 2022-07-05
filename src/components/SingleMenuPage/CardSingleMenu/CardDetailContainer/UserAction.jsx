@@ -13,7 +13,6 @@ function UserActionNavbar({ restaurantId }) {
    // like state for testing
 
    const { like, fetchLike } = useRestaurant();
-   console.log(like);
 
    const { createLike } = useRestaurant();
    const handleClickLike = async () => {
@@ -24,7 +23,6 @@ function UserActionNavbar({ restaurantId }) {
    useEffect(() => {
       if (restaurantId) {
          fetchLike(restaurantId);
-         console.log("test");
       }
    }, [restaurantId]);
 

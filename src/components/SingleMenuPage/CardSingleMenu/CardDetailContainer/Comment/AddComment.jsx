@@ -10,6 +10,8 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { useAuth } from "../../../../../contexts/AuthContextProvider";
+import ProfileAvatar from "../../../../common/ProfileAvatar";
+
 function AddComment({ comments, id, setComments, fetchMenusById }) {
    const [isComment, setIsComment] = useState(false);
    const [text, setText] = useState("");
@@ -98,13 +100,14 @@ function AddComment({ comments, id, setComments, fetchMenusById }) {
             </Box>
          ) : (
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-               <Link href="/myPin">
+               <Link href="/myPin" sx={{textDecoration: "none"}}>
                   <IconButton>
-                     <Avatar
+                     <ProfileAvatar width="40px" height="40px" cursor="pointer"/>
+                     {/* <Avatar
                         sizes="large"
                         sx={{ cursor: "pointer" }}
                         src={profilePicUrl}
-                     />
+                     /> */}
                   </IconButton>
                </Link>
                <CommentBtn onClick={() => setIsComment(true)}>
