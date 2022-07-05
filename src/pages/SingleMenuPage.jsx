@@ -5,7 +5,7 @@ function SingleMenuPage() {
   return (
     <Box
       sx={{
-        pt: "20px",
+        
         px: {
           xs: "0",
           xl: "70px",
