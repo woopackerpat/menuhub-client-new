@@ -35,10 +35,10 @@ function CartItemsRestaurant({ Menus, items }) {
     setShow(false);
   };
 
-  const handleClick = (id) => {
-    addClick(id)
-    navigate(`/allMenus/${id}`)
-  }
+  const handleClick = id => {
+    addClick(id);
+    navigate(`/allMenus/${id}`);
+  };
 
   const handleSaveRestaurant = async () => {
     try {
@@ -92,6 +92,7 @@ function CartItemsRestaurant({ Menus, items }) {
                 <ButtonSave
                   loading={isLoading}
                   onClick={handleSaveRestaurant}
+                  restaurantId={id}
                 />
               </Box>
               <Box
@@ -140,6 +141,7 @@ function CartItemsRestaurant({ Menus, items }) {
                 <ButtonSave
                   loading={isLoading}
                   onClick={handleSaveRestaurant}
+                  restaurantId={id}
                 />
               </Box>
               <Box

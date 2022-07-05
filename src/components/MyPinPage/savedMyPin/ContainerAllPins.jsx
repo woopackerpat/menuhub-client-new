@@ -1,16 +1,18 @@
-import { Box, ImageList, Typography } from "@mui/material"
-import { useNavigate } from "react-router-dom"
-import ItemCardSaved from "./ItemCardSaved"
+import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { getAllPins } from "../../../services/getAllPinsUnique";
+import ItemCardSaved from "./ItemCardSaved";
 
 function ContainerAllPins({ pin }) {
-  const getImage = pin?.slice(0, 4)
+  const allRestaurants = getAllPins(pin);
+  const getImage = allRestaurants?.slice(0, 4);
 
-  const img1 = getImage[0]?.Restaurants[0]?.Menus[0]?.imageUrl
-  const img2 = getImage[1]?.Restaurants[0]?.Menus[0]?.imageUrl
-  const img3 = getImage[2]?.Restaurants[0]?.Menus[0]?.imageUrl
-  const img4 = getImage[3]?.Restaurants[0]?.Menus[0]?.imageUrl
+  const img1 = getImage[0]?.Menus[0]?.imageUrl;
+  const img2 = getImage[1]?.Menus[0]?.imageUrl;
+  const img3 = getImage[2]?.Menus[0]?.imageUrl;
+  const img4 = getImage[3]?.Menus[0]?.imageUrl;
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Box onClick={() => navigate("/myPin/allPins")}>
       <Box
@@ -34,7 +36,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          {img1 && <ItemCardSaved src={img1} size='100%' />}
+          {img1 && <ItemCardSaved src={img1} size="100%" />}
         </Box>
         <Box
           sx={{
@@ -49,7 +51,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          {img2 && <ItemCardSaved src={img2} size='100%' />}
+          {img2 && <ItemCardSaved src={img2} size="100%" />}
         </Box>
         <Box
           sx={{
@@ -64,7 +66,7 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          {img3 && <ItemCardSaved src={img3} size='100%' />}
+          {img3 && <ItemCardSaved src={img3} size="100%" />}
         </Box>
         <Box
           sx={{
@@ -78,14 +80,14 @@ function ContainerAllPins({ pin }) {
             border: "1px solid #fff",
           }}
         >
-          {img4 && <ItemCardSaved src={img4} size='100%' />}
+          {img4 && <ItemCardSaved src={img4} size="100%" />}
         </Box>
       </Box>
-      <Typography variant='h6' fontWeight='bold'>
+      <Typography variant="h6" fontWeight="bold">
         All pins
       </Typography>
     </Box>
-  )
+  );
 }
 
-export default ContainerAllPins
+export default ContainerAllPins;

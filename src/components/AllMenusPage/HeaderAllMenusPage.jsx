@@ -75,7 +75,11 @@ function HeaderAllMenusPage({ restaurantId, menus }) {
             </Typography>
           </Box>
         </Box>
-        <ButtonSave loading={loading} onClick={handleSaveRestaurant} />
+        <ButtonSave
+          loading={loading}
+          onClick={handleSaveRestaurant}
+          restaurantId={restaurantId}
+        />
       </Box>
       <Backdrop
         sx={{
