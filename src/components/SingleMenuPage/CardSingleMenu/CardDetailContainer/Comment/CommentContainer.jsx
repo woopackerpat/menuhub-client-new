@@ -9,7 +9,7 @@ function CommentContainer({
    menuId,
 }) {
    return (
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2, ml: "-5px" }}>
          <CommentArea
             comments={comments}
             setComments={setComments}

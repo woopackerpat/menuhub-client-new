@@ -8,11 +8,11 @@ export default makeStyles(() => ({
     justifyContent: "center",
     width: "100px",
   },
-  mapContainer: {
-    height: "75vh",
-    width: "100%",
+  // mapContainer: {
+  //   height: "75vh",
+  //   width: "100%",
     
-  },
+  // },
   markerContainer: {
     position: "absolute",
     transform: "translate(-50%, -50%)",

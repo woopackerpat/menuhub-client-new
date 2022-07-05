@@ -55,7 +55,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
       onMouseOut={() => handleMouseOut()}
       className={classes.pointer}
     >
-      <Grid container>
+      <Grid container sx={{ height: { xs: "100%", lg: "200px" } }}>
         <Grid item xs={12} lg={5}>
           <Box
             sx={{ borderRadius: "24px", overflow: "hidden", height: "100%" }}
@@ -73,7 +73,13 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                 />
               </Skeleton>
             ) : (
-              <div style = {{height: "200px"}}>
+              <Box
+                sx={{
+                  height: {xs: "350px",lg:"200px"},
+                  borderRadius: "24px",
+                  overflow: "hidden",
+                }}
+              >
                 <img
                   src={
                     place.Menus[0]?.imageUrl ||
@@ -83,8 +89,9 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                   width="100%"
                   height="100%"
                   className="image-crop"
+                  style={{ objectFit: "cover" }}
                 />
-              </div>
+              </Box>
             )}
           </Box>
         </Grid>
@@ -141,7 +148,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                       <Skeleton width="190px" variant="text" animation="wave" />
                     </>
                   ) : (
-                    place.address ||
+                    place.address.slice(0, 65) ||
                     "Mint tower 719 Banthadthong road Wangmai Pathumwan Bangkok 10330"
                   )}
                 </Typography>
@@ -242,7 +249,11 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                     item?.title ? (
                       <Chip
                         key={idx}
-                        label={item.title}
+                        label={
+                          item.title.length> 13
+                            ? item.title.slice(0, 13) + "..."
+                            : item.title
+                        }
                         color="primary"
                         variant="outlined"
                         size="small"
