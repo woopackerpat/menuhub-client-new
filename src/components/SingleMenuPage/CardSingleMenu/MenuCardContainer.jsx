@@ -8,7 +8,10 @@ import CartItemsMenus from "../../common/cartItems/CartItemsMenus";
 
 function MenuCardContainer({ menuId }) {
    const [menus, setMenus] = useState([]);
+   const [creator, setCreator] = useState([]);
    const [allMenus, setAllMenus] = useState([]);
+   const [restaurant, setRestaurant] = useState([]);
+   const [posts, setPosts] = useState();
    const [isLoading, setIsLoading] = useState(true);
    const [comments, setComments] = useState([]);
 
@@ -27,6 +30,8 @@ function MenuCardContainer({ menuId }) {
          const res = await fetchMenusById(menuId);
          const menus = res.data.Menu;
          setMenus(menus);
+         const creators = res.data.Creator
+         setCreator(creators)
          const comments = res.data.Comments;
          setComments(comments);
       };
@@ -48,6 +53,8 @@ function MenuCardContainer({ menuId }) {
                   "/restaurant/menuall/" + restaurantId
                );
                setAllMenus(res.data.Menus);
+               setRestaurant(res.data.Menus[0].Restaurant.websiteUrl)
+               setPosts(res.data.posts)
             }
          } catch (err) {
             console.log(err);
@@ -57,6 +64,7 @@ function MenuCardContainer({ menuId }) {
       };
       fetchMenus();
    }, [menus]);
+   console.log(restaurant)
 
    return (
       <>
@@ -116,6 +124,9 @@ function MenuCardContainer({ menuId }) {
                   fetchMenusById={fetchMenusById}
                   menuId={menuId}
                   restaurantId={restaurantId}
+                  websiteUrl={restaurant}
+                  creator={creator}
+                  posts={posts}
                />
             </Box>
          </Box>

@@ -28,6 +28,7 @@ function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize
     }
 
     function stringAvatar(name) {
+        console.log(name)
         return {
             sx: {
                 bgcolor: stringToColor(name),
@@ -42,7 +43,6 @@ function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize
     }
 
     useEffect(() => {
-        console.log(width)
     }, [profilePicEdit])
 
     return (
