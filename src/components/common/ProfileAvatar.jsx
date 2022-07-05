@@ -2,7 +2,7 @@ import { Avatar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContextProvider";
 
-function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize}) {
+function ProfileAvatar({ cursor, width, height, margin, profilePicEdit, fontSize, commenter}) {
     const { user } = useAuth()
     const { profilePicUrl, firstName, lastName } = user
     const [fullName, setFullname] = useState()
