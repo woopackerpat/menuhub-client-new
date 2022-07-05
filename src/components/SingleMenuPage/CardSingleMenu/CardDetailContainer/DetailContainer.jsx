@@ -21,8 +21,8 @@ function DetailContainer({
          sx={{
             display: "flex",
             flexDirection: "column",
-            gap: 3,
-            p: 3,
+            gap: 2,
+            p: 5,
          }}
       >
          <UserAction restaurantId={restaurantId} />

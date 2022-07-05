@@ -72,14 +72,12 @@ function DropdownReport() {
       <>
          <IconButton
             sx={{
-               backgroundColor: "#f0f0f0",
-               opacity: [0.9, 0.8, 0.7],
-               "&:hover": { backgroundColor: "white", opacity: 1 },
-            }}
+               color: "black",
+             }}
             aria-controls={dropId}
             onClick={handleShareDropdown}
          >
-            <MoreHorizIcon color="dark" />
+            <MoreHorizIcon color="dark" style = {{fontSize: "32px"}}  />
          </IconButton>
          <ModalReportPin open={open} handleClose={handleClose} />
          {renderDropReport}

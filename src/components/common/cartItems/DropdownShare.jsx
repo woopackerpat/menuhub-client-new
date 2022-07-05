@@ -142,14 +142,13 @@ function DropdownShare({id}) {
       <>
          <IconButton
             sx={{
-               backgroundColor: "#f0f0f0",
-               opacity: [0.9, 0.8, 0.7],
-               "&:hover": { backgroundColor: "white", opacity: 1 },
-            }}
+               color: "black",
+               p: "12px"
+             }}
             aria-controls={dropId}
             onClick={handleShareDropdown}
          >
-            <ShareIcon color="dark" />
+            <ShareIcon color="dark" style = {{fontSize: "24px"}} />
          </IconButton>
          {renderDropShareMenu}
       </>
