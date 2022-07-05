@@ -1,27 +1,33 @@
 import { Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
+import DropdownProfile from "./DropdownProfile";
 import DropdownShare from "./DropdownShare";
 import { useNavigate } from "react-router-dom";
 import DropdownReport from "./DropdownReport";
+import { useRestaurant } from "../../../contexts/RestaurantContextProvider";
 import { useSearch } from "../../../contexts/SearchContextProvider";
 import { usePin } from "../../../contexts/PinContextProvider";
-import ButtonSave from "../ButtonSave";
+import ButtonSaveProfile from "../ButtonSaveProfile";
 
-function CartItemsPinId({ pinId, Menus, items }) {
-  const [loading, setLoading] = useState(false);
-
-  const { savePinRes } = usePin();
+function CartItemsAllPin({ Menus, items }) {
+  const { pin, savePinRes } = usePin();
   const { name, id } = items;
 
+  const itemPinId = items?.Pin_Restaurant?.PinId;
+
   const { addClick } = useSearch();
+  const profilePin = pin?.slice(0, 1).map(el => el.id);
 
   const restaurantId = id;
+  const pinId = profilePin[0];
 
   const ImageUrl = Menus[0]?.imageUrl;
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
+
+  const { isLoading } = useRestaurant();
 
   const handleMouseOver = () => {
     setShow(true);
@@ -38,12 +44,12 @@ function CartItemsPinId({ pinId, Menus, items }) {
 
   const handleSaveRestaurant = async () => {
     try {
-      setLoading(true);
+      // setIsLoading(true);
       await savePinRes({ pinId, restaurantId });
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      // setIsLoading(false);
     }
   };
 
@@ -54,7 +60,7 @@ function CartItemsPinId({ pinId, Menus, items }) {
       onMouseOut={handleMouseOut}
       className="hvr-grow"
     >
-      {loading ? (
+      {isLoading ? (
         <Skeleton
           animation="wave"
           variant="rectangular"
@@ -75,21 +81,27 @@ function CartItemsPinId({ pinId, Menus, items }) {
           </Box>
           {show && (
             <>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 6,
-                  left: 12,
-                }}
-              ></Box>
-              <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSave
-                  loading={loading}
-                  onClick={handleSaveRestaurant}
-                  restaurantId={id}
-                  pinId={pinId}
-                />
-              </Box>
+              {itemPinId === pinId && (
+                <>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 6,
+                      left: 12,
+                    }}
+                  >
+                    <DropdownProfile restaurantId={id} />
+                  </Box>
+                  <Box sx={{ position: "absolute", top: 12, right: 12 }}>
+                    <ButtonSaveProfile
+                      loading={isLoading}
+                      onClick={handleSaveRestaurant}
+                      restaurantId={id}
+                      pinId={pinId}
+                    />
+                  </Box>
+                </>
+              )}
               <Box
                 sx={{
                   position: "absolute",
@@ -123,21 +135,27 @@ function CartItemsPinId({ pinId, Menus, items }) {
           </Box>
           {show && (
             <>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 6,
-                  left: 12,
-                }}
-              ></Box>
-              <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSave
-                  loading={loading}
-                  onClick={handleSaveRestaurant}
-                  restaurantId={id}
-                  pinId={pinId}
-                />
-              </Box>
+              {itemPinId === pinId && (
+                <>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 6,
+                      left: 12,
+                    }}
+                  >
+                    <DropdownProfile restaurantId={id} />
+                  </Box>
+                  <Box sx={{ position: "absolute", top: 12, right: 12 }}>
+                    <ButtonSaveProfile
+                      loading={isLoading}
+                      onClick={handleSaveRestaurant}
+                      restaurantId={id}
+                      pinId={pinId}
+                    />
+                  </Box>
+                </>
+              )}
               <Box
                 sx={{
                   position: "absolute",
@@ -152,11 +170,13 @@ function CartItemsPinId({ pinId, Menus, items }) {
               </Box>
             </>
           )}
-          <Typography fontWeight="bold">{name}</Typography>
+          <Typography fontWeight="bold" sx={{ pl: "12px" }}>
+            {name}
+          </Typography>
         </>
       )}
     </Box>
   );
 }
 
-export default CartItemsPinId;
+export default CartItemsAllPin;

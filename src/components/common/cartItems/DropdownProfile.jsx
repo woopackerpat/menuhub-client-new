@@ -30,7 +30,7 @@ function DropdownProfile({ restaurantId, color }) {
 
   const pinId = profilePin[0];
 
-  console.log(pinId, restaurantId);
+  //   console.log(pinId, restaurantId);
 
   //Modal Create
   const [open, setOpen] = useState(false);
@@ -132,7 +132,7 @@ function DropdownProfile({ restaurantId, color }) {
         <Typography variant="caption">Save to board</Typography>
       </MenuItem>
       <Box sx={{ overflowY: "auto", maxHeight: "100px" }}>
-        {createdPin?.map(pins => {
+        {searchPin?.map(pins => {
           return (
             <BoxBoard
               Restaurants={pins.Restaurants}
