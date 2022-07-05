@@ -24,6 +24,8 @@ import FastfoodIcon from "@mui/icons-material/Fastfood";
 function HorizontalCard({ place, selected, refProp, markId }) {
   const classes = useStyles();
 
+  // console.log(place)
+
   const { setChildClicked, setListClicked, isLoading } = useMap();
 
   const navigate = useNavigate();
@@ -41,7 +43,6 @@ function HorizontalCard({ place, selected, refProp, markId }) {
   };
 
   const shortMenus = place.Menus.slice(0, 3);
-  
 
   const handleNavigate = (e) => {
     e.stopPropagation();
@@ -54,7 +55,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
       onMouseOut={() => handleMouseOut()}
       className={classes.pointer}
     >
-      <Grid container >
+      <Grid container>
         <Grid item xs={12} lg={5}>
           <Box
             sx={{ borderRadius: "24px", overflow: "hidden", height: "100%" }}
@@ -72,15 +73,18 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                 />
               </Skeleton>
             ) : (
-              <img
-                src={
-                  place.Menus[0]?.imageUrl ||
-                  "https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?w=2000"
-                }
-                alt=""
-                width="100%"
-                height="100%"
-              />
+              <div style = {{height: "200px"}}>
+                <img
+                  src={
+                    place.Menus[0]?.imageUrl ||
+                    "https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?w=2000"
+                  }
+                  alt=""
+                  width="100%"
+                  height="100%"
+                  className="image-crop"
+                />
+              </div>
             )}
           </Box>
         </Grid>
@@ -233,16 +237,20 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                     </Skeleton>
                   </>
                 ) : (
-                  shortMenus.map((item, idx) => (
+                  shortMenus.map((item, idx) =>
                     // console.log(item)
-                   item?.title ?  (<Chip
-                      key={idx}
-                      label={item.title}
-                      color="primary"
-                      variant="outlined"
-                      size="small"
-                    />): ''
-                  ))
+                    item?.title ? (
+                      <Chip
+                        key={idx}
+                        label={item.title}
+                        color="primary"
+                        variant="outlined"
+                        size="small"
+                      />
+                    ) : (
+                      ""
+                    )
+                  )
                 )}
               </Stack>
             )}
