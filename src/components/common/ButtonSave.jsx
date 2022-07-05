@@ -7,7 +7,15 @@ function ButtonSave({ onClick, loading }) {
       onClick={onClick}
       variant="contained"
       color="error"
-      sx={{ textTransform: "none", fontWeight: "bold" }}
+      sx={{
+        color: "white",
+        fontWeight: "bold",
+        lineHeight: "35px",
+        borderRadius: "24px",
+        textTransform: 'none'
+      }}
+      disableElevation
+      
     >
       Save
     </LoadingButton>

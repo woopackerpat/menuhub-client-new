@@ -7,7 +7,7 @@ import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
 function BodyHome() {
    const { restaurant, isLoading, allLoadMore, totalData } = useRestaurant();
 
-   console.log(restaurant.length < totalData);
+   // console.log(restaurant.length < totalData);
 
    return (
       <>

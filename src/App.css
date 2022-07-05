@@ -116,3 +116,12 @@ a {
   height:100%;
   object-fit: cover;
 }
+
+.MuiMasonry-root {
+  margin: 0!important;
+}
+
+.transition-hover {
+  transition: all 0.3s ease !important;
+  
+}
