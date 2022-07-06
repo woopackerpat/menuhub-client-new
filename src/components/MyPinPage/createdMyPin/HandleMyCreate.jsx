@@ -28,7 +28,7 @@ function HandleMyCreate({ id }) {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/restaurant/${id}`);
+    await axios.delete(`/restaurant/delete/${id}`);
     fetchMyCreated();
   };
 
