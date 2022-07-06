@@ -34,16 +34,16 @@ function AuthContextProvider({ children }) {
    }, []);
 
    const register = async (input) => {
-      try {
+      // try {
          await axios.post("/auth/register", input);
-      } catch (err) {
-         console.log(err);
-      }
+      // } catch (err) {
+      //    console.log(err);
+      // }
    };
 
    const login = async (email, password) => {
       const res = await axios.post("/auth/login", { email, password });
-
+      console.log(res)
       setAccessToken(res.data.token);
       const resMe = await axios.get("user/me");
       setUser(resMe.data.user);

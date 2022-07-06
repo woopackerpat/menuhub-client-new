@@ -9,11 +9,11 @@ function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
   const { pin, removeRestaurant } = usePin();
 
   // const allRes = getAllPins(pin);
-  console.log(pin);
+  // console.log(pin);
 
   const pins = pin?.filter(el => el.id === pinId);
 
-  console.log(pins[0]);
+  // console.log(pins[0]);
 
   const isSaved = pins[0]?.Restaurants.findIndex(el => el.id === +restaurantId);
 

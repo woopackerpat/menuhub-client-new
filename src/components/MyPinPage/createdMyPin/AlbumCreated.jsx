@@ -6,6 +6,7 @@ import CartItemsRestaurant from "../../common/cartItems/CartItemsRestaurant";
 
 function AlbumCreated() {
   const { fetchMyCreated, createdPin } = usePin();
+  
 
   useEffect(() => {
     const fetchAllCreated = async () => {

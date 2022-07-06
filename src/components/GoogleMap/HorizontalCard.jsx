@@ -46,7 +46,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
 
   const handleNavigate = (e) => {
     e.stopPropagation();
-    navigate(`/allMenus/${place.id}`);
+    navigate(`/search/?search=${place.name}`);
   };
 
   return (
