@@ -2,7 +2,7 @@ import { Masonry } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
 import { usePin } from "../../contexts/PinContextProvider";
 import { getAllPins } from "../../services/getAllPinsUnique";
-import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
+import CartItemsAllPin from "../common/cartItems/CartItemsAllPin";
 
 function ContainerMyAllPins() {
   const { pin } = usePin();
@@ -29,11 +29,7 @@ function ContainerMyAllPins() {
           spacing={2}
         >
           {allRestaurants?.map(items => (
-            <CartItemsRestaurant
-              key={items.id}
-              Menus={items.Menus}
-              items={items}
-            />
+            <CartItemsAllPin key={items.id} Menus={items.Menus} items={items} />
           ))}
         </Masonry>
       )}
