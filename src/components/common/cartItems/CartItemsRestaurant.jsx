@@ -3,19 +3,21 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
 import DropdownShare from "./DropdownShare";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DropdownReport from "./DropdownReport";
 import { useRestaurant } from "../../../contexts/RestaurantContextProvider";
 import { useSearch } from "../../../contexts/SearchContextProvider";
 import { usePin } from "../../../contexts/PinContextProvider";
 import ButtonSaveProfile from "../ButtonSaveProfile";
+import ShareMyCreate from "../../MyPinPage/createdMyPin/ShareMyCreate";
+import HandleMyCreate from "../../MyPinPage/createdMyPin/HandleMyCreate";
 
 function CartItemsRestaurant({ Menus, items }) {
   const { pin, savePinRes } = usePin();
   const { name, id } = items;
 
   const { addClick } = useSearch();
-  const profilePin = pin?.slice(0, 1).map(el => el.id);
+  const profilePin = pin?.slice(0, 1).map((el) => el.id);
 
   const restaurantId = id;
   const pinId = profilePin[0];
@@ -27,6 +29,8 @@ function CartItemsRestaurant({ Menus, items }) {
 
   const { isLoading } = useRestaurant();
 
+  const location = useLocation();
+
   const handleMouseOver = () => {
     setShow(true);
   };
@@ -35,7 +39,7 @@ function CartItemsRestaurant({ Menus, items }) {
     setShow(false);
   };
 
-  const handleClick = id => {
+  const handleClick = (id) => {
     addClick(id);
     navigate(`/allMenus/${id}`);
   };
@@ -50,6 +54,8 @@ function CartItemsRestaurant({ Menus, items }) {
       // setIsLoading(false);
     }
   };
+
+  // console.log(location.pathname === "/myPin/created-pin")
 
   return (
     <Box
@@ -155,8 +161,17 @@ function CartItemsRestaurant({ Menus, items }) {
                   gap: 1,
                 }}
               >
-                <DropdownShare id={id} />
-                <DropdownReport />
+                {location.pathname === "/myPin/created-pin" ? (
+                  <>
+                    <ShareMyCreate id={id} />
+                    <HandleMyCreate id={id} />
+                  </>
+                ) : (
+                  <>
+                    <DropdownShare id={id} />
+                    <DropdownReport />
+                  </>
+                )}
               </Box>
             </>
           )}

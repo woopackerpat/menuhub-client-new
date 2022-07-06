@@ -8,6 +8,7 @@ function PinContextProvider({ children }) {
   const [pin, setPin] = useState([]);
   const [pinById, setPinById] = useState([]);
   const [createdPin, setCreatedPin] = useState([]);
+  // const [myCreate, setMyCreate] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
@@ -21,6 +22,14 @@ function PinContextProvider({ children }) {
     }
   };
 
+  // const fetchMyRestaurants = async() => {
+  //   const res = await axios.get('/restaurant/mycreated')
+  //   // console.log(res.data.myCreatedRestaurants)
+  //   setMyCreate(res.data.myCreatedRestaurants)
+  // }
+
+  // fetchMyRestaurants()
+
   useEffect(() => {
     fetchPin();
   }, []);
@@ -29,7 +38,7 @@ function PinContextProvider({ children }) {
     fetchPin();
   }, [user.id]);
 
-  const fetchPinById = async pinId => {
+  const fetchPinById = async (pinId) => {
     try {
       setLoading(true);
       const res = await axios.get(`/pin/single?pinid=${pinId}`);
@@ -65,7 +74,7 @@ function PinContextProvider({ children }) {
     }
   };
 
-  const savePinRes = async input => {
+  const savePinRes = async (input) => {
     try {
       setLoading(true);
       const res = await axios.patch("/pin/restaurant", input);
@@ -78,7 +87,7 @@ function PinContextProvider({ children }) {
     }
   };
 
-  const deletePin = async pinId => {
+  const deletePin = async (pinId) => {
     try {
       setLoading(true);
       await axios.delete("/pin", { pinId });
