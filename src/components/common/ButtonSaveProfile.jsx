@@ -31,7 +31,14 @@ function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
           onClick={onClick}
           variant="contained"
           color="error"
-          sx={{ textTransform: "none", fontWeight: "bold" }}
+          sx={{
+            color: "white",
+            fontWeight: "bold",
+            lineHeight: "35px",
+            borderRadius: "24px",
+            textTransform: "none",
+          }}
+          disableElevation
         >
           Save
         </LoadingButton>
@@ -41,7 +48,14 @@ function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
           onClick={handleRemoveRes}
           variant="contained"
           color="primary"
-          sx={{ textTransform: "none", fontWeight: "bold", color: "#fff" }}
+          sx={{
+            color: "white",
+            fontWeight: "bold",
+            lineHeight: "35px",
+            borderRadius: "24px",
+            textTransform: "none",
+          }}
+          disableElevation
         >
           Saved
         </LoadingButton>

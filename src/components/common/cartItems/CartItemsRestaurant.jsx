@@ -135,23 +135,30 @@ function CartItemsRestaurant({ Menus, items }) {
           </Box>
           {show && (
             <>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 6,
-                  left: 12,
-                }}
-              >
-                {<DropdownProfile restaurantId={id} />}
-              </Box>
-              <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSaveProfile
-                  loading={isLoading}
-                  onClick={handleSaveRestaurant}
-                  restaurantId={id}
-                  pinId={pinId}
-                />
-              </Box>
+              {location.pathname === "/myPin/created-pin" ? (
+                <></>
+              ) : (
+                <>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 6,
+                      left: 12,
+                    }}
+                  >
+                    {<DropdownProfile restaurantId={id} />}
+                  </Box>
+                  <Box sx={{ position: "absolute", top: 12, right: 12 }}>
+                    <ButtonSaveProfile
+                      loading={isLoading}
+                      onClick={handleSaveRestaurant}
+                      restaurantId={id}
+                      pinId={pinId}
+                    />
+                  </Box>
+                </>
+              )}
+
               <Box
                 sx={{
                   position: "absolute",
@@ -175,8 +182,8 @@ function CartItemsRestaurant({ Menus, items }) {
               </Box>
             </>
           )}
-          <Typography fontWeight="bold" sx={{ pl: "12px" }}>
-            {name}
+          <Typography  sx={{ pl: "12px", fontSize: "14px", fontWeight: "300" }} className = "thai" >
+            {name.length > 20 ? name.slice(0, 20) + '...' : name}
           </Typography>
         </>
       )}

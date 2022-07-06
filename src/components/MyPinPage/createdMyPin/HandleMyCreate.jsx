@@ -25,11 +25,13 @@ function HandleMyCreate({ id }) {
 
   const handleEdit = () => {
     navigate(`/draftMenu/${id}`);
+    setShowReport(null);
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/restaurant/${id}`);
+    await axios.delete(`/restaurant/delete/${id}`);
     fetchMyCreated();
+    setShowReport(null);
   };
 
   const dropId = "drop-share";
@@ -58,7 +60,7 @@ function HandleMyCreate({ id }) {
         }}
       >
         <Typography variant="body1" align="center">
-          This Album was created by you
+          My Created Album
         </Typography>
         <Typography
           fontWeight="bold"
@@ -68,6 +70,8 @@ function HandleMyCreate({ id }) {
             cursor: "pointer",
             borderRadius: "16px",
             backgroundColor: "#f2f2f2",
+            display: "flex",
+            justifyContent: "center",
           }}
           onClick={() => handleEdit()}
         >
@@ -81,6 +85,8 @@ function HandleMyCreate({ id }) {
             cursor: "pointer",
             borderRadius: "16px",
             backgroundColor: "#f2f2f2",
+            display: "flex",
+            justifyContent: "center",
           }}
           onClick={() => handleDelete()}
         >

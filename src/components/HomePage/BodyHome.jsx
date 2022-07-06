@@ -18,16 +18,11 @@ function BodyHome() {
                }, 1000)
             }
             loader={
-               <Box sx={{ display: "flex", justifyContent: "center", gap: 4 }}>
+               <Box sx={{ display: "flex", justifyContent: "center", m: 4 }}>
                   <Spinner />
                </Box>
             }
             pageStart={0}
-            endMessage={
-               <p style={{ textAlign: "center" }}>
-                  <b>Yay! you have seen it all</b>
-               </p>
-            }
          >
             <Masonry
                columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
@@ -41,6 +36,7 @@ function BodyHome() {
                   />
                ))}
             </Masonry>
+
             <Backdrop
                sx={{
                   color: "#fff",
