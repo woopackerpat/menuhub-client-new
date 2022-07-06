@@ -25,11 +25,13 @@ function HandleMyCreate({ id }) {
 
   const handleEdit = () => {
     navigate(`/draftMenu/${id}`);
+    setShowReport(null);
   };
 
   const handleDelete = async () => {
     await axios.delete(`/restaurant/delete/${id}`);
     fetchMyCreated();
+    setShowReport(null);
   };
 
   const dropId = "drop-share";
