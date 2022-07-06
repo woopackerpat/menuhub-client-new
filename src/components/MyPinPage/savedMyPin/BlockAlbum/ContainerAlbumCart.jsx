@@ -1,8 +1,11 @@
 import { Box, Container, Typography } from "@mui/material";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePin } from "../../../../contexts/PinContextProvider";
 
 function ContainerAlbumCart({ name, id, Restaurants }) {
+  const [show, setShow] = useState(false);
+
   const { fetchPinById } = usePin();
   const navigate = useNavigate();
 
@@ -16,10 +19,21 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
     navigate(`/myPin/${id}`);
   };
 
+  const handleMouseOver = () => {
+    setShow(true);
+  };
+
+  const handleMouseOut = () => {
+    setShow(false);
+  };
+
   return (
     <Box
+      className="hvr-grow"
       sx={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
       onClick={handleClickPin}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
     >
       <Box sx={{ display: "flex", width: "270px", gap: "1px" }}>
         <Box

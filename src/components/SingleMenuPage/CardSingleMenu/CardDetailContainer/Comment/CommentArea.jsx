@@ -7,7 +7,7 @@ function CommentArea({ comments, fetchMenusById, id, setComments, menuId }) {
          sx={{
             display: "flex",
             flexDirection: "column",
-            gap: 2,
+            // gap: 1,
             maxHeight: "10em",
             overflowY: "auto",
             scrollbarWidth: "none",

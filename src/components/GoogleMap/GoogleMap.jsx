@@ -24,7 +24,7 @@ function GoogleMap() {
   const classes = useStyles();
 
   return (
-    <Box className={classes.mapContainer} elevation={3}>
+    <Box sx = {{height: {xs: "450px", lg:"75vh"}, width: "100%"}} elevation={3}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyAG4C7Ju1Fet3ojik0lU_TPkDcdaXuugF4" }}
         defaultCenter={coordinates}

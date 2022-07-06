@@ -24,6 +24,8 @@ import FastfoodIcon from "@mui/icons-material/Fastfood";
 function HorizontalCard({ place, selected, refProp, markId }) {
   const classes = useStyles();
 
+  // console.log(place)
+
   const { setChildClicked, setListClicked, isLoading } = useMap();
 
   const navigate = useNavigate();
@@ -41,7 +43,6 @@ function HorizontalCard({ place, selected, refProp, markId }) {
   };
 
   const shortMenus = place.Menus.slice(0, 3);
-  
 
   const handleNavigate = (e) => {
     e.stopPropagation();
@@ -54,7 +55,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
       onMouseOut={() => handleMouseOut()}
       className={classes.pointer}
     >
-      <Grid container >
+      <Grid container sx={{ height: { xs: "100%", lg: "200px" } }}>
         <Grid item xs={12} lg={5}>
           <Box
             sx={{ borderRadius: "24px", overflow: "hidden", height: "100%" }}
@@ -72,15 +73,25 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                 />
               </Skeleton>
             ) : (
-              <img
-                src={
-                  place.Menus[0]?.imageUrl ||
-                  "https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?w=2000"
-                }
-                alt=""
-                width="100%"
-                height="100%"
-              />
+              <Box
+                sx={{
+                  height: {xs: "350px",lg:"200px"},
+                  borderRadius: "24px",
+                  overflow: "hidden",
+                }}
+              >
+                <img
+                  src={
+                    place.Menus[0]?.imageUrl ||
+                    "https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?w=2000"
+                  }
+                  alt=""
+                  width="100%"
+                  height="100%"
+                  className="image-crop"
+                  style={{ objectFit: "cover" }}
+                />
+              </Box>
             )}
           </Box>
         </Grid>
@@ -137,7 +148,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                       <Skeleton width="190px" variant="text" animation="wave" />
                     </>
                   ) : (
-                    place.address ||
+                    place.address.slice(0, 65) ||
                     "Mint tower 719 Banthadthong road Wangmai Pathumwan Bangkok 10330"
                   )}
                 </Typography>
@@ -233,16 +244,24 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                     </Skeleton>
                   </>
                 ) : (
-                  shortMenus.map((item, idx) => (
+                  shortMenus.map((item, idx) =>
                     // console.log(item)
-                   item?.title ?  (<Chip
-                      key={idx}
-                      label={item.title}
-                      color="primary"
-                      variant="outlined"
-                      size="small"
-                    />): ''
-                  ))
+                    item?.title ? (
+                      <Chip
+                        key={idx}
+                        label={
+                          item.title.length> 13
+                            ? item.title.slice(0, 13) + "..."
+                            : item.title
+                        }
+                        color="primary"
+                        variant="outlined"
+                        size="small"
+                      />
+                    ) : (
+                      ""
+                    )
+                  )
                 )}
               </Stack>
             )}

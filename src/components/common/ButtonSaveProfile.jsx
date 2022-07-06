@@ -1,27 +1,26 @@
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { usePin } from "../../contexts/PinContextProvider";
 import { getAllPins } from "../../services/getAllPinsUnique";
 
-function ButtonSave({ onClick, loading, restaurantId, pinId }) {
+function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
   const [deleting, setDeleting] = useState(false);
 
-  const { albumId } = useParams();
+  const { pin, removeRestaurant } = usePin();
 
-  const { pin, removeRestaurant, fetchPinById } = usePin();
-  console.log(pin?.slice(1, pin.length));
-  const allRes = getAllPins(pin?.slice(1, pin.length));
-  console.log(allRes);
-  const isSaved = allRes.findIndex(el => el.Pin_Restaurant.PinId === pinId);
+  // const allRes = getAllPins(pin);
+  console.log(pin);
 
-  console.log(restaurantId, pinId);
+  const pins = pin?.filter(el => el.id === pinId);
+
+  console.log(pins[0]);
+
+  const isSaved = pins[0]?.Restaurants.findIndex(el => el.id === +restaurantId);
 
   const handleRemoveRes = async () => {
     try {
       setDeleting(true);
       await removeRestaurant(restaurantId, pinId);
-      fetchPinById(albumId);
     } catch (err) {
       console.log(err);
     } finally {
@@ -56,4 +55,4 @@ function ButtonSave({ onClick, loading, restaurantId, pinId }) {
   );
 }
 
-export default ButtonSave;
+export default ButtonSaveProfile;

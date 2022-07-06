@@ -10,12 +10,13 @@ function ContainerHome() {
                   display: "flex",
                   flexDirection: "column",
                   gap: "20px",
+                  pt: "10px"
                   // overflow: "auto",
                }}
             >
-               <Typography variant="h5" gutterBottom>
+               {/* <Typography variant="h5" gutterBottom>
                   Suggestion for you
-               </Typography>
+               </Typography> */}
                <BodyHome />
             </Box>
          </CssBaseline>

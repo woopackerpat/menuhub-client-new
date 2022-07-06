@@ -19,6 +19,6 @@ export const getAllPins = pin => {
   const allRestaurants = uniqueRes.sort(
     (a, b) => new Date(b.createdAt).getDate() - new Date(a.createdAt).getDate()
   );
-  // console.log(allRestaurants);
+  // console.log(allRestaurants)
   return allRestaurants;
 };

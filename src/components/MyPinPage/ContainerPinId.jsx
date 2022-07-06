@@ -1,11 +1,16 @@
 import { Masonry } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { usePin } from "../../contexts/PinContextProvider";
-import CartItemsRestaurant from "../common/cartItems/CartItemsRestaurant";
+import CartItemsPinId from "../common/cartItems/CartItemsPinId";
 
-function ContainerPinId() {
-  const { pinById } = usePin();
-  // console.log(pinById);
+function ContainerPinId({ id }) {
+  const { pinById, fetchPinById } = usePin();
+
+  useEffect(() => {
+    fetchPinById(id);
+  }, []);
+
   return (
     <Box
       sx={{
@@ -19,20 +24,19 @@ function ContainerPinId() {
       <Typography variant="h6" fontWeight="bold" sx={{ m: 2 }}>
         {pinById.name}
       </Typography>
-      <Box>
-        <Masonry
-          columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
-          spacing={2}
-        >
-          {pinById.Restaurants?.map(items => (
-            <CartItemsRestaurant
-              key={items?.id}
-              Menus={items.Menus}
-              items={items}
-            />
-          ))}
-        </Masonry>
-      </Box>
+      <Masonry
+        columns={{ xs: 2, sm: 4, md: 4, lg: 5, xl: 7, xxl: 8 }}
+        spacing={2}
+      >
+        {pinById.Restaurants?.map(items => (
+          <CartItemsPinId
+            key={items?.id}
+            pinId={pinById?.id}
+            Menus={items.Menus}
+            items={items}
+          />
+        ))}
+      </Masonry>
     </Box>
   );
 }

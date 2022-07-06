@@ -7,7 +7,7 @@ function RestaurantContextProvider({ children }) {
    const [restaurant, setRestaurant] = useState([]);
    const [like, setLike] = useState(null);
    const [isEditRestaurant, setIsEditRestaurant] = useState(false);
-   console.log(like);
+  
    // infinite Scroller
    const [page, setPage] = useState(2);
    const [totalData, setTotalData] = useState();

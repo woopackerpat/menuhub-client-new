@@ -10,9 +10,11 @@ import { useSearch } from "../../../contexts/SearchContextProvider";
 import { usePin } from "../../../contexts/PinContextProvider";
 import ButtonSaveProfile from "../ButtonSaveProfile";
 
-function CartItemsRestaurant({ Menus, items }) {
+function CartItemsAllPin({ Menus, items }) {
   const { pin, savePinRes } = usePin();
   const { name, id } = items;
+
+  const itemPinId = items?.Pin_Restaurant?.PinId;
 
   const { addClick } = useSearch();
   const profilePin = pin?.slice(0, 1).map(el => el.id);
@@ -79,23 +81,27 @@ function CartItemsRestaurant({ Menus, items }) {
           </Box>
           {show && (
             <>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 6,
-                  left: 12,
-                }}
-              >
-                <DropdownProfile restaurantId={id} />
-              </Box>
-              <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSaveProfile
-                  loading={isLoading}
-                  onClick={handleSaveRestaurant}
-                  restaurantId={id}
-                  pinId={pinId}
-                />
-              </Box>
+              {itemPinId === pinId && (
+                <>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 6,
+                      left: 12,
+                    }}
+                  >
+                    <DropdownProfile restaurantId={id} />
+                  </Box>
+                  <Box sx={{ position: "absolute", top: 12, right: 12 }}>
+                    <ButtonSaveProfile
+                      loading={isLoading}
+                      onClick={handleSaveRestaurant}
+                      restaurantId={id}
+                      pinId={pinId}
+                    />
+                  </Box>
+                </>
+              )}
               <Box
                 sx={{
                   position: "absolute",
@@ -129,23 +135,27 @@ function CartItemsRestaurant({ Menus, items }) {
           </Box>
           {show && (
             <>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 6,
-                  left: 12,
-                }}
-              >
-                {<DropdownProfile restaurantId={id} />}
-              </Box>
-              <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSaveProfile
-                  loading={isLoading}
-                  onClick={handleSaveRestaurant}
-                  restaurantId={id}
-                  pinId={pinId}
-                />
-              </Box>
+              {itemPinId === pinId && (
+                <>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 6,
+                      left: 12,
+                    }}
+                  >
+                    <DropdownProfile restaurantId={id} />
+                  </Box>
+                  <Box sx={{ position: "absolute", top: 12, right: 12 }}>
+                    <ButtonSaveProfile
+                      loading={isLoading}
+                      onClick={handleSaveRestaurant}
+                      restaurantId={id}
+                      pinId={pinId}
+                    />
+                  </Box>
+                </>
+              )}
               <Box
                 sx={{
                   position: "absolute",
@@ -169,4 +179,4 @@ function CartItemsRestaurant({ Menus, items }) {
   );
 }
 
-export default CartItemsRestaurant;
+export default CartItemsAllPin;

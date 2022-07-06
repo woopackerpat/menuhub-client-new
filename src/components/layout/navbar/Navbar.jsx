@@ -115,6 +115,7 @@ function Navbar() {
                   borderRadius: "24px",
                   textTransform: 'none'
                 }}
+                disableElevation
                 
               >
                 Home
