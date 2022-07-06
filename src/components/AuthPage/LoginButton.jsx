@@ -7,14 +7,14 @@ function LoginButton() {
          <Button
             variant="contained"
             fullWidth
-            size="medium"
+            size="small"
             color="error"
             type="submit"
          >
             <Typography
                sx={{
-                  py: "8px",
-                  fontWeight: "normal",
+                  py: "6px",
+                  fontWeight: "bold",
                   textTransform: "none",
                }}
                variant="h6"

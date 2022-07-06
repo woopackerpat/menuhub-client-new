@@ -39,15 +39,13 @@ function LoginForm({ handleClose }) {
             handleClose();
          } catch (err) {
             // console.log(err.response.status)
-            setApiError('Your email or password is incorrect')
+            setApiError("Your email or password is incorrect");
             // setApiError(err.response.data.message);
          }
       }
    };
 
-   useEffect(() => {
-
-   }, [error])
+   useEffect(() => {}, [error]);
 
    return (
       <>
@@ -78,15 +76,7 @@ function LoginForm({ handleClose }) {
                error={error.email ? true : apiError ? true : false}
                helperText={error.password || apiError}
             />
-            <Link href="#">
-               <Typography
-                  align="left"
-                  variant="subtitle2"
-                  sx={{ fontWeight: "bold" }}
-               >
-                  Forgot your password?
-               </Typography>
-            </Link>
+
             <LoginButton />
          </Box>
       </>
