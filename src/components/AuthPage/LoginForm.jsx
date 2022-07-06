@@ -3,6 +3,7 @@ import { useState } from "react";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../../contexts/AuthContextProvider";
 import { validateLogin } from "../../services/validate";
+import { useEffect } from "react";
 
 function LoginForm({ handleClose }) {
    const [email, setEmail] = useState("");
@@ -37,10 +38,16 @@ function LoginForm({ handleClose }) {
             setPassword("");
             handleClose();
          } catch (err) {
-            setApiError(err.response.data.message);
+            // console.log(err.response.status)
+            setApiError('Your email or password is incorrect')
+            // setApiError(err.response.data.message);
          }
       }
    };
+
+   useEffect(() => {
+
+   }, [error])
 
    return (
       <>
@@ -68,8 +75,8 @@ function LoginForm({ handleClose }) {
                onChange={handlePassword}
                value={password}
                required
-               error={error.email ? true : false}
-               helperText={error.password}
+               error={error.email ? true : apiError ? true : false}
+               helperText={error.password || apiError}
             />
             <Link href="#">
                <Typography

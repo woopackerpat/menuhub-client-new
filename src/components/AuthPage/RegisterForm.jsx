@@ -63,8 +63,8 @@ function RegisterForm({ setType, handleCloseRegister }) {
             });
             handleCloseRegister();
          } catch (err) {
-            console.log(err);
-            setApiError(err.response.data.message);
+            // console.log(err.response);
+            setApiError('This email is already in use');
          }
       }
    };
@@ -107,8 +107,8 @@ function RegisterForm({ setType, handleCloseRegister }) {
                onChange={handleEmail}
                value={email}
                required
-               error={error.email ? true : false}
-               helperText={error.email}
+               error={error.email ? true : apiError ? true : false}
+               helperText={error.email || apiError}
             />
             <TextField
                autoFocus
@@ -120,7 +120,7 @@ function RegisterForm({ setType, handleCloseRegister }) {
                onChange={handlePassword}
                value={password}
                required
-               error={error.email ? true : false}
+               error={error.password ? true : false}
                helperText={error.password}
             />
 
@@ -134,7 +134,7 @@ function RegisterForm({ setType, handleCloseRegister }) {
                onChange={handleConfirmPassword}
                value={confirmPassword}
                required
-               error={error.email ? true : false}
+               error={error.confirmPassword ? true : false}
                helperText={error.confirmPassword}
             />
             <Link href="#">
