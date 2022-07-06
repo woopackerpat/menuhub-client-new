@@ -16,22 +16,23 @@ const style = {
   p: 4,
 };
 
-function ModalCreatePin({ open, handleClose }) {
-  const [boardName, setBoardName] = useState("");
+function ModalEditPin({ open, handleClose, pinId, name }) {
+  const [newName, setNewName] = useState(name);
 
-  const { createNewPin } = usePin();
+  const { updatePin } = usePin();
 
-  const handleClickCreate = async () => {
+  const handleClickCreate = async e => {
     try {
-      await createNewPin(boardName);
-      handleClose();
+      e.stopPropagation();
+      await updatePin(newName, pinId);
+      handleClose(e);
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <Box>
+    <Box onClick={e => e.stopPropagation()}>
       <Modal
         open={open}
         onClose={handleClose}
@@ -42,10 +43,10 @@ function ModalCreatePin({ open, handleClose }) {
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <TextField
               fullWidth
-              label="Create New Board"
-              value={boardName}
-              placeholder="Board name"
-              onChange={e => setBoardName(e.target.value)}
+              label="Edit Board Name"
+              value={newName}
+              placeholder={name}
+              onChange={e => setNewName(e.target.value)}
             />
             <Button
               variant="contained"
@@ -53,7 +54,7 @@ function ModalCreatePin({ open, handleClose }) {
               sx={{ fontWeight: "bold", textTransform: "none" }}
               onClick={handleClickCreate}
             >
-              Create
+              Edit
             </Button>
           </Box>
         </Box>
@@ -61,4 +62,4 @@ function ModalCreatePin({ open, handleClose }) {
     </Box>
   );
 }
-export default ModalCreatePin;
+export default ModalEditPin;

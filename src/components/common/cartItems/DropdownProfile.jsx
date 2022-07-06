@@ -148,7 +148,7 @@ function DropdownProfile({ restaurantId, color }) {
       </Box>
 
       <Divider orientation="horizontal" />
-      <MenuItem>
+      <MenuItem onClick={handleOpen}>
         <Box
           sx={{
             display: "flex",
@@ -159,7 +159,6 @@ function DropdownProfile({ restaurantId, color }) {
             m: "10px",
             border: "none",
           }}
-          onClick={handleOpen}
         >
           <Box
             sx={{
