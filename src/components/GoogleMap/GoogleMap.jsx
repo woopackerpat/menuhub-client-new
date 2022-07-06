@@ -29,7 +29,7 @@ function GoogleMap() {
         bootstrapURLKeys={{ key: "AIzaSyAG4C7Ju1Fet3ojik0lU_TPkDcdaXuugF4" }}
         defaultCenter={coordinates}
         center={coordinates}
-        defaultZoom={17}
+        defaultZoom={16}
         margin={[50, 50, 50, 50]}
         option={""}
         onChange={(e) => {
