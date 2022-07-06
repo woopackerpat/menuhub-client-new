@@ -1,13 +1,11 @@
-import { Button, IconButton, Typography } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import DropdownProfile from "./DropdownProfile";
 import DropdownShare from "./DropdownShare";
 import { useNavigate } from "react-router-dom";
 import DropdownReport from "./DropdownReport";
 
-function CartItemsMenus({ item, menu, restaurantId }) {
+function CartItemsMenus({ item }) {
    const { title, imageUrl, id } = item;
    const navigate = useNavigate();
 
@@ -21,10 +19,9 @@ function CartItemsMenus({ item, menu, restaurantId }) {
       setShow(false);
    };
 
-   const handleCreateAlbum = (e) => {
-      e.stopPropagation();
+   const handleClickRef = () => {
+      navigate(`/singleMenu/${id}`);
    };
-
    return (
       <Box
          sx={{ position: "relative" }}
@@ -32,7 +29,7 @@ function CartItemsMenus({ item, menu, restaurantId }) {
          onMouseOut={handleMouseOut}
          className="hvr-grow"
       >
-         <Box onClick={() => navigate(`/singleMenu/${id}`)}>
+         <Box onClick={() => handleClickRef()}>
             <img
                src={imageUrl}
                alt="img"
