@@ -11,85 +11,85 @@ import ButtonSaveProfile from "../../../common/ButtonSaveProfile";
 import { usePin } from "../../../../contexts/PinContextProvider";
 
 function UserActionNavbar({ restaurantId }) {
-  const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(false);
 
-  const { pin, savePinRes } = usePin();
+   const { pin, savePinRes } = usePin();
 
-  const profilePin = pin?.slice(0, 1).map(el => el.id);
-  const pinId = profilePin[0];
+   const profilePin = pin?.slice(0, 1).map((el) => el.id);
+   const pinId = profilePin[0];
 
-  // like state for testing
+   // like state for testing
 
-  const { like, fetchLike } = useRestaurant();
-  console.log(like);
+   const { like, fetchLike } = useRestaurant();
+   console.log(like);
 
-  const { createLike } = useRestaurant();
-  const handleClickLike = async () => {
-    await createLike(restaurantId);
-    fetchLike(restaurantId);
-  };
-
-  useEffect(() => {
-    if (restaurantId) {
+   const { createLike } = useRestaurant();
+   const handleClickLike = async () => {
+      await createLike(restaurantId);
       fetchLike(restaurantId);
-      console.log("test");
-    }
-  }, [restaurantId]);
+   };
 
-  const handleSaveRestaurant = async () => {
-    try {
-      setLoading(true);
-      await savePinRes({ pinId, restaurantId });
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+   useEffect(() => {
+      if (restaurantId) {
+         fetchLike(restaurantId);
+         console.log("test");
+      }
+   }, [restaurantId]);
 
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 1.5,
-      }}
-    >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <DropdownReport />
-        <DropdownShare id={restaurantId} />
-        <IconButton
-          sx={{
-            color: "black",
-          }}
-        >
-          <LinkIcon fontSize="large" />
-        </IconButton>
-        <IconButton
-          sx={{
-            color: "black",
-          }}
-          onClick={handleClickLike}
-        >
-          {like ? (
-            <FavoriteIcon fontSize="large" color="error" />
-          ) : (
-            <FavoriteBorderIcon fontSize="large" />
-          )}
-        </IconButton>
+   const handleSaveRestaurant = async () => {
+      try {
+         setLoading(true);
+         await savePinRes({ pinId, restaurantId });
+      } catch (err) {
+         console.log(err);
+      } finally {
+         setLoading(false);
+      }
+   };
+
+   return (
+      <Box
+         sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 1.5,
+         }}
+      >
+         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <DropdownReport />
+            <DropdownShare id={restaurantId} />
+            <IconButton
+               sx={{
+                  color: "black",
+               }}
+            >
+               <LinkIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+               sx={{
+                  color: "black",
+               }}
+               onClick={handleClickLike}
+            >
+               {like ? (
+                  <FavoriteIcon fontSize="large" color="error" />
+               ) : (
+                  <FavoriteBorderIcon fontSize="large" />
+               )}
+            </IconButton>
+         </Box>
+         <Box sx={{ display: "flex" }}>
+            <DropdownProfile color="dark" restaurantId={restaurantId} />
+            <ButtonSaveProfile
+               loading={loading}
+               onClick={handleSaveRestaurant}
+               restaurantId={restaurantId}
+               pinId={pinId}
+            />
+         </Box>
       </Box>
-      <Box sx={{ display: "flex" }}>
-        <DropdownProfile color="dark" id={restaurantId} />
-        <ButtonSaveProfile
-          loading={loading}
-          onClick={handleSaveRestaurant}
-          restaurantId={restaurantId}
-          pinId={pinId}
-        />
-      </Box>
-    </Box>
-  );
+   );
 }
 
 export default UserActionNavbar;
