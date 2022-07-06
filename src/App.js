@@ -2,10 +2,6 @@ import "./App.css";
 import Router from "./routes/Router";
 import { createTheme, ThemeProvider } from "@mui/material";
 
-import { QueryClient, QueryClientProvider } from "react-query";
-
-const queryClient = new QueryClient();
-
 function App() {
    const theme = createTheme({
       palette: {
@@ -39,9 +35,7 @@ function App() {
    });
    return (
       <ThemeProvider theme={theme}>
-         <QueryClientProvider client={queryClient}>
-            <Router />
-         </QueryClientProvider>
+         <Router />
       </ThemeProvider>
    );
 }

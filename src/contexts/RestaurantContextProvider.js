@@ -11,7 +11,7 @@ function RestaurantContextProvider({ children }) {
    // infinite Scroller
    const [page, setPage] = useState(2);
    const [totalData, setTotalData] = useState();
-   const limit = 6;
+   const limit = 7;
 
    const [isLoading, setIsLoading] = useState(false);
 
