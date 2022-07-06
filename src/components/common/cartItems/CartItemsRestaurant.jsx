@@ -183,7 +183,7 @@ function CartItemsRestaurant({ Menus, items }) {
             </>
           )}
           <Typography fontWeight="bold" sx={{ pl: "12px" }}>
-            {name}
+            {name.length > 20 ? name.slice(0, 20) + '...' : name}
           </Typography>
         </>
       )}
