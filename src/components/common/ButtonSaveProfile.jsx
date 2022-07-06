@@ -11,11 +11,13 @@ function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
   // const allRes = getAllPins(pin);
   // console.log(pin);
 
-  const pins = pin?.filter(el => el.id === pinId);
+  const pins = pin?.filter((el) => el.id === pinId);
 
   // console.log(pins[0]);
 
-  const isSaved = pins[0]?.Restaurants.findIndex(el => el.id === +restaurantId);
+  const isSaved = pins[0]?.Restaurants.findIndex(
+    (el) => el.id === +restaurantId
+  );
 
   const handleRemoveRes = async () => {
     try {
@@ -36,7 +38,14 @@ function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
           onClick={onClick}
           variant="contained"
           color="error"
-          sx={{ textTransform: "none", fontWeight: "bold" }}
+          sx={{
+            color: "white",
+            fontWeight: "bold",
+            lineHeight: "35px",
+            borderRadius: "24px",
+            textTransform: "none",
+          }}
+          disableElevation
         >
           Save
         </LoadingButton>
@@ -46,7 +55,14 @@ function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
           onClick={handleRemoveRes}
           variant="contained"
           color="primary"
-          sx={{ textTransform: "none", fontWeight: "bold", color: "#fff" }}
+          sx={{
+            color: "white",
+            fontWeight: "bold",
+            lineHeight: "35px",
+            borderRadius: "24px",
+            textTransform: "none",
+          }}
+          disableElevation
         >
           Saved
         </LoadingButton>

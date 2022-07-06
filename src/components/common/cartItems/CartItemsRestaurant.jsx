@@ -135,23 +135,30 @@ function CartItemsRestaurant({ Menus, items }) {
           </Box>
           {show && (
             <>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 6,
-                  left: 12,
-                }}
-              >
-                {<DropdownProfile restaurantId={id} />}
-              </Box>
-              <Box sx={{ position: "absolute", top: 12, right: 12 }}>
-                <ButtonSaveProfile
-                  loading={isLoading}
-                  onClick={handleSaveRestaurant}
-                  restaurantId={id}
-                  pinId={pinId}
-                />
-              </Box>
+              {location.pathname === "/myPin/created-pin" ? (
+                <></>
+              ) : (
+                <>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 6,
+                      left: 12,
+                    }}
+                  >
+                    {<DropdownProfile restaurantId={id} />}
+                  </Box>
+                  <Box sx={{ position: "absolute", top: 12, right: 12 }}>
+                    <ButtonSaveProfile
+                      loading={isLoading}
+                      onClick={handleSaveRestaurant}
+                      restaurantId={id}
+                      pinId={pinId}
+                    />
+                  </Box>
+                </>
+              )}
+
               <Box
                 sx={{
                   position: "absolute",
