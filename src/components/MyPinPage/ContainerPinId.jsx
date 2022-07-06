@@ -49,7 +49,7 @@ function ContainerPinId({ id }) {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            height: "80vh",
+            height: "70vh",
             gap: 4,
             cursor: "pointer",
           }}
