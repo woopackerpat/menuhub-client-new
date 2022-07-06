@@ -182,7 +182,7 @@ function CartItemsRestaurant({ Menus, items }) {
               </Box>
             </>
           )}
-          <Typography fontWeight="bold" sx={{ pl: "12px" }}>
+          <Typography  sx={{ pl: "12px", fontSize: "14px", fontWeight: "300" }} className = "thai" >
             {name.length > 20 ? name.slice(0, 20) + '...' : name}
           </Typography>
         </>
