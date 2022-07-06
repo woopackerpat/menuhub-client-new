@@ -56,13 +56,18 @@ function HeaderSearchPage(props) {
     "563131",
     "542121",
     "591212",
-    "5b0909",
+    // "5b0909",
     "6d6565",
     "870909",
     "994040",
     "a07272",
     "a05272",
   ];
+
+  const setColor = (input) => {
+    const selector = (input.length) % 10
+    return color[selector]
+  }
 
   return (
     <>
@@ -99,7 +104,7 @@ function HeaderSearchPage(props) {
                   key={suggestion.id}
                   sx={{
                     padding: 2,
-                    backgroundColor: `#${color[Math.ceil(Math.random()*10)]}`,
+                    backgroundColor: `#${setColor(suggestion.name)}`,
                     color: "white",
                     borderRadius: "36px",
                     textTransform: "none",
