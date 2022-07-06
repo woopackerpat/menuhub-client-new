@@ -10,7 +10,7 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import HistoryIcon from "@mui/icons-material/History";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePin } from "../../../contexts/PinContextProvider";
 import ModalCreatePin from "./ModalCreatePin";
 import BoxBoard from "./BoxBoard";
@@ -30,7 +30,9 @@ function DropdownProfile({ restaurantId, color }) {
 
   const pinId = profilePin[0];
 
-  //   console.log(pinId, restaurantId);
+  useEffect(() => {
+    setSearchPin(createdPin);
+  }, [pin]);
 
   //Modal Create
   const [open, setOpen] = useState(false);
@@ -135,10 +137,10 @@ function DropdownProfile({ restaurantId, color }) {
         {searchPin?.map(pins => {
           return (
             <BoxBoard
-              Restaurants={pins.Restaurants}
               key={pins.id}
               name={pins.name}
               pinId={pins.id}
+              pins={searchPin}
               restaurantId={restaurantId}
             />
           );

@@ -5,11 +5,11 @@ import { usePin } from "../../contexts/PinContextProvider";
 import CartItemsPinId from "../common/cartItems/CartItemsPinId";
 
 function ContainerPinId({ id }) {
-  const { pinById, fetchPinById } = usePin();
+  const { pin, pinById, fetchPinById } = usePin();
 
   useEffect(() => {
     fetchPinById(id);
-  }, []);
+  }, [pin]);
 
   return (
     <Box

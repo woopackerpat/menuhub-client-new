@@ -27,6 +27,10 @@ function PinContextProvider({ children }) {
 
   useEffect(() => {
     fetchPin();
+  }, [pinById]);
+
+  useEffect(() => {
+    fetchPin();
   }, [user.id]);
 
   const fetchPinById = async pinId => {
@@ -108,6 +112,7 @@ function PinContextProvider({ children }) {
     <PinContext.Provider
       value={{
         createNewPin,
+        fetchPin,
         pin,
         setPin,
         pinById,
