@@ -1,21 +1,30 @@
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContextProvider";
 import { usePin } from "../../contexts/PinContextProvider";
 import { getAllPins } from "../../services/getAllPinsUnique";
 
 function ButtonSave({ onClick, loading, restaurantId, pinId }) {
   const [deleting, setDeleting] = useState(false);
 
-  const { albumId } = useParams();
+  const { user } = useAuth();
 
   const { pin, removeRestaurant, fetchPinById } = usePin();
-  // console.log(pin?.slice(1, pin.length));
+
+  let isSaved;
+
   const allRes = getAllPins(pin?.slice(1, pin.length));
-  // console.log(allRes);
-  const isSaved = allRes.findIndex(
-    el => el.Pin_Restaurant.PinId === pinId && +el.id === +restaurantId
-  );
+
+  if (user === "") {
+    isSaved = -1;
+  }
+
+  if (user !== "") {
+    isSaved = allRes.findIndex(
+      el => el.Pin_Restaurant.PinId === pinId && +el.id === +restaurantId
+    );
+  }
 
   const handleRemoveRes = async e => {
     try {
@@ -34,7 +43,7 @@ function ButtonSave({ onClick, loading, restaurantId, pinId }) {
       {isSaved === -1 ? (
         <LoadingButton
           loading={loading}
-          onClick={onClick}
+          onClick={user === "" ? () => {} : onClick}
           variant="contained"
           color="error"
           sx={{ textTransform: "none", fontWeight: "bold" }}
@@ -44,7 +53,7 @@ function ButtonSave({ onClick, loading, restaurantId, pinId }) {
       ) : (
         <LoadingButton
           loading={deleting}
-          onClick={handleRemoveRes}
+          onClick={user === "" ? () => {} : handleRemoveRes}
           variant="contained"
           color="primary"
           sx={{ textTransform: "none", fontWeight: "bold", color: "#fff" }}

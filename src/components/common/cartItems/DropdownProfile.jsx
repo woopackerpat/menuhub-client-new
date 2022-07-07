@@ -16,12 +16,18 @@ import ModalCreatePin from "./ModalCreatePin";
 import BoxBoard from "./BoxBoard";
 import SearchPin from "./SearchPin";
 import ButtonSaveProfile from "../ButtonSaveProfile";
+import { useAuth } from "../../../contexts/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 
 function DropdownProfile({ restaurantId, color }) {
   const { pin, savePinRes } = usePin();
   const [showDrop, setShowDrop] = useState(null);
   const [showProfileBtn, setShowProfileBtn] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
 
   const profilePin = pin?.slice(0, 1).map(el => el.id);
   const createdPin = pin?.slice(1, pin?.length);
@@ -61,6 +67,15 @@ function DropdownProfile({ restaurantId, color }) {
       setLoading(false);
     }
   };
+
+  const handleClickProfile = async e => {
+    try {
+      e.stopPropagation();
+      navigate("myPin/allPins");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   // ********************************
 
   const dropId = "drop-profile";
@@ -96,7 +111,7 @@ function DropdownProfile({ restaurantId, color }) {
         }}
         onMouseOver={() => setShowProfileBtn(true)}
         onMouseOut={() => setShowProfileBtn(false)}
-        onClick={e => e.stopPropagation()}
+        onClick={user === "" ? () => {} : handleClickProfile}
       >
         <Box
           sx={{
@@ -148,7 +163,7 @@ function DropdownProfile({ restaurantId, color }) {
       </Box>
 
       <Divider orientation="horizontal" />
-      <MenuItem onClick={handleOpen}>
+      <MenuItem onClick={user === "" ? () => {} : handleOpen}>
         <Box
           sx={{
             display: "flex",
