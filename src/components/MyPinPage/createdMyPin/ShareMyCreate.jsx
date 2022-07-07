@@ -150,7 +150,7 @@ function ShareMyCreate({ id }) {
         sx={{
           p: "12px",
         }}
-        style={{ backgroundColor: "#eaeaea" }}
+        style={{ backgroundColor: "rgb(234, 234, 234,0.7)" }}
         aria-controls={dropId}
         onClick={handleShareDropdown}
       >
