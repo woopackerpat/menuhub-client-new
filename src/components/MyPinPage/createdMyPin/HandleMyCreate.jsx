@@ -99,7 +99,7 @@ function HandleMyCreate({ id }) {
   return (
     <>
       <IconButton
-        style={{ backgroundColor: "#eaeaea" }}
+        style={{ backgroundColor: "rgb(234, 234, 234,0.7)" }}
         aria-controls={dropId}
         onClick={handleShareDropdown}
       >

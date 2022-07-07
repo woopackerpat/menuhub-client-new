@@ -5,84 +5,85 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ModalReportPin from "./ModalReportPin";
 
 function DropdownReport() {
-   const [showReport, setShowReport] = useState(null);
+  const [showReport, setShowReport] = useState(null);
 
-   const isMenuReport = Boolean(showReport);
+  const isMenuReport = Boolean(showReport);
 
-   const [open, setOpen] = useState(false);
-   const handleOpen = () => {
-      setOpen(true);
-      handleMenuCloseReport();
-   };
-   const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+    handleMenuCloseReport();
+  };
+  const handleClose = () => setOpen(false);
 
-   const handleShareDropdown = (event) => {
-      setShowReport(event.currentTarget);
-   };
-   const handleMenuCloseReport = () => {
-      setShowReport(null);
-   };
+  const handleShareDropdown = (event) => {
+    setShowReport(event.currentTarget);
+  };
+  const handleMenuCloseReport = () => {
+    setShowReport(null);
+  };
 
-   const dropId = "drop-share";
+  const dropId = "drop-share";
 
-   const renderDropReport = (
-      <Menu
-         anchorEl={showReport}
-         id={dropId}
-         keepMounted
-         open={isMenuReport}
-         onClose={handleMenuCloseReport}
-         sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 3,
-            justifyContent: "center",
-            alignItems: "center",
-         }}
+  const renderDropReport = (
+    <Menu
+      anchorEl={showReport}
+      id={dropId}
+      keepMounted
+      open={isMenuReport}
+      onClose={handleMenuCloseReport}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 3,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          p: 2,
+        }}
       >
-         <Box
-            sx={{
-               display: "flex",
-               flexDirection: "column",
-               gap: 2,
-               p: 2,
-            }}
-         >
-            <Typography variant="body1" align="center">
-               This Pin was inspired by your recent activity
-            </Typography>
-            <Typography
-               fontWeight="bold"
-               sx={{
-                  "&:hover": { backgroundColor: "#efefef" },
-                  p: 2,
-                  cursor: "pointer",
-                  borderRadius: "16px",
-                  backgroundColor: "#f2f2f2",
-               }}
-               onClick={handleOpen}
-            >
-               Report Pin
-            </Typography>
-         </Box>
-      </Menu>
-   );
+        <Typography variant="body1" align="center">
+          This Pin was inspired by your recent activity
+        </Typography>
+        <Typography
+          fontWeight="bold"
+          sx={{
+            "&:hover": { backgroundColor: "#efefef" },
+            p: 2,
+            cursor: "pointer",
+            borderRadius: "16px",
+            backgroundColor: "#f2f2f2",
+          }}
+          onClick={handleOpen}
+        >
+          Report Pin
+        </Typography>
+      </Box>
+    </Menu>
+  );
 
-   return (
-      <>
-         <IconButton
-            sx={{
-               color: "black",
-             }}
-            aria-controls={dropId}
-            onClick={handleShareDropdown}
-         >
-            <MoreHorizIcon color="dark" style = {{fontSize: "32px"}}  />
-         </IconButton>
-         <ModalReportPin open={open} handleClose={handleClose} />
-         {renderDropReport}
-      </>
-   );
+  return (
+    <>
+      <IconButton
+        sx={{
+          color: "black",
+        }}
+        aria-controls={dropId}
+        style={{ backgroundColor: "rgb(234, 234, 234,0.7)" }}
+        onClick={handleShareDropdown}
+      >
+        <MoreHorizIcon color="dark" style={{ fontSize: "32px" }} />
+      </IconButton>
+      <ModalReportPin open={open} handleClose={handleClose} />
+      {renderDropReport}
+    </>
+  );
 }
 
 export default DropdownReport;
