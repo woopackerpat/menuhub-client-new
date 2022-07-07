@@ -64,7 +64,7 @@ function RegisterForm({ setType, handleCloseRegister }) {
             handleCloseRegister();
          } catch (err) {
             // console.log(err.response);
-            setApiError('This email is already in use');
+            setApiError("This email is already in use");
          }
       }
    };
@@ -137,15 +137,7 @@ function RegisterForm({ setType, handleCloseRegister }) {
                error={error.confirmPassword ? true : false}
                helperText={error.confirmPassword}
             />
-            <Link href="#">
-               <Typography
-                  align="left"
-                  variant="subtitle2"
-                  sx={{ fontWeight: "bold" }}
-               >
-                  Forgot your password?
-               </Typography>
-            </Link>
+
             <RegisterButton />
          </Box>
       </>

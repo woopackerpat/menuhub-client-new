@@ -1,9 +1,10 @@
-import { Button } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useEffect, useRef } from "react";
 import axios from "../../config/axios";
 import { setAccessToken } from "../../services/localStorage";
 import React from "react";
 import { useAuth } from "../../contexts/AuthContextProvider";
+import googleLogo from "../../assets/images/google.png";
 
 function LoginGoogle({ handleClose }) {
    const { fetchMe } = useAuth();
@@ -47,13 +48,31 @@ function LoginGoogle({ handleClose }) {
    return (
       <>
          <Button
-            id="signInDiv"
-            ref={buttonWidth}
             fullWidth
             size="large"
             color="light"
-            sx={{ border: "1px silver solid" }}
-         ></Button>
+            variant="contained"
+            sx={{ border: "1px silver solid", position: "relative", py: 2 }}
+         >
+            <Box sx={{ position: "absolute", opacity: "1%" }}>
+               <Button ref={buttonWidth} id="signInDiv"></Button>
+            </Box>
+            <Box
+               sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 2,
+               }}
+            >
+               <img
+                  src={googleLogo}
+                  alt="google logo"
+                  style={{ width: 28, height: 25 }}
+               />
+               <Typography fontWeight="bold">Sign In with Google</Typography>
+            </Box>
+         </Button>
       </>
    );
 }

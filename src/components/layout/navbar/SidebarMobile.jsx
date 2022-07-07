@@ -69,10 +69,7 @@ function SidebarMobile() {
          onKeyDown={toggleDrawer(anchor, false)}
       >
          <ProfileAvatar margin="0.5rem auto" width="50px" height="50px" />
-         {/* <Avatar
-            sx={{ margin: "0.5rem auto", width: "100px", height: "100px" }}
-            alt="profilePic"
-         /> */}
+
          <Divider />
          <List>
             {listItems.map((item) => (
