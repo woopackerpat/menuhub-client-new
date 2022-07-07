@@ -1,17 +1,27 @@
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContextProvider";
 import { usePin } from "../../contexts/PinContextProvider";
 
 function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
    const [deleting, setDeleting] = useState(false);
 
+   const { user } = useAuth();
+
+   let isSaved;
+
+   if (user === "") {
+      isSaved = -1;
+   }
+   console.log(isSaved);
+
    const { pin, removeRestaurant } = usePin();
 
    const pins = pin?.filter((el) => el.id === pinId);
 
-   const isSaved = pins[0]?.Restaurants.findIndex(
-      (el) => el.id === +restaurantId
-   );
+   if (user !== "") {
+      isSaved = pins[0]?.Restaurants.findIndex((el) => el.id === +restaurantId);
+   }
 
    const handleRemoveRes = async () => {
       try {
@@ -29,7 +39,7 @@ function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
          {isSaved === -1 ? (
             <LoadingButton
                loading={loading}
-               onClick={onClick}
+               onClick={user === "" ? () => {} : onClick}
                variant="contained"
                color="error"
                sx={{
@@ -46,7 +56,7 @@ function ButtonSaveProfile({ onClick, loading, restaurantId, pinId }) {
          ) : (
             <LoadingButton
                loading={deleting}
-               onClick={handleRemoveRes}
+               onClick={user === "" ? () => {} : handleRemoveRes}
                variant="contained"
                color="primary"
                sx={{
