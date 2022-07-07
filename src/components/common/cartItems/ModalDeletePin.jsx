@@ -48,7 +48,7 @@ function ModalDeletePin({ open, handleClose, pinId }) {
                 Are you sure?
               </Typography>
               <Typography sx={{ fontSize: "18px", textAlign: "center" }}>
-                This restaurant will be permanently deleted from your pin.
+                This board will be permanently deleted.
               </Typography>
             </Box>
             <Box
