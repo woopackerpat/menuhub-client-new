@@ -10,18 +10,18 @@ function ButtonSave({ onClick, loading, restaurantId, pinId }) {
   const { albumId } = useParams();
 
   const { pin, removeRestaurant, fetchPinById } = usePin();
-  console.log(pin?.slice(1, pin.length));
+  // console.log(pin?.slice(1, pin.length));
   const allRes = getAllPins(pin?.slice(1, pin.length));
-  console.log(allRes);
-  const isSaved = allRes.findIndex(el => el.Pin_Restaurant.PinId === pinId);
+  // console.log(allRes);
+  const isSaved = allRes.findIndex(
+    el => el.Pin_Restaurant.PinId === pinId && +el.id === +restaurantId
+  );
 
-  console.log(restaurantId, pinId);
-
-  const handleRemoveRes = async () => {
+  const handleRemoveRes = async e => {
     try {
+      e.stopPropagation();
       setDeleting(true);
       await removeRestaurant(restaurantId, pinId);
-      fetchPinById(albumId);
     } catch (err) {
       console.log(err);
     } finally {

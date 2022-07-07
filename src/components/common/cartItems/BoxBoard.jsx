@@ -1,22 +1,26 @@
-import { LoadingButton } from "@mui/lab";
-import { Box, Button, MenuItem, Typography } from "@mui/material";
+import { Box, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { usePin } from "../../../contexts/PinContextProvider";
 import ButtonSave from "../ButtonSave";
 
-function BoxBoard({ name, pinId, restaurantId, Restaurants }) {
+function BoxBoard({ name, pinId, restaurantId, pins }) {
   const [showBoardBtn, setShowBoardBtn] = useState(false);
-  const { savePinRes, fetchPin } = usePin();
+  const { savePinRes, fetchPinById } = usePin();
   const [loading, setLoading] = useState(false);
 
-  const getImage = Restaurants?.map(el => el.Menus?.map(item => item.imageUrl));
+  const navigate = useNavigate();
+
+  const image = pins
+    ?.filter(el => el.id === pinId)
+    .map(el => el.Restaurants[0]?.Menus[0].imageUrl);
 
   const handleSaveRestaurant = async e => {
     try {
       e.stopPropagation();
       setLoading(true);
       await savePinRes({ pinId, restaurantId });
-      await fetchPin();
+      fetchPinById(pinId);
     } catch (err) {
       console.log(err);
     } finally {
@@ -34,6 +38,7 @@ function BoxBoard({ name, pinId, restaurantId, Restaurants }) {
       }}
       onMouseOver={() => setShowBoardBtn(true)}
       onMouseOut={() => setShowBoardBtn(false)}
+      onClick={() => navigate("/myPin/" + pinId)}
     >
       <Box
         sx={{
@@ -54,10 +59,15 @@ function BoxBoard({ name, pinId, restaurantId, Restaurants }) {
             borderRadius: "10px",
           }}
         >
-          {getImage?.length !== 0 && (
+          {image[0] && (
             <img
-              src={getImage[0]}
-              style={{ borderRadius: "10px", maxWidth: "40px" }}
+              src={image[0]}
+              style={{
+                borderRadius: "10px",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
               alt="img"
             />
           )}

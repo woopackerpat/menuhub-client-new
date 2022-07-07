@@ -2,6 +2,7 @@ import { Box, Container, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePin } from "../../../../contexts/PinContextProvider";
+import DropdownEditPin from "../../../common/cartItems/DropdownEditPin";
 
 function ContainerAlbumCart({ name, id, Restaurants }) {
   const [show, setShow] = useState(false);
@@ -35,7 +36,14 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
-      <Box sx={{ display: "flex", width: "270px", gap: "1px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          width: "270px",
+          gap: "1px",
+          position: "relative",
+        }}
+      >
         <Box
           sx={{
             width: "180px",
@@ -108,6 +116,19 @@ function ContainerAlbumCart({ name, id, Restaurants }) {
             )}
           </Box>
         </Box>
+        {show && (
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 10,
+              right: 6,
+              display: "flex",
+              gap: 1,
+            }}
+          >
+            <DropdownEditPin pinId={id} name={name} />
+          </Box>
+        )}
       </Box>
       <Typography variant="h6" fontWeight="bold" sx={{ mt: "8px", ml: "8px" }}>
         {name}

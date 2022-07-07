@@ -69,7 +69,7 @@ function HeaderAllMenusPage({ restaurantId, menus }) {
               },
             }}
           >
-            <Typography variant="h5" fontWeight="bold">
+            <Typography variant="h5" sx = {{fontWeight: 500}} className = "thai" >
               {name}
             </Typography>
           </Box>

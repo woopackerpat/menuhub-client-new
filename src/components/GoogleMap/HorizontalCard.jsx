@@ -99,7 +99,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
           <Box sx={{ px: "20px", py: "15px" }}>
             <Grid container>
               <Grid item xs={11}>
-                <Typography variant="h5" component="h2" gutterBottom>
+                <Typography variant="h5" component="h2" gutterBottom className = "thai" >
                   {isLoading ? (
                     <Skeleton width="50%" variant="text" animation="wave" />
                   ) : (
@@ -141,6 +141,7 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                 <Typography
                   variant="caption"
                   sx={{ lineHeight: 1.5, color: "#626262" }}
+                  
                 >
                   {isLoading ? (
                     <>
@@ -257,6 +258,8 @@ function HorizontalCard({ place, selected, refProp, markId }) {
                         color="primary"
                         variant="outlined"
                         size="small"
+                        className = "thai"
+                        sx = {{fontWeight: 300}}
                       />
                     ) : (
                       ""

@@ -55,13 +55,18 @@ function HeaderSearchPage(props) {
       "563131",
       "542121",
       "591212",
-      "5b0909",
+      // "5b0909",
       "6d6565",
       "870909",
       "994040",
       "a07272",
       "a05272",
    ];
+
+   const setColor = (input) => {
+      const selector = input.length % 10;
+      return color[selector];
+   };
 
    return (
       <>
@@ -74,7 +79,13 @@ function HeaderSearchPage(props) {
             container
          >
             <Grid item xs={2}>
-               <Typography variant="h5">Suggestions:</Typography>
+               <Typography
+                  variant="h5"
+
+                  // gutterBottom
+               >
+                  Suggestions:
+               </Typography>
             </Grid>
             <Grid
                item
@@ -84,40 +95,49 @@ function HeaderSearchPage(props) {
                <Box
                   sx={{
                      display: "flex",
-                     justifyContent: "flex-end",
-                     gap: 1,
+                     alignItems: "center",
+                     justifyContent: "space-between",
                   }}
                >
                   {list ? (
-                     list?.map((suggestion) => (
-                        <Button
-                           key={suggestion.id}
-                           sx={{
-                              padding: 2,
-                              backgroundColor: `#${
-                                 color[Math.ceil(Math.random() * 10)]
-                              }`,
-                              color: "white",
-                              borderRadius: "36px",
-                              textTransform: "none",
+                     list?.map((suggestion, idx) => {
+                        const english = /^[A-Za-z0-9]*$/;
+                        const isEnglish = english.test(suggestion.name);
+                        console.log(isEnglish);
+                        return (
+                           <Button
+                              key={suggestion.id}
+                              sx={{
+                                 padding: 2,
+                                 backgroundColor: `#${setColor(
+                                    suggestion.name
+                                 )}`,
+                                 color: "white",
+                                 borderRadius: "36px",
+                                 textTransform: "capitalize",
 
-                              "&:hover": {
-                                 color: "#000000",
-                                 backgroundColor: "#efefef",
-                              },
-                           }}
-                           onClick={() => {
-                              inputSearch(suggestion.name);
-                           }}
-                           className="transition-hover"
-                        >
-                           <Typography>
-                              {suggestion.name.length > 18
-                                 ? suggestion.name.slice(0, 18) + "..."
-                                 : suggestion.name}
-                           </Typography>
-                        </Button>
-                     ))
+                                 "&:hover": {
+                                    color: "#000000",
+                                    backgroundColor: "#efefef",
+                                 },
+                              }}
+                              onClick={() => {
+                                 inputSearch(suggestion.name);
+                                 // navigate(`../search?search=${suggestion.name}`)
+                              }}
+                              className="transition-hover"
+                           >
+                              <Typography
+                                 className="thai"
+                                 sx={{ fontWeight: 300 }}
+                              >
+                                 {suggestion.name.length > 18
+                                    ? suggestion.name.slice(0, 18) + "..."
+                                    : suggestion.name}
+                              </Typography>
+                           </Button>
+                        );
+                     })
                   ) : (
                      <div></div>
                   )}
